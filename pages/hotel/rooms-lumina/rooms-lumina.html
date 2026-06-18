@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Lumina Hospitality | Room Catalogue</title>
+    <link href="/css/ui-utils.css" rel="stylesheet"/>
+    <link href="rooms.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden hero-mesh">
+    <!-- Top Navigation Anchor -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-b border-white/30 dark:border-white/10 shadow-sm transition-all duration-300">
+        <div class="flex items-center gap-md">
+            <button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-opacity" id="menuBtn">menu</button>
+            <h1 class="font-h2 text-h2 tracking-tight text-primary dark:text-primary-fixed-dim">Lumina Hospitality</h1>
+        </div>
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex gap-lg">
+            <a class="text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home/">Home</a>
+            <a class="text-primary dark:text-primary-fixed-dim font-bold hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
+            <a class="text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking/">Bookings</a>
+            <a class="text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login/">Login</a>
+        </nav>
+        <div class="flex items-center gap-md">
+            <button class="material-symbols-outlined text-on-surface-variant">search</button>
+            <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
+                <img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOkC6VoRle4D850O5ZLI0I8GbznJpSYgvKKyZVgPkHcK4Q3CP4q9Gbv0SektCst8f2rUr7cNM4DjpyXIDw17lNNrn4v5avRuP_pglSWe450hfQpOO1abzjEUI0S8aybt35kG7Sdqnyyn-DpxG_RqP15D-RFONqtZ_Xi7ZlYkmFsEm29VKiiJPS9py--umq9uV5Pc0TS4bNc_vnFHzHkn4ERUjDQYMziDAgWULG1jmIRA6S05amjeFgf9EX7ENMYWyEeZxmYbQwP34"/>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Drawer (Hidden by default) -->
+    <aside class="fixed inset-y-0 left-0 w-80 z-[60] glass-card shadow-xl -translate-x-full slide-out flex flex-col p-lg gap-md rounded-none border-y-0 border-l-0" id="sidebar">
+        <div class="flex justify-between items-center mb-md">
+            <div class="flex items-center gap-md">
+                <div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-white font-bold">JR</div>
+                <div>
+                    <h3 class="font-h3 text-h3 text-primary leading-none">Julian Reed</h3>
+                    <span class="text-body-sm opacity-70">General Manager</span>
+                </div>
+            </div>
+            <button class="material-symbols-outlined hover:bg-surface-container-low p-sm rounded-full" id="closeSidebar">close</button>
+        </div>
+        <nav class="space-y-sm">
+            <a class="flex items-center gap-md p-md bg-primary/10 dark:bg-primary-container/20 text-primary dark:text-primary-fixed-dim rounded-lg hover:bg-surface-container-low transition-all" href="#">
+                <span class="material-symbols-outlined">concierge</span>
+                <span class="font-body-md">Hotel Services</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+                <span class="material-symbols-outlined">room_service</span>
+                <span class="font-body-md">Guest Requests</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+                <span class="material-symbols-outlined">badge</span>
+                <span class="font-body-md">Staff Directory</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+                <span class="material-symbols-outlined">monitoring</span>
+                <span class="font-body-md">Analytics</span>
+            </a>
+            <div class="pt-md mt-md border-t border-outline-variant/30">
+                <a class="flex items-center gap-md p-md text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span class="font-body-md">Settings</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="pt-[100px] pb-32 px-container-margin min-h-screen">
+        <!-- Header & Action Row -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+            <div class="space-y-xs">
+                <nav class="flex text-label-md text-on-surface-variant/60 uppercase tracking-widest mb-xs">
+                    <span>Directory</span>
+                    <span class="mx-xs">/</span>
+                    <span class="text-primary">Accommodations</span>
+                </nav>
+                <h2 class="font-h1 text-h1 text-on-surface">Room Catalogue</h2>
+                <p class="text-body-md text-on-surface-variant max-w-2xl">Curated collection of luxury stays, from executive suites to heritage lofts, designed for operational excellence.</p>
+            </div>
+            <div class="flex items-center gap-md">
+                <div class="relative group">
+                    <button class="glass-card px-md py-sm rounded-lg flex items-center gap-sm text-body-sm font-medium hover:border-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">sort</span>
+                        Sort by: Price (Low to High)
+                    </button>
+                </div>
+                <button class="md:hidden glass-card px-md py-sm rounded-lg flex items-center gap-sm text-body-sm font-medium text-primary bg-primary/5" id="openFilters">
+                    <span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Filters
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-lg items-start">
+            <!-- Desktop Sidebar Filters -->
+            <aside class="hidden md:block md:col-span-3 sticky top-[120px] space-y-lg">
+                <div class="glass-card p-lg rounded-xl border-l-4 border-l-primary">
+                    <h4 class="font-h3 text-[18px] mb-lg flex items-center gap-sm">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        Filter Criteria
+                    </h4>
+                    <div class="space-y-xl">
+                        <!-- Price Range -->
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-md">PRICE RANGE (PER NIGHT)</label>
+                            <input class="w-full accent-primary h-1 bg-surface-container rounded-lg appearance-none cursor-pointer" type="range"/>
+                            <div class="flex justify-between mt-sm text-body-sm font-medium">
+                                <span>$150</span>
+                                <span>$2,500+</span>
+                            </div>
+                        </div>
+                        <!-- Occupancy -->
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-md">GUEST CAPACITY</label>
+                            <div class="grid grid-cols-4 gap-xs">
+                                <button class="p-sm glass-card text-center rounded-lg hover:bg-primary hover:text-white transition-colors">1</button>
+                                <button class="p-sm glass-card text-center rounded-lg bg-primary text-white">2</button>
+                                <button class="p-sm glass-card text-center rounded-lg hover:bg-primary hover:text-white transition-colors">3</button>
+                                <button class="p-sm glass-card text-center rounded-lg hover:bg-primary hover:text-white transition-colors">4+</button>
+                            </div>
+                        </div>
+                        <!-- Amenities -->
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-md">PREMIUM AMENITIES</label>
+                            <div class="space-y-sm">
+                                <label class="flex items-center gap-md group cursor-pointer">
+                                    <input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20" type="checkbox"/>
+                                    <span class="text-body-md group-hover:text-primary transition-colors">Ocean View</span>
+                                </label>
+                                <label class="flex items-center gap-md group cursor-pointer">
+                                    <input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20" type="checkbox"/>
+                                    <span class="text-body-md group-hover:text-primary transition-colors">Private Pool</span>
+                                </label>
+                                <label class="flex items-center gap-md group cursor-pointer">
+                                    <input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20" type="checkbox"/>
+                                    <span class="text-body-md group-hover:text-primary transition-colors">Personal Butler</span>
+                                </label>
+                                <label class="flex items-center gap-md group cursor-pointer">
+                                    <input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20" type="checkbox"/>
+                                    <span class="text-body-md group-hover:text-primary transition-colors">Smart Home Tech</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-xl bg-primary text-white py-md rounded-lg font-button uppercase tracking-widest active-interaction hover:brightness-110 transition-all">
+                        Apply Filters
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Room Grid -->
+            <section class="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-lg" id="roomGrid">
+                <!-- Room cards will be dynamically loaded -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation Shell -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-t border-white/30 dark:border-white/10 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-colors duration-300" href="/pages/hotel/home/">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold active:scale-90 transition-all duration-300 ease-out" href="/pages/hotel/rooms/">
+            <span class="material-symbols-outlined">bed</span>
+            <span class="font-label-md text-label-md">Rooms</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-colors duration-300" href="/pages/hotel/booking/">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span class="font-label-md text-label-md">Bookings</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-colors duration-300" href="/pages/hotel/login/">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-label-md text-label-md">Profile</span>
+        </a>
+    </nav>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+    <script src="rooms.js"></script>
+</body>
+</html>

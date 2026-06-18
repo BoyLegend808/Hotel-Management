@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Lumina Hospitality | Guest Dashboard</title>
+    <link href="/css/ui-utils.css" rel="stylesheet"/>
+    <link href="guest-dashboard.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm">
+        <div class="flex items-center gap-md">
+            <h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking/">Bookings</a>
+            <a class="font-label-md text-label-md text-primary font-bold transition-opacity" href="/pages/hotel/guest-dashboard/">Dashboard</a>
+        </nav>
+        <div class="flex items-center gap-sm">
+            <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" onclick="logout()">logout</button>
+            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+                <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ3yGs7cNljtHDHjFea748H7hxRyyytdScsR7bN3Jvf-QO4ZavQlaUU9q2dw_shLU5V7ZccYLmXTtt7YcPTmVj7Beu--O_7SMKwFk_A8aEn_mSlSOtEPcxe9hgj7WCSJAecU7b7dkwKnGnIbuaY6kxwyyYwLb0W-fbPsFvnoWMTAZPqF7NRerbrlgyN5osMSbVZRX4eVErQ9TDspKAo_vpIO5U076Fa5sDe1Zt3PSoYkPmxfbMx2TFoT-levyJf1IPGxQG83WAUBY"/>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20 pb-32 px-container-margin max-w-7xl mx-auto">
+        <!-- Dashboard Header -->
+        <div class="mb-xl">
+            <h2 class="font-h1 text-h1 text-on-surface mb-sm">Welcome back, Julian</h2>
+            <p class="font-body-md text-on-surface-variant">Manage your bookings and preferences</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-md mb-xl border-b border-outline-variant">
+            <button class="px-md py-sm font-label-md text-primary border-b-2 border-primary" id="tab-upcoming" onclick="switchTab('upcoming')">Upcoming</button>
+            <button class="px-md py-sm font-label-md text-on-surface-variant hover:text-primary transition-colors" id="tab-past" onclick="switchTab('past')">Past</button>
+            <button class="px-md py-sm font-label-md text-on-surface-variant hover:text-primary transition-colors" id="tab-settings" onclick="switchTab('settings')">Settings</button>
+        </div>
+
+        <!-- Upcoming Bookings -->
+        <div id="content-upcoming">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg" id="upcomingBookings">
+                <!-- Bookings will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Past Bookings -->
+        <div id="content-past" class="hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg" id="pastBookings">
+                <!-- Past bookings will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Settings -->
+        <div id="content-settings" class="hidden">
+            <div class="glass-card rounded-xl p-lg max-w-2xl">
+                <h3 class="font-h2 text-h2 mb-lg">Account Settings</h3>
+                <div class="space-y-lg">
+                    <div>
+                        <label class="block text-label-md text-on-surface-variant mb-sm">FULL NAME</label>
+                        <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="text" value="Julian Reed"/>
+                    </div>
+                    <div>
+                        <label class="block text-label-md text-on-surface-variant mb-sm">EMAIL ADDRESS</label>
+                        <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="email" value="julian.reed@example.com"/>
+                    </div>
+                    <div>
+                        <label class="block text-label-md text-on-surface-variant mb-sm">PHONE NUMBER</label>
+                        <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="tel" value="+1 234 567 8900"/>
+                    </div>
+                    <div>
+                        <label class="block text-label-md text-on-surface-variant mb-sm">PREFERENCES</label>
+                        <div class="space-y-sm">
+                            <label class="flex items-center gap-md">
+                                <input type="checkbox" checked class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20"/>
+                                <span class="text-body-md">Email notifications for booking updates</span>
+                            </label>
+                            <label class="flex items-center gap-md">
+                                <input type="checkbox" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20"/>
+                                <span class="text-body-md">SMS notifications for check-in reminders</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button class="bg-primary text-white py-md px-xl rounded-lg font-button hover:bg-primary/90 transition-all active:scale-95">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 backdrop-blur-3xl border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">bed</span>
+            <span class="font-label-md text-label-md">Rooms</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span class="font-label-md text-label-md">Bookings</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-primary font-bold">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-label-md text-label-md">Profile</span>
+        </div>
+    </nav>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+    <script src="guest-dashboard.js"></script>
+</body>
+</html>

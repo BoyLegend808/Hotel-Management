@@ -1,0 +1,756 @@
+/* Lumina Hospitality - Room Detail Page Styles */
+
+:root {
+    --primary: #006683;
+    --primary-container: #2a7f9e;
+    --primary-fixed: #bde9ff;
+    --primary-fixed-dim: #84d0f2;
+    --secondary: #845400;
+    --secondary-container: #fdaa2d;
+    --background: #f7fafc;
+    --surface: #f7fafc;
+    --on-surface: #181c1e;
+    --on-surface-variant: #3f484d;
+    --on-primary: #ffffff;
+    --on-secondary: #ffffff;
+    --outline: #6f787e;
+    --outline-variant: #bfc8cd;
+    --surface-dim: #d8dadd;
+    --surface-container: #eceef1;
+    --surface-container-low: #f1f4f6;
+    --surface-container-high: #e6e8eb;
+    --surface-container-highest: #e0e3e5;
+    --surface-container-lowest: #ffffff;
+    --inverse-surface: #2d3133;
+    --inverse-on-surface: #eef1f4;
+    --inverse-primary: #84d0f2;
+    --on-primary-fixed: #001f2a;
+    --on-primary-fixed-variant: #004d64;
+    --on-secondary-container: #6a4200;
+    --on-tertiary-container: #ffffff;
+    --on-error-container: #93000a;
+    --on-error: #ffffff;
+    --error: #ba1a1a;
+    --error-container: #ffdad6;
+    --tertiary: #86510f;
+    --tertiary-container: #a36927;
+    --on-tertiary: #ffffff;
+    --on-tertiary-fixed: #2c1600;
+    --on-tertiary-fixed-variant: #693c00;
+    --tertiary-fixed: #ffdcbd;
+    --tertiary-fixed-dim: #ffb86f;
+    --secondary-fixed: #ffddb7;
+    --secondary-fixed-dim: #ffb95c;
+    --on-secondary-fixed: #2a1700;
+    --on-secondary-fixed-variant: #653e00;
+    --primary-fixed: #bde9ff;
+    --surface-bright: #f7fafc;
+    --surface-tint: #006684;
+    --on-background: #181c1e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--surface);
+    color: var(--on-surface);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+/* Typography */
+.font-h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+
+.font-h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 32px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.font-h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.font-body-md {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.font-body-sm {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.font-label-md {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.font-button {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    font-weight: 500;
+}
+
+/* Glass Card Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.dark .glass-card {
+    background: rgba(30, 30, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.inner-glow {
+    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.nav-active {
+    color: #006683;
+    font-weight: 700;
+}
+
+.animate-hover {
+    transition: all 0.3s ease-out;
+}
+
+.animate-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(2, 250px);
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 300px repeat(2, 200px);
+    }
+}
+
+/* Spacing */
+.px-gutter {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.px-container-margin {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.py-md {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.py-sm {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.py-lg {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.py-xl {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.pt-24 {
+    padding-top: 6rem;
+}
+
+.pb-32 {
+    padding-bottom: 8rem;
+}
+
+.p-md {
+    padding: 1rem;
+}
+
+.p-lg {
+    padding: 1.5rem;
+}
+
+.p-xl {
+    padding: 2.5rem;
+}
+
+.gap-md {
+    gap: 1rem;
+}
+
+.gap-lg {
+    gap: 1.5rem;
+}
+
+.gap-sm {
+    gap: 0.5rem;
+}
+
+.gap-xs {
+    gap: 0.25rem;
+}
+
+.mb-sm {
+    margin-bottom: 0.5rem;
+}
+
+.mb-md {
+    margin-bottom: 1rem;
+}
+
+.mb-lg {
+    margin-bottom: 1.5rem;
+}
+
+.mb-xl {
+    margin-bottom: 2.5rem;
+}
+
+.mt-xs {
+    margin-top: 0.25rem;
+}
+
+.mt-lg {
+    margin-top: 1.5rem;
+}
+
+.mt-xl {
+    margin-top: 2.5rem;
+}
+
+.space-y-lg > * + * {
+    margin-top: 1.5rem;
+}
+
+.space-y-md > * + * {
+    margin-top: 1rem;
+}
+
+.space-y-gutter > * + * {
+    margin-top: 1.5rem;
+}
+
+/* Layout */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-baseline {
+    align-items: baseline;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.lg\:col-span-2 {
+    @media (min-width: 1024px) {
+        grid-column: span 2;
+    }
+}
+
+.lg\:col-span-3 {
+    @media (min-width: 1024px) {
+        grid-column: span 3;
+    }
+}
+
+/* Positioning */
+.fixed {
+    position: fixed;
+}
+
+.sticky {
+    position: sticky;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.left-0 {
+    left: 0;
+}
+
+.bottom-0 {
+    bottom: 0;
+}
+
+.top-28 {
+    top: 7rem;
+}
+
+.z-40 {
+    z-index: 40;
+}
+
+.z-50 {
+    z-index: 50;
+}
+
+/* Sizing */
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.w-10 {
+    width: 2.5rem;
+}
+
+.h-10 {
+    height: 2.5rem;
+}
+
+.max-w-7xl {
+    max-width: 80rem;
+}
+
+.flex-1 {
+    flex: 1 1 0%;
+}
+
+/* Colors */
+.bg-surface {
+    background-color: var(--surface);
+}
+
+.bg-white\/70 {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.bg-black\/60 {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-primary\/5 {
+    background-color: rgba(0, 102, 131, 0.05);
+}
+
+.bg-primary\/10 {
+    background-color: rgba(0, 102, 131, 0.1);
+}
+
+.bg-primary-container {
+    background-color: var(--primary-container);
+}
+
+.text-on-surface {
+    color: var(--on-surface);
+}
+
+.text-on-surface-variant {
+    color: var(--on-surface-variant);
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-primary-fixed {
+    color: var(--primary-fixed);
+}
+
+.text-primary-fixed-dim {
+    color: var(--primary-fixed-dim);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.text-on-primary {
+    color: var(--on-primary);
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.border-b {
+    border-bottom-width: 1px;
+}
+
+.border-t {
+    border-top-width: 1px;
+}
+
+.border-white\/30 {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.border-white\/10 {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.border-white\/40 {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.border-primary\/20 {
+    border-color: rgba(0, 102, 131, 0.2);
+}
+
+.border-outline-variant {
+    border-color: var(--outline-variant);
+}
+
+.border-primary-fixed {
+    border-color: var(--primary-fixed);
+}
+
+/* Border Radius */
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.rounded-xl {
+    border-radius: 0.75rem;
+}
+
+.rounded-2xl {
+    border-radius: 1rem;
+}
+
+/* Shadow */
+.shadow-sm {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.shadow-xl {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+.shadow-\[0_-8px_32px_0_rgba\(0\,0\,0\,0\.08\)\] {
+    box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Transitions */
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.transition-colors {
+    transition-property: color, background-color, border-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.duration-300 {
+    transition-duration: 300ms;
+}
+
+.ease-out {
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Effects */
+.backdrop-blur-3xl {
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+.tracking-widest {
+    letter-spacing: 0.1em;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.leading-none {
+    line-height: 1;
+}
+
+.leading-relaxed {
+    line-height: 1.625;
+}
+
+.row-span-2 {
+    grid-row: span 2;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .font-h1 {
+        font-family: 'Roboto Slab', serif;
+        font-size: 32px;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+    
+    .px-container-margin {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .md\:hidden {
+        display: none;
+    }
+    
+    .md\:flex {
+        display: flex;
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:hidden {
+        display: none;
+    }
+    
+    .lg\:block {
+        display: block;
+    }
+    
+    .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .lg\:col-span-2 {
+        grid-column: span 2;
+    }
+    
+    .lg\:col-span-3 {
+        grid-column: span 3;
+    }
+}
+
+/* Interactive States */
+.hover\:opacity-80:hover {
+    opacity: 0.8;
+}
+
+.hover\:text-secondary:hover {
+    color: var(--secondary);
+}
+
+.active\:scale-95:active {
+    transform: scale(0.95);
+}
+
+/* Cursor */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Padding bottom safe area for mobile */
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Button styling */
+button {
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    border: none;
+}
+
+/* Image styling */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Group hover effects */
+.group:hover .group-hover\:scale-105 {
+    transform: scale(1.05);
+}
+
+.group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+}
+
+/* Opacity */
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-100 {
+    opacity: 1;
+}
+
+/* Gradient */
+.bg-gradient-to-t {
+    background-image: linear-gradient(to top, var(--tw-gradient-stops));
+}
+
+.from-black\/40 {
+    --tw-gradient-from: rgba(0, 0, 0, 0.4);
+    --tw-gradient-to: transparent;
+}
+
+.to-transparent {
+    --tw-gradient-to: transparent;
+}
+
+.via-transparent {
+    --tw-gradient-stops: var(--tw-gradient-from), transparent, var(--tw-gradient-to);
+}
+
+/* Inset */
+.inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* Text sizing */
+.text-\[18px\] {
+    font-size: 18px;
+}
+
+.text-\[28px\] {
+    font-size: 28px;
+}
+
+/* Dark mode */
+.dark {
+    color-scheme: dark;
+}
+
+.dark .text-on-surface {
+    color: var(--on-surface);
+}
+
+.dark .text-on-surface-variant {
+    color: var(--on-surface-variant);
+}
+
+.dark .bg-surface-container-low {
+    background-color: var(--surface-container-low);
+}

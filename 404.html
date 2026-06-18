@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | Evergreen Estates</title>
+  <!-- Preconnect to font domains for faster connection setup -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="icon" href="/favicon.ico" type="image/svg+xml">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', system-ui, sans-serif;
+      background: #fbf9f8;
+      color: #1b1c1c;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+      text-decoration: none;
+      color: #032521;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: #032521;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fed65b;
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #032521;
+      line-height: 1.2;
+    }
+    .brand-sub {
+      font-size: 0.75rem;
+      color: #717976;
+      font-weight: 400;
+    }
+    .error-code {
+      font-size: 7rem;
+      font-weight: 700;
+      color: #032521;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+    .error-code span {
+      color: #fed65b;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      color: #032521;
+    }
+    p {
+      color: #414846;
+      font-size: 1rem;
+      max-width: 400px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: #032521;
+      color: #ffffff;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outline {
+      background: transparent;
+      color: #032521;
+      border: 1.5px solid #c1c8c5;
+    }
+    .btn-outline:hover { background: #efeded; }
+  </style>
+</head>
+<body>
+  <a href="/" class="brand">
+    <div class="brand-icon">E</div>
+    <div>
+      <div class="brand-name">Evergreen Estates</div>
+      <div class="brand-sub">Senior Living</div>
+    </div>
+  </a>
+
+  <div class="error-code">4<span>0</span>4</div>
+  <h1>Page not found</h1>
+  <p>The page you're looking for doesn't exist or may have been moved. Let us guide you back.</p>
+
+  <div class="actions">
+    <a href="/" class="btn btn-primary">Go Home</a>
+    <a href="/pages/public/home/" class="btn btn-outline">Public Site</a>
+    <a href="/admin/login" class="btn btn-outline">Admin Login</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking Wizard | Lumina Hospitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#eceef1",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#ffffff",
+                        "surface": "#f7fafc",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-bright": "#f7fafc",
+                        "secondary-fixed": "#ffddb7",
+                        "on-surface-variant": "#3f484d",
+                        "secondary-container": "#fdaa2d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#2a7f9e",
+                        "outline": "#6f787e",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb95c",
+                        "inverse-surface": "#2d3133",
+                        "surface-dim": "#d8dadd",
+                        "on-primary-fixed": "#001f2a",
+                        "secondary": "#845400",
+                        "surface-tint": "#006684",
+                        "primary-fixed-dim": "#84d0f2",
+                        "on-secondary-fixed": "#2a1700",
+                        "tertiary-container": "#a36927",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#004d64",
+                        "inverse-on-surface": "#eef1f4",
+                        "surface-container-low": "#f1f4f6",
+                        "surface-variant": "#e0e3e5",
+                        "on-surface": "#181c1e",
+                        "on-background": "#181c1e",
+                        "on-tertiary-fixed": "#2c1600",
+                        "primary-fixed": "#bde9ff",
+                        "tertiary-fixed-dim": "#ffb86f",
+                        "tertiary-fixed": "#ffdcbd",
+                        "outline-variant": "#bfc8cd",
+                        "primary": "#006683",
+                        "tertiary": "#86510f",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e6e8eb",
+                        "inverse-primary": "#84d0f2",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#6a4200",
+                        "background": "#f7fafc",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "surface-container-highest": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "2rem",
+                        "xl": "2.5rem",
+                        "md": "1rem",
+                        "gutter": "1.5rem",
+                        "lg": "1.5rem",
+                        "sm": "0.5rem",
+                        "xs": "0.25rem"
+                    },
+                    "fontFamily": {
+                        "h1": ["Roboto Slab"],
+                        "body-sm": ["Inter"],
+                        "h1-mobile": ["Roboto Slab"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Roboto Slab"],
+                        "h2": ["Roboto Slab"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "button": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "button": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        
+        .floating-label-group {
+            position: relative;
+        }
+        .floating-label-group input:focus ~ label,
+        .floating-label-group input:not(:placeholder-shown) ~ label {
+            top: -0.5rem;
+            left: 0.75rem;
+            font-size: 0.75rem;
+            color: #006683;
+            background: white;
+            padding: 0 4px;
+        }
+        
+        .floating-label-group input {
+            border-bottom: 2px solid #bfc8cd;
+            transition: border-color 0.3s ease;
+        }
+        
+        .floating-label-group input:focus {
+            border-color: #006683;
+            outline: none;
+        }
+
+        .step-transition {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen overflow-x-hidden font-body-md text-body-md">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity duration-300">menu</button>
+<h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex gap-lg">
+<a class="font-body-md text-body-md text-primary font-bold hover:opacity-80 transition-opacity" href="#">Booking</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Rooms</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Concierge</a>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center border-2 border-white overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0PUXZV09dL7vI-SSERiioOZDLwBZwnMBscgJQd3DpsSxJ3y_msg-ADY4QokyTyg2S78CvChEH_XREo8eElyo9vzZWooEldWf97BcygHb3_qnPH1ZMyycolhaU5gS160d0esRXJoinSrbfY2zPEmssqfC979fQ74LrJqihqaWQAnUr_fXwcOeZgif2-3k5uIdB8z2kzKlkYqFXcdkDzgo2Vt8LVjOEeyR0hgQT8MdJQ1WDAdyiviWCqpjvlRPV2bwMMpqA2x0-b6M"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-container-margin max-w-7xl mx-auto">
+<!-- Progress Stepper -->
+<div class="flex justify-center mb-12">
+<div class="flex items-center w-full max-w-2xl relative">
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-outline-variant -z-10 -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-0 h-0.5 bg-primary -z-10 -translate-y-1/2 transition-all duration-500" id="progress-line" style="width: 0%"></div>
+<div class="flex-1 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold transition-colors" id="step-node-1">1</div>
+<span class="font-label-md text-label-md mt-2 text-primary">Dates</span>
+</div>
+<div class="flex-1 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold transition-colors" id="step-node-2">2</div>
+<span class="font-label-md text-label-md mt-2 text-on-surface-variant">Room</span>
+</div>
+<div class="flex-1 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold transition-colors" id="step-node-3">3</div>
+<span class="font-label-md text-label-md mt-2 text-on-surface-variant">Payment</span>
+</div>
+</div>
+</div>
+<!-- STEP 1: DATES & GUESTS -->
+<section class="step-transition opacity-100 translate-x-0" id="step-1">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-8">
+<div class="glass-card rounded-xl p-lg">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-h3 text-h3 text-on-surface">Select Your Stay</h2>
+<div class="flex gap-sm">
+<button class="material-symbols-outlined p-xs hover:bg-surface-container-low rounded-full">chevron_left</button>
+<button class="material-symbols-outlined p-xs hover:bg-surface-container-low rounded-full">chevron_right</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2 text-center">
+<!-- Calendar Header -->
+<div class="font-label-md py-2 text-outline">MON</div>
+<div class="font-label-md py-2 text-outline">TUE</div>
+<div class="font-label-md py-2 text-outline">WED</div>
+<div class="font-label-md py-2 text-outline">THU</div>
+<div class="font-label-md py-2 text-outline">FRI</div>
+<div class="font-label-md py-2 text-outline">SAT</div>
+<div class="font-label-md py-2 text-outline">SUN</div>
+<!-- Calendar Days (Static Sample) -->
+<div class="py-4 text-outline-variant">28</div>
+<div class="py-4 text-outline-variant">29</div>
+<div class="py-4 text-outline-variant">30</div>
+<div class="py-4 text-outline-variant">31</div>
+<button class="py-4 hover:bg-primary/10 rounded-lg transition-colors font-bold">1</button>
+<button class="py-4 hover:bg-primary/10 rounded-lg transition-colors font-bold">2</button>
+<button class="py-4 hover:bg-primary/10 rounded-lg transition-colors font-bold">3</button>
+<button class="py-4 bg-primary text-white rounded-lg shadow-lg">4</button>
+<button class="py-4 bg-primary/20 text-primary">5</button>
+<button class="py-4 bg-primary/20 text-primary">6</button>
+<button class="py-4 bg-primary/20 text-primary">7</button>
+<button class="py-4 bg-primary text-white rounded-lg shadow-lg">8</button>
+<button class="py-4 hover:bg-primary/10 rounded-lg transition-colors">9</button>
+<button class="py-4 hover:bg-primary/10 rounded-lg transition-colors">10</button>
+<div class="py-4 hover:bg-primary/10 rounded-lg transition-colors">11</div>
+<div class="py-4 hover:bg-primary/10 rounded-lg transition-colors">12</div>
+<div class="py-4 hover:bg-primary/10 rounded-lg transition-colors">13</div>
+<div class="py-4 hover:bg-primary/10 rounded-lg transition-colors">14</div>
+<div class="py-4 hover:bg-primary/10 rounded-lg transition-colors">15</div>
+<div class="py-4 hover:bg-primary/10 rounded-lg transition-colors">16</div>
+<div class="py-4 hover:bg-primary/10 rounded-lg transition-colors">17</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="glass-card rounded-xl p-lg flex flex-col gap-lg">
+<h3 class="font-h3 text-h3">Guests</h3>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold">Adults</p>
+<p class="text-sm text-on-surface-variant">Ages 13 or above</p>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-6 text-center font-bold">2</span>
+<button class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold">Children</p>
+<p class="text-sm text-on-surface-variant">Ages 2 – 12</p>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-6 text-center font-bold">0</span>
+<button class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-lg rounded-xl font-bold text-h3 shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-md" onclick="goToStep(2)">
+                        Check Availability
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- STEP 2: ROOM SELECTION -->
+<section class="step-transition hidden opacity-0 translate-x-20" id="step-2">
+<div class="mb-lg flex justify-between items-end">
+<div>
+<h2 class="font-h2 text-h2 text-primary">Available Sanctuaries</h2>
+<p class="text-on-surface-variant">Showing results for 4 Oct — 8 Oct, 2 Adults</p>
+</div>
+<div class="flex gap-sm">
+<button class="p-md glass-card rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span class="font-button">Filters</span>
+</button>
+</div>
+</div>
+<div class="flex gap-lg overflow-x-auto no-scrollbar pb-lg -mx-4 px-4 snap-x">
+<!-- Room Card 1 -->
+<div class="min-w-[320px] md:min-w-[450px] snap-start">
+<div class="glass-card rounded-2xl overflow-hidden hover:translate-y-[-8px] transition-all duration-300 cursor-pointer group">
+<div class="h-64 relative overflow-hidden">
+<img alt="Azure King Suite" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A luxurious hotel suite with a large floor-to-ceiling window overlooking a pristine teal ocean at sunset. The interior features minimalist furniture in cream and light wood, with gold accent lighting casting a warm, premium glow on the plush textures of the bed. The mood is one of serene modern luxury with a high-key architectural photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXseuG_AjfR-thUc-boN4XX5N6ALQs7UEKw7OOTd9ZJDC39uXEREryWf_O3aRaf6NuddiRm043O00hRAcX00hZU3xYRQEBNhUjf7fVj79t-gQ-Upj6f92YiwZ1bQXGkG_TuWvcUe33Dqcf4gQcKlnNFXiQX4nZHbsjsAYQMgHcVYEb7C32GRFNRL9H5OI3yH2xnKoiJFsFXf-LCZSmTnVkiF-InynsLStWCNjsRutrYsjarqQ2a6Ic44Dmp7IBmkK03lC8ms4Ds3Q"/>
+<div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full font-label-md">VIP PRIORITY</div>
+<div class="absolute bottom-4 left-4 glass-card px-4 py-2 rounded-lg text-white">
+<span class="font-h3">$450</span><span class="text-xs opacity-80">/night</span>
+</div>
+</div>
+<div class="p-lg">
+<h3 class="font-h3 text-h3 mb-xs">Azure King Suite</h3>
+<div class="flex gap-md text-on-surface-variant mb-md">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">aspect_ratio</span> 55m²</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">king_bed</span> King</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-lg">A sophisticated space designed for absolute tranquility, featuring panoramic coastal views and private terrace access.</p>
+<button class="w-full border-2 border-primary text-primary py-md rounded-xl font-bold hover:bg-primary hover:text-white transition-all" onclick="goToStep(3)">Select This Room</button>
+</div>
+</div>
+</div>
+<!-- Room Card 2 -->
+<div class="min-w-[320px] md:min-w-[450px] snap-start">
+<div class="glass-card rounded-2xl overflow-hidden hover:translate-y-[-8px] transition-all duration-300 cursor-pointer group">
+<div class="h-64 relative overflow-hidden">
+<img alt="Zen Garden Deluxe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An elegant boutique hotel room featuring sophisticated glass-morphism decor and soft ambient lighting in tones of teal and gold. A large comfortable bed with white linens is the focal point, accented by minimalist art on the walls. The atmosphere is professional, quiet, and exudes modern hospitality excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfix0ZvkXy0In72PsXka6j-nti2uaDkYVwDqnI1c5Qj-xOyKjbXpNQ1STRS87YAqktbpGZRSBz52YYPlNy2epJZrG9ml9kwJGIKRHkKig4S1fepX28YiCWLVN6OoGaf5aGaRoj04vIZX898uc04-x9AQ4w-zjpz2hFlMl5t2oGRIM-Ja0aMZQinAAyAgGz5btuw7DXL-Hpz2rp1K6PbNNjHZFGCLC7HePRlMuRZi2PAhnFGvd_2n_4Z7EaTtoGLcAbt5nNbvL0CIE"/>
+<div class="absolute bottom-4 left-4 glass-card px-4 py-2 rounded-lg text-white">
+<span class="font-h3">$320</span><span class="text-xs opacity-80">/night</span>
+</div>
+</div>
+<div class="p-lg">
+<h3 class="font-h3 text-h3 mb-xs">Zen Garden Deluxe</h3>
+<div class="flex gap-md text-on-surface-variant mb-md">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">aspect_ratio</span> 42m²</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">bed</span> Queen</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-lg">Immerse yourself in Japanese-inspired minimalism with a private courtyard view and rainfall sensory shower.</p>
+<button class="w-full border-2 border-primary text-primary py-md rounded-xl font-bold hover:bg-primary hover:text-white transition-all" onclick="goToStep(3)">Select This Room</button>
+</div>
+</div>
+</div>
+<!-- Room Card 3 -->
+<div class="min-w-[320px] md:min-w-[450px] snap-start">
+<div class="glass-card rounded-2xl overflow-hidden hover:translate-y-[-8px] transition-all duration-300 cursor-pointer group border-primary/40 border-2">
+<div class="h-64 relative overflow-hidden">
+<img alt="Lumina Penthouse" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A sprawling penthouse suite with multi-level architecture and high-density glass walls. The color palette is dominated by deep teals and rich gold metal accents. Plush velvet furniture is arranged in a conversation circle. The lighting is dramatic and moody, reflecting a high-end luxury lifestyle for premium travelers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVigq7ggE_rqTgXYi3bDaQIatuaWxnZgQOSt2McR0nKZx63ZQ2_rwDGQ_4wvhJNaVnWC5q4wkuQDmh_VL9uOCwnnPdWP-NPeebsrBtWQQVNcamWiJHlpOHVP1EGyKzI-ylM4poLy-XGZGv7h7-uWwEkvYkusHg6Zy2C1ytYOAlanF9anFwBy8V17OAZZhYnQ7xt8GyQPzSe-Zisvwut7vW5wJ1TjzRRczk6Oy9cFaHNTkEqulJeN_UKuSrBDwdVmMJ_UxNASfd5FI"/>
+<div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full font-label-md">MOST POPULAR</div>
+<div class="absolute bottom-4 left-4 glass-card px-4 py-2 rounded-lg text-white">
+<span class="font-h3">$890</span><span class="text-xs opacity-80">/night</span>
+</div>
+</div>
+<div class="p-lg">
+<h3 class="font-h3 text-h3 mb-xs">Lumina Penthouse</h3>
+<div class="flex gap-md text-on-surface-variant mb-md">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">aspect_ratio</span> 120m²</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">king_bed</span> 2x King</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-lg">The pinnacle of luxury. Two bedrooms, a private pool, and 24/7 dedicated butler service for the ultimate stay.</p>
+<button class="w-full border-2 border-primary text-primary py-md rounded-xl font-bold hover:bg-primary hover:text-white transition-all" onclick="goToStep(3)">Select This Room</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-between">
+<button class="flex items-center gap-sm text-primary font-bold hover:opacity-80" onclick="goToStep(1)">
+<span class="material-symbols-outlined">arrow_back</span> Back to Dates
+                </button>
+</div>
+</section>
+<!-- STEP 3: PAYMENT & SUMMARY -->
+<section class="step-transition hidden opacity-0 translate-x-20" id="step-3">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Payment Form -->
+<div class="lg:col-span-7 flex flex-col gap-lg">
+<h2 class="font-h2 text-h2 text-primary">Guest Information</h2>
+<form class="glass-card rounded-2xl p-lg flex flex-col gap-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="floating-label-group">
+<input class="w-full pt-6 pb-2 bg-transparent border-t-0 border-x-0" id="first_name" placeholder=" " type="text"/>
+<label class="absolute left-0 top-6 text-on-surface-variant transition-all pointer-events-none" for="first_name">First Name</label>
+</div>
+<div class="floating-label-group">
+<input class="w-full pt-6 pb-2 bg-transparent border-t-0 border-x-0" id="last_name" placeholder=" " type="text"/>
+<label class="absolute left-0 top-6 text-on-surface-variant transition-all pointer-events-none" for="last_name">Last Name</label>
+</div>
+</div>
+<div class="floating-label-group">
+<input class="w-full pt-6 pb-2 bg-transparent border-t-0 border-x-0" id="email" placeholder=" " type="email"/>
+<label class="absolute left-0 top-6 text-on-surface-variant transition-all pointer-events-none" for="email">Email Address</label>
+</div>
+<h3 class="font-h3 text-h3 mt-4 border-t pt-8 border-outline-variant/30">Secure Payment</h3>
+<div class="floating-label-group">
+<input class="w-full pt-6 pb-2 bg-transparent border-t-0 border-x-0" id="card_num" placeholder=" " type="text"/>
+<label class="absolute left-0 top-6 text-on-surface-variant transition-all pointer-events-none" for="card_num">Card Number</label>
+<span class="absolute right-0 top-6 material-symbols-outlined text-outline">credit_card</span>
+</div>
+<div class="grid grid-cols-2 gap-lg">
+<div class="floating-label-group">
+<input class="w-full pt-6 pb-2 bg-transparent border-t-0 border-x-0" id="expiry" placeholder=" " type="text"/>
+<label class="absolute left-0 top-6 text-on-surface-variant transition-all pointer-events-none" for="expiry">Expiry (MM/YY)</label>
+</div>
+<div class="floating-label-group">
+<input class="w-full pt-6 pb-2 bg-transparent border-t-0 border-x-0" id="cvv" placeholder=" " type="password"/>
+<label class="absolute left-0 top-6 text-on-surface-variant transition-all pointer-events-none" for="cvv">CVV</label>
+</div>
+</div>
+<div class="flex items-start gap-md mt-4">
+<input class="mt-1 rounded border-outline-variant text-primary focus:ring-primary" id="terms" type="checkbox"/>
+<label class="text-body-sm text-on-surface-variant" for="terms">I agree to the Lumina Hospitality Terms of Service and Privacy Policy. I understand that cancellation within 48 hours of arrival will incur a 1-night fee.</label>
+</div>
+<button class="mt-4 bg-primary text-white py-lg rounded-xl font-bold text-h3 shadow-xl hover:shadow-primary/20 hover:scale-[1.01] active:scale-95 transition-all" type="button">
+                            Complete Booking • $1,800
+                        </button>
+</form>
+</div>
+<!-- Summary Panel -->
+<div class="lg:col-span-5">
+<div class="sticky top-28 glass-card rounded-2xl p-lg border-2 border-primary/20">
+<h3 class="font-h3 text-h3 mb-lg">Reservation Summary</h3>
+<div class="flex items-center gap-lg mb-lg pb-lg border-b border-outline-variant/30">
+<img alt="Selected Room" class="w-24 h-24 rounded-xl object-cover" data-alt="Close up of a luxury hotel bed with high-thread count linens and decorative teal pillows. The background is softly blurred showing a warm wooden nightstand and a gold designer lamp. Professional hotel catalog style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbJYUycqrPOHC6GonI-fSWgpDmCzmP4lyppne0Mw8k8LC2QOcu6D6ddWNJeuuaTdr9OgVE1I4jRhC8h6amGlVfCmU0VHP6BTveuvzfHJDp6mP9kQCoFJ8y7vGM3PuMjZjF5Wyrc2x4wSZ6HVjXujzn0HGW9O4DfauG2P5shNNTqtMmgnjrNc6CrypjAEmNwQTC10ph_cy16dhIM6i-riD9mfsaEkkdZIj4IrD883IHiemdkNrX3d8RTIH9CJN1GafxXnrVKWfPN-I"/>
+<div>
+<h4 class="font-bold text-primary">Azure King Suite</h4>
+<p class="text-sm text-on-surface-variant">4 Nights • 2 Adults</p>
+<p class="text-sm font-bold text-secondary">Free Breakfast Included</p>
+</div>
+</div>
+<div class="flex flex-col gap-md mb-lg">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Room Rate ($450 x 4)</span>
+<span class="font-medium">$1,800.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Resort Fee</span>
+<span class="text-success font-medium">FREE</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Service Charge (10%)</span>
+<span class="font-medium">$180.00</span>
+</div>
+<div class="flex justify-between items-center text-primary font-bold">
+<span class="text-sm">MEMBERSHIP DISCOUNT</span>
+<span class="">-$180.00</span>
+</div>
+</div>
+<div class="pt-lg border-t border-primary/30 flex justify-between items-end">
+<div>
+<p class="text-sm text-on-surface-variant">Total Amount</p>
+<p class="text-[32px] font-bold text-primary leading-tight">$1,800.00</p>
+</div>
+<span class="text-xs text-on-surface-variant text-right">All taxes included</span>
+</div>
+<div class="mt-lg p-md bg-primary-container/10 rounded-xl flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<p class="text-xs text-on-primary-fixed-variant">Best Price Guaranteed. You saved $180 by booking direct with Lumina.</p>
+</div>
+</div>
+<button class="mt-lg flex items-center gap-sm text-primary font-bold hover:opacity-80 px-4" onclick="goToStep(2)">
+<span class="material-symbols-outlined">arrow_back</span> Change Room Selection
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 backdrop-blur-3xl border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-primary font-bold transition-all duration-300" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Booking</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Status</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">bed</span>
+<span class="font-label-md text-label-md">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        function goToStep(step) {
+            const steps = [1, 2, 3];
+            const progressLine = document.getElementById('progress-line');
+            
+            steps.forEach(s => {
+                const el = document.getElementById(`step-${s}`);
+                const node = document.getElementById(`step-node-${s}`);
+                
+                if (s === step) {
+                    el.classList.remove('hidden');
+                    setTimeout(() => {
+                        el.classList.remove('opacity-0', 'translate-x-20', '-translate-x-20');
+                        el.classList.add('opacity-100', 'translate-x-0');
+                    }, 50);
+                    
+                    node.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                    node.classList.add('bg-primary', 'text-white');
+                } else {
+                    el.classList.add('hidden', 'opacity-0');
+                    if (s < step) {
+                        el.classList.add('-translate-x-20');
+                        node.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                        node.classList.add('bg-primary', 'text-white');
+                    } else {
+                        el.classList.add('translate-x-20');
+                        node.classList.add('bg-surface-container', 'text-on-surface-variant');
+                        node.classList.remove('bg-primary', 'text-white');
+                    }
+                }
+            });
+
+            // Update Progress Line
+            const progressWidths = {1: '0%', 2: '50%', 3: '100%'};
+            progressLine.style.width = progressWidths[step];
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Add micro-interactions for input focus
+        document.querySelectorAll('.floating-label-group input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('active');
+            });
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentElement.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Hospitality - Guest Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2a1700",
+                    "on-secondary-container": "#6a4200",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface-variant": "#3f484d",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e6e8eb",
+                    "surface-dim": "#d8dadd",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#2a7f9e",
+                    "outline-variant": "#bfc8cd",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface": "#f7fafc",
+                    "on-surface": "#181c1e",
+                    "on-primary-container": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#004d64",
+                    "tertiary-fixed-dim": "#ffb86f",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7fafc",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "background": "#f7fafc",
+                    "secondary-fixed-dim": "#ffb95c",
+                    "secondary-fixed": "#ffddb7",
+                    "secondary": "#845400",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary-container": "#fdaa2d",
+                    "on-tertiary-fixed": "#2c1600",
+                    "surface-container-low": "#f1f4f6",
+                    "on-background": "#181c1e",
+                    "on-primary-fixed": "#001f2a",
+                    "outline": "#6f787e",
+                    "primary-fixed": "#bde9ff",
+                    "inverse-on-surface": "#eef1f4",
+                    "primary": "#006683",
+                    "surface-container": "#eceef1",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "inverse-primary": "#84d0f2",
+                    "surface-tint": "#006684",
+                    "on-tertiary-container": "#ffffff",
+                    "tertiary-container": "#a36927",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#86510f",
+                    "primary-fixed-dim": "#84d0f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1rem",
+                    "lg": "1.5rem",
+                    "gutter": "1.5rem",
+                    "container-margin": "2rem",
+                    "xs": "0.25rem",
+                    "xl": "2.5rem",
+                    "sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "h3": ["Roboto Slab"],
+                    "h1": ["Roboto Slab"],
+                    "body-sm": ["Inter"],
+                    "button": ["Inter"],
+                    "h2": ["Roboto Slab"],
+                    "h1-mobile": ["Roboto Slab"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "button": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.4);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            height: 2px;
+            background: #006683;
+            transition: all 0.3s ease-out;
+        }
+        body {
+            background-color: #f7fafc;
+            background-image: radial-gradient(at 0% 0%, rgba(0, 102, 131, 0.05) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(134, 81, 15, 0.05) 0px, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm">
+<div class="flex items-center gap-md">
+<button class="hover:opacity-80 transition-opacity duration-300 active:scale-95">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant">search</button>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border-2 border-primary/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a sophisticated hotel guest in a clean, high-key studio setting. The lighting is soft and flattering, reflecting a luxury hospitality brand's aesthetic. The individual wears a smart-casual linen shirt in a neutral tone, blending seamlessly with a modern, light-mode UI design featuring subtle teal accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnp6mv-4oXG1Cmy5Wmo8kOSZEpEt5eJXSAwA33WAEsI502n-uoyroQJFQu5bu6nf9j8hAEuOicSgOs1kcWAR7f1inicpHC2Bjv7A0Ezo6zbwpfAZU8rFRFGO1TuCj6k33st_3FdZzqu6m9kLAcrnyaeFAaRDfHAJJ1ZMni42sbmKWhUsUQOKjDk-R6OnkUYqcklHTVsNPGrR6hOfxyLJMYfPtrDiGh6BxD4T-refp8HbmjUp86U5uURJNNiRixlmPZUWJG94FThdM"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-container-margin max-w-6xl mx-auto">
+<!-- Dashboard Header -->
+<div class="mb-lg">
+<h2 class="font-h1 text-h1 text-on-surface mb-xs">Welcome back, Julian</h2>
+<p class="font-body-md text-on-surface-variant">Manage your luxury stays and preferences.</p>
+</div>
+<!-- Tab Navigation -->
+<nav class="flex gap-lg border-b border-outline-variant/30 mb-xl sticky top-20 bg-background/50 backdrop-blur-md z-40">
+<button class="py-md font-label-md text-label-md text-primary flex items-center gap-xs relative" id="tab-upcoming" onclick="switchTab('upcoming')">
+                UPCOMING STAYS
+                <div class="active-tab-indicator absolute bottom-0 left-0 w-full"></div>
+</button>
+<button class="py-md font-label-md text-label-md text-on-surface-variant flex items-center gap-xs relative" id="tab-past" onclick="switchTab('past')">
+                PAST STAYS
+                <div class="active-tab-indicator absolute bottom-0 left-0 w-0"></div>
+</button>
+<button class="py-md font-label-md text-label-md text-on-surface-variant flex items-center gap-xs relative" id="tab-saved" onclick="switchTab('saved')">
+                SAVED
+                <div class="active-tab-indicator absolute bottom-0 left-0 w-0"></div>
+</button>
+</nav>
+<!-- Content Sections -->
+<div class="space-y-lg" id="section-upcoming">
+<!-- Featured Upcoming Card -->
+<div class="glass-card rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-12 group transition-all duration-300 hover:shadow-xl">
+<div class="md:col-span-5 h-64 md:h-full relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A breathtaking view of a luxury infinity pool overlooking the turquoise Mediterranean Sea at dusk. The scene is bathed in a warm, golden hour glow with elegant lounge chairs and minimalist architectural lines. The aesthetic is serene, opulent, and perfectly aligned with a premium hospitality brand using teal and gold accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGBG6xFMFa4M7LFIZjy9C8-m_2kTq5ns90gK3_fjIwN0MicJLXmnklUYcQBLUiA67KPPB23cUMWfGpQzWcChx3TxdnldN8KzVfr8Kwwy2nV9YZD3DCGIHKFa7_RmCbT-1rTfWKU2Pl8vUR4_KuLV6w7ic54l30CP1tGEr23w8dDsDYyvOlp4IsDHvmvQ7eu9ZtdNnPkIWVg-17dHf_dEcPS_rbBgcNApFgbkpUxuUl-3LaFY01fzZVNIHlIA2p6qJz6fEW8aLEpug"/>
+<div class="absolute top-md left-md bg-primary text-white font-label-md text-label-md px-md py-xs rounded-full shadow-lg">
+                        CONFIRMED
+                    </div>
+</div>
+<div class="md:col-span-7 p-lg flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-md text-label-md text-tertiary">LUMINA AZURE • AMALFI COAST</span>
+<span class="material-symbols-outlined text-tertiary">star</span>
+</div>
+<h3 class="font-h3 text-h3 mb-md">Terrace Panorama Suite</h3>
+<div class="flex gap-xl mb-lg">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase text-[10px]">Check-in</span>
+<span class="font-body-lg text-body-lg text-on-surface">Oct 12, 2024</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase text-[10px]">Check-out</span>
+<span class="font-body-lg text-body-lg text-on-surface">Oct 18, 2024</span>
+</div>
+</div>
+</div>
+<div class="flex gap-md">
+<button class="flex-1 bg-primary text-on-primary font-button text-button py-md rounded-lg hover:opacity-90 transition-all duration-300 active:scale-95">Manage Booking</button>
+<button class="px-md border border-primary text-primary rounded-lg hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined translate-y-px">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden space-y-md" id="section-past">
+<!-- Past Stay Item -->
+<div class="glass-card rounded-xl p-md flex flex-col md:flex-row gap-md items-center justify-between border-l-4 border-l-tertiary">
+<div class="flex items-center gap-md w-full md:w-auto">
+<div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A serene and elegantly designed hotel bedroom featuring high-quality linens in soft cream tones and warm ambient lighting. The background shows a large window looking out onto a lush garden. The style is modern luxury with a focus on comfort and high-end hospitality materials." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqxdfS2fzUaB0HfH7AmEhwLXQUF_GZ2PnjN7MDQrx9A3x2vop1f08AyOEGz4EZ4YWiFQOgRTWoegA8r8xhOAXquUzkK79buIa_BrLVW9HHuBjtx3aNZWWetgcNnQZHi_vHLIYiGRc1WIRO0UvWEZ4woFxNX0xsiTo11NhDOV2TdErCfyEbtUJYooWtWMZ2ek4QrI8cPZZRdv-lwLZ8we8qDQMYA58YWnOxsc3xamhslUH9NmfO9NYVmqVHi9RkJBjdJlGt3ba9okI"/>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg font-bold">Lumina Alpine Lodge</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Stayed Dec 2023 • 4 Nights</p>
+</div>
+</div>
+<div class="flex gap-sm w-full md:w-auto">
+<button class="flex-1 md:flex-none border border-tertiary text-tertiary font-button text-button px-lg py-sm rounded-lg hover:bg-tertiary/5 transition-all">Leave Review</button>
+<button class="flex-1 md:flex-none bg-surface-container text-on-surface-variant font-button text-button px-lg py-sm rounded-lg">View Invoice</button>
+</div>
+</div>
+<div class="glass-card rounded-xl p-md flex flex-col md:flex-row gap-md items-center justify-between border-l-4 border-l-outline">
+<div class="flex items-center gap-md w-full md:w-auto">
+<div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A grand hotel lobby featuring high ceilings, marble floors, and sophisticated lighting installations. The palette includes rich gold and deep teal accents, creating an atmosphere of prestigious modern hospitality and professional management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxYl_0VdX59N6_fZlKBYHA76y2NUMb3CL0jd_4VvRWVQZ_mb0g5HaH9Emfv9hMyP4-iU6adxFQCyhZPDZGghrxR1ntqYI4rmAAW553BIbY-q2BJQZ2eAGqNN9EQ3jV-31KL3ywk7JU7bsGr8VJ9uWMDFXse10GJTo1n-0oBJxGj2n47VtXmV40mo38mM0TLt7FZmgi981560raHN6ywDhjfhNi2coTkjnJIf_YnpLxIBlvQ6ZPj1PY0cSc3pvrOuuueqyG8kQWsoY"/>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg font-bold">Lumina City Center</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Stayed Aug 2023 • 2 Nights</p>
+</div>
+</div>
+<div class="flex gap-sm w-full md:w-auto">
+<div class="flex items-center gap-xs px-lg py-sm text-on-surface-variant font-button text-button">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                        5.0 Reviewed
+                    </div>
+<button class="flex-1 md:flex-none bg-surface-container text-on-surface-variant font-button text-button px-lg py-sm rounded-lg">Book Again</button>
+</div>
+</div>
+</div>
+<div class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md" id="section-saved">
+<!-- Saved Property Card -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col h-full group">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A modern luxury hotel exterior at dusk, featuring floor-to-ceiling glass windows and warm interior lighting. The architecture is sleek and contemporary, set against a deep blue evening sky. A small, elegant sign with gold lettering reflects the premium Lumina Hospitality brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3G1FdTZm3gA1p2WlYFgkmQZISde8yYzoiHGKamBP8573aOW7-ZuVU7ZwYWSRJQr5v3e7DCqPckgTpfXcAk40kA8fMGWLPxrg7o4rM9CsDqPrmZUlWKKCfMYe9YF-1gaaJcvCBm4jZAmCzGtoS5-IVAoTX_87jA0IsGOXu9ChTD-PWE4B_moCGKsAwa9v7oRXXYpQh8CWdgHAXriI1fbDeSbvlsS9JVkbtQMTsvvhYebrwvs7e1bt3OKErhQNCVSBfjPJ4uJll2UE"/>
+<button class="absolute top-sm right-sm w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="p-md flex-1 flex flex-col justify-between">
+<div>
+<h4 class="font-body-lg text-body-lg font-bold mb-xs">Lumina Sky Residences</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">location_on</span> Tokyo, Japan
+                        </p>
+</div>
+<div class="mt-md flex justify-between items-center">
+<span class="font-h3 text-h3 text-primary">$450<span class="text-label-md font-normal text-on-surface-variant">/night</span></span>
+<button class="text-primary font-button text-button flex items-center gap-xs hover:gap-md transition-all">
+                            View Details <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 backdrop-blur-3xl border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">bed</span>
+<span class="font-label-md text-label-md">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        function switchTab(tab) {
+            const sections = ['upcoming', 'past', 'saved'];
+            sections.forEach(s => {
+                document.getElementById('section-' + s).classList.add('hidden');
+                document.getElementById('section-' + s).classList.remove('grid');
+                
+                const tabBtn = document.getElementById('tab-' + s);
+                const indicator = tabBtn.querySelector('.active-tab-indicator');
+                
+                tabBtn.classList.remove('text-primary');
+                tabBtn.classList.add('text-on-surface-variant');
+                indicator.classList.remove('w-full');
+                indicator.classList.add('w-0');
+            });
+
+            const activeSection = document.getElementById('section-' + tab);
+            if(tab === 'saved') {
+                activeSection.classList.remove('hidden');
+                activeSection.classList.add('grid');
+            } else {
+                activeSection.classList.remove('hidden');
+            }
+
+            const activeBtn = document.getElementById('tab-' + tab);
+            activeBtn.classList.add('text-primary');
+            activeBtn.classList.remove('text-on-surface-variant');
+            activeBtn.querySelector('.active-tab-indicator').classList.add('w-full');
+            activeBtn.querySelector('.active-tab-indicator').classList.remove('w-0');
+        }
+
+        // Pulse effect for interactive elements
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

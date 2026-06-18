@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Lumina Hospitality | Luxury Management & Stays</title>
+    <link href="/css/ui-utils.css" rel="stylesheet"/>
+    <link href="home-lumina.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm">
+        <div class="flex items-center gap-md">
+            <span class="material-symbols-outlined text-primary cursor-pointer lg:hidden">menu</span>
+            <h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="font-label-md text-label-md text-primary font-bold transition-opacity duration-300" href="/pages/hotel/home-lumina/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity duration-300" href="/pages/hotel/rooms-lumina/">Rooms</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity duration-300" href="/pages/hotel/booking-your-stay/">Bookings</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity duration-300" href="/pages/hotel/login-lumina/">Login</a>
+        </nav>
+        <div class="flex items-center gap-sm">
+            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+                <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ3yGs7cNljtHDHjFea748H7hxRyyytdScsR7bN3Jvf-QO4ZavQlaUU9q2dw_shLU5V7ZccYLmXTtt7YcPTmVj7Beu--O_7SMKwFk_A8aEn_mSlSOtEPcxe9hgj7WCSJAecU7b7dkwKnGnIbuaY6kxwyyYwLb0W-fbPsFvnoWMTAZPqF7NRerbrlgyN5osMSbVZRX4eVErQ9TDspKAo_vpIO5U076Fa5sDe1Zt3PSoYkPmxfbMx2TFoT-levyJf1IPGxQG83WAUBY"/>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Carousel Section -->
+        <section class="relative w-full h-[707px] overflow-hidden group">
+            <div class="carousel-track h-full" id="hero-carousel">
+                <!-- Slide 1 -->
+                <div class="min-w-full h-full relative">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqyAXJpR8fGwrKygPxYpFAVSVnL-MOjdDRD848lcEEk9OmUd1tQ5zdeMW7aPvxT0ldmjvwvcTCwdPsCABm7bLIcnsoMuZBKNjZdhzX75YAooAyRfw1lj5drp7bP1DqaJiQFbM7hmHM2aKzsA1pz2yhAF316mf9oayHYpMVHMqdcxZ6JHswc75meIKKfpbKgQB5IQzCIpUN-RHrHrVfe5yX-DsjQl38R6gdF_nr1YqLNP37wrHEeaqjcHUHlEwQPL6xznRSfhm4rnc"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-xl left-container-margin md:left-xl z-10">
+                        <h2 class="font-h1 text-h1 text-white mb-sm">The Lumina Presidential Suite</h2>
+                        <div class="inline-block bg-secondary px-lg py-sm rounded-lg shadow-lg">
+                            <span class="font-h3 text-h3 text-white">$1,250 / night</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="min-w-full h-full relative">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGaCTI7-tuZjDF9joFdmRrO29pW7O9gpdSv2TlCXR6PNjNQN0eKDbGYKnknNgE87Jcf130B2iPzgRTVKcteMI5KMkH8RVWnnyKDaU5l4pfjO9F3fieY3ZCL7w0iAy_thlTh2pMBeh56pJF07Z96Wag2ZIBhz8MgXCS9gnwTg4BDlvq0NnqhikOj3DjL71wUGnxxAbfALNeCFWqTX6gdkY1z6byGHN5GL12uVCkeKSXVMHWR57Iu7ywBOXWbKXGjBMNDeJEfDSmRFo"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-xl left-container-margin md:left-xl z-10">
+                        <h2 class="font-h1 text-h1 text-white mb-sm">Azure Oceanfront Villa</h2>
+                        <div class="inline-block bg-secondary px-lg py-sm rounded-lg shadow-lg">
+                            <span class="font-h3 text-h3 text-white">$890 / night</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel Controls -->
+            <div class="absolute bottom-lg right-container-margin flex gap-sm z-20">
+                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/40 transition-all border border-white/30" onclick="moveCarousel(-1)">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/40 transition-all border border-white/30" onclick="moveCarousel(1)">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Sticky Search Bar -->
+        <div class="sticky top-[72px] z-40 px-container-margin -mt-8">
+            <div class="max-w-6xl mx-auto glass-card rounded-xl p-md md:p-lg flex flex-col md:flex-row items-center gap-md inner-glow shadow-xl">
+                <div class="w-full md:flex-1 relative">
+                    <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Check-in</label>
+                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" value="2024-10-24"/>
+                </div>
+                <div class="w-full md:flex-1 relative">
+                    <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Check-out</label>
+                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" value="2024-10-28"/>
+                </div>
+                <div class="w-full md:w-48 relative">
+                    <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Guests</label>
+                    <select class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md">
+                        <option>2 Adults, 0 Children</option>
+                        <option>2 Adults, 1 Child</option>
+                        <option>1 Adult</option>
+                    </select>
+                </div>
+                <button class="w-full md:w-auto px-xl py-4 bg-primary text-white font-button rounded-lg hover:bg-primary/90 transition-all active:scale-95 shadow-md flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">search</span>
+                    Check Availability
+                </button>
+            </div>
+        </div>
+
+        <!-- Highlights / Amenities Section -->
+        <section class="max-w-7xl mx-auto px-container-margin py-xl">
+            <div class="text-center mb-xl">
+                <h3 class="font-h2 text-h2 text-on-surface mb-xs">Exceptional Comfort</h3>
+                <p class="font-body-md text-on-surface-variant max-w-2xl mx-auto">Discover the signature hospitality that defines Lumina. Every detail is curated for your ultimate relaxation and operational excellence.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-xl p-xl flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined scale-150">wifi</span>
+                    </div>
+                    <h4 class="font-h3 text-h3 mb-sm">Free Wi-Fi</h4>
+                    <p class="font-body-sm text-on-surface-variant">Stay connected with ultra-high-speed fiber optic connectivity available throughout the entire property.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-card rounded-xl p-xl flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-md group-hover:bg-secondary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined scale-150">restaurant</span>
+                    </div>
+                    <h4 class="font-h3 text-h3 mb-sm">Breakfast Included</h4>
+                    <p class="font-body-sm text-on-surface-variant">Start your day with a curated selection of gourmet local and international delicacies in our glass-walled dining room.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card rounded-xl p-xl flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined scale-150">pets</span>
+                    </div>
+                    <h4 class="font-h3 text-h3 mb-sm">Pet Friendly</h4>
+                    <p class="font-body-sm text-on-surface-variant">We welcome your furry companions with specialized amenities and dedicated concierge services for their comfort.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section with Asymmetric Layout -->
+        <section class="max-w-7xl mx-auto px-container-margin py-xl grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
+            <div class="lg:col-span-7 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbCn4lWQ-Vz4_JWrcR_iOey77Vuj-AnVxDW56qAVIMuYlnUT-4uHmmFk8p3-IJ2l3ZY2PjyvwptWqKIj7W8XgqQhOS52JCq3sbLouaaz__NWHCXajR1mrzEmTH79l7E34zgHR2MGtRS5PbDAxm-j3emHvVVvJ0PmjS0Mxxdxdxd-B2SiuGUWMwpSODgIx44glV0p_w4b8nSEkQjIBVaWgtB-8lHH28vtXS-CydCQ_HkVJYjXXnT7lsosnSExpBZo1aGqQW3n7NWAnOk"/>
+                <div class="absolute inset-0 bg-primary/10 backdrop-overlay"></div>
+                <div class="absolute top-lg right-lg glass-card p-md rounded-xl text-primary font-bold">
+                    Award Winning Service
+                </div>
+            </div>
+            <div class="lg:col-span-5 space-y-md">
+                <span class="text-secondary font-label-md tracking-widest uppercase">The Lumina Experience</span>
+                <h3 class="font-h2 text-h2 leading-tight">Elevating Every Moment of Your Stay</h3>
+                <p class="font-body-lg text-on-surface-variant">From our smart concierge system to bespoke interior design, Lumina Hospitality bridges the gap between digital efficiency and human warmth.</p>
+                <div class="space-y-sm">
+                    <div class="flex items-center gap-md">
+                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <span class="font-body-md font-medium">Smart Room Automation</span>
+                    </div>
+                    <div class="flex items-center gap-md">
+                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <span class="font-body-md font-medium">24/7 VIP Concierge</span>
+                    </div>
+                    <div class="flex items-center gap-md">
+                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <span class="font-body-md font-medium">Sustainable Luxury Practices</span>
+                    </div>
+                </div>
+                <button class="px-xl py-4 border-2 border-primary text-primary font-button rounded-lg hover:bg-primary hover:text-white transition-all active:scale-95 mt-md">
+                    Explore Our Story
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-white/70 backdrop-blur-3xl px-container-margin py-sm pb-safe border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+        <div class="flex flex-col items-center justify-center text-primary font-bold">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">bed</span>
+            <span class="font-label-md text-label-md">Rooms</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span class="font-label-md text-label-md">Bookings</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-label-md text-label-md">Profile</span>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="bg-surface-dim mt-xl py-xl border-t border-outline-variant/30">
+        <div class="max-w-7xl mx-auto px-container-margin grid grid-cols-1 md:grid-cols-4 gap-xl">
+            <div class="col-span-1 md:col-span-2">
+                <h1 class="font-h2 text-h2 text-primary mb-md">Lumina Hospitality</h1>
+                <p class="font-body-md text-on-surface-variant max-w-sm">Setting the standard for modern hospitality management with a focus on luxury, efficiency, and guest satisfaction.</p>
+            </div>
+            <div>
+                <h5 class="font-label-md text-label-md text-on-surface mb-md">Quick Links</h5>
+                <ul class="space-y-sm text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="/pages/hotel/rooms-lumina/">Our Properties</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Corporate Services</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-label-md text-label-md text-on-surface mb-md">Legal</h5>
+                <ul class="space-y-sm text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-container-margin mt-xl pt-lg border-t border-outline-variant/30 text-center text-on-surface-variant font-label-md">
+            © 2024 Lumina Hospitality Group. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+    <script src="home-lumina.js"></script>
+</body>
+</html>

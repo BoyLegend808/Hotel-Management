@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Exec($content)",
+      "Exec($heroSection)",
+      "Exec(Select-Object)",
+      "Exec(git status)",
+      "Exec($optimizedScroll)",
+      "Exec($newContent)",
+      "Exec(head)",
+      "Exec(powershell)",
+      "Exec(cd)",
+      "Exec(node)",
+      "Exec(taskkill)",
+      "Exec(npm install)",
+      "Exec(netstat)"
+    ]
+  }
+}

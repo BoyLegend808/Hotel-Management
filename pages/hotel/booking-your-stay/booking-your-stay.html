@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Lumina Hospitality | Book Your Stay</title>
+    <link href="/css/ui-utils.css" rel="stylesheet"/>
+    <link href="booking-your-stay.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm">
+        <div class="flex items-center gap-md">
+            <span class="material-symbols-outlined text-primary cursor-pointer" onclick="goBack()">arrow_back</span>
+            <h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
+            <a class="font-label-md text-label-md text-primary font-bold transition-opacity" href="/pages/hotel/booking/">Bookings</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login/">Login</a>
+        </nav>
+        <div class="flex items-center gap-sm">
+            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+                <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ3yGs7cNljtHDHjFea748H7hxRyyytdScsR7bN3Jvf-QO4ZavQlaUU9q2dw_shLU5V7ZccYLmXTtt7YcPTmVj7Beu--O_7SMKwFk_A8aEn_mSlSOtEPcxe9hgj7WCSJAecU7b7dkwKnGnIbuaY6kxwyyYwLb0W-fbPsFvnoWMTAZPqF7NRerbrlgyN5osMSbVZRX4eVErQ9TDspKAo_vpIO5U076Fa5sDe1Zt3PSoYkPmxfbMx2TFoT-levyJf1IPGxQG83WAUBY"/>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20 pb-32 px-container-margin max-w-7xl mx-auto">
+        <!-- Booking Wizard Header -->
+        <div class="text-center mb-xl">
+            <h2 class="font-h1 text-h1 text-on-surface mb-sm">Book Your Stay</h2>
+            <p class="font-body-md text-on-surface-variant">Complete your reservation in 3 simple steps</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="flex justify-center mb-xl">
+            <div class="flex items-center gap-md">
+                <div class="flex items-center gap-sm">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold" id="step1-indicator">1</div>
+                    <span class="font-label-md text-primary font-bold">Dates</span>
+                </div>
+                <div class="w-16 h-1 bg-outline-variant rounded" id="progress1"></div>
+                <div class="flex items-center gap-sm">
+                    <div class="w-10 h-10 rounded-full bg-outline-variant text-on-surface-variant flex items-center justify-center font-bold" id="step2-indicator">2</div>
+                    <span class="font-label-md text-on-surface-variant" id="step2-label">Room</span>
+                </div>
+                <div class="w-16 h-1 bg-outline-variant rounded" id="progress2"></div>
+                <div class="flex items-center gap-sm">
+                    <div class="w-10 h-10 rounded-full bg-outline-variant text-on-surface-variant flex items-center justify-center font-bold" id="step3-indicator">3</div>
+                    <span class="font-label-md text-on-surface-variant" id="step3-label">Payment</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Date Selection -->
+        <div class="glass-card rounded-xl p-lg mb-xl" id="step1">
+            <h3 class="font-h2 text-h2 mb-lg">Select Your Dates</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                <div>
+                    <label class="block text-label-md text-on-surface-variant mb-md">CHECK-IN DATE</label>
+                    <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="date" id="checkInDate"/>
+                </div>
+                <div>
+                    <label class="block text-label-md text-on-surface-variant mb-md">CHECK-OUT DATE</label>
+                    <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="date" id="checkOutDate"/>
+                </div>
+            </div>
+            <div class="mt-lg">
+                <label class="block text-label-md text-on-surface-variant mb-md">NUMBER OF GUESTS</label>
+                <select class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" id="guestCount">
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                </select>
+            </div>
+            <button class="w-full mt-lg bg-primary text-white py-md rounded-lg font-button hover:bg-primary/90 transition-all active:scale-95" onclick="goToStep(2)">
+                Continue to Room Selection
+            </button>
+        </div>
+
+        <!-- Step 2: Room Selection -->
+        <div class="glass-card rounded-xl p-lg mb-xl hidden" id="step2">
+            <h3 class="font-h2 text-h2 mb-lg">Select Your Room</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg" id="roomSelection">
+                <!-- Room options will be loaded dynamically -->
+            </div>
+            <div class="flex gap-md mt-lg">
+                <button class="flex-1 border border-outline-variant text-on-surface-variant py-md rounded-lg font-button hover:bg-surface-container transition-all" onclick="goToStep(1)">
+                    Back
+                </button>
+                <button class="flex-1 bg-primary text-white py-md rounded-lg font-button hover:bg-primary/90 transition-all active:scale-95" onclick="goToStep(3)">
+                    Continue to Payment
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Payment -->
+        <div class="glass-card rounded-xl p-lg mb-xl hidden" id="step3">
+            <h3 class="font-h2 text-h2 mb-lg">Payment Details</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-xl">
+                <!-- Guest Information -->
+                <div>
+                    <h4 class="font-h3 text-h3 mb-md">Guest Information</h4>
+                    <div class="space-y-md">
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-sm">FULL NAME</label>
+                            <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="text" id="guestName" placeholder="John Doe"/>
+                        </div>
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-sm">EMAIL ADDRESS</label>
+                            <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="email" id="guestEmail" placeholder="john@example.com"/>
+                        </div>
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-sm">PHONE NUMBER</label>
+                            <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="tel" id="guestPhone" placeholder="+1 234 567 8900"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Information -->
+                <div>
+                    <h4 class="font-h3 text-h3 mb-md">Payment Information</h4>
+                    <div class="space-y-md">
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-sm">CARD NUMBER</label>
+                            <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="text" id="cardNumber" placeholder="1234 5678 9012 3456"/>
+                        </div>
+                        <div class="grid grid-cols-2 gap-md">
+                            <div>
+                                <label class="block text-label-md text-on-surface-variant mb-sm">EXPIRY DATE</label>
+                                <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="text" id="cardExpiry" placeholder="MM/YY"/>
+                            </div>
+                            <div>
+                                <label class="block text-label-md text-on-surface-variant mb-sm">CVV</label>
+                                <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="text" id="cardCvv" placeholder="123"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-label-md text-on-surface-variant mb-sm">NAME ON CARD</label>
+                            <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="text" id="cardName" placeholder="JOHN DOE"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="mt-xl p-lg bg-surface-container rounded-xl">
+                <h4 class="font-h3 text-h3 mb-md">Order Summary</h4>
+                <div class="space-y-sm" id="orderSummary">
+                    <!-- Summary will be populated dynamically -->
+                </div>
+            </div>
+
+            <div class="flex gap-md mt-lg">
+                <button class="flex-1 border border-outline-variant text-on-surface-variant py-md rounded-lg font-button hover:bg-surface-container transition-all" onclick="goToStep(2)">
+                    Back
+                </button>
+                <button class="flex-1 bg-primary text-white py-md rounded-lg font-button hover:bg-primary/90 transition-all active:scale-95" onclick="completeBooking()">
+                    Complete Booking
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 backdrop-blur-3xl border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">bed</span>
+            <span class="font-label-md text-label-md">Rooms</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-primary font-bold">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span class="font-label-md text-label-md">Bookings</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-label-md text-label-md">Profile</span>
+        </div>
+    </nav>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+    <script src="booking.js"></script>
+</body>
+</html>

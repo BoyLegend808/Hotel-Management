@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Page Not Found | Lumina Hospitality</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2a1700",
+                    "on-secondary-container": "#6a4200",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface-variant": "#3f484d",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e6e8eb",
+                    "surface-dim": "#d8dadd",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#2a7f9e",
+                    "outline-variant": "#bfc8cd",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface": "#f7fafc",
+                    "on-surface": "#181c1e",
+                    "on-primary-container": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#004d64",
+                    "tertiary-fixed-dim": "#ffb86f",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7fafc",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "background": "#f7fafc",
+                    "secondary-fixed-dim": "#ffb95c",
+                    "secondary-fixed": "#ffddb7",
+                    "secondary": "#845400",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary-container": "#fdaa2d",
+                    "on-tertiary-fixed": "#2c1600",
+                    "surface-container-low": "#f1f4f6",
+                    "on-background": "#181c1e",
+                    "on-primary-fixed": "#001f2a",
+                    "outline": "#6f787e",
+                    "primary-fixed": "#bde9ff",
+                    "inverse-on-surface": "#eef1f4",
+                    "primary": "#006683",
+                    "surface-container": "#eceef1",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "inverse-primary": "#84d0f2",
+                    "surface-tint": "#006684",
+                    "on-tertiary-container": "#ffffff",
+                    "tertiary-container": "#a36927",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#86510f",
+                    "primary-fixed-dim": "#84d0f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1rem",
+                    "lg": "1.5rem",
+                    "gutter": "1.5rem",
+                    "container-margin": "2rem",
+                    "xs": "0.25rem",
+                    "xl": "2.5rem",
+                    "sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "h3": ["Roboto Slab"],
+                    "h1": ["Roboto Slab"],
+                    "body-sm": ["Inter"],
+                    "button": ["Inter"],
+                    "h2": ["Roboto Slab"],
+                    "h1-mobile": ["Roboto Slab"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "button": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: inset 2px 2px 0px rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .floating-input:focus-within label,
+        .floating-input input:not(:placeholder-shown) + label {
+            transform: translateY(-1.25rem) scale(0.85);
+            color: #006683;
+        }
+        .floating-input label {
+            transition: all 0.3s ease-out;
+            pointer-events: none;
+        }
+        .interactive-scale:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar (Shared Component Anchor) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-b border-white/30 dark:border-white/10 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+<h1 class="font-h2 text-h2 tracking-tight text-primary dark:text-primary-fixed-dim">Lumina Hospitality</h1>
+</div>
+<div class="hidden md:flex gap-lg items-center">
+<nav class="flex gap-md">
+<a class="font-body-md text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity duration-300" href="#">Dashboard</a>
+<a class="font-body-md text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity duration-300" href="#">Rooms</a>
+<a class="font-body-md text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-opacity duration-300" href="#">Bookings</a>
+</nav>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmt3CYlwAQZmnhT7BqHeJAoeEc5cKzuc9te2AwNR8VXd01ilin1n6q0wKh54P-2f4j0M2t5hn8BCvtc8v90H4qZ2-GF36iLeddWy3e1Zjd560C9KAciqwN2l0SorT2DlrE02ANFNxlrcOoD1Q9MQ15UmZe8m1vH2Xhv5-eAufZZQiyoj65FOkcTNi7A0anNuNAgWCbpkKar0xo1IO507JZeddPMlL8OKY4CaaVyYcoPGZ2vsfhMWRs_dfOxjU7ErPvls1_oZrrmC4"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative pt-32 pb-16 px-gutter flex flex-col items-center justify-center min-h-screen">
+<!-- Abstract Background Decorative Elements -->
+<div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-tertiary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- 404 Glass Card -->
+<div class="glass-card max-w-4xl w-full rounded-xl p-lg md:p-xl flex flex-col md:flex-row gap-xl items-center relative z-10 transition-all duration-300">
+<!-- Illustration Column -->
+<div class="w-full md:w-1/2 flex flex-col items-center">
+<div class="relative w-full aspect-square max-w-[320px] mb-md overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover rounded-lg shadow-xl" data-alt="A sophisticated, high-end hotel concierge desk that is strangely empty and shrouded in a soft, ethereal mist. The lighting is warm and cinematic, featuring golden hues from elegant table lamps casting long shadows on polished marble floors. A single, pristine white glove sits on the counter, suggesting a missing staff member. The overall style is modern luxury with a surreal, dreamlike quality that fits a professional hospitality 404 page." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb6xg88HiOJkRedD6JNE_Y_p-Z_4ijGYKxEZSdhaZmkYVB-JmSP5fNqwQBXM-2bHzmz7PqHP6o3sGcXHsRFfgn7rqi6vUe6OUfyQybDbfeQwBv60Ik8Uevsrj_bZ_ylctAF1aX3eI3dQGNqBm-zIYHnMVjKQObCI442IFy3poyys8Kf0v3NdlxLdKKuMcG7LCl2hEIcSsdC5cH8IMAj87g9-cOIkQcTjIyH5ypaEsaXmLbZvP5IfkO6JQGblCk1XIezrLSEehf4nw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="font-h1 text-white text-6xl opacity-40 select-none">404</span>
+</div>
+</div>
+</div>
+<!-- Content Column -->
+<div class="w-full md:w-1/2 space-y-lg">
+<div class="space-y-sm">
+<h2 class="font-h2 text-h2 text-primary dark:text-primary-fixed-dim">Checking Out?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">It seems the room you're looking for isn't in our current inventory. We might have rearranged the floors or moved the content elsewhere.</p>
+</div>
+<!-- Floating Label Search Input -->
+<div class="relative w-full floating-input border-b-2 border-outline-variant focus-within:border-primary transition-colors duration-300">
+<input class="block w-full px-0 py-md bg-transparent border-none focus:ring-0 text-on-surface" id="search" placeholder=" " type="text"/>
+<label class="absolute left-0 top-md text-on-surface-variant font-body-md origin-top-left" for="search">Search hotel services...</label>
+<button class="absolute right-0 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<!-- Helpful Links Grid -->
+<div class="grid grid-cols-2 gap-md pt-md">
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-primary/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-primary/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">concierge</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Services</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-primary/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">support_agent</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Support</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-primary/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">map</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Site Map</span>
+</a>
+</div>
+<div class="pt-lg flex gap-md">
+<button class="px-xl py-md bg-primary text-on-primary rounded-xl font-button text-button interactive-scale transition-all hover:bg-primary/90 shadow-lg shadow-primary/20">
+                        Back to Reception
+                    </button>
+<button class="px-lg py-md border border-primary text-primary rounded-xl font-button text-button interactive-scale transition-all hover:bg-primary/5">
+                        Report Issue
+                    </button>
+</div>
+</div>
+</div>
+<!-- System Message / Toast Notification (Micro-interaction) -->
+<div class="mt-xl glass-card px-lg py-sm rounded-full flex items-center gap-md opacity-0 translate-y-4 transition-all duration-500 ease-out" id="toast">
+<div class="w-1 h-6 bg-secondary rounded-full"></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Don't worry, Julian. We've logged this request for the tech team.</p>
+<button class="text-on-surface-variant hover:text-error transition-colors" onclick="this.parentElement.remove()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</main>
+<!-- Bottom Nav for Mobile Only (Shared Component Rule) -->
+<footer class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-t border-white/30 dark:border-white/10 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">bed</span>
+<span class="font-label-md text-label-md">Rooms</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</footer>
+<script>
+        // Micro-interactions for the 404 page
+        window.addEventListener('DOMContentLoaded', () => {
+            // Show toast after a short delay
+            setTimeout(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('opacity-0', 'translate-y-4');
+                toast.classList.add('opacity-100', 'translate-y-0');
+            }, 1000);
+
+            // Subtle parallax/tilt effect on the glass card
+            const card = document.querySelector('.glass-card');
+            document.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth / 2 - e.pageX) / 50;
+                const y = (window.innerHeight / 2 - e.pageY) / 50;
+                card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+            });
+        });
+
+        // Search interaction
+        const searchInput = document.getElementById('search');
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                alert('Searching for: ' + searchInput.value);
+            }
+        });
+    </script>
+</body></html>

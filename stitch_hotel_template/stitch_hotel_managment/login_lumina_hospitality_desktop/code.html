@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Hospitality | Secure Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#2a1700",
+            "on-secondary-container": "#6a4200",
+            "surface-variant": "#e0e3e5",
+            "on-surface-variant": "#3f484d",
+            "inverse-surface": "#2d3133",
+            "on-secondary-fixed-variant": "#653e00",
+            "on-error": "#ffffff",
+            "surface-container-high": "#e6e8eb",
+            "surface-dim": "#d8dadd",
+            "surface-container-lowest": "#ffffff",
+            "primary-container": "#2a7f9e",
+            "outline-variant": "#bfc8cd",
+            "tertiary-fixed": "#ffdcbd",
+            "surface": "#f7fafc",
+            "on-surface": "#181c1e",
+            "on-primary-container": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#004d64",
+            "tertiary-fixed-dim": "#ffb86f",
+            "on-tertiary": "#ffffff",
+            "error": "#ba1a1a",
+            "surface-bright": "#f7fafc",
+            "error-container": "#ffdad6",
+            "on-primary": "#ffffff",
+            "background": "#f7fafc",
+            "secondary-fixed-dim": "#ffb95c",
+            "secondary-fixed": "#ffddb7",
+            "secondary": "#845400",
+            "surface-container-highest": "#e0e3e5",
+            "secondary-container": "#fdaa2d",
+            "on-tertiary-fixed": "#2c1600",
+            "surface-container-low": "#f1f4f6",
+            "on-background": "#181c1e",
+            "on-primary-fixed": "#001f2a",
+            "outline": "#6f787e",
+            "primary-fixed": "#bde9ff",
+            "inverse-on-surface": "#eef1f4",
+            "primary": "#006683",
+            "surface-container": "#eceef1",
+            "on-tertiary-fixed-variant": "#693c00",
+            "inverse-primary": "#84d0f2",
+            "surface-tint": "#006684",
+            "on-tertiary-container": "#ffffff",
+            "tertiary-container": "#a36927",
+            "on-secondary": "#ffffff",
+            "tertiary": "#86510f",
+            "primary-fixed-dim": "#84d0f2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "md": "1rem",
+            "lg": "1.5rem",
+            "gutter": "1.5rem",
+            "container-margin": "2rem",
+            "xs": "0.25rem",
+            "xl": "2.5rem",
+            "sm": "0.5rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "h3": ["Roboto Slab"],
+            "h1": ["Roboto Slab"],
+            "body-sm": ["Inter"],
+            "button": ["Inter"],
+            "h2": ["Roboto Slab"],
+            "h1-mobile": ["Roboto Slab"],
+            "label-md": ["Inter"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+            "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "button": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+            "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+            "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08), inset 1px 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .input-focus-teal:focus-within label {
+      color: #006683;
+      transform: translateY(-1.5rem) scale(0.85);
+    }
+    .transition-custom {
+      transition: all 0.3s ease-out;
+    }
+    .floating-label-container label {
+      pointer-events: none;
+      transition: all 0.3s ease-out;
+    }
+    .floating-label-container input:focus + label,
+    .floating-label-container input:not(:placeholder-shown) + label {
+      transform: translateY(-1.25rem) scale(0.85);
+      color: #006683;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen w-screen m-0 p-0 flex">
+<!-- Left Side: Hero Image (Split Screen) -->
+<aside class="hidden lg:block w-7/12 relative h-full overflow-hidden">
+<img alt="Luxury Hotel" class="absolute inset-0 w-full h-full object-cover" data-alt="A wide-angle, cinematic view of a luxury boutique hotel lobby at dusk. The space features soaring ceilings, marble floors, and floor-to-ceiling glass windows overlooking a serene infinity pool. Warm, golden architectural lighting highlights rich wood textures and plush velvet furniture. The overall mood is sophisticated, calm, and exquisitely professional, reflecting a high-end hospitality environment with a palette of deep teals and warm ambers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXso4HSdi3BOfCqgOe2gA0-nXGQH6Fh_ky5oFYYyIP2eHyTEtXe6LGBoySEGorFschfZKPKpICN6l3V7FA-DPKtnRTj9ncE3Bi7a0X0o3_9dh5JU7pXr2lOvMi7TeuaK_Efp9P2GK7Xrt2BMOtHZoFhLzD5tSGOXnplNli88UEXNAsAoow0VOow4XNKoZ7_ys-YuZ-xKijPaqOYFOQOF5m7QKC4_F_pygKhdORk_Rte-L29GaHd8p_6E2AWicuI_5j1gev6Om7A_A"/>
+<!-- Overlay Gradient for Brand Presence -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent flex flex-col justify-end p-xl">
+<div class="max-w-xl">
+<h1 class="font-h1 text-h1 text-white drop-shadow-lg mb-sm">Refining Excellence.</h1>
+<p class="font-body-lg text-white/90 drop-shadow-md">The management suite for the world's most distinguished properties.</p>
+</div>
+</div>
+</aside>
+<!-- Right Side: Login Section -->
+<main class="w-full lg:w-5/12 h-full flex flex-col items-center justify-center relative bg-surface p-gutter overflow-y-auto">
+<!-- Subtle Background Shader (Simulated with simple CSS pattern to avoid bloat) -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#006683 1px, transparent 1px); background-size: 40px 40px;"></div>
+<!-- Top Branding Anchor -->
+<header class="absolute top-md left-gutter lg:left-xl z-10">
+<div class="font-h2 text-h2 tracking-tight text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[32px]">lightbulb_circle</span>
+<span>Lumina</span>
+</div>
+</header>
+<!-- Centered Glass-morphism Login Card -->
+<div class="glass-card w-full max-w-md rounded-xl p-xl z-20 transition-custom hover:shadow-lg">
+<div class="mb-xl">
+<h2 class="font-h3 text-h3 text-on-surface mb-xs">Welcome Back</h2>
+<p class="font-body-sm text-on-surface-variant">Please enter your credentials to access the console.</p>
+</div>
+<form class="space-y-lg" onsubmit="event.preventDefault();">
+<!-- Username Input -->
+<div class="relative floating-label-container pt-sm border-b-2 border-outline-variant focus-within:border-primary transition-custom">
+<input class="block w-full border-none bg-transparent py-sm px-0 focus:ring-0 font-body-md text-on-surface transition-custom" id="username" placeholder=" " type="text"/>
+<label class="absolute left-0 top-sm font-body-md text-on-surface-variant origin-[0]" for="username">Staff Identifier</label>
+</div>
+<!-- Password Input -->
+<div class="relative floating-label-container pt-sm border-b-2 border-outline-variant focus-within:border-primary transition-custom">
+<input class="block w-full border-none bg-transparent py-sm px-0 focus:ring-0 font-body-md text-on-surface transition-custom" id="password" placeholder=" " type="password"/>
+<label class="absolute left-0 top-sm font-body-md text-on-surface-variant origin-[0]" for="password">Security Key</label>
+<button class="absolute right-0 top-sm text-outline hover:text-primary transition-custom" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+<div class="flex items-center justify-between py-xs">
+<label class="flex items-center gap-xs cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="font-label-md text-on-surface-variant group-hover:text-on-surface transition-custom">Keep me signed in</span>
+</label>
+<a class="font-label-md text-primary hover:opacity-80 transition-custom underline decoration-primary/30 underline-offset-4" href="#">Forgot access?</a>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary text-on-primary py-md px-lg rounded-lg font-button text-button shadow-md hover:brightness-90 active:scale-95 transition-custom flex justify-center items-center gap-sm group" type="submit">
+<span>Authorize Access</span>
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Help -->
+<footer class="mt-xl flex flex-col items-center gap-md">
+<div class="h-px w-16 bg-outline-variant"></div>
+<p class="font-label-md text-on-surface-variant text-center opacity-70">
+          SECURE CHANNEL ENCRYPTED<br/>
+<span class="text-[10px] tracking-widest uppercase">Property Intelligence Suite v4.2</span>
+</p>
+</footer>
+</div>
+<!-- Minimalist Footer Links -->
+<nav class="absolute bottom-md flex gap-lg opacity-40 hover:opacity-100 transition-custom">
+<a class="font-label-md hover:text-primary" href="#">System Status</a>
+<a class="font-label-md hover:text-primary" href="#">Global Support</a>
+<a class="font-label-md hover:text-primary" href="#">Privacy</a>
+</nav>
+</main>
+<!-- Interactive script for micro-interactions -->
+<script>
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('focus', () => {
+        input.parentElement.classList.add('border-primary');
+        input.parentElement.classList.remove('border-outline-variant');
+      });
+      input.addEventListener('blur', () => {
+        if (!input.value) {
+          input.parentElement.classList.remove('border-primary');
+          input.parentElement.classList.add('border-outline-variant');
+        }
+      });
+    });
+
+    // Simple interaction for the visibility toggle
+    const togglePass = document.querySelector('button[type="button"]');
+    const passInput = document.getElementById('password');
+    togglePass.addEventListener('click', () => {
+      const isPass = passInput.type === 'password';
+      passInput.type = isPass ? 'text' : 'password';
+      togglePass.querySelector('span').innerText = isPass ? 'visibility_off' : 'visibility';
+    });
+  </script>
+</body></html>

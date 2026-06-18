@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Hospitality | Admin Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2a1700",
+                    "on-secondary-container": "#6a4200",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface-variant": "#3f484d",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e6e8eb",
+                    "surface-dim": "#d8dadd",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#2a7f9e",
+                    "outline-variant": "#bfc8cd",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface": "#f7fafc",
+                    "on-surface": "#181c1e",
+                    "on-primary-container": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#004d64",
+                    "tertiary-fixed-dim": "#ffb86f",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7fafc",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "background": "#f7fafc",
+                    "secondary-fixed-dim": "#ffb95c",
+                    "secondary-fixed": "#ffddb7",
+                    "secondary": "#845400",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary-container": "#fdaa2d",
+                    "on-tertiary-fixed": "#2c1600",
+                    "surface-container-low": "#f1f4f6",
+                    "on-background": "#181c1e",
+                    "on-primary-fixed": "#001f2a",
+                    "outline": "#6f787e",
+                    "primary-fixed": "#bde9ff",
+                    "inverse-on-surface": "#eef1f4",
+                    "primary": "#006683",
+                    "surface-container": "#eceef1",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "inverse-primary": "#84d0f2",
+                    "surface-tint": "#006684",
+                    "on-tertiary-container": "#ffffff",
+                    "tertiary-container": "#a36927",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#86510f",
+                    "primary-fixed-dim": "#84d0f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1rem",
+                    "lg": "1.5rem",
+                    "gutter": "1.5rem",
+                    "container-margin": "2rem",
+                    "xs": "0.25rem",
+                    "xl": "2.5rem",
+                    "sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "h3": ["Roboto Slab"],
+                    "h1": ["Roboto Slab"],
+                    "body-sm": ["Inter"],
+                    "button": ["Inter"],
+                    "h2": ["Roboto Slab"],
+                    "h1-mobile": ["Roboto Slab"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "button": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7fafc;
+            color: #181c1e;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease-out;
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar-active {
+            background: rgba(0, 102, 131, 0.1);
+            color: #006683;
+            border-radius: 0.5rem;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for data tables */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfc8cd;
+            border-radius: 10px;
+        }
+        /* Glass effect for navigation */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- WebGL Shader Background -->
+
+<div class="flex h-screen overflow-hidden">
+<!-- NavigationDrawer (Shared Component) -->
+<aside class="hidden md:flex h-full w-80 fixed left-0 top-0 flex-col p-lg gap-md glass-nav z-50">
+<div class="flex items-center gap-md mb-xl">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Julian Reed" class="w-full h-full object-cover" data-alt="A professional headshot of a luxury hotel general manager in his 40s with a warm but authoritative presence. He wears a high-end charcoal tailored suit and is positioned against a blurred background of a modern, sunlit hotel lobby. The lighting is soft and cinematic, emphasizing a clean, light-mode hospitality aesthetic with teal and gold undertones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7vaV6t-bHz8RAV37ESxRPW3jcZdpI5IPitTBxTW01ofEbaEE6VUUPdri3wj-j85f-eU6ze-qQ8OIXOfHTZkLbU1Fwr5iOJDX-HW593Pov9P38_nLz46YcKoaocdcjogUsfq3EWJoQUzcYSh0qMiT4etS3exma3kTalVa5LKzq04_XPMUi7GxrL9CZapkVDRpEyfvx1y5tde2GJWehvRKrBLqsbKYFLVsfgfdBDED6xsQM7XnBwqccah5W2GyQejGv1xS1BdWcgSM"/>
+</div>
+<div>
+<h2 class="font-h3 text-h3 text-primary">Julian Reed</h2>
+<p class="font-body-sm text-on-surface-variant">General Manager</p>
+</div>
+</div>
+<nav class="flex flex-col gap-sm">
+<a class="flex items-center gap-md px-md py-sm transition-all duration-300 hover:bg-surface-container-low text-on-surface" href="#">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm transition-all duration-300 hover:bg-surface-container-low text-on-surface" href="#">
+<span class="material-symbols-outlined">concierge</span>
+<span class="font-body-md">Hotel Services</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm transition-all duration-300 hover:bg-surface-container-low text-on-surface" href="#">
+<span class="material-symbols-outlined">room_service</span>
+<span class="font-body-md">Guest Requests</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm transition-all duration-300 hover:bg-surface-container-low text-on-surface" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-body-md">Staff Directory</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm transition-all duration-300 hover:bg-surface-container-low sidebar-active font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-body-md">Bookings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm transition-all duration-300 hover:bg-surface-container-low text-on-surface" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-body-md">Analytics</span>
+</a>
+<div class="mt-xl pt-lg border-t border-outline-variant/30 flex flex-col gap-sm">
+<a class="flex items-center gap-md px-md py-sm transition-all duration-300 hover:bg-surface-container-low text-on-surface" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-80 overflow-y-auto custom-scrollbar relative px-gutter py-xl">
+<!-- TopAppBar (Shared Component Integration) -->
+<header class="flex justify-between items-center mb-xl">
+<div>
+<h1 class="font-h1 text-h1 text-primary tracking-tight">Management Dashboard</h1>
+<p class="font-body-md text-on-surface-variant">Lumina Hospitality Operational Overview</p>
+</div>
+<div class="flex items-center gap-lg">
+<button class="w-10 h-10 flex items-center justify-center glass-card rounded-full text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center glass-card rounded-full text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="hidden lg:flex items-center gap-sm bg-primary/10 px-md py-xs rounded-full border border-primary/20">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-label-md text-primary">System Live</span>
+</div>
+</div>
+</header>
+<!-- Metrics Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+<!-- Revenue Card -->
+<div class="glass-card p-lg rounded-xl">
+<div class="flex justify-between items-start mb-md">
+<div class="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-label-md text-secondary font-bold">+12.5%</span>
+</div>
+<p class="font-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Daily Revenue</p>
+<h3 class="font-h2 text-h2 text-on-surface mb-md">$42,850</h3>
+<div class="h-16 flex items-end gap-1">
+<!-- Tiny Chart Placeholder -->
+<div class="w-full bg-primary/20 rounded-t-sm h-[40%]"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[60%]"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[45%]"></div>
+<div class="w-full bg-primary/20 rounded-t-sm h-[75%]"></div>
+<div class="w-full bg-primary/40 rounded-t-sm h-[90%]"></div>
+<div class="w-full bg-primary rounded-t-sm h-[100%]"></div>
+</div>
+</div>
+<!-- Occupancy Card -->
+<div class="glass-card p-lg rounded-xl">
+<div class="flex justify-between items-start mb-md">
+<div class="w-12 h-12 bg-secondary/10 text-secondary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">bed</span>
+</div>
+<span class="text-label-md text-secondary font-bold">+3.2%</span>
+</div>
+<p class="font-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Occupancy Rate</p>
+<h3 class="font-h2 text-h2 text-on-surface mb-md">94.8%</h3>
+<div class="w-full bg-surface-container-high rounded-full h-2 mb-sm overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 94.8%"></div>
+</div>
+<p class="text-label-md text-on-surface-variant">242 / 256 Rooms occupied</p>
+</div>
+<!-- Guest Sentiment -->
+<div class="glass-card p-lg rounded-xl">
+<div class="flex justify-between items-start mb-md">
+<div class="w-12 h-12 bg-tertiary-container/10 text-tertiary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">star</span>
+</div>
+<span class="text-label-md text-on-tertiary-fixed-variant font-bold">Stable</span>
+</div>
+<p class="font-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Guest Rating</p>
+<h3 class="font-h2 text-h2 text-on-surface mb-md">4.92<span class="text-h3 font-normal opacity-50">/5</span></h3>
+<div class="flex gap-1 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+<!-- Requests -->
+<div class="glass-card p-lg rounded-xl">
+<div class="flex justify-between items-start mb-md">
+<div class="w-12 h-12 bg-error-container/20 text-error flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">priority_high</span>
+</div>
+<span class="text-label-md text-error font-bold">8 Urgent</span>
+</div>
+<p class="font-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Active Requests</p>
+<h3 class="font-h2 text-h2 text-on-surface mb-md">24</h3>
+<div class="flex -space-x-2">
+<img alt="Staff" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a professional hotel receptionist with a friendly smile, working in a luxurious lobby with glass architecture. High-key lighting, soft teal and white color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQshfqSsRBy-l85nJqeMgx26lXCaUPkrScbAWOKqjwO9nViOCspmeGJKBjqd-9ZeTJ6u8LFUMXDmAuP74vXj4zRhIGMWj2LsRYASwO4m2tWcXOEKS5IZixfPU9QOAJ3FBXF5D04cq10UAOcLq11FuGwgKPAw4PhVCxuMaRhp1459Xz-9bcX7e1OvkyDOmUROxpXMFBYBtjarurCUqXrNrD8Fq1D3zM239qwD1nMGGX_pVgKpDNLYgf0x2fMkK3bIhGZxB9S8pubAw"/>
+<img alt="Staff" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Portrait of a diverse hotel concierge standing in a sophisticated grand lobby with blurred background lighting. Professional attire, serene atmosphere, corporate luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrGw96YtvX5rZYYkID21VGBx4S1sPYHWuNrY8UMPykwCba-FApb2stUYYKfFv7FwUePSZGpvDR5W9HLEUVig5PeK3Vm9tt0eV6MZFhfhj7ZcrkbIiIQLuPTcvRNttDljxkj-VrZnmUv97hwg5eZEW28i3DvGC4SzRtdosPk27MQMHV9H6VW5dsiCOcEzNJR2d6fwwl6LQMp3yjfBayPuZ4Fst_xSGxjpIFg6vLIG3sglUCj86CiEVG-Nfl91OkwMYTGdVYAvmMO1w"/>
+<img alt="Staff" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Professional hotel manager portrait against a minimalist glass background. Clear skin, focused expression, cinematic lighting with a luxury hospitality theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeNdBEJFe10erCVw7z4UHGJRMLB1HAIAoK11S-eDI_4o4My8_YMw_RPdk79Z3ft8iITU0Sm06MLcLEmrEt297DFDV49co1EKhQ5g2k_s98PQtGZGiMnqEZxPmxxbSQ6qypkl_6_20wzP_oGelkAghgksEmSsY2foopY4zGB6DceShJ6sMDFToBRU4CGp_qHQ4iEwdQpXxxezoz2E9YnnL6pNawkDKF3DAThOl75Alp_2gsaWy-lmb8iDWWuwW5vrW_8MusEfgW68k"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-variant flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+</div>
+</section>
+<!-- Bookings Table Section -->
+<section class="glass-card rounded-xl overflow-hidden mb-xl">
+<div class="p-lg border-b border-outline-variant/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Recent Bookings</h3>
+<p class="font-body-sm text-on-surface-variant">Live updates from the last 24 hours</p>
+</div>
+<div class="flex items-center gap-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-body-md">filter_list</span>
+<select class="pl-xl pr-lg py-sm bg-white/50 border-outline-variant rounded-lg text-body-sm focus:ring-primary focus:border-primary transition-all">
+<option>All Bookings</option>
+<option>Checked In</option>
+<option>Confirmed</option>
+<option>Pending</option>
+</select>
+</div>
+<button class="px-lg py-sm bg-primary text-on-primary rounded-lg font-button flex items-center gap-xs hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-body-md">add</span>
+                            New Booking
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">Guest Name</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">Room Type</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">Stay Period</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">Amount</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">SC</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Sophia Carter</p>
+<p class="text-body-sm text-on-surface-variant">#BK-9023</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-lg text-body-md">Penthouse Suite</td>
+<td class="px-lg py-lg">
+<p class="text-body-md">Oct 12 - Oct 18</p>
+<p class="text-body-sm text-on-surface-variant">6 Nights</p>
+</td>
+<td class="px-lg py-lg">
+<span class="px-md py-1 bg-primary/10 text-primary rounded-full text-label-md">Checked In</span>
+</td>
+<td class="px-lg py-lg font-bold text-on-surface">$4,200.00</td>
+<td class="px-lg py-lg">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-sm hover:bg-surface-variant rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center font-bold text-secondary">LR</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Liam Ross</p>
+<p class="text-body-sm text-on-surface-variant">#BK-9024</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-lg text-body-md">Deluxe King</td>
+<td class="px-lg py-lg">
+<p class="text-body-md">Oct 14 - Oct 16</p>
+<p class="text-body-sm text-on-surface-variant">2 Nights</p>
+</td>
+<td class="px-lg py-lg">
+<span class="px-md py-1 bg-secondary/10 text-secondary rounded-full text-label-md">Confirmed</span>
+</td>
+<td class="px-lg py-lg font-bold text-on-surface">$850.00</td>
+<td class="px-lg py-lg">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-sm hover:bg-surface-variant rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/10 flex items-center justify-center font-bold text-tertiary">EM</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Elena Myers</p>
+<p class="text-body-sm text-on-surface-variant">#BK-9025</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-lg text-body-md">Luxury Suite</td>
+<td class="px-lg py-lg">
+<p class="text-body-md">Oct 15 - Oct 20</p>
+<p class="text-body-sm text-on-surface-variant">5 Nights</p>
+</td>
+<td class="px-lg py-lg">
+<span class="px-md py-1 bg-on-secondary-container/10 text-on-secondary-container rounded-full text-label-md">Pending</span>
+</td>
+<td class="px-lg py-lg font-bold text-on-surface">$2,750.00</td>
+<td class="px-lg py-lg">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-sm hover:bg-surface-variant rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-lg bg-surface-container-lowest/30 flex justify-between items-center border-t border-outline-variant/20">
+<p class="text-body-sm text-on-surface-variant">Showing 3 of 124 bookings</p>
+<div class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-body-md">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-primary bg-primary text-on-primary text-label-md font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white transition-colors text-label-md">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white transition-colors text-label-md">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-body-md">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Staff and Room Status -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl">
+<!-- Staff Shifts -->
+<div class="glass-card rounded-xl p-lg">
+<h3 class="font-h3 text-h3 text-on-surface mb-lg">Active Personnel</h3>
+<div class="space-y-md">
+<div class="flex items-center justify-between p-md bg-white/40 rounded-lg border border-white/50">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Marcus Thorne</p>
+<p class="text-body-sm text-on-surface-variant">Floor Manager • East Wing</p>
+</div>
+</div>
+<span class="px-md py-xs bg-primary/10 text-primary text-label-md rounded-full">On Shift</span>
+</div>
+<div class="flex items-center justify-between p-md bg-white/40 rounded-lg border border-white/50">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Sarah Jenkins</p>
+<p class="text-body-sm text-on-surface-variant">Concierge • Main Lobby</p>
+</div>
+</div>
+<span class="px-md py-xs bg-primary/10 text-primary text-label-md rounded-full">On Shift</span>
+</div>
+</div>
+</div>
+<!-- Room Availability Chart -->
+<div class="glass-card rounded-xl p-lg">
+<h3 class="font-h3 text-h3 text-on-surface mb-lg">Inventory Status</h3>
+<div class="space-y-lg">
+<div>
+<div class="flex justify-between text-body-sm mb-xs">
+<span>Standard Rooms</span>
+<span class="font-bold">12 / 120 available</span>
+</div>
+<div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 90%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-xs">
+<span>Deluxe Suites</span>
+<span class="font-bold">4 / 80 available</span>
+</div>
+<div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-xs">
+<span>Penthouse Collection</span>
+<span class="font-bold">0 / 12 available</span>
+</div>
+<div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-error" style="width: 100%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        // Tab highlight logic
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                document.querySelectorAll('nav a').forEach(l => {
+                    l.classList.remove('sidebar-active', 'font-bold');
+                    l.classList.add('text-on-surface');
+                    const icon = l.querySelector('.material-symbols-outlined');
+                    if (icon) icon.style.fontVariationSettings = "'FILL' 0";
+                });
+                this.classList.add('sidebar-active', 'font-bold');
+                this.classList.remove('text-on-surface');
+                const icon = this.querySelector('.material-symbols-outlined');
+                if (icon) icon.style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+
+        // Simple sorting feedback
+        const tableHeads = document.querySelectorAll('th');
+        tableHeads.forEach(th => {
+            th.style.cursor = 'pointer';
+            th.addEventListener('click', () => {
+                console.log('Sorting by: ' + th.innerText);
+                // Implementation of sorting logic would go here
+            });
+        });
+    </script>
+</body></html>

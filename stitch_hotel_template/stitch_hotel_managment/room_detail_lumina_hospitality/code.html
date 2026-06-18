@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Hospitality | Azure Ocean Suite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eceef1",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#ffffff",
+                    "surface": "#f7fafc",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "surface-bright": "#f7fafc",
+                    "secondary-fixed": "#ffddb7",
+                    "on-surface-variant": "#3f484d",
+                    "secondary-container": "#fdaa2d",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#2a7f9e",
+                    "outline": "#6f787e",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#ffb95c",
+                    "inverse-surface": "#2d3133",
+                    "surface-dim": "#d8dadd",
+                    "on-primary-fixed": "#001f2a",
+                    "secondary": "#845400",
+                    "surface-tint": "#006684",
+                    "primary-fixed-dim": "#84d0f2",
+                    "on-secondary-fixed": "#2a1700",
+                    "tertiary-container": "#a36927",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#004d64",
+                    "inverse-on-surface": "#eef1f4",
+                    "surface-container-low": "#f1f4f6",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface": "#181c1e",
+                    "on-background": "#181c1e",
+                    "on-tertiary-fixed": "#2c1600",
+                    "primary-fixed": "#bde9ff",
+                    "tertiary-fixed-dim": "#ffb86f",
+                    "tertiary-fixed": "#ffdcbd",
+                    "outline-variant": "#bfc8cd",
+                    "primary": "#006683",
+                    "tertiary": "#86510f",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e6e8eb",
+                    "inverse-primary": "#84d0f2",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#6a4200",
+                    "background": "#f7fafc",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "surface-container-highest": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "2rem",
+                    "xl": "2.5rem",
+                    "md": "1rem",
+                    "gutter": "1.5rem",
+                    "lg": "1.5rem",
+                    "sm": "0.5rem",
+                    "xs": "0.25rem"
+            },
+            "fontFamily": {
+                    "h1": ["Roboto Slab"],
+                    "body-sm": ["Inter"],
+                    "h1-mobile": ["Roboto Slab"],
+                    "body-lg": ["Inter"],
+                    "h3": ["Roboto Slab"],
+                    "h2": ["Roboto Slab"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "button": ["Inter"]
+            },
+            "fontSize": {
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "button": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .dark .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .inner-glow {
+            box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4);
+        }
+        .nav-active {
+            color: #006683;
+            font-weight: 700;
+        }
+        .animate-hover {
+            transition: all 0.3s ease-out;
+        }
+        .animate-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: repeat(2, 250px);
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: 300px repeat(2, 200px);
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface transition-colors duration-300">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-b border-white/30 dark:border-white/10 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer animate-hover">menu</span>
+<h1 class="font-h2 text-h2 tracking-tight text-primary dark:text-primary-fixed-dim">Lumina Hospitality</h1>
+</div>
+<div class="hidden md:flex gap-lg">
+<a class="font-label-md text-label-md nav-active" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Rooms</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Bookings</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Profile</a>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed animate-hover cursor-pointer">
+<img alt="User Profile" data-alt="A professional headshot of a person with a warm, friendly smile, set against a blurred high-end hotel lobby background. The lighting is soft and golden, suggesting luxury and professional service. The image style is sharp and modern, following a bright light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfCBsmjQmz8-BolcV6YxiHQYnF3GLIDRR7zaqN4A3vm7t-H6xi6JFtRdeKzsh394GcjSMVaz6Qu9c2xtxPfGbMY0GpD6heU4RhWsAbgVpI6El7DKC0m9mUkV-R6EKOXU9N1wZ5FYpvoJ9wnx--S4iInSb4eu_tVjftSk-B1I2Y1x7nphSD30Zku3FZUsi5DPwG0JBvb9KfIkyDDRl9PCHxYyqDX3lB81vKBWXMiznfvX8HNg4rYQ54b7Ctdtlz5ILx3JX_lSYGaCU"/>
+</div>
+</header>
+<main class="pt-24 pb-32 px-container-margin max-w-7xl mx-auto">
+<!-- Hero Gallery -->
+<section class="mb-xl">
+<div class="gallery-grid rounded-xl overflow-hidden shadow-lg">
+<div class="relative group cursor-pointer overflow-hidden row-span-2">
+<img alt="Main Suite View" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A panoramic view of a luxury hotel suite featuring floor-to-ceiling windows that overlook a turquoise ocean at sunset. The interior is decorated in sophisticated neutral tones with teal and gold accents, highlighting a king-sized bed with plush white linens. The atmosphere is serene and opulent, captured with high-dynamic range and soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmzzZYHtqR003gLo_fXte54QqlQlBOqnL294c2nBSU1aGKXjYPDQLHXQ3jm4CP3t_y1DF3CBBGORVAggDzPGDQI_VfXK8kRugK1syJ2gC8g1RTIo4nPhNho0E9gTq0Y_FFMymQzFvysIqnURv67laPRxj_PNIUx-OA07komn3cC7LlPMnfEThCTpsD2FTbadifji6VWd3OlX3zRN2x11MbAc_gCZvgkntr1zSUjofFdomWtfRv5wjTSPHM3NK1qcI3UPm19w27u80"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+<div class="relative group cursor-pointer overflow-hidden">
+<img alt="Bathroom detail" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A detailed view of a luxury bathroom within a hotel suite, featuring white marble surfaces, a deep soaking tub, and gold-finished fixtures. Soft ambient lighting creates a spa-like atmosphere, while a large window offers a glimpse of lush tropical greenery. The aesthetic is clean, bright, and modern, emphasizing pure luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWxY5ZPRO7TeOXaoemVBAA4izE0emvE3963Km0aT5oUVqCr_0JufqE3FMGnFvYNmpC9uRJTvr1dgc19vPU_NQBJA7gE8hklTdYvUS6lXsB7VF84DV3SJR4GAXyFFk0_nwj_ZODR2HBlADLGOzFzGB3sVEC8eE9nOd35dtTLStmhz1z2yECDGKdkYV10S9w_jV7U2vJV4_S6_UAYq-fk_sndCj-ybLBLR24FjefY2W-78hv3zp43GEBZig5x6Cft4gvOzVQNUUdlhE"/>
+</div>
+<div class="relative group cursor-pointer overflow-hidden">
+<img alt="Seating area" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An elegant seating area in a high-end hotel room, showcasing a designer velvet sofa in a deep teal color. A minimalist gold side table holds a crystal vase with fresh lilies. The backdrop is a subtly textured wall with contemporary art. The lighting is focused and warm, enhancing the rich textures and premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPjLKPRMMmdtyQedv1d3GKRg8KXW2e2vwTLZw6F3YFndLmv-wWt_d6xGJlam5rr6SSrAiHNoYXfxXHEzpbVN--RGanF368jmVldvx-CIs-CUZDDCN5aLd_vEtI6iwGiaYGc-FymQlOuo9uRspyVttrbt8noZrBDoHqygWK5Inh6ZS7QX2hkju2wE5PcGMsfrw8LxGpuiRU0H5JQJv1PGXUJosfS0G5VGNeOcPZ4FUIi6dCuDmr-7DrmlskysX-zCKhehpzKhsjo1g"/>
+</div>
+</div>
+</section>
+<!-- Room Header & Info -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<div class="lg:col-span-2 space-y-lg">
+<div class="flex flex-wrap justify-between items-start gap-md">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Azure Ocean Suite</h2>
+<div class="flex items-center gap-xs mt-xs text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-body-md">4.9 (124 Reviews)</span>
+</div>
+</div>
+<div class="glass-card px-md py-sm rounded-xl flex items-center gap-sm inner-glow">
+<span class="font-h3 text-h3 text-secondary">$450</span>
+<span class="text-body-sm text-on-surface-variant">/ night</span>
+</div>
+</div>
+<!-- Description -->
+<div class="glass-card p-lg rounded-xl inner-glow">
+<h3 class="font-h3 text-h3 mb-md">About this space</h3>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+                        Experience unparalleled luxury in our Azure Ocean Suite. Designed for discerning guests who appreciate the finer things, this suite offers a breathtaking 180-degree view of the coastline. The interior features bespoke furnishings from Italian artisans, integrated smart-home technology, and a private terrace for evening cocktails. Whether you're here for a romantic getaway or executive retreat, the Lumina experience ensures every detail is mastered.
+                    </p>
+</div>
+<!-- Amenities Grid -->
+<div>
+<h3 class="font-h3 text-h3 mb-md">Premier Amenities</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-md">
+<div class="glass-card p-md rounded-xl flex items-center gap-md animate-hover">
+<span class="material-symbols-outlined text-primary text-[28px]">wifi</span>
+<span class="font-button text-button">Gigabit Wi-Fi</span>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center gap-md animate-hover">
+<span class="material-symbols-outlined text-primary text-[28px]">pool</span>
+<span class="font-button text-button">Private Pool</span>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center gap-md animate-hover">
+<span class="material-symbols-outlined text-primary text-[28px]">coffee_maker</span>
+<span class="font-button text-button">Nespresso Bar</span>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center gap-md animate-hover">
+<span class="material-symbols-outlined text-primary text-[28px]">ac_unit</span>
+<span class="font-button text-button">Climate Control</span>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center gap-md animate-hover">
+<span class="material-symbols-outlined text-primary text-[28px]">room_service</span>
+<span class="font-button text-button">24/7 Concierge</span>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center gap-md animate-hover">
+<span class="material-symbols-outlined text-primary text-[28px]">workspace_premium</span>
+<span class="font-button text-button">Work Station</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Card (Stats & Occupancy) -->
+<div class="space-y-md">
+<div class="glass-card p-lg rounded-xl inner-glow sticky top-28">
+<h3 class="font-h3 text-h3 mb-md">Room Specifications</h3>
+<ul class="space-y-gutter">
+<li class="flex justify-between items-center pb-sm border-b border-outline-variant">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Max Occupancy</span>
+</div>
+<span class="font-bold">4 Guests</span>
+</li>
+<li class="flex justify-between items-center pb-sm border-b border-outline-variant">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined">straighten</span>
+<span class="font-body-md">Total Area</span>
+</div>
+<span class="font-bold">1,200 sq. ft</span>
+</li>
+<li class="flex justify-between items-center pb-sm border-b border-outline-variant">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined">bed</span>
+<span class="font-body-md">Bedding</span>
+</div>
+<span class="font-bold">1 King, 1 Sofa</span>
+</li>
+</ul>
+<div class="mt-xl p-md bg-primary/5 rounded-lg border border-primary/20">
+<p class="text-body-sm text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">info</span>
+                            Free cancellation until 48 hours before arrival.
+                        </p>
+</div>
+<button class="hidden lg:block w-full mt-lg bg-primary text-on-primary py-md rounded-xl font-button text-button transition-all duration-300 hover:brightness-90 active:scale-95 shadow-lg">
+                        Check Availability
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Mobile Nav (Shell Component) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-t border-white/30 dark:border-white/10 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bed</span>
+<span class="font-label-md text-label-md">Rooms</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+<!-- Sticky 'Book Now' CTA (Mobile/Tablet Only) -->
+<div class="lg:hidden fixed bottom-24 left-0 w-full px-gutter z-40">
+<div class="glass-card p-md rounded-2xl flex items-center justify-between shadow-xl border border-white/40">
+<div>
+<p class="text-label-md font-bold text-on-surface-variant uppercase tracking-widest">Pricing</p>
+<div class="flex items-baseline gap-xs">
+<span class="font-h3 text-h3 text-secondary">$450</span>
+<span class="text-body-sm text-on-surface-variant">/ night</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-xl py-md rounded-xl font-button text-button shadow-lg active:scale-95 transition-transform duration-100">
+                Book Now
+            </button>
+</div>
+</div>
+<script>
+        // Micro-interaction for gallery images
+        document.querySelectorAll('.gallery-grid > div').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple scroll effect for Top Bar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>

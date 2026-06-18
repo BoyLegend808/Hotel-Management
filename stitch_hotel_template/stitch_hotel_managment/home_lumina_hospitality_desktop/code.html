@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Hospitality | Luxury Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2a1700",
+                    "on-secondary-container": "#6a4200",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface-variant": "#3f484d",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e6e8eb",
+                    "surface-dim": "#d8dadd",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#2a7f9e",
+                    "outline-variant": "#bfc8cd",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface": "#f7fafc",
+                    "on-surface": "#181c1e",
+                    "on-primary-container": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#004d64",
+                    "tertiary-fixed-dim": "#ffb86f",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7fafc",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "background": "#f7fafc",
+                    "secondary-fixed-dim": "#ffb95c",
+                    "secondary-fixed": "#ffddb7",
+                    "secondary": "#845400",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary-container": "#fdaa2d",
+                    "on-tertiary-fixed": "#2c1600",
+                    "surface-container-low": "#f1f4f6",
+                    "on-background": "#181c1e",
+                    "on-primary-fixed": "#001f2a",
+                    "outline": "#6f787e",
+                    "primary-fixed": "#bde9ff",
+                    "inverse-on-surface": "#eef1f4",
+                    "primary": "#006683",
+                    "surface-container": "#eceef1",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "inverse-primary": "#84d0f2",
+                    "surface-tint": "#006684",
+                    "on-tertiary-container": "#ffffff",
+                    "tertiary-container": "#a36927",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#86510f",
+                    "primary-fixed-dim": "#84d0f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1rem",
+                    "lg": "1.5rem",
+                    "gutter": "1.5rem",
+                    "container-margin": "2rem",
+                    "xs": "0.25rem",
+                    "xl": "2.5rem",
+                    "sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "h3": ["Roboto Slab"],
+                    "h1": ["Roboto Slab"],
+                    "body-sm": ["Inter"],
+                    "button": ["Inter"],
+                    "h2": ["Roboto Slab"],
+                    "h1-mobile": ["Roboto Slab"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "button": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .transition-standard {
+            transition: all 0.3s ease-out;
+        }
+        .inner-glow {
+            box-shadow: inset 1px 1px 0px rgba(255,255,255,0.4);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hero-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.7) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm transition-standard">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-h2 cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+<h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
+</div>
+<nav class="hidden md:flex items-center gap-xl">
+<a class="font-label-md text-label-md text-primary font-bold hover:opacity-80 transition-opacity" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Rooms</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Bookings</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Staff</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity">search</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden cursor-pointer active:scale-95 transition-transform">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a luxury hotel manager in a sharp navy suit, looking confident and welcoming. The background is a softly blurred high-end hotel lobby with warm ambient lighting and marble surfaces. The overall aesthetic is professional, sophisticated, and light-filled, consistent with the Lumina Hospitality brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9flY9DguNiDrPXLyxD92qucRnUwTjT6A7xNcQHE8ZGEi8UmkE9OVyczbPJLZQOeONsnPXWYkRD4Zn5e2nU0MvZNo9UMfVlcFQnOksM9MnA9Jw7nl0B_TEoJCcfIFfJ9d0AZ63WRhF47WZOqw7HCydw1nLQculfHw_yzmtSD3GGxgzrBaI7Wl4Il7giM6crPtuuWae4kENlz_UlXzS2s1BLKCMGf0LJxY1NY9b8IDlB8Gg6AQ1LxFTZerve525RlWIMecTQlfmwRA"/>
+</div>
+</div>
+</header>
+<!-- Hero Section with Carousel -->
+<section class="relative h-[921px] w-full overflow-hidden">
+<div class="flex h-full transition-transform duration-700 ease-in-out" id="hero-slider">
+<!-- Slide 1 -->
+<div class="min-w-full h-full relative">
+<img class="w-full h-full object-cover" data-alt="A breathtaking panoramic view of a luxury infinity pool overlooking a sunset at a coastal Mediterranean resort. The architecture is modern and minimalist with clean lines, utilizing natural stone and warm wood accents. The lighting is golden and ethereal, creating a sense of calm control and premium hospitality in a high-key, sophisticated atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoRopuqe2XjmN4jgwPfD0VIe8g4AImyxXYVCqDlDUxluCzuhK-yqgD6dySKthXY3ouI09vqrCoPeXzQ4Yk8UMNvP1Ro66ORtpIECdAtPI6MJCXa5sJJ-llkdeDeenWoiagI0chqDD2B_s50Jh9TW3rknb3iYzT7cTSSIvRkuui8Bn4jl2h4TksSw4aNn70dICF6i0Smnyq3iUbxnQolceday8SaWLaA-OM1Xkfa58XgL8tdEWkrWRA9aoxdHQ8g9h3H3t3IOFTlcg"/>
+<div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-end px-container-margin pb-32">
+<h2 class="font-h1 text-h1 text-white max-w-2xl mb-md">Seamless Operations, Extraordinary Experiences.</h2>
+<p class="font-body-lg text-body-lg text-white/90 max-w-xl">Elevate your hospitality standards with Lumina's integrated management suite.</p>
+</div>
+</div>
+</div>
+<!-- Hero Controls -->
+<div class="absolute bottom-12 right-container-margin flex gap-sm">
+<button class="w-12 h-12 flex items-center justify-center glass-card rounded-full text-primary active:scale-90 transition-standard">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center glass-card rounded-full text-primary active:scale-90 transition-standard">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Sticky Search Bar -->
+<div class="sticky top-[72px] z-40 px-container-margin -mt-10">
+<div class="max-w-6xl mx-auto glass-card rounded-xl p-sm flex flex-wrap md:flex-nowrap items-center gap-md inner-glow">
+<div class="flex-1 min-w-[200px] relative">
+<label class="absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">search</span>
+<span class="font-body-md">Search properties or guests...</span>
+</label>
+<input class="w-full bg-transparent border-none focus:ring-0 pl-48 pr-md py-md font-body-md text-on-surface placeholder-transparent" type="text"/>
+</div>
+<div class="w-px h-8 bg-outline-variant hidden md:block"></div>
+<div class="flex-1 min-w-[150px] px-md flex items-center justify-between cursor-pointer">
+<span class="font-label-md text-label-md text-on-surface-variant">Arrival Date</span>
+<span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+</div>
+<div class="w-px h-8 bg-outline-variant hidden md:block"></div>
+<div class="flex-1 min-w-[150px] px-md flex items-center justify-between cursor-pointer">
+<span class="font-label-md text-label-md text-on-surface-variant">Occupancy</span>
+<span class="material-symbols-outlined text-on-surface-variant">group</span>
+</div>
+<button class="bg-primary text-white font-button text-button px-xl py-md rounded-lg hover:bg-primary/90 active:scale-95 transition-standard">
+                Find Availability
+            </button>
+</div>
+</div>
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto px-container-margin py-xl space-y-24">
+<!-- Amenities Bento Grid -->
+<section>
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Premium Services</span>
+<h3 class="font-h2 text-h2 text-on-surface">World-Class Amenities</h3>
+</div>
+<button class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all">
+                    View All Services <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-md h-[600px]">
+<div class="md:col-span-2 md:row-span-2 glass-card rounded-xl overflow-hidden group cursor-pointer relative">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A serene luxury spa treatment room with soft, diffused lighting. The interior design features minimalist organic materials like bamboo, smooth river stones, and soft white linens. A subtle teal accent is present in the lighting, reflecting a calm, professional, and high-end wellness experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKx4jfQz7VJ4s3GJJqMrYoFqQKxnOUC8GxJtFqoUE-je96aZ8zcsjDVPxXK9MwqrElduWbiQqlVr-DSEzlSdTro6cNv8xAwcRDY28JXGoyDTkkUzrhAhNgmxfqzX40YN_fv5uoQj5Dzjwlu1muczrRztfV0j3bBOiOzJy45YvbzFw9hhQEVijH-uBKLsYs373EzXcx77Y-GWJTP8GEPK9ED9Wv4TV5FrXN82pF62ZzC51DJ_5VbltuBRo5KNEfD9vP3caz2mBv0oQ"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm" style="font-variation-settings: 'FILL' 1;">spa</span>
+<h4 class="font-h3 text-h3 mb-xs">Holistic Spa &amp; Wellness</h4>
+<p class="font-body-md text-white/80 max-w-sm">Rejuvenating treatments designed for complete physical and mental harmony.</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-end fine dining restaurant interior with a focus on gold and teal accents. The tables are perfectly set with crystal glassware and silver cutlery. Large windows offer a view of a city skyline at twilight. The mood is sophisticated, elegant, and perfectly controlled, reflecting a premium hospitality service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGRPmHDXWgOicI3FcNOhVeN55mTn4Ain2ovb2u6raiw0yMik6TX9DRJ3-Bg0ZXKSOnXdYpHSgvdLCYuORl8oMQKvuG1UXhjyP_Gw4Y0aknem9IbrGzoeK-2srBpVe5NIUsdADNU9puUQa7njg4IBmVsVZfXIsyMj1S1ljIS7728XHEgqrOsrJ1gyMNGs1AloYLbrvdRB-JCaM43SjDzgBur5uquSb0pK57-jiTQetdMhBoapauw0fzoX8ILfB2Y6i_v0T4JG2CiTk"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute bottom-0 left-0 p-md text-white">
+<h4 class="font-h3 text-h3">Fine Dining</h4>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A state-of-the-art hotel fitness center with modern equipment and panoramic glass walls. The space is bright and airy with high-key lighting, maintaining a clean and professional aesthetic. The design is modern luxury with metallic finishes and cool-toned flooring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkO6hAv3OLns5LUgLDPoWxIi9D5L0nGPtgfr4X_ExF07MxZJXC32i0W77z4rztpfrlW8TiwIXeN3J8lp5bUBj-bYELGcKlD3ZO3hZ-L_INgc1CYXK2sqjm7FTne7X1goNr7yzpYPWgB9edry3kxvu7fvzhyQ4MPLI-JDXRuUo5qltrMUiWVuBwknD67uUuqRvaRIn6aKX8oxEuTSxzb9I4wJnqDB5JyS-H2gFmxNTN5Pvdr1_MPjYFwxlkFYtqfn02_t7BLGfa4YQ"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute bottom-0 left-0 p-md text-white">
+<h4 class="font-h3 text-h3">Global Fitness</h4>
+</div>
+</div>
+<div class="md:col-span-2 glass-card rounded-xl overflow-hidden group cursor-pointer relative">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An expansive, modern glass-walled conference room in a luxury hotel. The setting includes high-end executive furniture, advanced presentation technology, and a sophisticated minimalist aesthetic. The lighting is bright and professional, emphasizing efficiency and modern luxury management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdzvyRSG-6wQ_2-YMfiW3ItLwiEy0hrC4A_KAgbFrwwgQ3eOiqCnsPmmj0rLyNl7dT-R_MEmEFF2ReOOvlxG7YqH1rPFts4HAwm9i8ag15fjNR_nZAOYze-cGyR5ioGyuVcB1CeQ-sU_L7OR13MPg232UjgWK2MrsmInSv3s1oI_0TgsIWozNaa9dVyOoDoFIYChlWJbw4S2o76TWSM5w_MX6AHLrhx7HNdZLlmvCqvJCeDXOTCa6rRmtJD051RNDaFA7rBt699-Y"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute bottom-0 left-0 p-md text-white">
+<h4 class="font-h3 text-h3">Executive Business Suites</h4>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Multi-Column -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<div class="lg:col-span-1 space-y-md">
+<h3 class="font-h1 text-h1 text-primary">The Future of Guest Experience</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Lumina combines intelligent data with human-centric design to create unforgettable stays. Our platform empowers staff to anticipate guest needs before they arise.</p>
+<div class="pt-md">
+<button class="bg-secondary text-white font-button text-button px-xl py-md rounded-lg hover:opacity-90 transition-standard">
+                        Request a Demo
+                    </button>
+</div>
+</div>
+<div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_graph</span>
+</div>
+<h4 class="font-h3 text-h3">Real-time Analytics</h4>
+<p class="font-body-md text-on-surface-variant">Monitor occupancy, revenue, and guest satisfaction scores from a single unified dashboard.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">concierge</span>
+</div>
+<h4 class="font-h3 text-h3">AI Concierge</h4>
+<p class="font-body-md text-on-surface-variant">Automated request handling for 24/7 guest support, integrated with local services.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<h4 class="font-h3 text-h3">Inventory Control</h4>
+<p class="font-body-md text-on-surface-variant">Dynamic supply management to reduce waste and ensure premium product availability.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">team_dashboard</span>
+</div>
+<h4 class="font-h3 text-h3">Staff Coordination</h4>
+<p class="font-body-md text-on-surface-variant">Assign tasks, track performance, and communicate instantly with mobile-first staff tools.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="relative rounded-2xl overflow-hidden py-32 bg-primary flex flex-col items-center justify-center text-center px-md">
+
+<div class="relative z-10 space-y-lg max-w-3xl">
+<h3 class="font-h1 text-h1 text-white">Transform Your Property Management Today</h3>
+<p class="font-body-lg text-body-lg text-white/80">Join 500+ luxury hotels worldwide using Lumina to set the standard for hospitality excellence.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md">
+<button class="bg-white text-primary font-button text-button px-xl py-md rounded-lg hover:bg-surface-bright transition-standard">Get Started Free</button>
+<button class="border border-white/50 text-white font-button text-button px-xl py-md rounded-lg hover:bg-white/10 transition-standard">Explore Case Studies</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low pt-24 pb-md border-t border-white/30">
+<div class="max-w-7xl mx-auto px-container-margin grid grid-cols-1 md:grid-cols-4 gap-xl mb-16">
+<div class="space-y-md">
+<h2 class="font-h2 text-h2 text-primary">Lumina</h2>
+<p class="font-body-md text-on-surface-variant">Redefining luxury hospitality management through technology and design precision.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-primary cursor-pointer">public</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">mail</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">call</span>
+</div>
+</div>
+<div class="space-y-md">
+<h5 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Solutions</h5>
+<ul class="space-y-sm font-body-md text-on-surface-variant">
+<li class="hover:text-primary cursor-pointer transition-colors">Property Management</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Revenue Control</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Guest Experience</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Staff Workflow</li>
+</ul>
+</div>
+<div class="space-y-md">
+<h5 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Resources</h5>
+<ul class="space-y-sm font-body-md text-on-surface-variant">
+<li class="hover:text-primary cursor-pointer transition-colors">Industry Reports</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Success Stories</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Documentation</li>
+<li class="hover:text-primary cursor-pointer transition-colors">API Support</li>
+</ul>
+</div>
+<div class="space-y-md">
+<h5 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Newsletter</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Get the latest hospitality trends delivered weekly.</p>
+<div class="flex">
+<input class="flex-1 bg-white border border-outline-variant rounded-l-lg px-md py-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Your email" type="email"/>
+<button class="bg-primary text-white px-md py-sm rounded-r-lg font-button text-button">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-container-margin pt-md border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Lumina Hospitality Systems. All rights reserved.</p>
+<div class="flex gap-xl font-body-sm text-body-sm text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer">Privacy Policy</span>
+<span class="hover:text-primary cursor-pointer">Terms of Service</span>
+</div>
+</div>
+</footer>
+<!-- Floating Action Button (Limited Use) -->
+<button class="fixed bottom-10 right-10 w-16 h-16 bg-secondary text-white rounded-full shadow-xl flex items-center justify-center active:scale-90 transition-standard hover:shadow-2xl z-50">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+<script>
+        // Simple Interaction logic
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('py-2', 'shadow-md');
+                header.classList.remove('py-md', 'shadow-sm');
+            } else {
+                header.classList.add('py-md', 'shadow-sm');
+                header.classList.remove('py-2', 'shadow-md');
+            }
+        });
+
+        // Micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'rgba(0, 102, 131, 0.2)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            });
+        });
+    </script>
+</body></html>

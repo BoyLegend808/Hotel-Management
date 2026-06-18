@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Lumina Hospitality | Room Detail</title>
+    <link href="/css/ui-utils.css" rel="stylesheet"/>
+    <link href="room-detail.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface transition-colors duration-300">
+    <!-- Top App Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-b border-white/30 dark:border-white/10 shadow-sm dark:shadow-none">
+        <div class="flex items-center gap-md">
+            <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer animate-hover" onclick="goBack()">arrow_back</span>
+            <h1 class="font-h2 text-h2 tracking-tight text-primary dark:text-primary-fixed-dim">Lumina Hospitality</h1>
+        </div>
+        <div class="hidden md:flex gap-lg">
+            <a class="font-label-md text-label-md nav-active" href="/pages/hotel/home/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking/">Bookings</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login/">Login</a>
+        </div>
+        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed animate-hover cursor-pointer">
+            <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfCBsmjQmz8-BolcV6YxiHQYnF3GLIDRR7zaqN4A3vm7t-H6xi6JFtRdeKzsh394GcjSMVaz6Qu9c2xtxPfGbMY0GpD6heU4RhWsAbgVpI6El7DKC0m9mUkV-R6EKOXU9N1wZ5FYpvoJ9wnx--S4iInSb4eu_tVjftSk-B1I2Y1x7nphSD30Zku3FZUsi5DPwG0JBvb9KfIkyDDRl9PCHxYyqDX3lB81vKBWXMiznfvX8HNg4rYQ54b7Ctdtlz5ILx3JX_lSYGaCU"/>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-32 px-container-margin max-w-7xl mx-auto">
+        <!-- Hero Gallery -->
+        <section class="mb-xl">
+            <div class="gallery-grid rounded-xl overflow-hidden shadow-lg" id="galleryGrid">
+                <!-- Gallery images will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Room Header & Info -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+            <div class="lg:col-span-2 space-y-lg">
+                <div class="flex flex-wrap justify-between items-start gap-md">
+                    <div>
+                        <h2 class="font-h1 text-h1 text-on-surface" id="roomName">Loading...</h2>
+                        <div class="flex items-center gap-xs mt-xs text-secondary font-bold">
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="text-body-md" id="roomRating">0.0 (0 Reviews)</span>
+                        </div>
+                    </div>
+                    <div class="glass-card px-md py-sm rounded-xl flex items-center gap-sm inner-glow">
+                        <span class="font-h3 text-h3 text-secondary" id="roomPrice">$0</span>
+                        <span class="text-body-sm text-on-surface-variant">/ night</span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="glass-card p-lg rounded-xl inner-glow">
+                    <h3 class="font-h3 text-h3 mb-md">About this space</h3>
+                    <p class="text-body-md text-on-surface-variant leading-relaxed" id="roomDescription">
+                        Loading room details...
+                    </p>
+                </div>
+
+                <!-- Amenities Grid -->
+                <div>
+                    <h3 class="font-h3 text-h3 mb-md">Premier Amenities</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-md" id="amenitiesGrid">
+                        <!-- Amenities will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Card (Stats & Occupancy) -->
+            <div class="space-y-md">
+                <div class="glass-card p-lg rounded-xl inner-glow sticky top-28">
+                    <h3 class="font-h3 text-h3 mb-md">Room Specifications</h3>
+                    <ul class="space-y-gutter">
+                        <li class="flex justify-between items-center pb-sm border-b border-outline-variant">
+                            <div class="flex items-center gap-sm text-on-surface-variant">
+                                <span class="material-symbols-outlined">group</span>
+                                <span class="font-body-md">Max Occupancy</span>
+                            </div>
+                            <span class="font-bold" id="maxOccupancy">0 Guests</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-sm border-b border-outline-variant">
+                            <div class="flex items-center gap-sm text-on-surface-variant">
+                                <span class="material-symbols-outlined">straighten</span>
+                                <span class="font-body-md">Total Area</span>
+                            </div>
+                            <span class="font-bold" id="totalArea">0 sq. ft</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-sm border-b border-outline-variant">
+                            <div class="flex items-center gap-sm text-on-surface-variant">
+                                <span class="material-symbols-outlined">bed</span>
+                                <span class="font-body-md">Bedding</span>
+                            </div>
+                            <span class="font-bold" id="bedding">-</span>
+                        </li>
+                    </ul>
+                    <div class="mt-xl p-md bg-primary/5 rounded-lg border border-primary/20">
+                        <p class="text-body-sm text-primary flex items-center gap-xs">
+                            <span class="material-symbols-outlined text-[18px]">info</span>
+                            Free cancellation until 48 hours before arrival.
+                        </p>
+                    </div>
+                    <button class="hidden lg:block w-full mt-lg bg-primary text-on-primary py-md rounded-xl font-button text-button transition-all duration-300 hover:brightness-90 active:scale-95 shadow-lg" onclick="bookNow()">
+                        Check Availability
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Mobile Nav (Shell Component) -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-t border-white/30 dark:border-white/10 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+        <div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold transition-all duration-300">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bed</span>
+            <span class="font-label-md text-label-md">Rooms</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span class="font-label-md text-label-md">Bookings</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-label-md text-label-md">Profile</span>
+        </div>
+    </nav>
+
+    <!-- Sticky 'Book Now' CTA (Mobile/Tablet Only) -->
+    <div class="lg:hidden fixed bottom-24 left-0 w-full px-gutter z-40">
+        <div class="glass-card p-md rounded-2xl flex items-center justify-between shadow-xl border border-white/40">
+            <div>
+                <p class="text-label-md font-bold text-on-surface-variant uppercase tracking-widest">Pricing</p>
+                <div class="flex items-baseline gap-xs">
+                    <span class="font-h3 text-h3 text-secondary" id="mobilePrice">$0</span>
+                    <span class="text-body-sm text-on-surface-variant">/ night</span>
+                </div>
+            </div>
+            <button class="bg-primary text-on-primary px-xl py-md rounded-xl font-button text-button shadow-lg active:scale-95 transition-transform duration-100" onclick="bookNow()">
+                Book Now
+            </button>
+        </div>
+    </div>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+    <script src="room-detail.js"></script>
+</body>
+</html>

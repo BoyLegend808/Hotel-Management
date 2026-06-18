@@ -1,0 +1,28 @@
+{
+  "component_library": {
+    "NavigationBar": {
+      "states": ["sticky", "mobile_hamburger", "dark_mode_aware"],
+      "elements": ["Logo", "NavLinks", "UserAvatar"]
+    },
+    "GlassCard": {
+      "states": ["default", "hover_elevate", "active_press"],
+      "styles": ["backdrop-filter: blur(10px)", "border: 1px solid rgba(255,255,255,0.1)"]
+    },
+    "FormInput": {
+      "states": ["default", "focused_floating_label", "error_state"],
+      "interaction": "Label slides up 12px on focus"
+    },
+    "ToastNotification": {
+      "types": ["success", "error", "warning", "info"],
+      "behavior": "Auto-dismiss 4s, entrance: slide-in-top"
+    },
+    "LoadingSpinner": {
+      "style": "Circular SVG path animation",
+      "placement": "Center-aligned in async sections"
+    },
+    "CTAButton": {
+      "states": ["primary_gradient", "hover_lift", "disabled_spinner"],
+      "colors": ["#2A7F9E", "#D98C00"]
+    }
+  }
+}

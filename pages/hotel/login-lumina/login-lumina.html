@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Lumina Hospitality | Login</title>
+    <link href="/css/ui-utils.css" rel="stylesheet"/>
+    <link href="login.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm">
+        <div class="flex items-center gap-md">
+            <button class="material-symbols-outlined text-primary cursor-pointer" onclick="goBack()">arrow_back</button>
+            <h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking/">Bookings</a>
+            <a class="font-label-md text-label-md text-primary font-bold transition-opacity" href="/pages/hotel/login/">Login</a>
+        </nav>
+    </header>
+
+    <main class="pt-20 pb-32 px-container-margin min-h-screen flex items-center justify-center">
+        <div class="glass-card rounded-xl p-lg w-full max-w-md">
+            <div class="text-center mb-xl">
+                <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-md">
+                    <span class="material-symbols-outlined text-4xl">lock</span>
+                </div>
+                <h2 class="font-h1 text-h1 text-on-surface mb-sm">Welcome Back</h2>
+                <p class="font-body-md text-on-surface-variant">Sign in to access your account</p>
+            </div>
+
+            <form id="loginForm" class="space-y-lg">
+                <div>
+                    <label class="block text-label-md text-on-surface-variant mb-sm">USERNAME OR EMAIL</label>
+                    <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="text" id="username" placeholder="Enter your username" required/>
+                </div>
+                <div>
+                    <label class="block text-label-md text-on-surface-variant mb-sm">PASSWORD</label>
+                    <input class="w-full border border-outline-variant rounded-lg p-md focus:border-primary focus:ring-0" type="password" id="password" placeholder="Enter your password" required/>
+                </div>
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center gap-sm cursor-pointer">
+                        <input type="checkbox" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20"/>
+                        <span class="text-body-sm text-on-surface-variant">Remember me</span>
+                    </label>
+                    <a class="text-body-sm text-primary hover:underline" href="#">Forgot password?</a>
+                </div>
+                <button type="submit" class="w-full bg-primary text-white py-md rounded-lg font-button hover:bg-primary/90 transition-all active:scale-95 flex items-center justify-center gap-sm">
+                    <span class="material-symbols-outlined">login</span>
+                    Sign In
+                </button>
+            </form>
+
+            <div class="mt-xl text-center">
+                <p class="text-body-sm text-on-surface-variant">
+                    Don't have an account? 
+                    <a class="text-primary font-medium hover:underline" href="#">Create one</a>
+                </p>
+            </div>
+
+            <div class="mt-lg pt-lg border-t border-outline-variant">
+                <p class="text-label-md text-on-surface-variant text-center mb-md">DEMO CREDENTIALS</p>
+                <div class="space-y-sm">
+                    <div class="flex justify-between text-body-sm">
+                        <span class="text-on-surface-variant">Admin:</span>
+                        <span class="font-medium">admin / demo1234</span>
+                    </div>
+                    <div class="flex justify-between text-body-sm">
+                        <span class="text-on-surface-variant">Guest:</span>
+                        <span class="font-medium">guest / demo1234</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
