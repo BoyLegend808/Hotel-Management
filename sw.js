@@ -3,13 +3,13 @@
  * Provides offline functionality and improves performance through caching
  */
 
-const CACHE_NAME = 'evergreen-v1';
-const RUNTIME_CACHE = 'evergreen-runtime-v1';
+const CACHE_NAME = 'lumina-v1';
+const RUNTIME_CACHE = 'lumina-runtime-v1';
 
 // Assets to cache on install
 const STATIC_ASSETS = [
   '/',
-  '/pages/public/home/',
+  '/pages/hotel/home-lumina/',
   '/css/main.css',
   '/css/fonts.css',
   '/css/ui-utils.css',
@@ -214,7 +214,7 @@ self.addEventListener('push', (event) => {
   };
   
   event.waitUntil(
-    self.registration.showNotification('Evergreen Estates', options)
+    self.registration.showNotification('Lumina Hospitality', options)
   );
 });
 

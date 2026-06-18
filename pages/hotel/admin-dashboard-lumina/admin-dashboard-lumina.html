@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Lumina Hospitality | Admin Dashboard</title>
     <link href="/css/ui-utils.css" rel="stylesheet"/>
-    <link href="admin-dashboard.css" rel="stylesheet"/>
+    <link href="admin-dashboard-lumina.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 </head>
@@ -17,10 +17,10 @@
             <span class="text-label-md text-primary bg-primary/10 px-sm py-xs rounded-full">Admin</span>
         </div>
         <nav class="hidden md:flex items-center gap-lg">
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home/">Home</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking/">Bookings</a>
-            <a class="font-label-md text-label-md text-primary font-bold transition-opacity" href="/pages/hotel/admin-dashboard/">Dashboard</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home-lumina/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms-lumina/">Rooms</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking-your-stay/">Bookings</a>
+            <a class="font-label-md text-label-md text-primary font-bold transition-opacity" href="/pages/hotel/admin-dashboard-lumina/">Dashboard</a>
         </nav>
         <div class="flex items-center gap-sm">
             <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" onclick="logout()">logout</button>
@@ -87,11 +87,11 @@
             <div class="glass-card rounded-xl p-lg">
                 <h3 class="font-h2 text-h2 mb-lg">Quick Actions</h3>
                 <div class="space-y-md">
-                    <button class="w-full py-md border border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-sm" onclick="window.location.href='/pages/hotel/rooms/'">
+                    <button class="w-full py-md border border-primary text-primary rounded-lg font-button hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-sm" onclick="window.location.href='/pages/hotel/rooms-lumina/'">
                         <span class="material-symbols-outlined">add</span>
                         Add New Room
                     </button>
-                    <button class="w-full py-md border border-outline-variant text-on-surface-variant rounded-lg font-button hover:bg-surface-container transition-all flex items-center justify-center gap-sm" onclick="window.location.href='/pages/hotel/booking/'">
+                    <button class="w-full py-md border border-outline-variant text-on-surface-variant rounded-lg font-button hover:bg-surface-container transition-all flex items-center justify-center gap-sm" onclick="window.location.href='/pages/hotel/booking-your-stay/'">
                         <span class="material-symbols-outlined">event</span>
                         View All Bookings
                     </button>
@@ -133,6 +133,6 @@
 
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
-    <script src="admin-dashboard.js"></script>
+    <script src="admin-dashboard-lumina.js"></script>
 </body>
 </html>

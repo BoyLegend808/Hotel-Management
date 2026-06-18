@@ -108,7 +108,7 @@ function renderRooms(rooms) {
 
 // View room details
 function viewRoomDetails(roomId) {
-    window.location.href = `/pages/hotel/room-detail/?id=${roomId}`;
+    window.location.href = `/pages/hotel/room-detail-lumina/?id=${roomId}`;
 }
 
 // Sidebar functionality

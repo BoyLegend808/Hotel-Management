@@ -1,5 +1,5 @@
 /**
- * Evergreen Estates — Responsive Navbar Controller
+ * Lumina Hospitality — Responsive Navbar Controller
  * Handles scroll detection, mobile menu toggle, and animated hamburger.
  */
 (function () {

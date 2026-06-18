@@ -2,8 +2,8 @@
 
 // Demo credentials
 const DEMO_CREDENTIALS = {
-    admin: { password: 'demo1234', role: 'admin', redirect: '/pages/hotel/admin-dashboard/' },
-    guest: { password: 'demo1234', role: 'guest', redirect: '/pages/hotel/guest-dashboard/' }
+    admin: { password: 'demo1234', role: 'admin', redirect: '/pages/hotel/admin-dashboard-lumina/' },
+    guest: { password: 'demo1234', role: 'guest', redirect: '/pages/hotel/guest-dashboard-lumina/' }
 };
 
 // Handle login form submission
@@ -57,7 +57,7 @@ function goBack() {
     if (window.history.length > 1) {
         window.history.back();
     } else {
-        window.location.href = '/pages/hotel/home/';
+        window.location.href = '/pages/hotel/home-lumina/';
     }
 }
 
@@ -67,9 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user) {
         const userData = JSON.parse(user);
         if (userData.role === 'admin') {
-            window.location.href = '/pages/hotel/admin-dashboard/';
+            window.location.href = '/pages/hotel/admin-dashboard-lumina/';
         } else {
-            window.location.href = '/pages/hotel/guest-dashboard/';
+            window.location.href = '/pages/hotel/guest-dashboard-lumina/';
         }
     }
 });

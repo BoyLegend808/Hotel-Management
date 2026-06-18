@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function generateBreadcrumbs(path) {
   // Use hotel home as base
-  const breadcrumbs = [{ label: "Home", url: "/pages/hotel/home/" }];
+  const breadcrumbs = [{ label: "Home", url: "/pages/hotel/home-lumina/" }];
 
   const parts = path.split("/").filter((p) => p && p !== "pages");
 
@@ -98,7 +98,7 @@ function setupLogout() {
             UI.showToast("Logged out successfully", "success", 1500);
           }
           setTimeout(() => {
-            window.location.href = "/pages/hotel/login/";
+            window.location.href = "/pages/hotel/login-lumina/";
           }, 500);
         }
       } catch (error) {
@@ -144,7 +144,7 @@ function setupSessionTimeout() {
         3000,
       );
     }
-    window.location.href = "/pages/hotel/login/";
+    window.location.href = "/pages/hotel/login-lumina/";
   }, SESSION_DURATION);
 }
 
