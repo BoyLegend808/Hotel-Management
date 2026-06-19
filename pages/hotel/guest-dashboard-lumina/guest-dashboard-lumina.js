@@ -1,87 +1,61 @@
 // Lumina Hospitality - Guest Dashboard JavaScript
 
-// Sample booking data
-const upcomingBookings = [
-    {
-        id: 1,
-        roomName: "Azure Ocean Suite",
-        roomType: "VIP SANCTUARY",
-        checkIn: "2024-11-15",
-        checkOut: "2024-11-20",
-        status: "confirmed",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAmzzZYHtqR003gLo_fXte54QqlQlBOqnL294c2nBSU1aGKXjYPDQLHXQ3jm4CP3t_y1DF3CBBGORVAggDzPGDQI_VfXK8kRugK1syJ2gC8g1RTIo4nPhNho0E9gTq0Y_FFMymQzFvysIqnURv67laPRxj_PNIUx-OA07komn3cC7LlPMnfEThCTpsD2FTbadifji6VWd3OlX3zRN2x11MbAc_gCZvgkntr1zSUjofFdomWtfRv5wjTSPHM3NK1qcI3UPm19w27u80",
-        totalPrice: 2250
-    },
-    {
-        id: 2,
-        roomName: "The Horizon Loft",
-        roomType: "EXECUTIVE SUITE",
-        checkIn: "2024-12-10",
-        checkOut: "2024-12-15",
-        status: "pending",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAxi0wjU6aLr44vsc3N063QAcEDEQM9Cv_MImZtSci66HzHWmuEI1UYwKsCF6sUkq7G7qaH5JuacNzh_a81nzUGG9tWMl1uHBWxh-tPU8Uspt_ZTciCarVyGerQz9D-BYgOpSZd3Bxb_Dbe82m11YHPJ3AAJy2UaIbgLrxaSbgdEwnisnNrfgsNIar8UbY0-W34S7O9PUWpMETQPAWpwtWwog5Jle5uvR_PYQTpIkch7nhIkiIKeFbPTwihSWHciu0v75ouoFScCXQ",
-        totalPrice: 1800
-    }
-];
+// Auth helper
+function getAuthHeaders() {
+    const token = sessionStorage.getItem('token');
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': token ? `Bearer ${token}` : ''
+    };
+}
 
-const pastBookings = [
-    {
-        id: 3,
-        roomName: "Royal Heritage Room",
-        roomType: "DELUXE KING",
-        checkIn: "2024-09-01",
-        checkOut: "2024-09-05",
-        status: "completed",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC19eUlmgJWbWeAf0lnzVzsqE5UlsJ7Nqr5b0gy5DSaxM-PHFp3X3lGJ-Cg_DI4RK5YfJAkZcWkRUyRnpMwo41TKGXCxQF2yE827K3OP07qsBfTUB-c9yFRfg8QYFKv6xa-BT7p3QmtSKH5RbdxoLZw8cf4AR-PuqZo3oN7XV22ETDR312PkUsk8mf3gIaZ6wXO0MZjEfxOygHvOeRKY6-wFN0Byvz9XIYOcq9y7EfTlohzCWKQRm_prBdoux9YheMj3IwqrZcLE4Q",
-        totalPrice: 1280
-    },
-    {
-        id: 4,
-        roomName: "Peak View Cabin",
-        roomType: "ALPINE ESCAPE",
-        checkIn: "2024-07-20",
-        checkOut: "2024-07-25",
-        status: "completed",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAFxkqrMt1GmGKYJfSCYgn2H9WMZPlWKbl9yci7Od6p9ffT5HLYaa-PVV0axf5LuGH0llQ-KVbi9U1ykms8W1XA3FxCW1xohYWvWj60itCEftceR-oWaNVplq5F_N0XiJv6rtew0vEhBUNNiDe5tc7tRVgLNiUTyzLQw0U35mixv6iYWwVnfmHiddZ_xqrOp5N1lbICmjaqaJzVY8xph-SquNuOhPboIApwyUqu5NcTkPuq1acgjdLjqvGXdqlOPvuiadiJcynNnzI",
-        totalPrice: 2240
-    }
-];
+// Sample booking data (fallback)
+const upcomingBookingsFallback = [];
+const pastBookingsFallback = [];
 
 // Render booking card
 function renderBookingCard(booking) {
-    const statusClass = booking.status === 'confirmed' ? 'status-confirmed' : 
-                       booking.status === 'pending' ? 'status-pending' : 'status-cancelled';
-    
+    const statusColors = {
+        confirmed: 'bg-green-100 text-green-800',
+        pending:   'bg-yellow-100 text-yellow-800',
+        cancelled: 'bg-red-100 text-red-800',
+        completed: 'bg-blue-100 text-blue-800'
+    };
+    const statusClass = statusColors[booking.status] || 'bg-gray-100 text-gray-800';
+
     return `
-        <div class="booking-card">
-            <img src="${booking.image}" alt="${booking.roomName}" class="booking-image"/>
+        <div class="glass-card rounded-xl overflow-hidden booking-card">
+            <div class="h-48 overflow-hidden bg-surface-container">
+                ${booking.image ? `<img src="${booking.image}" alt="${booking.roomName || 'Room'}" class="w-full h-full object-cover"/>` : 
+                  `<div class="w-full h-full flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined text-5xl">bed</span></div>`}
+            </div>
             <div class="p-md">
                 <div class="flex justify-between items-start mb-sm">
                     <div>
-                        <h4 class="font-h3 text-h3">${booking.roomName}</h4>
-                        <p class="text-body-sm text-on-surface-variant">${booking.roomType}</p>
+                        <h4 class="font-h3 text-h3">${booking.roomName || 'Room #' + booking.roomId}</h4>
+                        <p class="text-body-sm text-on-surface-variant">${booking.roomType || ''}</p>
                     </div>
-                    <span class="booking-status ${statusClass}">${booking.status}</span>
+                    <span class="px-sm py-xs rounded-full text-label-md font-bold ${statusClass}">${booking.status}</span>
                 </div>
                 <div class="space-y-sm mt-md">
                     <div class="flex justify-between text-body-sm">
                         <span class="text-on-surface-variant">Check-in</span>
-                        <span class="font-medium">${formatDate(booking.checkIn)}</span>
+                        <span class="font-medium">${booking.checkIn ? formatDate(booking.checkIn) : '—'}</span>
                     </div>
                     <div class="flex justify-between text-body-sm">
                         <span class="text-on-surface-variant">Check-out</span>
-                        <span class="font-medium">${formatDate(booking.checkOut)}</span>
+                        <span class="font-medium">${booking.checkOut ? formatDate(booking.checkOut) : '—'}</span>
                     </div>
                     <div class="flex justify-between text-body-sm">
                         <span class="text-on-surface-variant">Total</span>
-                        <span class="font-bold text-primary">$${booking.totalPrice}</span>
+                        <span class="font-bold text-primary">$${Number(booking.total || booking.totalPrice || 0).toFixed(2)}</span>
                     </div>
                 </div>
                 <div class="flex gap-sm mt-lg">
                     <button class="flex-1 py-sm border border-primary text-primary rounded-lg font-button text-button hover:bg-primary hover:text-white transition-all" onclick="viewBookingDetails(${booking.id})">
                         View Details
                     </button>
-                    ${booking.status === 'confirmed' ? `
+                    ${booking.status === 'confirmed' || booking.status === 'pending' ? `
                         <button class="flex-1 py-sm border border-outline-variant text-on-surface-variant rounded-lg font-button text-button hover:bg-surface-container transition-all" onclick="cancelBooking(${booking.id})">
                             Cancel
                         </button>
@@ -99,37 +73,39 @@ function formatDate(dateString) {
 }
 
 // Render bookings
-function renderUpcomingBookings() {
+function renderUpcomingBookings(bookings) {
     const container = document.getElementById('upcomingBookings');
     if (!container) return;
-    
-    if (upcomingBookings.length === 0) {
+
+    const upcoming = (bookings || []).filter(b => b.status === 'confirmed' || b.status === 'pending');
+
+    if (upcoming.length === 0) {
         container.innerHTML = `
             <div class="glass-card rounded-xl p-lg text-center col-span-full">
-                <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-md">calendar_today</span>
+                <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-md" style="display:block;">calendar_today</span>
                 <p class="text-body-md text-on-surface-variant">No upcoming bookings</p>
-                <button class="mt-md bg-primary text-white py-md px-xl rounded-lg font-button hover:bg-primary/90 transition-all" onclick="window.location.href='/pages/hotel/rooms/'">
+                <button class="mt-md bg-primary text-white py-md px-xl rounded-lg font-button hover:bg-primary/90 transition-all" onclick="window.location.href='/pages/hotel/rooms-lumina/'">
                     Book a Room
                 </button>
-            </div>
-        `;
+            </div>`;
     } else {
-        container.innerHTML = upcomingBookings.map(renderBookingCard).join('');
+        container.innerHTML = upcoming.map(renderBookingCard).join('');
     }
 }
 
-function renderPastBookings() {
+function renderPastBookings(bookings) {
     const container = document.getElementById('pastBookings');
     if (!container) return;
-    
-    if (pastBookings.length === 0) {
+
+    const past = (bookings || []).filter(b => b.status === 'completed' || b.status === 'cancelled');
+
+    if (past.length === 0) {
         container.innerHTML = `
             <div class="glass-card rounded-xl p-lg text-center col-span-full">
                 <p class="text-body-md text-on-surface-variant">No past bookings</p>
-            </div>
-        `;
+            </div>`;
     } else {
-        container.innerHTML = pastBookings.map(renderBookingCard).join('');
+        container.innerHTML = past.map(renderBookingCard).join('');
     }
 }
 
@@ -161,29 +137,72 @@ function viewBookingDetails(bookingId) {
 }
 
 // Cancel booking
-function cancelBooking(bookingId) {
-    if (confirm('Are you sure you want to cancel this booking?')) {
-        showToast('Booking cancellation request submitted', 'success');
-        // In a real app, this would call an API to cancel the booking
+async function cancelBooking(bookingId) {
+    if (!confirm('Are you sure you want to cancel this booking?')) return;
+    try {
+        const res = await fetch(`/api/bookings/${bookingId}/cancel`, {
+            method: 'PUT',
+            headers: getAuthHeaders()
+        });
+        const data = await res.json();
+        if (data.success) {
+            showToast('Booking cancelled successfully', 'success');
+            // Reload bookings
+            const bookingsRes = await fetch('/api/bookings', { headers: getAuthHeaders() });
+            if (bookingsRes.ok) {
+                const bookingsData = await bookingsRes.json();
+                renderUpcomingBookings(bookingsData.bookings || []);
+                renderPastBookings(bookingsData.bookings || []);
+            }
+        } else {
+            showToast(data.message || 'Could not cancel booking', 'error');
+        }
+    } catch (err) {
+        showToast('An error occurred. Please try again.', 'error');
     }
 }
 
 // Logout
 function logout() {
     if (confirm('Are you sure you want to logout?')) {
-        // Clear session
+        // Call API logout
+        fetch('/api/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('token') || '') } })
+            .catch(() => {});
         sessionStorage.clear();
         showToast('Logged out successfully', 'success');
         setTimeout(() => {
-            window.location.href = '/pages/hotel/login/';
+            window.location.href = '/pages/hotel/login-lumina/';
         }, 1000);
     }
 }
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    renderUpcomingBookings();
-    renderPastBookings();
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load user name from session
+    try {
+        const userData = JSON.parse(sessionStorage.getItem('user') || '{}');
+        const nameEl = document.querySelector('h2.font-h1');
+        if (nameEl && userData.name) {
+            nameEl.textContent = `Welcome back, ${userData.name}`;
+        }
+    } catch (e) {}
+
+    // Load bookings from API, fall back to empty
+    try {
+        const res = await fetch('/api/bookings', { headers: getAuthHeaders() });
+        if (res.ok) {
+            const data = await res.json();
+            const bookings = data.bookings || [];
+            renderUpcomingBookings(bookings);
+            renderPastBookings(bookings);
+        } else {
+            renderUpcomingBookings([]);
+            renderPastBookings([]);
+        }
+    } catch (err) {
+        renderUpcomingBookings([]);
+        renderPastBookings([]);
+    }
 });
 
 // Initialize UI utilities (if available)

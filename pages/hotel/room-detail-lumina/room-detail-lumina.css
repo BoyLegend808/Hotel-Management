@@ -1,52 +1,213 @@
 /* Lumina Hospitality - Room Detail Page Styles */
 
-:root {
-    --primary: #006683;
-    --primary-container: #2a7f9e;
-    --primary-fixed: #bde9ff;
-    --primary-fixed-dim: #84d0f2;
-    --secondary: #845400;
-    --secondary-container: #fdaa2d;
-    --background: #f7fafc;
-    --surface: #f7fafc;
-    --on-surface: #181c1e;
-    --on-surface-variant: #3f484d;
-    --on-primary: #ffffff;
-    --on-secondary: #ffffff;
-    --outline: #6f787e;
-    --outline-variant: #bfc8cd;
-    --surface-dim: #d8dadd;
-    --surface-container: #eceef1;
-    --surface-container-low: #f1f4f6;
-    --surface-container-high: #e6e8eb;
-    --surface-container-highest: #e0e3e5;
-    --surface-container-lowest: #ffffff;
-    --inverse-surface: #2d3133;
-    --inverse-on-surface: #eef1f4;
-    --inverse-primary: #84d0f2;
-    --on-primary-fixed: #001f2a;
-    --on-primary-fixed-variant: #004d64;
-    --on-secondary-container: #6a4200;
-    --on-tertiary-container: #ffffff;
-    --on-error-container: #93000a;
-    --on-error: #ffffff;
-    --error: #ba1a1a;
-    --error-container: #ffdad6;
-    --tertiary: #86510f;
-    --tertiary-container: #a36927;
-    --on-tertiary: #ffffff;
-    --on-tertiary-fixed: #2c1600;
-    --on-tertiary-fixed-variant: #693c00;
-    --tertiary-fixed: #ffdcbd;
-    --tertiary-fixed-dim: #ffb86f;
-    --secondary-fixed: #ffddb7;
-    --secondary-fixed-dim: #ffb95c;
-    --on-secondary-fixed: #2a1700;
-    --on-secondary-fixed-variant: #653e00;
-    --primary-fixed: #bde9ff;
-    --surface-bright: #f7fafc;
-    --surface-tint: #006684;
-    --on-background: #181c1e;
+/* Page-specific overrides using design system variables */
+body {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+/* Icon Styles */
+.icon-filled {
+    font-variation-settings: 'FILL' 1;
+}
+
+/* Glass Card Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: var(--shadow-lg);
+}
+
+.glass-card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+    transition: all var(--transition-base);
+}
+
+/* Inner Glow Effect */
+.inner-glow {
+    box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: var(--spacing-sm);
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.gallery-item:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Amenities Grid */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+
+.amenity-item:hover {
+    border-color: var(--primary-300);
+    box-shadow: var(--shadow-md);
+}
+
+.amenity-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--primary-50);
+    color: var(--primary-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Room Specifications */
+.spec-list {
+    list-style: none;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.spec-item:last-child {
+    border-bottom: none;
+}
+
+.spec-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+}
+
+.spec-value {
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-fixed);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    padding-bottom: env(safe-area-inset-bottom);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-base);
+}
+
+.mobile-nav-item.active {
+    color: var(--primary-600);
+    font-weight: var(--font-bold);
+}
+
+.mobile-nav-item:hover {
+    color: var(--primary-600);
+}
+
+/* Sticky CTA (Mobile) */
+.sticky-cta {
+    position: fixed;
+    bottom: 6rem;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-sticky);
+    padding: 0 var(--spacing-lg);
+}
+
+/* Spacing Utilities */
+.px-container-margin {
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .px-container-margin {
+        padding-left: var(--spacing-xl);
+        padding-right: var(--spacing-xl);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 150px);
+    }
+    
+    .gallery-item:first-child {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .amenities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sticky-cta {
+        bottom: 5rem;
+    }
 }
 
 * {
@@ -61,6 +222,11 @@ body {
     color: var(--on-surface);
     line-height: 1.5;
     min-height: 100vh;
+}
+
+/* Icon Styles */
+.icon-filled {
+    font-variation-settings: 'FILL' 1;
 }
 
 /* Typography */

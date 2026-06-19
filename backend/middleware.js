@@ -208,10 +208,17 @@ const sanitizeQuery = (req, res, next) => {
 const responseTime = (req, res, next) => {
   const startTime = Date.now();
   
-  res.on('finish', () => {
+  // Store original end method
+  const originalEnd = res.end;
+  
+  // Override end method to set header before sending
+  res.end = function(...args) {
     const duration = Date.now() - startTime;
-    res.setHeader('X-Response-Time', `${duration}ms`);
-  });
+    if (!res.headersSent) {
+      res.setHeader('X-Response-Time', `${duration}ms`);
+    }
+    originalEnd.apply(this, args);
+  };
   
   next();
 };

@@ -108,7 +108,7 @@ function renderRooms(rooms) {
 
 // View room details
 function viewRoomDetails(roomId) {
-    window.location.href = `/pages/hotel/room-detail/?id=${roomId}`;
+    window.location.href = `/pages/hotel/room-detail-lumina/?id=${roomId}`;
 }
 
 // Sidebar functionality
@@ -144,17 +144,31 @@ filterButtons.forEach(button => {
 });
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    renderRooms(roomsData);
+document.addEventListener('DOMContentLoaded', async () => {
+    // Try to load rooms from API, fall back to static data
+    try {
+        const res = await fetch('/api/rooms');
+        if (res.ok) {
+            const data = await res.json();
+            if (data.rooms && data.rooms.length > 0) {
+                renderRooms(data.rooms);
+            } else {
+                renderRooms(roomsData);
+            }
+        } else {
+            renderRooms(roomsData);
+        }
+    } catch (err) {
+        renderRooms(roomsData);
+    }
     
     // Get search parameters from URL
     const urlParams = new URLSearchParams(window.location.search);
     const checkIn = urlParams.get('checkIn');
     const checkOut = urlParams.get('checkOut');
-    const guests = urlParams.get('guests');
     
     if (checkIn && checkOut) {
-        showToast(`Searching for rooms: ${checkIn} to ${checkOut}`, 'info');
+        showToast(`Searching rooms: ${checkIn} → ${checkOut}`, 'info');
     }
 });
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const { requireAuth, requireRole, findDemoUser, createSession, destroySession } = require("./auth");
-const { readDB } = require("./db");
+const { readDB } = require("./db-optimized");
 
 const roomsRouter = require("./routes/rooms");
 const bookingsRouter = require("./routes/bookings");
@@ -40,8 +40,8 @@ router.use("/payments", paymentsRouter);
 router.use("/reviews", reviewsRouter);
 
 // Stats endpoint (admin only)
-router.get("/stats", requireAuth, requireRole("admin"), (req, res) => {
-  const db = readDB();
+router.get("/stats", requireAuth, requireRole("admin"), async (req, res) => {
+  const db = await readDB();
   const totalBookings = (db.bookings || []).length;
   const confirmedBookings = (db.bookings || []).filter(b => b.status === "confirmed").length;
   const pendingBookings = (db.bookings || []).filter(b => b.status === "pending").length;

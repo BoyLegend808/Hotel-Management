@@ -3,26 +3,26 @@ const path = require("path");
 const { getSession } = require("./auth");
 
 const PAGE_ALIASES = {
-  "/": "/pages/hotel/home",
-  "/home": "/pages/hotel/home",
-  "/about": "/pages/hotel/home",
-  "/about-us": "/pages/hotel/home",
-  "/services": "/pages/hotel/home",
-  "/contact": "/pages/hotel/home",
-  "/resources": "/pages/hotel/home",
-  "/rooms": "/pages/hotel/rooms",
-  "/booking": "/pages/hotel/booking",
-  "/bookings": "/pages/hotel/booking",
-  "/login": "/pages/hotel/login",
-  "/guest-dashboard": "/pages/hotel/guest-dashboard",
-  "/admin-dashboard": "/pages/hotel/admin-dashboard",
-  "/room-detail": "/pages/hotel/room-detail",
+  "/": "/pages/hotel/home-lumina",
+  "/home": "/pages/hotel/home-lumina",
+  "/about": "/pages/hotel/home-lumina",
+  "/about-us": "/pages/hotel/home-lumina",
+  "/services": "/pages/hotel/home-lumina",
+  "/contact": "/pages/hotel/home-lumina",
+  "/resources": "/pages/hotel/home-lumina",
+  "/rooms": "/pages/hotel/rooms-lumina",
+  "/booking": "/pages/hotel/booking-your-stay",
+  "/bookings": "/pages/hotel/booking-your-stay",
+  "/login": "/pages/hotel/login-lumina",
+  "/guest-dashboard": "/pages/hotel/guest-dashboard-lumina",
+  "/admin-dashboard": "/pages/hotel/admin-dashboard-lumina",
+  "/room-detail": "/pages/hotel/room-detail-lumina",
   // Legacy care management routes (for backward compatibility)
-  "/admin": "/pages/hotel/admin-dashboard",
-  "/admin/login": "/pages/hotel/login",
-  "/admin/dashboard": "/pages/hotel/admin-dashboard",
-  "/family-portal": "/pages/hotel/guest-dashboard",
-  "/staff-portal": "/pages/hotel/admin-dashboard",
+  "/admin": "/pages/hotel/admin-dashboard-lumina",
+  "/admin/login": "/pages/hotel/login-lumina",
+  "/admin/dashboard": "/pages/hotel/admin-dashboard-lumina",
+  "/family-portal": "/pages/hotel/guest-dashboard-lumina",
+  "/staff-portal": "/pages/hotel/admin-dashboard-lumina",
 };
 
 function isInside(baseDir, candidate) {
@@ -63,16 +63,16 @@ function toPageRequestPath(requestPath) {
   if (normalized.startsWith("/hotel/")) return `/pages${normalized}`;
   if (normalized === "/hotel") return "/pages/hotel";
   if (normalized.startsWith("/admin-dashboard/")) return `/pages${normalized}`;
-  if (normalized === "/admin-dashboard") return "/pages/hotel/admin-dashboard";
+  if (normalized === "/admin-dashboard") return "/pages/hotel/admin-dashboard-lumina";
   if (normalized.startsWith("/guest-dashboard/")) return `/pages${normalized}`;
-  if (normalized === "/guest-dashboard") return "/pages/hotel/guest-dashboard";
+  if (normalized === "/guest-dashboard") return "/pages/hotel/guest-dashboard-lumina";
   // Legacy care management shortcuts (redirect to hotel)
-  if (normalized.startsWith("/admin/")) return "/pages/hotel/admin-dashboard";
-  if (normalized === "/admin") return "/pages/hotel/admin-dashboard";
-  if (normalized.startsWith("/family-portal/")) return "/pages/hotel/guest-dashboard";
-  if (normalized === "/family-portal") return "/pages/hotel/guest-dashboard";
-  if (normalized.startsWith("/staff-portal/")) return "/pages/hotel/admin-dashboard";
-  if (normalized === "/staff-portal") return "/pages/hotel/admin-dashboard";
+  if (normalized.startsWith("/admin/")) return "/pages/hotel/admin-dashboard-lumina";
+  if (normalized === "/admin") return "/pages/hotel/admin-dashboard-lumina";
+  if (normalized.startsWith("/family-portal/")) return "/pages/hotel/guest-dashboard-lumina";
+  if (normalized === "/family-portal") return "/pages/hotel/guest-dashboard-lumina";
+  if (normalized.startsWith("/staff-portal/")) return "/pages/hotel/admin-dashboard-lumina";
+  if (normalized === "/staff-portal") return "/pages/hotel/admin-dashboard-lumina";
 
   return normalized;
 }
@@ -134,29 +134,25 @@ function registerPageRoutes(app, rootDir) {
     // If it's a real file request (like .css/.js/.png), ignore - static middleware should serve it.
     if (path.extname(req.path) && !req.path.endsWith(".html")) return next();
 
-    // Check if this is a protected route (hotel admin-dashboard, guest-dashboard)
-    const isProtectedRoute = req.path.startsWith("/admin-dashboard/") || 
-                            req.path.startsWith("/guest-dashboard/") ||
-                            req.path === "/admin-dashboard" || 
-                            req.path === "/guest-dashboard";
-    
-    // Allow access to login page without authentication
-    const isLoginPage = req.path.includes("/login");
+    // Protected dashboard routes — require a valid session
+    const isProtectedRoute = 
+      req.path.startsWith("/pages/hotel/admin-dashboard-lumina") ||
+      req.path.startsWith("/pages/hotel/guest-dashboard-lumina") ||
+      req.path.startsWith("/admin-dashboard") ||
+      req.path.startsWith("/guest-dashboard");
 
-    if (isProtectedRoute && !isLoginPage) {
-      // Check for session token in cookie or header
-      const token = req.cookies?.token || req.headers.authorization?.replace("Bearer ", "");
-      
+    if (isProtectedRoute) {
+      // Accept token from Authorization header only (no cookie-parser needed)
+      const authHeader = req.headers.authorization || "";
+      const token = authHeader.replace(/^Bearer\s+/i, "").trim();
+
       if (!token) {
-        // No token found, redirect to hotel login page
-        return res.redirect("/pages/hotel/login/");
+        return res.redirect("/pages/hotel/login-lumina/");
       }
 
-      // Validate the session
-      const session = getSession(token);
+      const session = getSession({ headers: { authorization: authHeader } });
       if (!session) {
-        // Invalid session, redirect to hotel login page
-        return res.redirect("/pages/hotel/login/");
+        return res.redirect("/pages/hotel/login-lumina/");
       }
     }
 

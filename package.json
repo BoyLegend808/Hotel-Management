@@ -1,7 +1,7 @@
 {
-  "name": "evergreen-estates-cms",
+  "name": "lumina-hotel-management",
   "version": "1.0.0",
-  "description": "Evergreen Estates Care Management System",
+  "description": "Lumina Hospitality Hotel Management System",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -16,7 +16,7 @@
     "postbuild": "node scripts/copy-dist.js"
   },
   "keywords": [
-    "care-management",
+    "hotel-management",
     "performance-optimization"
   ],
   "author": "",

@@ -8,7 +8,7 @@ const DEMO_USERS = [
     passwords: ["demo1234"],
     role: "admin",
     name: "Admin User",
-    redirect: "/pages/admin/dashboard"
+    redirect: "/pages/hotel/admin-dashboard-lumina/"
   },
   {
     username: "staffnurse",
@@ -16,7 +16,7 @@ const DEMO_USERS = [
     role: "staff",
     name: "Nurse Staff",
     residentId: null,
-    redirect: "/pages/staff-portal/dashboard"
+    redirect: "/pages/hotel/admin-dashboard-lumina/"
   },
   {
     username: "henderson",
@@ -24,7 +24,7 @@ const DEMO_USERS = [
     role: "family",
     name: "Henderson Family",
     residentId: "RES001",
-    redirect: "/pages/family-portal/dashboard"
+    redirect: "/pages/hotel/guest-dashboard-lumina/"
   }
 ];
 

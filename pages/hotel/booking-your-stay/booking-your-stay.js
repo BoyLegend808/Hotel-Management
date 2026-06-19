@@ -243,7 +243,7 @@ function completeBooking() {
         showToast('Booking confirmed! Check your email for details.', 'success');
         // Redirect to confirmation page or dashboard
         setTimeout(() => {
-            window.location.href = '/pages/hotel/guest-dashboard/';
+            window.location.href = '/pages/hotel/guest-dashboard-lumina/';
         }, 2000);
     }, 2000);
 }
@@ -253,7 +253,7 @@ function goBack() {
     if (window.history.length > 1) {
         window.history.back();
     } else {
-        window.location.href = '/pages/hotel/rooms/';
+        window.location.href = '/pages/hotel/rooms-lumina/';
     }
 }
 

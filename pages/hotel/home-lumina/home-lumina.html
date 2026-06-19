@@ -5,7 +5,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Lumina Hospitality | Luxury Management & Stays</title>
     <link href="/css/ui-utils.css" rel="stylesheet"/>
-    <link href="home-lumina.css" rel="stylesheet"/>
+    <link href="/css/lumina-design-system.css" rel="stylesheet"/>
+    <link href="/pages/hotel/home-lumina/home-lumina.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 </head>
@@ -142,15 +143,15 @@
                 <p class="font-body-lg text-on-surface-variant">From our smart concierge system to bespoke interior design, Lumina Hospitality bridges the gap between digital efficiency and human warmth.</p>
                 <div class="space-y-sm">
                     <div class="flex items-center gap-md">
-                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <span class="material-symbols-outlined text-secondary icon-filled">check_circle</span>
                         <span class="font-body-md font-medium">Smart Room Automation</span>
                     </div>
                     <div class="flex items-center gap-md">
-                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <span class="material-symbols-outlined text-secondary icon-filled">check_circle</span>
                         <span class="font-body-md font-medium">24/7 VIP Concierge</span>
                     </div>
                     <div class="flex items-center gap-md">
-                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <span class="material-symbols-outlined text-secondary icon-filled">check_circle</span>
                         <span class="font-body-md font-medium">Sustainable Luxury Practices</span>
                     </div>
                 </div>
@@ -163,22 +164,22 @@
 
     <!-- Bottom Navigation for Mobile -->
     <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-white/70 backdrop-blur-3xl px-container-margin py-sm pb-safe border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
-        <div class="flex flex-col items-center justify-center text-primary font-bold">
+        <a href="/pages/hotel/home-lumina/" class="flex flex-col items-center justify-center text-primary font-bold">
             <span class="material-symbols-outlined">dashboard</span>
             <span class="font-label-md text-label-md">Home</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        </a>
+        <a href="/pages/hotel/rooms-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant">
             <span class="material-symbols-outlined">bed</span>
             <span class="font-label-md text-label-md">Rooms</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        </a>
+        <a href="/pages/hotel/booking-your-stay/" class="flex flex-col items-center justify-center text-on-surface-variant">
             <span class="material-symbols-outlined">calendar_month</span>
             <span class="font-label-md text-label-md">Bookings</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        </a>
+        <a href="/pages/hotel/login-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant">
             <span class="material-symbols-outlined">person</span>
             <span class="font-label-md text-label-md">Profile</span>
-        </div>
+        </a>
     </nav>
 
     <!-- Footer -->
@@ -213,6 +214,6 @@
 
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
-    <script src="home-lumina.js"></script>
+    <script src="/pages/hotel/home-lumina/home-lumina.js"></script>
 </body>
 </html>

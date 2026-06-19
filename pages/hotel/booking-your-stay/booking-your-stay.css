@@ -1,47 +1,237 @@
 /* Lumina Hospitality - Booking Page Styles */
 
-:root {
-    --primary: #006683;
-    --primary-container: #2a7f9e;
-    --secondary: #845400;
-    --secondary-container: #fdaa2d;
-    --background: #f7fafc;
-    --surface: #f7fafc;
-    --on-surface: #181c1e;
-    --on-surface-variant: #3f484d;
-    --on-primary: #ffffff;
-    --on-secondary: #ffffff;
-    --outline: #6f787e;
-    --outline-variant: #bfc8cd;
-    --surface-dim: #d8dadd;
-    --surface-container: #eceef1;
-    --surface-container-low: #f1f4f6;
-    --surface-container-high: #e6e8eb;
-    --surface-container-highest: #e0e3e5;
-    --surface-container-lowest: #ffffff;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Page-specific overrides using design system variables */
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--background);
-    color: var(--on-surface);
-    line-height: 1.5;
-    min-height: 100vh;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
 }
 
-/* Typography */
-.font-h1 {
-    font-family: 'Roboto Slab', serif;
-    font-size: 40px;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    font-weight: 700;
+/* Icon Styles */
+.icon-filled {
+    font-variation-settings: 'FILL' 1;
+}
+
+/* Glass Card Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: var(--shadow-lg);
+}
+
+.glass-card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+    transition: all var(--transition-base);
+}
+
+/* Progress Steps */
+.progress-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.step-indicator {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-bold);
+    transition: all var(--transition-base);
+}
+
+.step-indicator.active {
+    background: var(--primary-600);
+    color: white;
+}
+
+.step-indicator.completed {
+    background: var(--success);
+    color: white;
+}
+
+.step-indicator.inactive {
+    background: var(--gray-200);
+    color: var(--text-secondary);
+}
+
+.progress-line {
+    width: 4rem;
+    height: 0.25rem;
+    background: var(--gray-200);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+}
+
+.progress-line.completed {
+    background: var(--success);
+}
+
+/* Form Elements */
+.form-input {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+}
+
+/* Room Selection Cards */
+.room-option-card {
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.room-option-card:hover {
+    border-color: var(--primary-300);
+    box-shadow: var(--shadow-lg);
+}
+
+.room-option-card.selected {
+    border-color: var(--primary-600);
+    background: var(--primary-50);
+}
+
+.room-option-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+.room-option-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.room-option-price {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-600);
+}
+
+/* Order Summary */
+.order-summary {
+    background: var(--gray-100);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-row.total {
+    font-weight: var(--font-bold);
+    font-size: var(--text-lg);
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--border-medium);
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-fixed);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    padding-bottom: env(safe-area-inset-bottom);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-base);
+}
+
+.mobile-nav-item.active {
+    color: var(--primary-600);
+    font-weight: var(--font-bold);
+}
+
+.mobile-nav-item:hover {
+    color: var(--primary-600);
+}
+
+/* Spacing Utilities */
+.px-container-margin {
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .px-container-margin {
+        padding-left: var(--spacing-xl);
+        padding-right: var(--spacing-xl);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .progress-steps {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .progress-line {
+        width: 0.25rem;
+        height: 2rem;
+    }
+    
+    .room-option-card {
+        margin-bottom: var(--spacing-md);
+    }
 }
 
 .font-h2 {

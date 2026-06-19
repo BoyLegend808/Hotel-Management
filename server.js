@@ -29,7 +29,7 @@ const ROOT_DIR = __dirname;
 const CDN_URL = process.env.CDN_URL || '';
 
 // Log application startup
-logger.info('Starting Evergreen Estates server', {
+logger.info('Starting Lumina Hospitality server', {
   port: PORT,
   nodeEnv: process.env.NODE_ENV || 'development',
   cdnEnabled: !!CDN_URL
@@ -84,7 +84,7 @@ const staticOptions = {
 
 app.use("/css", express.static(path.join(ROOT_DIR, "css"), staticOptions));
 app.use("/js", express.static(path.join(ROOT_DIR, "js"), staticOptions));
-app.use("/pages", express.static(path.join(ROOT_DIR, "pages"), { index: false }));
+app.use("/pages", express.static(path.join(ROOT_DIR, "pages"), staticOptions));
 app.use("/hero%20imgs", express.static(path.join(ROOT_DIR, "hero imgs"), staticOptions));
 app.use("/hero imgs", express.static(path.join(ROOT_DIR, "hero imgs"), staticOptions));
 
@@ -203,7 +203,7 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 const server = app.listen(PORT, () => {
-  logger.info(`Evergreen Estates running at: http://localhost:${PORT}`);
+  logger.info(`Lumina Hospitality running at: http://localhost:${PORT}`);
   logger.info('Performance monitoring enabled');
   
   // Initial memory snapshot

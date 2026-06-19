@@ -5,7 +5,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Lumina Hospitality | Room Detail</title>
     <link href="/css/ui-utils.css" rel="stylesheet"/>
-    <link href="room-detail.css" rel="stylesheet"/>
+    <link href="/css/lumina-design-system.css" rel="stylesheet"/>
+    <link href="/pages/hotel/room-detail-lumina/room-detail-lumina.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 </head>
@@ -17,10 +18,10 @@
             <h1 class="font-h2 text-h2 tracking-tight text-primary dark:text-primary-fixed-dim">Lumina Hospitality</h1>
         </div>
         <div class="hidden md:flex gap-lg">
-            <a class="font-label-md text-label-md nav-active" href="/pages/hotel/home/">Home</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking/">Bookings</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login/">Login</a>
+            <a class="font-label-md text-label-md nav-active" href="/pages/hotel/home-lumina/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms-lumina/">Rooms</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking-your-stay/">Bookings</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login-lumina/">Login</a>
         </div>
         <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed animate-hover cursor-pointer">
             <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfCBsmjQmz8-BolcV6YxiHQYnF3GLIDRR7zaqN4A3vm7t-H6xi6JFtRdeKzsh394GcjSMVaz6Qu9c2xtxPfGbMY0GpD6heU4RhWsAbgVpI6El7DKC0m9mUkV-R6EKOXU9N1wZ5FYpvoJ9wnx--S4iInSb4eu_tVjftSk-B1I2Y1x7nphSD30Zku3FZUsi5DPwG0JBvb9KfIkyDDRl9PCHxYyqDX3lB81vKBWXMiznfvX8HNg4rYQ54b7Ctdtlz5ILx3JX_lSYGaCU"/>
@@ -112,22 +113,22 @@
 
     <!-- Bottom Mobile Nav (Shell Component) -->
     <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-t border-white/30 dark:border-white/10 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
-        <div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+        <a href="/pages/hotel/home-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
             <span class="material-symbols-outlined">dashboard</span>
             <span class="font-label-md text-label-md">Home</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold transition-all duration-300">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bed</span>
+        </a>
+        <a href="/pages/hotel/rooms-lumina/" class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold transition-all duration-300">
+            <span class="material-symbols-outlined icon-filled">bed</span>
             <span class="font-label-md text-label-md">Rooms</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+        </a>
+        <a href="/pages/hotel/booking-your-stay/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
             <span class="material-symbols-outlined">calendar_month</span>
             <span class="font-label-md text-label-md">Bookings</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
+        </a>
+        <a href="/pages/hotel/login-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
             <span class="material-symbols-outlined">person</span>
             <span class="font-label-md text-label-md">Profile</span>
-        </div>
+        </a>
     </nav>
 
     <!-- Sticky 'Book Now' CTA (Mobile/Tablet Only) -->
@@ -148,6 +149,6 @@
 
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
-    <script src="room-detail.js"></script>
+    <script src="/pages/hotel/room-detail-lumina/room-detail-lumina.js"></script>
 </body>
 </html>

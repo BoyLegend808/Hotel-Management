@@ -5,7 +5,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Lumina Hospitality | Book Your Stay</title>
     <link href="/css/ui-utils.css" rel="stylesheet"/>
-    <link href="booking-your-stay.css" rel="stylesheet"/>
+    <link href="/css/lumina-design-system.css" rel="stylesheet"/>
+    <link href="/pages/hotel/booking-your-stay/booking-your-stay.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 </head>
@@ -17,10 +18,10 @@
             <h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
         </div>
         <nav class="hidden md:flex items-center gap-lg">
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home/">Home</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms/">Rooms</a>
-            <a class="font-label-md text-label-md text-primary font-bold transition-opacity" href="/pages/hotel/booking/">Bookings</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login/">Login</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/home-lumina/">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms-lumina/">Rooms</a>
+            <a class="font-label-md text-label-md text-primary font-bold transition-opacity" href="/pages/hotel/booking-your-stay/">Bookings</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login-lumina/">Login</a>
         </nav>
         <div class="flex items-center gap-sm">
             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
@@ -169,26 +170,26 @@
 
     <!-- Bottom Navigation for Mobile -->
     <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 backdrop-blur-3xl border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
-        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        <a href="/pages/hotel/home-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant">
             <span class="material-symbols-outlined">dashboard</span>
             <span class="font-label-md text-label-md">Home</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        </a>
+        <a href="/pages/hotel/rooms-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant">
             <span class="material-symbols-outlined">bed</span>
             <span class="font-label-md text-label-md">Rooms</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-primary font-bold">
+        </a>
+        <a href="/pages/hotel/booking-your-stay/" class="flex flex-col items-center justify-center text-primary font-bold">
             <span class="material-symbols-outlined">calendar_month</span>
             <span class="font-label-md text-label-md">Bookings</span>
-        </div>
-        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        </a>
+        <a href="/pages/hotel/login-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant">
             <span class="material-symbols-outlined">person</span>
             <span class="font-label-md text-label-md">Profile</span>
-        </div>
+        </a>
     </nav>
 
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
-    <script src="booking.js"></script>
+    <script src="/pages/hotel/booking-your-stay/booking-your-stay.js"></script>
 </body>
 </html>

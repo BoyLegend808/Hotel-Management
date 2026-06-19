@@ -7,13 +7,13 @@ const router = express.Router();
 // Get all bookings (admin only) or user's bookings (guest)
 router.get("/", requireAuth, async (req, res) => {
   const db = await readDB();
-  const userRole = req.user.role;
-  const userId = req.user.id;
+  const userRole = req.session.role;
+  const userId = req.session.id;
   
   let bookings = db.bookings || [];
   
-  // Guests can only see their own bookings
-  if (userRole === "guest") {
+  // Guests/family can only see their own bookings
+  if (userRole !== "admin" && userRole !== "staff") {
     bookings = bookings.filter(b => b.guestId === userId);
   }
   
@@ -32,8 +32,8 @@ router.get("/:id", requireAuth, async (req, res) => {
     return res.status(404).json({ success: false, message: "Booking not found" });
   }
   
-  // Guests can only view their own bookings
-  if (req.user.role === "guest" && booking.guestId !== req.user.id) {
+  // Non-admin/staff can only view their own bookings
+  if (req.session.role !== "admin" && req.session.role !== "staff" && booking.guestId !== req.session.id) {
     return res.status(403).json({ success: false, message: "Access denied" });
   }
   
@@ -81,10 +81,10 @@ router.post("/", requireAuth, async (req, res) => {
   const newBooking = {
     id: Date.now(),
     roomId: parseInt(roomId),
-    guestId: req.user.id,
-    guestName: guestInfo.name || req.user.name,
-    guestEmail: guestInfo.email || req.user.email,
-    guestPhone: guestInfo.phone || req.user.phone,
+    guestId: req.session.id,
+    guestName: guestInfo.name || req.session.name,
+    guestEmail: guestInfo.email || '',
+    guestPhone: guestInfo.phone || '',
     checkIn,
     checkOut,
     guests,
@@ -147,7 +147,7 @@ router.put("/:id/cancel", requireAuth, async (req, res) => {
   const booking = db.bookings[bookingIndex];
   
   // Guests can only cancel their own bookings
-  if (req.user.role === "guest" && booking.guestId !== req.user.id) {
+  if (req.session.role !== "admin" && req.session.role !== "staff" && booking.guestId !== req.session.id) {
     return res.status(403).json({ success: false, message: "Access denied" });
   }
   

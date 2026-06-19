@@ -1,6 +1,6 @@
 /**
  * Validation & Sanitization Module
- * Provides consistent validation across all API endpoints
+ * Generic validation helpers used across hotel API routes.
  */
 
 function clean(value, max = 100) {
@@ -15,8 +15,9 @@ function validateEmail(email) {
 }
 
 function validatePhone(phone) {
-  const phoneRegex = /^[\d\s\-+()]+$/;
-  return phone.length === 0 || phoneRegex.test(phone);
+  if (!phone) return true; // phone is optional
+  const phoneRegex = /^[\d\s\-+()]{7,20}$/;
+  return phoneRegex.test(phone);
 }
 
 function validateDate(dateStr) {
@@ -25,49 +26,60 @@ function validateDate(dateStr) {
   return date instanceof Date && !isNaN(date);
 }
 
-function validateAge(age) {
-  const num = parseInt(age, 10);
-  return num >= 0 && num <= 150;
+function validateFutureDate(dateStr) {
+  if (!validateDate(dateStr)) return false;
+  return new Date(dateStr) >= new Date(new Date().toDateString());
 }
 
-function validateResidentData(data) {
+function validateDateRange(checkIn, checkOut) {
+  if (!validateDate(checkIn) || !validateDate(checkOut)) return false;
+  return new Date(checkOut) > new Date(checkIn);
+}
+
+function validateRating(rating) {
+  const r = parseInt(rating, 10);
+  return !isNaN(r) && r >= 1 && r <= 5;
+}
+
+/**
+ * Validate booking request body
+ */
+function validateBookingData(data) {
   const errors = [];
 
-  if (!clean(data.name)) errors.push("Name is required");
-  if (!clean(data.careType)) errors.push("Care Type is required");
-  if (data.email && !validateEmail(data.email))
-    errors.push("Invalid email format");
-  if (data.emergencyPhone && !validatePhone(data.emergencyPhone))
-    errors.push("Invalid phone format");
-  if (data.dob && !validateDate(data.dob)) errors.push("Invalid date of birth");
-  if (data.age !== undefined && !validateAge(data.age))
-    errors.push("Age must be between 0-150");
+  if (!data.roomId) errors.push("Room ID is required");
+  if (!data.checkIn) errors.push("Check-in date is required");
+  if (!data.checkOut) errors.push("Check-out date is required");
+
+  if (data.checkIn && !validateFutureDate(data.checkIn)) {
+    errors.push("Check-in date must be today or in the future");
+  }
+
+  if (data.checkIn && data.checkOut && !validateDateRange(data.checkIn, data.checkOut)) {
+    errors.push("Check-out date must be after check-in date");
+  }
+
+  if (data.guestInfo) {
+    if (data.guestInfo.email && !validateEmail(data.guestInfo.email)) {
+      errors.push("Invalid email format");
+    }
+    if (data.guestInfo.phone && !validatePhone(data.guestInfo.phone)) {
+      errors.push("Invalid phone format");
+    }
+  }
 
   return { valid: errors.length === 0, errors };
 }
 
-function validateStaffData(data) {
+/**
+ * Validate room data
+ */
+function validateRoomData(data) {
   const errors = [];
 
-  if (!clean(data.name)) errors.push("Name is required");
-  if (!clean(data.position)) errors.push("Position is required");
-  if (data.email && !validateEmail(data.email))
-    errors.push("Invalid email format");
-  if (data.phone && !validatePhone(data.phone))
-    errors.push("Invalid phone format");
-  if (data.dob && !validateDate(data.dob)) errors.push("Invalid date of birth");
-
-  return { valid: errors.length === 0, errors };
-}
-
-function validateFamilyData(data) {
-  const errors = [];
-
-  if (!clean(data.name)) errors.push("Name is required");
-  if (data.email && !validateEmail(data.email))
-    errors.push("Invalid email format");
-  if (data.phone && !validatePhone(data.phone))
-    errors.push("Invalid phone format");
+  if (!clean(data.name)) errors.push("Room name is required");
+  if (!data.price || isNaN(data.price) || data.price <= 0) errors.push("Valid price is required");
+  if (!data.capacity || isNaN(data.capacity) || data.capacity < 1) errors.push("Valid capacity is required");
 
   return { valid: errors.length === 0, errors };
 }
@@ -93,10 +105,11 @@ module.exports = {
   validateEmail,
   validatePhone,
   validateDate,
-  validateAge,
-  validateResidentData,
-  validateStaffData,
-  validateFamilyData,
+  validateFutureDate,
+  validateDateRange,
+  validateRating,
+  validateBookingData,
+  validateRoomData,
   sendError,
   sendSuccess,
 };

@@ -73,7 +73,7 @@ function updateRoomDetails(room) {
 function bookNow() {
     const urlParams = new URLSearchParams(window.location.search);
     const roomId = urlParams.get('id') || roomData.id;
-    window.location.href = `/pages/hotel/booking/?roomId=${roomId}`;
+    window.location.href = `/pages/hotel/booking-your-stay/?roomId=${roomId}`;
 }
 
 // Go back function
@@ -81,7 +81,7 @@ function goBack() {
     if (window.history.length > 1) {
         window.history.back();
     } else {
-        window.location.href = '/pages/hotel/rooms/';
+        window.location.href = '/pages/hotel/rooms-lumina/';
     }
 }
 
