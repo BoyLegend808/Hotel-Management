@@ -162,6 +162,15 @@ async function cancelBooking(bookingId) {
     }
 }
 
+// Save settings
+function saveSettings() {
+    const name = document.querySelector('#content-settings input[type="text"]').value;
+    const email = document.querySelector('#content-settings input[type="email"]').value;
+    const phone = document.querySelector('#content-settings input[type="tel"]').value;
+    localStorage.setItem('guestSettings', JSON.stringify({ name, email, phone }));
+    showToast('Settings saved locally', 'success');
+}
+
 // Logout
 function logout() {
     if (confirm('Are you sure you want to logout?')) {
@@ -178,6 +187,14 @@ function logout() {
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', async () => {
+    // Load settings from localStorage
+    try {
+        const saved = JSON.parse(localStorage.getItem('guestSettings') || '{}');
+        if (saved.name) document.querySelector('#content-settings input[type="text"]').value = saved.name;
+        if (saved.email) document.querySelector('#content-settings input[type="email"]').value = saved.email;
+        if (saved.phone) document.querySelector('#content-settings input[type="tel"]').value = saved.phone;
+    } catch (e) {}
+
     // Load user name from session
     try {
         const userData = JSON.parse(sessionStorage.getItem('user') || '{}');
@@ -205,7 +222,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Initialize UI utilities (if available)
-if (typeof initializeUI === 'function') {
-    initializeUI();
-}

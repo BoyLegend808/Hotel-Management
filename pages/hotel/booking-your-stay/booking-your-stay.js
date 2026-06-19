@@ -272,12 +272,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Set minimum date for check-in (today)
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('checkInDate').setAttribute('min', today);
-    document.getElementById('checkOutDate').setAttribute('min', today);
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+    document.getElementById('checkInDate').setAttribute('min', todayStr);
+    document.getElementById('checkOutDate').setAttribute('min', tomorrowStr);
+
+    // When check-in changes, update check-out min
+    document.getElementById('checkInDate').addEventListener('change', () => {
+        const nextDay = new Date(document.getElementById('checkInDate').value);
+        nextDay.setDate(nextDay.getDate() + 1);
+        document.getElementById('checkOutDate').setAttribute('min', nextDay.toISOString().split('T')[0]);
+    });
 });
 
-// Initialize UI utilities (if available)
-if (typeof initializeUI === 'function') {
-    initializeUI();
-}

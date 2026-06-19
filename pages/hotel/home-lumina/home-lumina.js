@@ -21,8 +21,12 @@ if (slides > 0) {
 
 // Pause auto-play on hover
 if (track) {
-    track.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
+    track.addEventListener('mouseenter', () => {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+    });
     track.addEventListener('mouseleave', () => {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
         autoPlayTimer = setInterval(() => moveCarousel(1), 6000);
     });
 }
@@ -34,9 +38,29 @@ window.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
         document.body.style.opacity = '1';
     });
+
+    // Initialize search bar dates
+    const checkIn = document.getElementById('homeCheckIn');
+    const checkOut = document.getElementById('homeCheckOut');
+    if (checkIn && checkOut) {
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        checkIn.value = today.toISOString().split('T')[0];
+        checkOut.value = tomorrow.toISOString().split('T')[0];
+        checkIn.min = today.toISOString().split('T')[0];
+        checkOut.min = tomorrow.toISOString().split('T')[0];
+        checkIn.addEventListener('change', () => {
+            const nextDay = new Date(checkIn.value);
+            nextDay.setDate(nextDay.getDate() + 1);
+            checkOut.value = nextDay.toISOString().split('T')[0];
+            checkOut.min = nextDay.toISOString().split('T')[0];
+        });
+    }
 });
 
 // Add atmospheric micro-interactions
+window.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.glass-card').forEach(card => {
     card.addEventListener('mousedown', () => {
         card.style.transform = 'scale(0.98) translateY(0px)';
@@ -48,9 +72,10 @@ document.querySelectorAll('.glass-card').forEach(card => {
         card.style.transform = '';
     });
 });
+});
 
 // Search functionality — redirect to rooms page with params
-const searchButton = document.querySelector('button.bg-primary');
+const searchButton = document.querySelector('button:has(span.material-symbols-outlined)');
 if (searchButton) {
     searchButton.addEventListener('click', () => {
         const dateInputs = document.querySelectorAll('input[type="date"]');
@@ -92,7 +117,4 @@ document.querySelectorAll('nav.md\\:hidden a, nav a').forEach(link => {
     // links already have href, nothing to do
 });
 
-// Initialize UI utilities (if available)
-if (typeof initializeUI === 'function') {
-    initializeUI();
-}
+

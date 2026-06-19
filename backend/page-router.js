@@ -150,7 +150,7 @@ function registerPageRoutes(app, rootDir) {
         return res.redirect("/pages/hotel/login-lumina/");
       }
 
-      const session = getSession({ headers: { authorization: authHeader } });
+      const session = getSession(req);
       if (!session) {
         return res.redirect("/pages/hotel/login-lumina/");
       }

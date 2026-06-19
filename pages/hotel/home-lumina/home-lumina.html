@@ -6,6 +6,7 @@
     <title>Lumina Hospitality | Luxury Management & Stays</title>
     <link href="/css/ui-utils.css" rel="stylesheet"/>
     <link href="/css/lumina-design-system.css" rel="stylesheet"/>
+    <link href="/css/tailwind-output.css" rel="stylesheet"/>
     <link href="/pages/hotel/home-lumina/home-lumina.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -73,11 +74,11 @@
             <div class="max-w-6xl mx-auto glass-card rounded-xl p-md md:p-lg flex flex-col md:flex-row items-center gap-md inner-glow shadow-xl">
                 <div class="w-full md:flex-1 relative">
                     <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Check-in</label>
-                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" value="2024-10-24"/>
+                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" id="homeCheckIn"/>
                 </div>
                 <div class="w-full md:flex-1 relative">
                     <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Check-out</label>
-                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" value="2024-10-28"/>
+                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" id="homeCheckOut"/>
                 </div>
                 <div class="w-full md:w-48 relative">
                     <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Guests</label>
@@ -208,12 +209,13 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-container-margin mt-xl pt-lg border-t border-outline-variant/30 text-center text-on-surface-variant font-label-md">
-            © 2024 Lumina Hospitality Group. All rights reserved.
+            © <span id="copyright-year">2026</span> Lumina Hospitality Group. All rights reserved.
         </div>
     </footer>
 
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
     <script src="/pages/hotel/home-lumina/home-lumina.js"></script>
+    <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

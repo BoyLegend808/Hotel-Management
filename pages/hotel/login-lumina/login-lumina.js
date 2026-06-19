@@ -86,7 +86,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Initialize UI utilities (if available)
-if (typeof initializeUI === 'function') {
-    initializeUI();
-}

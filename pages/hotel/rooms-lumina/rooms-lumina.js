@@ -143,6 +143,58 @@ filterButtons.forEach(button => {
     });
 });
 
+// Sort dropdown toggle
+const sortButton = document.getElementById('sortButton');
+const sortDropdown = document.getElementById('sortDropdown');
+if (sortButton && sortDropdown) {
+    sortButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sortDropdown.classList.toggle('hidden');
+    });
+    document.addEventListener('click', () => sortDropdown.classList.add('hidden'));
+    document.querySelectorAll('.sort-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const sortBy = opt.dataset.sort;
+            sortButton.innerHTML = `<span class="material-symbols-outlined text-[18px]">sort</span> Sort by: ${opt.textContent}`;
+            sortDropdown.classList.add('hidden');
+            let sorted = [...roomsData];
+            if (sortBy === 'price-asc') sorted.sort((a, b) => a.price - b.price);
+            else if (sortBy === 'price-desc') sorted.sort((a, b) => b.price - a.price);
+            else if (sortBy === 'rating') sorted.sort((a, b) => b.rating - a.rating);
+            else if (sortBy === 'name') sorted.sort((a, b) => a.name.localeCompare(b.name));
+            renderRooms(sorted);
+        });
+    });
+}
+
+// Apply Filters button
+const applyFilters = document.querySelector('.glass-card .bg-primary.text-white');
+if (applyFilters) {
+    applyFilters.addEventListener('click', () => {
+        const selectedOccupancy = document.querySelector('.grid-cols-4 .bg-primary');
+        const amenityChecks = document.querySelectorAll('.space-y-sm input[type="checkbox"]:checked');
+        const selectedAmenities = Array.from(amenityChecks).map(cb => cb.nextElementSibling.textContent.trim());
+
+        let filtered = [...roomsData];
+
+        if (selectedOccupancy) {
+            const cap = parseInt(selectedOccupancy.textContent.replace('+', ''), 10);
+            filtered = filtered.filter(r => r.capacity >= cap);
+        }
+
+        if (selectedAmenities.length > 0) {
+            filtered = filtered.filter(r =>
+                selectedAmenities.some(a =>
+                    r.amenityLabels.some(l => l.toLowerCase().includes(a.toLowerCase()))
+                )
+            );
+        }
+
+        renderRooms(filtered);
+        showToast(`Showing ${filtered.length} room(s)`, 'info');
+    });
+}
+
 // Initialize page
 document.addEventListener('DOMContentLoaded', async () => {
     // Try to load rooms from API, fall back to static data
@@ -172,7 +224,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Initialize UI utilities (if available)
-if (typeof initializeUI === 'function') {
-    initializeUI();
-}

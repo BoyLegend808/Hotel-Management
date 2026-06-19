@@ -86,6 +86,7 @@ function goBack() {
 }
 
 // Micro-interaction for gallery images
+function initGalleryInteractions() {
 document.querySelectorAll('.gallery-grid > div').forEach(card => {
     card.addEventListener('mousedown', () => {
         card.style.transform = 'scale(0.98)';
@@ -97,6 +98,7 @@ document.querySelectorAll('.gallery-grid > div').forEach(card => {
         card.style.transform = 'scale(1)';
     });
 });
+}
 
 // Simple scroll effect for Top Bar
 window.addEventListener('scroll', () => {
@@ -125,9 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (roomId) {
         console.log(`Loading room details for ID: ${roomId}`);
     }
+
+    initGalleryInteractions();
 });
 
-// Initialize UI utilities (if available)
-if (typeof initializeUI === 'function') {
-    initializeUI();
-}

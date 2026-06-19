@@ -15,19 +15,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 const config = {
   mode: isProduction ? 'production' : 'development',
   entry: {
-    app: './js/app.js',
     pageInit: './js/page-init.js',
-    public: './js/public.js',
-    navbar: './js/navbar.js',
     uiUtils: './js/ui-utils.js',
     performanceUtils: './js/performance-utils.js',
-    dynamicLoader: './js/dynamic-loader.js',
-    cssLoader: './js/css-loader.js',
     scrollOptimization: './js/scroll-optimization.js',
-    memoryLeakPrevention: './js/memory-leak-prevention.js',
-    serviceWorkerRegistration: './js/service-worker-registration.js',
-    lazyComponents: './js/lazy-components.js',
-    virtualScroll: './js/virtual-scroll.js'
+    memoryLeakPrevention: './js/memory-leak-prevention.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

@@ -30,9 +30,37 @@ document.addEventListener('DOMContentLoaded', function () {
     // Wire up any #logout-btn element
     setupLogout();
 
+    // Replace hardcoded avatar images with user initials when available
+    setupAvatarFallback();
+
     // Session timeout warning (only for logged-in users)
     setupSessionTimeout();
 });
+
+function setupAvatarFallback() {
+    try {
+        const userData = JSON.parse(sessionStorage.getItem('user') || '{}');
+        if (!userData.name) return;
+        const initial = userData.name.charAt(0).toUpperCase();
+        document.querySelectorAll('.rounded-full img').forEach(img => {
+            const parent = img.parentElement;
+            parent.style.background = 'var(--primary, #006683)';
+            parent.style.display = 'flex';
+            parent.style.alignItems = 'center';
+            parent.style.justifyContent = 'center';
+            parent.style.color = 'white';
+            parent.style.fontWeight = 'bold';
+            parent.style.fontSize = '1.25rem';
+            img.style.display = 'none';
+            if (!parent.querySelector('.avatar-initial')) {
+                const span = document.createElement('span');
+                span.className = 'avatar-initial';
+                span.textContent = initial;
+                parent.appendChild(span);
+            }
+        });
+    } catch (e) {}
+}
 
 function setupLogout() {
     const user = sessionStorage.getItem('user');
@@ -106,10 +134,3 @@ function setupSessionTimeout() {
     }, remaining);
 }
 
-// Global error handler for unhandled API errors
-window.addEventListener('unhandledrejection', (event) => {
-    console.error('Unhandled error:', event.reason);
-    if (typeof UI !== 'undefined') {
-        UI.showToast('An unexpected error occurred', 'error');
-    }
-});

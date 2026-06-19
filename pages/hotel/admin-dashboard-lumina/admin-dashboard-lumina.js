@@ -134,7 +134,3 @@ document.addEventListener('DOMContentLoaded', () => {
     loadRecentBookings();
 });
 
-// Initialize UI utilities (if available)
-if (typeof initializeUI === 'function') {
-    initializeUI();
-}

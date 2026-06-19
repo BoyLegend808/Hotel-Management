@@ -6,6 +6,7 @@
     <title>Lumina Hospitality | Room Catalogue</title>
     <link href="/css/ui-utils.css" rel="stylesheet"/>
     <link href="/css/lumina-design-system.css" rel="stylesheet"/>
+    <link href="/css/tailwind-output.css" rel="stylesheet"/>
     <link href="/pages/hotel/rooms-lumina/rooms-lumina.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -85,10 +86,16 @@
             </div>
             <div class="flex items-center gap-md">
                 <div class="relative group">
-                    <button class="glass-card px-md py-sm rounded-lg flex items-center gap-sm text-body-sm font-medium hover:border-primary transition-colors">
+                    <button class="glass-card px-md py-sm rounded-lg flex items-center gap-sm text-body-sm font-medium hover:border-primary transition-colors" id="sortButton">
                         <span class="material-symbols-outlined text-[18px]">sort</span>
                         Sort by: Price (Low to High)
                     </button>
+                    <div class="absolute right-0 top-full mt-xs glass-card rounded-lg shadow-xl hidden min-w-[200px] z-30" id="sortDropdown">
+                        <button class="w-full text-left px-md py-sm hover:bg-surface-container-low transition-colors sort-option" data-sort="price-asc">Price (Low to High)</button>
+                        <button class="w-full text-left px-md py-sm hover:bg-surface-container-low transition-colors sort-option" data-sort="price-desc">Price (High to Low)</button>
+                        <button class="w-full text-left px-md py-sm hover:bg-surface-container-low transition-colors sort-option" data-sort="rating">Rating</button>
+                        <button class="w-full text-left px-md py-sm hover:bg-surface-container-low transition-colors sort-option" data-sort="name">Name</button>
+                    </div>
                 </div>
                 <button class="md:hidden glass-card px-md py-sm rounded-lg flex items-center gap-sm text-body-sm font-medium text-primary bg-primary/5" id="openFilters">
                     <span class="material-symbols-outlined text-[18px]">filter_list</span>
