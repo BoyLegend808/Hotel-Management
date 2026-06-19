@@ -203,9 +203,17 @@ function loadOrderSummary() {
     `;
 }
 
+// Get auth headers from session
+function getAuthHeaders() {
+    const token = sessionStorage.getItem('token');
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': token ? `Bearer ${token}` : ''
+    };
+}
+
 // Complete booking
-function completeBooking() {
-    // Validate payment information
+async function completeBooking() {
     const guestName = document.getElementById('guestName').value;
     const guestEmail = document.getElementById('guestEmail').value;
     const guestPhone = document.getElementById('guestPhone').value;
@@ -224,28 +232,74 @@ function completeBooking() {
         return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(guestEmail)) {
         showToast('Please enter a valid email address', 'error');
         return;
     }
 
-    // Save booking data
     bookingData.guestName = guestName;
     bookingData.guestEmail = guestEmail;
     bookingData.guestPhone = guestPhone;
 
-    // Simulate booking submission
     showToast('Processing your booking...', 'info');
 
-    setTimeout(() => {
-        showToast('Booking confirmed! Check your email for details.', 'success');
-        // Redirect to confirmation page or dashboard
-        setTimeout(() => {
-            window.location.href = '/pages/hotel/guest-dashboard-lumina/';
-        }, 2000);
-    }, 2000);
+    // Check if logged in
+    if (!sessionStorage.getItem('token')) {
+        showToast('Please sign in to complete your booking', 'error');
+        return;
+    }
+
+    try {
+        // Create booking via API
+        const bookingRes = await fetch('/api/bookings', {
+            method: 'POST',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({
+                roomId: selectedRoom.id,
+                checkIn: bookingData.checkIn,
+                checkOut: bookingData.checkOut,
+                guests: bookingData.guests,
+                guestInfo: {
+                    name: guestName,
+                    email: guestEmail,
+                    phone: guestPhone
+                }
+            })
+        });
+
+        const bookingData_res = await bookingRes.json();
+
+        if (!bookingData_res.success) {
+            showToast(bookingData_res.message || 'Booking failed', 'error');
+            return;
+        }
+
+        // Process payment
+        const paymentRes = await fetch('/api/payments', {
+            method: 'POST',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({
+                bookingId: bookingData_res.booking.id,
+                amount: bookingData_res.booking.total,
+                cardNumber: cardNumber.slice(-4),
+                cardName: cardName
+            })
+        });
+
+        const paymentData = await paymentRes.json();
+
+        if (paymentData.success) {
+            showToast('Booking confirmed! Check your email for details.', 'success');
+            setTimeout(() => {
+                window.location.href = '/pages/hotel/guest-dashboard-lumina/';
+            }, 2000);
+        } else {
+            showToast(paymentData.message || 'Payment failed', 'error');
+        }
+    } catch (err) {
+        showToast('An error occurred. Please try again.', 'error');
+    }
 }
 
 // Go back function

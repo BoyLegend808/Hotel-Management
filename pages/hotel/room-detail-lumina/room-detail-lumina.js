@@ -113,21 +113,31 @@ window.addEventListener('scroll', () => {
 });
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    // Get room ID from URL
+document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const roomId = urlParams.get('id');
-    
-    // In a real app, you would fetch room data from API
-    // For now, use sample data
+
+    // Fetch room from API, fall back to static data
+    try {
+        if (roomId) {
+            const res = await fetch(`/api/rooms/${roomId}`);
+            if (res.ok) {
+                const data = await res.json();
+                if (data.room) {
+                    updateRoomDetails(data.room);
+                    renderGallery(data.room.images || roomData.images);
+                    renderAmenities(data.room.amenities || roomData.amenities);
+                    initGalleryInteractions();
+                    return;
+                }
+            }
+        }
+    } catch (e) {}
+
+    // Fallback to static sample data
     updateRoomDetails(roomData);
     renderGallery(roomData.images);
     renderAmenities(roomData.amenities);
-    
-    if (roomId) {
-        console.log(`Loading room details for ID: ${roomId}`);
-    }
-
     initGalleryInteractions();
 });
 

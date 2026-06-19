@@ -30,6 +30,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         if (data.success) {
             // Store token and user info in sessionStorage
             sessionStorage.setItem('token', data.token);
+            sessionStorage.setItem('sessionStart', Date.now());
             sessionStorage.setItem('user', JSON.stringify({
                 name: data.name,
                 role: data.role
