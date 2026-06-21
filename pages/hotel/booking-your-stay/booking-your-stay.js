@@ -41,6 +41,10 @@ const availableRooms = [
 ];
 
 // Navigate between steps
+function nextStep(step) {
+    goToStep(step);
+}
+
 function goToStep(step) {
     // Validate current step before moving
     if (step > currentStep) {
@@ -49,13 +53,21 @@ function goToStep(step) {
         }
     }
 
-    // Hide all steps
-    document.getElementById('step1').classList.add('hidden');
-    document.getElementById('step2').classList.add('hidden');
-    document.getElementById('step3').classList.add('hidden');
-
-    // Show target step
-    document.getElementById(`step${step}`).classList.remove('hidden');
+    // Hide all steps with beautiful transition
+    [1, 2, 3].forEach(i => {
+        const el = document.getElementById(`step-${i}`);
+        if (el) {
+            if (i === step) {
+                // Show target step
+                el.classList.remove('opacity-0', 'translate-x-20', 'pointer-events-none', 'absolute', 'top-0', 'left-0', 'w-full');
+                el.classList.add('opacity-100', 'translate-x-0');
+            } else {
+                // Hide other steps
+                el.classList.remove('opacity-100', 'translate-x-0');
+                el.classList.add('opacity-0', 'translate-x-20', 'pointer-events-none', 'absolute', 'top-0', 'left-0', 'w-full');
+            }
+        }
+    });
 
     // Update progress indicators
     updateProgressIndicators(step);
@@ -73,52 +85,33 @@ function goToStep(step) {
 // Update progress indicators
 function updateProgressIndicators(step) {
     for (let i = 1; i <= 3; i++) {
-        const indicator = document.getElementById(`step${i}-indicator`);
-        const label = document.getElementById(`step${i}-label`);
+        const indicator = document.getElementById(`step-${i}-indicator`);
         
-        if (i < step) {
-            // Completed steps
-            indicator.classList.remove('bg-outline-variant', 'text-on-surface-variant');
-            indicator.classList.add('bg-primary', 'text-white');
-            if (label) {
-                label.classList.remove('text-on-surface-variant');
-                label.classList.add('text-primary', 'font-bold');
-            }
-        } else if (i === step) {
-            // Current step
-            indicator.classList.remove('bg-outline-variant', 'text-on-surface-variant');
-            indicator.classList.add('bg-primary', 'text-white');
-            if (label) {
-                label.classList.remove('text-on-surface-variant');
-                label.classList.add('text-primary', 'font-bold');
-            }
-        } else {
-            // Future steps
-            indicator.classList.remove('bg-primary', 'text-white');
-            indicator.classList.add('bg-outline-variant', 'text-on-surface-variant');
-            if (label) {
-                label.classList.remove('text-primary', 'font-bold');
-                label.classList.add('text-on-surface-variant');
+        if (indicator) {
+            if (i <= step) {
+                // Completed and Current steps
+                indicator.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+                indicator.classList.add('bg-primary', 'text-on-primary', 'shadow-lg', 'scale-110');
+            } else {
+                // Future steps
+                indicator.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg', 'scale-110');
+                indicator.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
             }
         }
     }
 
-    // Update progress bars
-    if (step >= 2) {
-        document.getElementById('progress1').classList.remove('bg-outline-variant');
-        document.getElementById('progress1').classList.add('bg-primary');
-    }
-    if (step >= 3) {
-        document.getElementById('progress2').classList.remove('bg-outline-variant');
-        document.getElementById('progress2').classList.add('bg-primary');
+    // Update progress bar width
+    const progressBar = document.getElementById('progress-bar');
+    if (progressBar) {
+        progressBar.style.width = step === 1 ? '33%' : step === 2 ? '66%' : '100%';
     }
 }
 
 // Validate current step
 function validateStep(step) {
     if (step === 1) {
-        const checkIn = document.getElementById('checkInDate').value;
-        const checkOut = document.getElementById('checkOutDate').value;
+        const checkIn = document.getElementById('checkin').value;
+        const checkOut = document.getElementById('checkout').value;
         
         if (!checkIn || !checkOut) {
             showToast('Please select check-in and check-out dates', 'error');
@@ -135,7 +128,8 @@ function validateStep(step) {
 
         bookingData.checkIn = checkIn;
         bookingData.checkOut = checkOut;
-        bookingData.guests = parseInt(document.getElementById('guestCount').value);
+        // Mock guest count as it's purely UI right now
+        bookingData.guests = 2;
     } else if (step === 2) {
         if (!selectedRoom) {
             showToast('Please select a room', 'error');
@@ -152,17 +146,35 @@ function loadRoomSelection() {
     const roomSelection = document.getElementById('roomSelection');
     if (!roomSelection) return;
 
-    roomSelection.innerHTML = availableRooms.map(room => `
-        <div class="room-option ${selectedRoom && selectedRoom.id === room.id ? 'selected' : ''}" onclick="selectRoom(${room.id})">
-            <img src="${room.image}" alt="${room.name}" class="w-full h-32 object-cover rounded-lg mb-md"/>
-            <h4 class="font-h3 text-h3 mb-sm">${room.name}</h4>
-            <p class="text-body-sm text-on-surface-variant mb-sm">${room.type}</p>
-            <div class="flex justify-between items-center">
-                <span class="font-bold text-primary">$${room.price}/night</span>
-                <span class="text-body-sm text-on-surface-variant">${room.description}</span>
+    roomSelection.innerHTML = availableRooms.map(room => {
+        const isSelected = selectedRoom && selectedRoom.id === room.id;
+        const containerClasses = isSelected 
+            ? "group relative flex flex-col md:flex-row gap-md p-sm rounded-lg border border-primary/30 bg-primary/5 shadow-inner transition-all transform scale-[1.02]"
+            : "group relative flex flex-col md:flex-row gap-md p-sm rounded-lg border border-outline/10 hover:border-primary/30 transition-all bg-white/20";
+        
+        const buttonClasses = isSelected
+            ? "px-md py-sm bg-primary text-on-primary rounded font-button text-button transition-all flex items-center gap-2"
+            : "px-md py-sm bg-primary/10 text-primary border border-primary/20 rounded font-button text-button hover:bg-primary hover:text-on-primary transition-all";
+            
+        return `
+        <div class="${containerClasses}">
+            <div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
+                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${room.image}" alt="${room.name}"/>
+            </div>
+            <div class="flex-grow flex flex-col justify-between py-xs">
+                <div>
+                    <h4 class="font-h3 text-h3 text-on-surface">${room.name}</h4>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">${room.description}</p>
+                </div>
+                <div class="flex justify-between items-end mt-2 md:mt-0">
+                    <div class="text-primary font-h3">$${room.price} <span class="text-body-sm text-outline">/ night</span></div>
+                    <button class="${buttonClasses}" onclick="selectRoom(${room.id})">
+                        ${isSelected ? '<span class="material-symbols-outlined text-sm">check</span> Selected' : 'Select'}
+                    </button>
+                </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 // Select room
@@ -331,14 +343,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowStr = tomorrow.toISOString().split('T')[0];
-    document.getElementById('checkInDate').setAttribute('min', todayStr);
-    document.getElementById('checkOutDate').setAttribute('min', tomorrowStr);
+    
+    const checkinEl = document.getElementById('checkin');
+    const checkoutEl = document.getElementById('checkout');
+    
+    if(checkinEl && checkoutEl) {
+        checkinEl.setAttribute('min', todayStr);
+        checkoutEl.setAttribute('min', tomorrowStr);
 
-    // When check-in changes, update check-out min
-    document.getElementById('checkInDate').addEventListener('change', () => {
-        const nextDay = new Date(document.getElementById('checkInDate').value);
-        nextDay.setDate(nextDay.getDate() + 1);
-        document.getElementById('checkOutDate').setAttribute('min', nextDay.toISOString().split('T')[0]);
-    });
+        // When check-in changes, update check-out min
+        checkinEl.addEventListener('change', () => {
+            const nextDay = new Date(checkinEl.value);
+            nextDay.setDate(nextDay.getDate() + 1);
+            checkoutEl.setAttribute('min', nextDay.toISOString().split('T')[0]);
+        });
+    }
 });
 

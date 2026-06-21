@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Area Guide & Experiences | Lumina Hospitality</title>
+    <link href="/css/ui-utils.css" rel="stylesheet"/>
+    <link href="/css/lumina-design-system.css" rel="stylesheet"/>
+    <link href="/css/tailwind-output.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#006683', 50: '#e8f4f8', 100: '#d1e9f4', 200: '#a8d4e9', 300: '#7bb8dd', 400: '#4d9cd1', 500: '#2980b9', 600: '#1f6391', 700: '#164a6a', 800: '#0f3247', 900: '#081e2b', container: '#bde9ff', fixed: '#bde9ff', 'fixed-dim': '#6fd2f9' },
+                        secondary: { DEFAULT: '#4e6778', 50: '#fef9e7', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', container: '#d1e5f5' },
+                        background: '#f5fafd',
+                        surface: { DEFAULT: '#f5fafd', dim: '#d5dbe0', container: '#dde3e7', 'container-low': '#e7edf0' },
+                        'on-surface': '#171c1f', 'on-surface-variant': '#3f484d', 'on-primary': '#ffffff', 'on-secondary': '#ffffff', 'on-background': '#171c1f',
+                        outline: { DEFAULT: '#6f797e', variant: '#bfc8cd' }
+                    },
+                    borderRadius: { 'sm': '0.25rem', DEFAULT: '0.375rem', 'lg': '0.5rem', 'xl': '0.75rem', '2xl': '1rem', '3xl': '1.5rem', 'full': '9999px' },
+                    spacing: { 'gutter': '1.5rem', 'container-margin': '2rem', 'xs': '0.25rem', 'sm': '0.5rem', 'md': '1rem', 'lg': '1.5rem', 'xl': '2rem', '2xl': '3rem', '3xl': '4rem' },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], serif: ['Roboto Slab', 'Georgia', 'serif'], body: ['Inter', 'system-ui', 'sans-serif'] },
+                    boxShadow: { 'soft': '0 4px 20px rgba(0, 0, 0, 0.08)', 'glass': '0 8px 32px rgba(0, 102, 131, 0.12)' },
+                    backdropBlur: { '3xl': '32px' },
+                    maxWidth: { '7xl': '80rem', '6xl': '72rem' },
+                    height: { '707': '707px', '500': '500px' }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        .nav-link{display:flex;align-items:center;padding:0.5rem 0.75rem;font-size:0.8rem;font-weight:500;color:var(--on-surface-variant);border-radius:0.5rem;transition:all .2s ease;text-decoration:none}
+        .nav-link:hover{color:var(--primary)}
+        .dropdown-menu{position:absolute;top:100%;left:0;min-width:200px;background:#fff;border-radius:0.75rem;box-shadow:0 12px 40px rgba(0,0,0,0.12);border:1px solid #e0e0e0;padding:0.5rem;z-index:100}
+        .dropdown-menu a{display:block;padding:0.5rem 1rem;font-size:0.8rem;color:#333;border-radius:0.5rem;text-decoration:none}
+        .dropdown-menu a:hover{background:rgba(0,102,131,0.05);color:var(--primary)}
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <header role="banner" class="sticky top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-16">
+            <a href="/pages/hotel/home-lumina/home-lumina.html" style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;color:var(--primary);text-decoration:none">Lumina Hospitality</a>
+            <nav role="navigation" class="hidden lg:flex items-center gap-1">
+                <a class="nav-link" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
+                <a class="nav-link" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
+                <a class="nav-link" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
+                <a class="nav-link" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
+                <a class="nav-link" href="/pages/hotel/amenities-lumina/amenities-lumina.html">Amenities</a>
+                <a class="nav-link" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
+                <div class="relative group">
+                    <button class="nav-link flex items-center gap-1">More <span class="material-symbols-outlined text-[16px]">expand_more</span></button>
+                    <div class="dropdown-menu hidden group-hover:block">
+                        <a href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
+                        <a href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
+                        <a href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
+                        <a href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
+                        <a href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
+                        <a href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex items-center gap-3">
+                <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="hidden sm:inline-flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all">Book Now</a>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+    <!-- Hero -->
+    <section class="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=1400&q=80" alt="Lagos" class="absolute inset-0 w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="relative z-10 text-center text-white px-6">
+            <h1 style="font-family:var(--font-serif);font-size:3rem;font-weight:700;margin-bottom:1rem">Explore Lagos</h1>
+            <p class="text-lg max-w-xl mx-auto" style="color:rgba(255,255,255,0.85)">Discover the vibrant culture, art, and nature of Lagos from our prime Victoria Island location.</p>
+        </div>
+    </section>
+
+    <!-- Attractions Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h2 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;margin-bottom:0.75rem">Popular Attractions</h2>
+            <p style="color:var(--on-surface-variant);max-width:600px;margin:0 auto">Explore the best of Lagos, from nature reserves to world-class art galleries, all within easy reach of Lumina Hospitality.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Lekki Conservation Centre" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+                </div>
+                <div class="p-6">
+                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Lekki Conservation Centre</h3>
+                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">A sprawling nature reserve featuring a canopy walkway, diverse wildlife, and tranquil mangrove forests. Perfect for nature lovers and bird watchers.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 12 km away</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" alt="Nike Art Gallery" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+                </div>
+                <div class="p-6">
+                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Nike Art Gallery</h3>
+                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">One of West Africa's largest art galleries, housing an extensive collection of contemporary African art, sculptures, and traditional textiles.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 8 km away</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80" alt="Eko Atlantic City" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+                </div>
+                <div class="p-6">
+                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Eko Atlantic City</h3>
+                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">A modern, ambitious city built on reclaimed land featuring luxury residences, offices, retail centers, and world-class entertainment venues.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 5 km away</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Balogun Market" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+                </div>
+                <div class="p-6">
+                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Balogun Market</h3>
+                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">Lagos's iconic open-air marketplace offering a sensory feast of fabrics, spices, accessories, and local crafts. A true cultural experience.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 15 km away</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Tafawa Balewa Square" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+                </div>
+                <div class="p-6">
+                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Tafawa Balewa Square</h3>
+                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">A historic landmark and ceremonial ground in Lagos Island, notable for its independence-day significance and surrounding colonial architecture.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 14 km away</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80" alt="Ikoyi Club" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+                </div>
+                <div class="p-6">
+                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Ikoyi Club</h3>
+                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">An exclusive social and recreational club featuring an 18-hole golf course, tennis courts, swimming pools, and fine dining restaurants.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 3 km away</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="max-w-7xl mx-auto px-6 pb-20">
+        <div class="bg-primary/5 rounded-3xl p-12 text-center border border-primary/10">
+            <h2 style="font-family:var(--font-serif);font-size:1.75rem;font-weight:700;margin-bottom:0.75rem">Need Help Planning Your Excursion?</h2>
+            <p style="color:var(--on-surface-variant);max-width:500px;margin:0 auto 1.5rem">Our concierge team can arrange private tours, transportation, and exclusive access to Lagos's best attractions.</p>
+            <a href="/pages/hotel/contact-lumina/contact-lumina.html" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all">Contact Concierge</a>
+        </div>
+    </section>
+    </main>
+
+    <footer role="contentinfo" class="bg-primary-800 text-white mt-24">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div><h3 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;margin-bottom:1rem">Lumina Hospitality</h3><p style="color:rgba(255,255,255,0.7);font-size:0.85rem;line-height:1.6">A world-class luxury hotel on Victoria Island, Lagos.</p></div>
+                <div><h4 style="font-weight:600;margin-bottom:1rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">Quick Links</h4><ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.7)"><li><a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="hover:text-white">Rooms & Suites</a></li><li><a href="/pages/hotel/special-offers/special-offers.html" class="hover:text-white">Special Offers</a></li><li><a href="/pages/hotel/dining-lumina/dining-lumina.html" class="hover:text-white">Dining</a></li><li><a href="/pages/hotel/spa-wellness/spa-wellness.html" class="hover:text-white">Spa & Wellness</a></li></ul></div>
+                <div><h4 style="font-weight:600;margin-bottom:1rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">Discover</h4><ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.7)"><li><a href="/pages/hotel/local-area/local-area.html" class="hover:text-white">Local Area Guide</a></li><li><a href="/pages/hotel/meetings-events/meetings-events.html" class="hover:text-white">Meetings & Events</a></li><li><a href="/pages/hotel/gallery-lumina/gallery-lumina.html" class="hover:text-white">Gallery</a></li><li><a href="/pages/hotel/reviews-lumina/reviews-lumina.html" class="hover:text-white">Guest Reviews</a></li></ul></div>
+                <div><h4 style="font-weight:600;margin-bottom:1rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">Contact</h4><ul class="space-y-3 text-sm" style="color:rgba(255,255,255,0.7)"><li class="flex items-start gap-2"><span class="material-symbols-outlined text-[16px] mt-0.5">location_on</span> Plot 14, Ahmadu Bello Way, Victoria Island, Lagos</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">call</span> +234 1 277 2700</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">mail</span> reservations@lumina.com</li></ul></div>
+            </div>
+        </div>
+        <div class="border-t border-white/10"><div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4"><p style="color:rgba(255,255,255,0.5);font-size:0.8rem">&copy; 2026 Lumina Hospitality. All rights reserved.</p><div class="flex gap-6 text-xs" style="color:rgba(255,255,255,0.5)"><a href="/pages/hotel/policies/policies.html" class="hover:text-white">Policies</a><a href="/pages/hotel/privacy/privacy.html" class="hover:text-white">Privacy</a><a href="/pages/hotel/faq-lumina/faq-lumina.html" class="hover:text-white">FAQ</a></div></div></div>
+    </footer>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+</body>
+</html>
+

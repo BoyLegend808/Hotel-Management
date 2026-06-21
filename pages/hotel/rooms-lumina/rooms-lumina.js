@@ -70,37 +70,32 @@ function renderRooms(rooms) {
     if (!roomGrid) return;
     
     roomGrid.innerHTML = rooms.map(room => `
-        <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full group room-card">
-            <div class="relative h-64 overflow-hidden">
-                <img class="w-full h-full object-cover transition-transform duration-500" src="${room.image}" alt="${room.name}"/>
-                <div class="absolute top-md left-md bg-white/90 backdrop-blur px-md py-xs rounded-full flex items-center gap-xs">
-                    <span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="text-label-md font-bold">${room.rating}</span>
+        <div class="room-card-overlay">
+            <div class="card-img">
+                <img src="${room.image}" alt="${room.name}" loading="lazy"/>
+                <div class="img-overlay"></div>
+                <div class="rating-badge">
+                    <span class="material-symbols-outlined" style="font-size:14px; font-variation-settings:'FILL' 1;">star</span>
+                    ${room.rating}
                 </div>
-                <div class="absolute bottom-md left-md bg-primary text-white px-md py-xs rounded-lg text-label-md font-bold">
-                    ${room.type}
-                </div>
+                <div class="type-badge">${room.type}</div>
+                <div class="price-float">$${room.price}<span style="font-size:0.65rem;font-weight:400;opacity:0.8"> / night</span></div>
             </div>
-            <div class="p-lg flex flex-col flex-grow">
-                <div class="flex justify-between items-start mb-sm">
-                    <h3 class="font-h3 text-[20px] text-on-surface">${room.name}</h3>
-                    <div class="text-right">
-                        <span class="text-h3 font-bold text-primary">$${room.price}</span>
-                        <span class="block text-label-md text-on-surface-variant">/ NIGHT</span>
-                    </div>
-                </div>
-                <p class="text-body-sm text-on-surface-variant line-clamp-2 mb-lg">${room.description}</p>
-                <div class="flex items-center gap-md mb-lg">
+            <div class="card-body">
+                <h3>${room.name}</h3>
+                <p>${room.description}</p>
+                <div class="flex items-center gap-md mb-[0.75rem]">
                     ${room.amenities.map((amenity, index) => `
-                        <div class="flex items-center gap-xs text-on-surface-variant">
-                            <span class="material-symbols-outlined text-[18px]">${amenity}</span>
-                            <span class="text-label-md">${room.amenityLabels[index]}</span>
+                        <div class="flex items-center gap-xs text-on-surface-variant" style="font-size:0.75rem">
+                            <span class="material-symbols-outlined" style="font-size:16px">${amenity}</span>
+                            <span>${room.amenityLabels[index]}</span>
                         </div>
                     `).join('')}
                 </div>
-                <button class="w-full mt-auto py-md border border-primary text-primary font-button rounded-lg active-interaction hover:bg-primary hover:text-white transition-all" onclick="viewRoomDetails(${room.id})">
-                    View Details
-                </button>
+                <div class="card-actions">
+                    <a class="btn-details" href="/pages/hotel/room-detail-lumina/?id=${room.id}">View Details</a>
+                    <a class="btn-book-card" href="/pages/hotel/booking-your-stay/?roomId=${room.id}">Book Now</a>
+                </div>
             </div>
         </div>
     `).join('');

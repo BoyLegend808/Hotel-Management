@@ -1,155 +1,291 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Lumina Hospitality | Room Detail</title>
-    <link href="/css/ui-utils.css" rel="stylesheet"/>
-    <link href="/css/lumina-design-system.css" rel="stylesheet"/>
-    <link href="/css/tailwind-output.css" rel="stylesheet"/>
-    <link href="/pages/hotel/room-detail-lumina/room-detail-lumina.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Hospitality | Room Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#006683', 50: '#e8f4f8', 100: '#d1e9f4', 200: '#a8d4e9', 300: '#7bb8dd', 400: '#4d9cd1', 500: '#2980b9', 600: '#1f6391', 700: '#164a6a', 800: '#0f3247', 900: '#081e2b', container: '#bde9ff', fixed: '#bde9ff', 'fixed-dim': '#6fd2f9' },
+                        secondary: { DEFAULT: '#4e6778', 50: '#fef9e7', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', container: '#d1e5f5' },
+                        background: '#f5fafd',
+                        surface: { DEFAULT: '#f5fafd', dim: '#d5dbe0', container: '#dde3e7', 'container-low': '#e7edf0' },
+                        'on-surface': '#171c1f', 'on-surface-variant': '#3f484d', 'on-primary': '#ffffff', 'on-secondary': '#ffffff', 'on-background': '#171c1f',
+                        outline: { DEFAULT: '#6f797e', variant: '#bfc8cd' }
+                    },
+                    borderRadius: { 'sm': '0.25rem', DEFAULT: '0.375rem', 'lg': '0.5rem', 'xl': '0.75rem', '2xl': '1rem', '3xl': '1.5rem', 'full': '9999px' },
+                    spacing: { 'gutter': '1.5rem', 'container-margin': '2rem', 'xs': '0.25rem', 'sm': '0.5rem', 'md': '1rem', 'lg': '1.5rem', 'xl': '2rem', '2xl': '3rem', '3xl': '4rem' },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], serif: ['Roboto Slab', 'Georgia', 'serif'], body: ['Inter', 'system-ui', 'sans-serif'] },
+                    boxShadow: { 'soft': '0 4px 20px rgba(0, 0, 0, 0.08)', 'glass': '0 8px 32px rgba(0, 102, 131, 0.12)' },
+                    backdropBlur: { '3xl': '32px' },
+                    maxWidth: { '7xl': '80rem', '6xl': '72rem' },
+                    height: { '707': '707px', '500': '500px' }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7fafc;
+            color: #181c1e;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav {
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+        .sticky-summary {
+            position: sticky;
+            top: 6rem;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfc8cd;
+            border-radius: 10px;
+        }
+    </style>
 </head>
-<body class="bg-surface font-body-md text-on-surface transition-colors duration-300">
-    <!-- Top App Bar -->
-    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-b border-white/30 dark:border-white/10 shadow-sm dark:shadow-none">
-        <div class="flex items-center gap-md">
-            <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer animate-hover" onclick="goBack()">arrow_back</span>
-            <h1 class="font-h2 text-h2 tracking-tight text-primary dark:text-primary-fixed-dim">Lumina Hospitality</h1>
-        </div>
-        <div class="hidden md:flex gap-lg">
-            <a class="font-label-md text-label-md nav-active" href="/pages/hotel/home-lumina/">Home</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/rooms-lumina/">Rooms</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/booking-your-stay/">Bookings</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity" href="/pages/hotel/login-lumina/">Login</a>
-        </div>
-        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed animate-hover cursor-pointer">
-            <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfCBsmjQmz8-BolcV6YxiHQYnF3GLIDRR7zaqN4A3vm7t-H6xi6JFtRdeKzsh394GcjSMVaz6Qu9c2xtxPfGbMY0GpD6heU4RhWsAbgVpI6El7DKC0m9mUkV-R6EKOXU9N1wZ5FYpvoJ9wnx--S4iInSb4eu_tVjftSk-B1I2Y1x7nphSD30Zku3FZUsi5DPwG0JBvb9KfIkyDDRl9PCHxYyqDX3lB81vKBWXMiznfvX8HNg4rYQ54b7Ctdtlz5ILx3JX_lSYGaCU"/>
-        </div>
-    </header>
-
-    <main class="pt-24 pb-32 px-container-margin max-w-7xl mx-auto">
-        <!-- Hero Gallery -->
-        <section class="mb-xl">
-            <div class="gallery-grid rounded-xl overflow-hidden shadow-lg" id="galleryGrid">
-                <!-- Gallery images will be loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- Room Header & Info -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
-            <div class="lg:col-span-2 space-y-lg">
-                <div class="flex flex-wrap justify-between items-start gap-md">
-                    <div>
-                        <h2 class="font-h1 text-h1 text-on-surface" id="roomName">Loading...</h2>
-                        <div class="flex items-center gap-xs mt-xs text-secondary font-bold">
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="text-body-md" id="roomRating">0.0 (0 Reviews)</span>
-                        </div>
-                    </div>
-                    <div class="glass-card px-md py-sm rounded-xl flex items-center gap-sm inner-glow">
-                        <span class="font-h3 text-h3 text-secondary" id="roomPrice">$0</span>
-                        <span class="text-body-sm text-on-surface-variant">/ night</span>
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <div class="glass-card p-lg rounded-xl inner-glow">
-                    <h3 class="font-h3 text-h3 mb-md">About this space</h3>
-                    <p class="text-body-md text-on-surface-variant leading-relaxed" id="roomDescription">
-                        Loading room details...
-                    </p>
-                </div>
-
-                <!-- Amenities Grid -->
-                <div>
-                    <h3 class="font-h3 text-h3 mb-md">Premier Amenities</h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-md stagger-fade-in" id="amenitiesGrid">
-                        <!-- Amenities will be loaded dynamically -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Card (Stats & Occupancy) -->
-            <div class="space-y-md">
-                <div class="glass-card p-lg rounded-xl inner-glow sticky top-28">
-                    <h3 class="font-h3 text-h3 mb-md">Room Specifications</h3>
-                    <ul class="space-y-gutter">
-                        <li class="flex justify-between items-center pb-sm border-b border-outline-variant">
-                            <div class="flex items-center gap-sm text-on-surface-variant">
-                                <span class="material-symbols-outlined">group</span>
-                                <span class="font-body-md">Max Occupancy</span>
-                            </div>
-                            <span class="font-bold" id="maxOccupancy">0 Guests</span>
-                        </li>
-                        <li class="flex justify-between items-center pb-sm border-b border-outline-variant">
-                            <div class="flex items-center gap-sm text-on-surface-variant">
-                                <span class="material-symbols-outlined">straighten</span>
-                                <span class="font-body-md">Total Area</span>
-                            </div>
-                            <span class="font-bold" id="totalArea">0 sq. ft</span>
-                        </li>
-                        <li class="flex justify-between items-center pb-sm border-b border-outline-variant">
-                            <div class="flex items-center gap-sm text-on-surface-variant">
-                                <span class="material-symbols-outlined">bed</span>
-                                <span class="font-body-md">Bedding</span>
-                            </div>
-                            <span class="font-bold" id="bedding">-</span>
-                        </li>
-                    </ul>
-                    <div class="mt-xl p-md bg-primary/5 rounded-lg border border-primary/20">
-                        <p class="text-body-sm text-primary flex items-center gap-xs">
-                            <span class="material-symbols-outlined text-[18px]">info</span>
-                            Free cancellation until 48 hours before arrival.
-                        </p>
-                    </div>
-                    <button class="hidden lg:block w-full mt-lg bg-primary text-on-primary py-md rounded-xl font-button text-button transition-all duration-300 hover:brightness-90 active:scale-95 shadow-lg" onclick="bookNow()">
-                        Check Availability
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<nav role="navigation" class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm transition-standard glass-nav">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity" onclick="goBack()">arrow_back</button>
+<h1 class="font-h2 text-h2 tracking-tight text-primary font-bold" style="font-family:'Roboto Slab', serif;">Lumina Hospitality</h1>
+</div>
+<div class="hidden lg:flex items-center gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
+<a class="font-label-md text-label-md text-primary font-bold hover:text-primary-light transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
+<div class="relative group">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs">More <span class="material-symbols-outlined text-sm">expand_more</span></button>
+<div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-xl rounded-xl border border-outline-variant/20 p-md top-full left-0 min-w-[200px] z-50">
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="hidden sm:inline-flex items-center gap-2 bg-primary text-white font-button text-button px-lg py-sm rounded-full hover:bg-primary-light transition-standard shadow-lg shadow-primary/10">Book Stay</a>
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm" id="userAvatar">U</div>
+</div>
+</nav>
+<main role="main" class="mt-24 pb-24 px-container-margin max-w-7xl mx-auto">
+<!-- Large Gallery Grid -->
+<section class="grid grid-cols-12 gap-sm h-[600px] mb-lg rounded-xl overflow-hidden shadow-lg">
+<div class="col-span-8 h-full relative group overflow-hidden">
+<img alt="Luxury Suite Main View" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sprawling luxury suite at dusk with floor-to-ceiling windows overlooking a shimmering city skyline. The interior features plush teal velvet seating, a king-sized bed with gold-accented linens, and warm architectural lighting that casts a soft glow over polished oak floors. The atmosphere is one of serene, high-end urban sophistication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6j2rkf9xN59E8EFKXUPO15JaOgBr7-9oNborLiUfE03pqktqH17M_vWDso0RZw-xvL1cJd3JRt6rEBfcViooZl5-mZ28rhiCMIWDLK59Q_zlCCH1hHqPAPstCQETQsMtFrk7Fmnui8R608-SbNTa74pY9_-p-LOMu4poksglamChPP4gwbnxvE2dMOqj7SpN7U3SMcl0iUHx8-Ga461oMZVp3PGNq4Wxk3LjfIr8BTcBL9zybtTwL9PICdOv2txC1ynGsTEtMjQ8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+<div class="col-span-4 grid grid-rows-2 gap-sm h-full">
+<div class="relative group overflow-hidden">
+<img alt="Bathroom detail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A close-up of a modern marble bathroom in a luxury hotel, featuring a double vanity with gold hardware and high-end artisanal toiletries. Soft, recessed lighting illuminates the sleek surfaces and a pristine white orchid sits elegantly in the corner. The aesthetic is clean, minimalist, and deeply indulgent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCscfFWNbZ4N0JhYDKhT27ODAoV31bfUVQyFshKD1KaRA-Bp8EWyWrskfiZke386Kwf13hVBWVXe9XzV7U8xqG8yRkxOg_5nrxukKLRl-vtjDSFQDYR46gUEJia-J4hbf1L2uQ-RFGHmIuAvna9H6iIdhs7lq9ttU1fD7Cws5DaH4fWNaBgAbdjtBcctPzw8h0DgSujo2C66xIZD9lPOrxS7QKY02c6d4Qnc0g9waSg1IrHXGhO-7uEuT3FaxoT19SAPedAtoM_38I"/>
+</div>
+<div class="relative group overflow-hidden">
+<img alt="Lounge area" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A cozy, sun-drenched reading nook within a premium hotel room, featuring a mid-century modern armchair in teal and a small glass side table. A large window reveals a lush garden view, and the morning light creates a peaceful, airy atmosphere. Every detail suggests quality and curated comfort for the discerning traveler." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5X2EOEqWLeH77fj9yQqEPcAc0cPFkRUtUFsKc021wF39bVwhkNTyfitSPVX2yGZXT8TBjz9VFe_oxn-ATSjl-gtfnEuxUVeQYXuqyFYQtqWV0oX6DbvXFYjzstTWddYzrlElOneC7PEfRNDmc1ol2TGB_6zVpsSz3nu7lGgO8THd62elmz_i_ToYX8gcmBbZlRJB11AldITWlNwFdYuf-FZzfbObt7Uwz3Me61-nCGdxIVVrslgl-rbELEvc5yk_iEoDL6iKOthk"/>
+<button class="absolute bottom-md right-md bg-white/80 backdrop-blur-md px-md py-sm rounded-lg text-primary font-bold flex items-center gap-xs hover:bg-white transition-all">
+<span class="material-symbols-outlined text-sm">grid_view</span> View all photos
                     </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Bottom Mobile Nav (Shell Component) -->
-    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 dark:bg-black/60 backdrop-blur-3xl border-t border-white/30 dark:border-white/10 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
-        <a href="/pages/hotel/home-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="font-label-md text-label-md">Home</span>
-        </a>
-        <a href="/pages/hotel/rooms-lumina/" class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold transition-all duration-300">
-            <span class="material-symbols-outlined icon-filled">bed</span>
-            <span class="font-label-md text-label-md">Rooms</span>
-        </a>
-        <a href="/pages/hotel/booking-your-stay/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
-            <span class="material-symbols-outlined">calendar_month</span>
-            <span class="font-label-md text-label-md">Bookings</span>
-        </a>
-        <a href="/pages/hotel/login-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300">
-            <span class="material-symbols-outlined">person</span>
-            <span class="font-label-md text-label-md">Profile</span>
-        </a>
-    </nav>
-
-    <!-- Sticky 'Book Now' CTA (Mobile/Tablet Only) -->
-    <div class="lg:hidden fixed bottom-24 left-0 w-full px-gutter z-40">
-        <div class="glass-card p-md rounded-2xl flex items-center justify-between shadow-xl border border-white/40">
-            <div>
-                <p class="text-label-md font-bold text-on-surface-variant uppercase tracking-widest">Pricing</p>
-                <div class="flex items-baseline gap-xs">
-                    <span class="font-h3 text-h3 text-secondary" id="mobilePrice">$0</span>
-                    <span class="text-body-sm text-on-surface-variant">/ night</span>
-                </div>
-            </div>
-            <button class="bg-primary text-on-primary px-xl py-md rounded-xl font-button text-button shadow-lg active:scale-95 transition-transform duration-100" onclick="bookNow()">
-                Book Now
-            </button>
-        </div>
-    </div>
-
+</div>
+</div>
+</section>
+<!-- Two Column Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl">
+<!-- Left: Description and Amenities -->
+<div class="md:col-span-8 space-y-xl">
+<header role="banner">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h2 class="font-h1 text-h1 text-on-background">Grand Executive Suite</h2>
+<p class="text-on-surface-variant flex items-center gap-xs mt-xs">
+<span class="material-symbols-outlined text-md">location_on</span> Floor 24, South Wing
+                            </p>
+</div>
+<div class="flex gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+<div class="flex gap-md mt-lg pb-lg border-b border-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">person</span>
+<span class="font-bold">2 Guests</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">bed</span>
+<span class="font-bold">1 King Bed</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">square_foot</span>
+<span class="font-bold">850 sq ft</span>
+</div>
+</div>
+</header>
+<article>
+<h3 class="font-h3 text-h3 mb-md">About this room</h3>
+<p class="text-body-lg text-on-surface-variant mb-md leading-relaxed">
+                        Experience the pinnacle of hospitality in our Grand Executive Suite. Designed for both business and leisure, this suite offers a separate living area, a dedicated workstation, and breathtaking views of the city skyline through soundproof panoramic windows. 
+                    </p>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                        The room is equipped with smart-home technology, allowing you to control lighting, climate, and entertainment from the Lumina Guest App. Indulge in our signature bedding and a spa-inspired bathroom featuring a deep soaking tub and rain shower.
+                    </p>
+</article>
+<!-- Bento Amenities Grid -->
+<section>
+<h3 class="font-h3 text-h3 mb-lg">Premium Amenities</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-md">
+<div class="glass-card p-lg rounded-xl flex flex-col gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl">wifi</span>
+<span class="font-bold">Ultra-fast WiFi</span>
+<span class="text-body-sm text-on-surface-variant">600Mbps dedicated connection</span>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+<span class="font-bold">24/7 Dining</span>
+<span class="text-body-sm text-on-surface-variant">In-room gourmet service</span>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl">local_bar</span>
+<span class="font-bold">Mini Bar</span>
+<span class="text-body-sm text-on-surface-variant">Curated local selections</span>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
+<span class="font-bold">Gym Access</span>
+<span class="text-body-sm text-on-surface-variant">State-of-the-art facility</span>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl">ac_unit</span>
+<span class="font-bold">Climate Control</span>
+<span class="text-body-sm text-on-surface-variant">Precision smart thermostat</span>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl">tv_gen</span>
+<span class="font-bold">Smart TV</span>
+<span class="text-body-sm text-on-surface-variant">65" OLED with streaming</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right: Sticky Booking Summary -->
+<aside class="md:col-span-4">
+<div class="sticky-summary glass-card p-lg rounded-2xl shadow-xl border-t-2 border-l-2 border-white/50">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<span class="text-h2 font-h2 text-primary">$450</span>
+<span class="text-on-surface-variant">/ night</span>
+</div>
+<div class="flex items-center text-secondary font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.9</span>
+<span class="text-on-surface-variant font-normal ml-1">(128 reviews)</span>
+</div>
+</div>
+<div class="space-y-md mb-lg">
+<div class="grid grid-cols-2 gap-px bg-outline-variant rounded-xl overflow-hidden border border-outline-variant">
+<div class="bg-white p-sm">
+<label class="text-label-md text-on-surface-variant block uppercase mb-1">Check-in</label>
+<input class="w-full border-none p-0 focus:ring-0 font-bold text-on-surface" type="text" value="Oct 12, 2023"/>
+</div>
+<div class="bg-white p-sm">
+<label class="text-label-md text-on-surface-variant block uppercase mb-1">Check-out</label>
+<input class="w-full border-none p-0 focus:ring-0 font-bold text-on-surface" type="text" value="Oct 15, 2023"/>
+</div>
+</div>
+<div class="bg-white p-sm rounded-xl border border-outline-variant">
+<label class="text-label-md text-on-surface-variant block uppercase mb-1">Guests</label>
+<select class="w-full border-none p-0 focus:ring-0 font-bold text-on-surface bg-transparent">
+<option>2 Guests</option>
+<option>1 Guest</option>
+<option>3 Guests</option>
+</select>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-md rounded-xl font-h3 transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20 mb-md">
+                        Reserve Now
+                    </button>
+<p class="text-center text-body-sm text-on-surface-variant mb-lg">You won't be charged yet</p>
+<div class="space-y-sm border-t border-surface-variant pt-lg">
+<div class="flex justify-between">
+<span class="text-on-surface-variant underline underline-offset-4 cursor-help">$450 x 3 nights</span>
+<span>$1,350</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant underline underline-offset-4 cursor-help">Cleaning fee</span>
+<span>$45</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant underline underline-offset-4 cursor-help">Service fee</span>
+<span>$120</span>
+</div>
+<div class="flex justify-between pt-md border-t border-surface-variant font-bold text-lg">
+<span>Total before taxes</span>
+<span>$1,515</span>
+</div>
+</div>
+<!-- VIP Indicator -->
+<div class="mt-xl p-md bg-secondary-container/20 rounded-xl border border-secondary-container/30 flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<div>
+<p class="font-bold text-on-secondary-container text-body-sm">VIP Priority Booking</p>
+<p class="text-on-secondary-container/80 text-body-sm">Includes complimentary airport transfer and late checkout.</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Bottom Nav for Mobile (Matches JSON logic) -->
+<nav role="navigation" class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe glass-nav border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/pages/hotel/guest-dashboard-lumina/guest-dashboard-lumina.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold active-nav" href="/pages/hotel/rooms-lumina/rooms-lumina.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bed</span>
+<span class="text-label-md">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/pages/hotel/booking-your-stay/booking-your-stay.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-label-md">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/pages/hotel/guest-dashboard-lumina/guest-dashboard-lumina.html">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md">Profile</span>
+</a>
+</nav>
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
     <script src="/pages/hotel/room-detail-lumina/room-detail-lumina.js"></script>
-</body>
-</html>
+</body></html>

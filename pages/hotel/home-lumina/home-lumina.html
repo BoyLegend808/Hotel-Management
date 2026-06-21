@@ -1,221 +1,701 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Lumina Hospitality | Luxury Management & Stays</title>
-    <link href="/css/ui-utils.css" rel="stylesheet"/>
-    <link href="/css/lumina-design-system.css" rel="stylesheet"/>
-    <link href="/css/tailwind-output.css" rel="stylesheet"/>
-    <link href="/pages/hotel/home-lumina/home-lumina.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Hospitality | Luxury Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: { DEFAULT: '#006683', 50: '#e8f4f8', 100: '#d1e9f4', 200: '#a8d4e9', 300: '#7bb8dd', 400: '#4d9cd1', 500: '#2980b9', 600: '#1f6391', 700: '#164a6a', 800: '#0f3247', 900: '#081e2b', container: '#bde9ff', fixed: '#bde9ff', 'fixed-dim': '#6fd2f9' },
+              secondary: { DEFAULT: '#4e6778', 50: '#fef9e7', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', container: '#d1e5f5' },
+              background: '#f5fafd',
+              surface: { DEFAULT: '#f5fafd', dim: '#d5dbe0', container: '#dde3e7', 'container-low': '#e7edf0' },
+              'on-surface': '#171c1f', 'on-surface-variant': '#3f484d', 'on-primary': '#ffffff', 'on-secondary': '#ffffff', 'on-background': '#171c1f',
+              outline: { DEFAULT: '#6f797e', variant: '#bfc8cd' }
+            },
+            borderRadius: { 'sm': '0.25rem', DEFAULT: '0.375rem', 'lg': '0.5rem', 'xl': '0.75rem', '2xl': '1rem', '3xl': '1.5rem', 'full': '9999px' },
+            spacing: { 'gutter': '1.5rem', 'container-margin': '2rem', 'xs': '0.25rem', 'sm': '0.5rem', 'md': '1rem', 'lg': '1.5rem', 'xl': '2rem', '2xl': '3rem', '3xl': '4rem' },
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], serif: ['Roboto Slab', 'Georgia', 'serif'], body: ['Inter', 'system-ui', 'sans-serif'] },
+            boxShadow: { 'soft': '0 4px 20px rgba(0, 0, 0, 0.08)', 'glass': '0 8px 32px rgba(0, 102, 131, 0.12)' },
+            backdropBlur: { '3xl': '32px' },
+            maxWidth: { '7xl': '80rem', '6xl': '72rem' },
+            height: { '707': '707px', '500': '500px' }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .transition-standard {
+            transition: all 0.3s ease-out;
+        }
+        .inner-glow {
+            box-shadow: inset 1px 1px 0px rgba(255,255,255,0.4);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hero-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.7) 100%);
+        }
+        
+        /* Slide Button Styles */
+        .slide-button-container {
+            position: relative;
+            width: 200px;
+            height: 48px;
+            background: #f0f0f0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s ease;
+        }
+        
+        .slide-button-container.completed {
+            width: 140px;
+        }
+        
+        .slide-button-track {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+        
+        .slide-button-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: var(--primary);
+            transition: width 0.1s ease-out;
+        }
+        
+        .slide-button-handle {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 40px;
+            height: 40px;
+            cursor: grab;
+            z-index: 10;
+            transition: transform 0.1s ease-out;
+        }
+        
+        .slide-button-handle:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+        
+        .slide-button-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: grab;
+        }
+        
+        .slide-button-icon:active {
+            cursor: grabbing;
+        }
+        
+        .slide-button-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .slide-button-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--on-surface-variant);
+            transition: opacity 0.2s ease;
+        }
+        
+        .slide-button-status {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 15;
+        }
+        
+        .slide-button-status.visible {
+            opacity: 1;
+        }
+        
+        .slide-button-status .material-symbols-outlined {
+            color: white;
+            font-size: 24px;
+        }
+        
+        .slide-button-status .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
-    <!-- Top Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/70 backdrop-blur-3xl border-b border-white/30 shadow-sm">
-        <div class="flex items-center gap-md">
-            <span class="material-symbols-outlined text-primary cursor-pointer lg:hidden">menu</span>
-            <h1 class="font-h2 text-h2 tracking-tight text-primary">Lumina Hospitality</h1>
-        </div>
-        <nav class="hidden md:flex items-center gap-lg">
-            <a class="font-label-md text-label-md text-primary font-bold transition-opacity duration-300" href="/pages/hotel/home-lumina/">Home</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity duration-300" href="/pages/hotel/rooms-lumina/">Rooms</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity duration-300" href="/pages/hotel/booking-your-stay/">Bookings</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity duration-300" href="/pages/hotel/login-lumina/">Login</a>
-        </nav>
-        <div class="flex items-center gap-sm">
-            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
-                <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ3yGs7cNljtHDHjFea748H7hxRyyytdScsR7bN3Jvf-QO4ZavQlaUU9q2dw_shLU5V7ZccYLmXTtt7YcPTmVj7Beu--O_7SMKwFk_A8aEn_mSlSOtEPcxe9hgj7WCSJAecU7b7dkwKnGnIbuaY6kxwyyYwLb0W-fbPsFvnoWMTAZPqF7NRerbrlgyN5osMSbVZRX4eVErQ9TDspKAo_vpIO5U076Fa5sDe1Zt3PSoYkPmxfbMx2TFoT-levyJf1IPGxQG83WAUBY"/>
-            </div>
-        </div>
-    </header>
+<!-- Top Navigation Bar -->
+<header role="banner" class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm transition-standard">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-h2 cursor-pointer hover:opacity-80 transition-colors hover:scale-110" id="mobileMenuBtn">menu</span>
+<h1 class="font-h2 text-h2 tracking-tight text-primary font-bold" style="font-family:'Roboto Slab', serif;">Lumina Hospitality</h1>
+</div>
+<nav role="navigation" class="hidden lg:flex items-center gap-lg">
+<a class="font-label-md text-label-md text-primary font-bold hover:text-primary-light transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
+<div class="relative group">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs">More <span class="material-symbols-outlined text-sm">expand_more</span></button>
+<div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-xl rounded-xl border border-outline-variant/20 p-md top-full left-0 min-w-[200px] z-50">
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
+<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
+</div>
+</div>
+</nav>
+<div class="flex items-center gap-md">
+<a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="hidden sm:inline-flex items-center gap-2 bg-primary text-white font-button text-button px-lg py-sm rounded-full hover:bg-primary-light transition-standard shadow-lg shadow-primary/10 hover-lift">Book Stay</a>
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm cursor-pointer hover-lift" id="userAvatar">U</div>
+</div>
+</header>
+<!-- Mobile Menu Overlay -->
+<div id="mobileMenu" class="fixed inset-0 z-40 hidden">
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobileMenuOverlay"></div>
+<div class="absolute right-0 top-0 h-full w-80 max-w-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out" id="mobileMenuContent">
+<div class="p-6">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-h2 text-h2 text-primary font-bold" style="font-family:'Roboto Slab', serif;">Menu</h2>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" id="closeMobileMenu">close</button>
+</div>
+<nav class="flex flex-col gap-4">
+<a class="font-label-md text-label-md text-primary font-bold py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
+<div class="border-t border-outline-variant pt-4 mt-4">
+<p class="font-label-md text-label-md text-outline uppercase tracking-widest mb-4">More</p>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant">
+<a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="w-full text-center py-4 bg-primary text-white rounded-xl font-button text-button hover:bg-primary/90 transition-all shadow-lg shadow-primary/30 hover-lift">Book Your Stay</a>
+</div>
+</nav>
+</div>
+</div>
+</div>
+<!-- Hero Section with Carousel -->
+<section class="relative h-[85vh] min-h-[600px] max-h-[800px] w-full overflow-hidden perspective-1000">
+<div class="flex h-full transition-transform duration-700 ease-in-out transform-3d" id="hero-slider">
+<!-- Slide 1 -->
+<div class="min-w-full h-full relative animate-fade-in-up">
+<img class="w-full h-full object-cover hover-scale" data-alt="A breathtaking panoramic view of a luxury infinity pool overlooking a sunset at a coastal Mediterranean resort. The architecture is modern and minimalist with clean lines, utilizing natural stone and warm wood accents. The lighting is golden and ethereal, creating a sense of calm control and premium hospitality in a high-key, sophisticated atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoRopuqe2XjmN4jgwPfD0VIe8g4AImyxXYVCqDlDUxluCzuhK-yqgD6dySKthXY3ouI09vqrCoPeXzQ4Yk8UMNvP1Ro66ORtpIECdAtPI6MJCXa5sJJ-llkdeDeenWoiagI0chqDD2B_s50Jh9TW3rknb3iYzT7cTSSIvRkuui8Bn4jl2h4TksSw4aNn70dICF6i0Smnyq3iUbxnQolceday8SaWLaA-OM1Xkfa58XgL8tdEWkrWRA9aoxdHQ8g9h3H3t3IOFTlcg"/>
+<div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-center px-container-margin">
+<div class="max-w-3xl animate-fade-in-up stagger-1">
+<span class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider border border-white/30 hover-glow">
+<span class="material-symbols-outlined text-[16px] animate-spin" style="font-variation-settings:'FILL' 1">diamond</span>
+Victoria Island, Lagos
+</span>
+<h2 class="font-h1 text-h1 text-white mb-4 leading-tight" style="font-family:'Roboto Slab', serif;">Where Luxury Meets Nigerian Excellence</h2>
+<p class="font-body-lg text-body-lg text-white/90 max-w-xl mb-8 leading-relaxed">Experience world-class hospitality in the heart of Lagos. From our stunning ocean views to our award-winning spa, every moment is crafted for perfection.</p>
+<div class="flex flex-wrap gap-4">
+<a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/30 flex items-center gap-2 hover-lift ripple">
+<span class="material-symbols-outlined text-[20px]">bed</span>
+Explore Rooms
+</a>
+<a href="/pages/hotel/special-offers/special-offers.html" class="px-8 py-4 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full font-semibold hover:bg-white/30 transition-all flex items-center gap-2 hover-lift">
+<span class="material-symbols-outlined text-[20px]">local_offer</span>
+View Offers
+</a>
+</div>
+<div class="flex items-center gap-8 mt-10 text-white/80">
+<div class="flex items-center gap-2 hover-scale">
+<span class="material-symbols-outlined text-yellow-400 animate-pulse" style="font-variation-settings:'FILL' 1">star</span>
+<span class="font-semibold">4.9</span>
+<span class="text-sm">(2,847 reviews)</span>
+</div>
+<div class="flex items-center gap-2 hover-scale">
+<span class="material-symbols-outlined text-secondary animate-glow" style="font-variation-settings:'FILL' 1">emoji_events</span>
+<span class="text-sm">Award-Winning Resort</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="min-w-full h-full relative animate-fade-in-up stagger-2">
+<img class="w-full h-full object-cover hover-scale" data-alt="An elegant fine dining restaurant interior with panoramic ocean views, featuring crystal chandeliers, white tablecloths, and golden accents. The atmosphere is sophisticated and romantic with soft ambient lighting, creating an unforgettable culinary experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGRPmHDXWgOicI3FcNOhVeN55mTn4Ain2ovb2u6raiw0yMik6TX9DRJ3-Bg0ZXKSOnXdYpHSgvdLCYuORl8oMQKvuG1UXhjyP_Gw4Y0aknem9IbrGzoeK-2srBpVe5NIUsdADNU9puUQa7njg4IBmVsVZfXIsyMj1S1ljIS7728XHEgqrOsrJ1gyMNGs1AloYLbrvdRB-JCaM43SjDzgBur5uquSb0pK57-jiTQetdMhBoapauw0fzoX8ILfB2Y6i_v0T4JG2CiTk"/>
+<div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-center px-container-margin">
+<div class="max-w-3xl animate-fade-in-up stagger-3">
+<span class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider border border-white/30 hover-glow">
+<span class="material-symbols-outlined text-[16px] animate-spin" style="font-variation-settings:'FILL' 1">restaurant</span>
+Culinary Excellence
+</span>
+<h2 class="font-h1 text-h1 text-white mb-4 leading-tight" style="font-family:'Roboto Slab', serif;">Taste the Extraordinary</h2>
+<p class="font-body-lg text-body-lg text-white/90 max-w-xl mb-8 leading-relaxed">From authentic Nigerian cuisine to international fine dining, our award-winning chefs create unforgettable culinary journeys.</p>
+<div class="flex flex-wrap gap-4">
+<a href="/pages/hotel/dining-lumina/dining-lumina.html" class="px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/30 flex items-center gap-2 hover-lift ripple">
+<span class="material-symbols-outlined text-[20px]">restaurant_menu</span>
+Our Restaurants
+</a>
+<a href="/pages/hotel/spa-wellness/spa-wellness.html" class="px-8 py-4 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full font-semibold hover:bg-white/30 transition-all flex items-center gap-2 hover-lift">
+<span class="material-symbols-outlined text-[20px]">spa</span>
+Spa & Wellness
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="min-w-full h-full relative animate-fade-in-up stagger-3">
+<img class="w-full h-full object-cover hover-scale" data-alt="A luxurious hotel suite with floor-to-ceiling windows overlooking the ocean, featuring a plush king bed, modern amenities, and elegant decor. The room is bathed in natural light with soft golden tones, creating a serene and sophisticated atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl4cpL_-Ip5oZmoxv0RGyuhwHeHKgKirKecUb4apcXDdxKOntFWZ1Uk6oZRhS46khhLtr4nLsMGpfAbZ6DdAgxcd5BAdWoEFI-bARLK_P14jREIfyDu8RhaG3LDdNu9jx_3b3w430AMTxCtsd9mPSqgNvrrFN9y_M9UGG48J5DCnJOsNUGeF78Cb31xkgu2sdntvatutX7IS8LTdoCPP1dAA82DZllCPE7oanNjUPupJ2XSbuD8yxQH0l_8qIuKWu9at-YqSBpoWY"/>
+<div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-center px-container-margin">
+<div class="max-w-3xl animate-fade-in-up stagger-4">
+<span class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider border border-white/30 hover-glow">
+<span class="material-symbols-outlined text-[16px] animate-spin" style="font-variation-settings:'FILL' 1">bed</span>
+Luxury Accommodations
+</span>
+<h2 class="font-h1 text-h1 text-white mb-4 leading-tight" style="font-family:'Roboto Slab', serif;">Your Sanctuary Awaits</h2>
+<p class="font-body-lg text-body-lg text-white/90 max-w-xl mb-8 leading-relaxed">Discover our collection of elegantly appointed rooms and suites, each designed to provide the ultimate in comfort and sophistication.</p>
+<div class="flex flex-wrap gap-4">
+<a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/30 flex items-center gap-2 hover-lift ripple">
+<span class="material-symbols-outlined text-[20px]">bed</span>
+Explore Rooms
+</a>
+<a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="px-8 py-4 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full font-semibold hover:bg-white/30 transition-all flex items-center gap-2 hover-lift">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+Book Now
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Hero Controls -->
+<div class="absolute bottom-12 right-container-margin flex gap-sm">
+<button class="w-12 h-12 flex items-center justify-center glass-card rounded-full text-primary active:scale-90 transition-standard hover-lift">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center glass-card rounded-full text-primary active:scale-90 transition-standard hover-lift">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- Carousel Indicators -->
+<div class="absolute bottom-12 left-container-margin flex gap-2">
+<button class="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all animate-pulse" data-slide="0"></button>
+<button class="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all animate-pulse" data-slide="1"></button>
+<button class="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all animate-pulse" data-slide="2"></button>
+</div>
+</section>
+<!-- Sticky Search Bar -->
+<div class="sticky top-[72px] z-40 px-container-margin -mt-10 animate-fade-in-down">
+<div class="max-w-6xl mx-auto glass-card rounded-xl p-sm flex flex-wrap md:flex-nowrap items-center gap-md inner-glow hover-lift">
+<div class="flex-1 min-w-[200px] relative">
+<label class="absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary animate-pulse">search</span>
+<span class="font-body-md">Search properties or guests...</span>
+</label>
+<input class="w-full bg-transparent border-none focus:ring-0 pl-48 pr-md py-md font-body-md text-on-surface placeholder-transparent" type="text"/>
+</div>
+<div class="w-px h-8 bg-outline-variant hidden md:block"></div>
+<div class="flex-1 min-w-[150px] px-md flex items-center justify-between cursor-pointer hover-scale">
+<span class="font-label-md text-label-md text-on-surface-variant">Arrival Date</span>
+<span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+</div>
+<div class="w-px h-8 bg-outline-variant hidden md:block"></div>
+<div class="flex-1 min-w-[150px] px-md flex items-center justify-between cursor-pointer hover-scale">
+<span class="font-label-md text-label-md text-on-surface-variant">Departure Date</span>
+<span class="material-symbols-outlined text-on-surface-variant">event</span>
+</div>
+<div class="w-px h-8 bg-outline-variant hidden md:block"></div>
+<button class="px-lg py-sm bg-primary text-white rounded-full font-button text-button hover:bg-primary/90 transition-all hover-lift shadow-lg shadow-primary/30">
+Search Availability
+</button>
+</div>
+</div>
 
-    <main class="pt-20">
-        <!-- Hero Carousel Section -->
-        <section class="relative w-full h-[707px] overflow-hidden group">
-            <div class="carousel-track h-full" id="hero-carousel">
-                <!-- Slide 1 -->
-                <div class="min-w-full h-full relative">
-                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqyAXJpR8fGwrKygPxYpFAVSVnL-MOjdDRD848lcEEk9OmUd1tQ5zdeMW7aPvxT0ldmjvwvcTCwdPsCABm7bLIcnsoMuZBKNjZdhzX75YAooAyRfw1lj5drp7bP1DqaJiQFbM7hmHM2aKzsA1pz2yhAF316mf9oayHYpMVHMqdcxZ6JHswc75meIKKfpbKgQB5IQzCIpUN-RHrHrVfe5yX-DsjQl38R6gdF_nr1YqLNP37wrHEeaqjcHUHlEwQPL6xznRSfhm4rnc"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-xl left-container-margin md:left-xl z-10">
-                        <h2 class="font-h1 text-h1 text-white mb-sm">The Lumina Presidential Suite</h2>
-                        <div class="inline-block bg-secondary px-lg py-sm rounded-lg shadow-lg">
-                            <span class="font-h3 text-h3 text-white">$1,250 / night</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="min-w-full h-full relative">
-                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGaCTI7-tuZjDF9joFdmRrO29pW7O9gpdSv2TlCXR6PNjNQN0eKDbGYKnknNgE87Jcf130B2iPzgRTVKcteMI5KMkH8RVWnnyKDaU5l4pfjO9F3fieY3ZCL7w0iAy_thlTh2pMBeh56pJF07Z96Wag2ZIBhz8MgXCS9gnwTg4BDlvq0NnqhikOj3DjL71wUGnxxAbfALNeCFWqTX6gdkY1z6byGHN5GL12uVCkeKSXVMHWR57Iu7ywBOXWbKXGjBMNDeJEfDSmRFo"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-xl left-container-margin md:left-xl z-10">
-                        <h2 class="font-h1 text-h1 text-white mb-sm">Azure Oceanfront Villa</h2>
-                        <div class="inline-block bg-secondary px-lg py-sm rounded-lg shadow-lg">
-                            <span class="font-h3 text-h3 text-white">$890 / night</span>
-                        </div>
-                    </div>
-                </div>
+<!-- Slide Button Demo -->
+<section class="max-w-7xl mx-auto px-container-margin py-16">
+    <div class="text-center mb-8">
+        <h2 class="font-h2 text-h2 text-primary mb-2" style="font-family:'Roboto Slab', serif;">Quick Book</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant">Slide to book your stay</p>
+    </div>
+    <div class="flex justify-center">
+        <div class="slide-button-container" id="slideButton">
+            <div class="slide-button-track">
+                <div class="slide-button-fill"></div>
             </div>
-            <!-- Carousel Controls -->
-            <div class="absolute bottom-lg right-container-margin flex gap-sm z-20">
-                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/40 transition-all border border-white/30" onclick="moveCarousel(-1)">
-                    <span class="material-symbols-outlined">chevron_left</span>
+            <div class="slide-button-handle" id="slideHandle">
+                <button class="slide-button-icon">
+                    <span class="material-symbols-outlined">send</span>
                 </button>
-                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/40 transition-all border border-white/30" onclick="moveCarousel(1)">
-                    <span class="material-symbols-outlined">chevron_right</span>
-                </button>
             </div>
-        </section>
-
-        <!-- Sticky Search Bar -->
-        <div class="sticky top-[72px] z-40 px-container-margin -mt-8">
-            <div class="max-w-6xl mx-auto glass-card rounded-xl p-md md:p-lg flex flex-col md:flex-row items-center gap-md inner-glow shadow-xl">
-                <div class="w-full md:flex-1 relative">
-                    <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Check-in</label>
-                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" id="homeCheckIn"/>
-                </div>
-                <div class="w-full md:flex-1 relative">
-                    <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Check-out</label>
-                    <input class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md" type="date" id="homeCheckOut"/>
-                </div>
-                <div class="w-full md:w-48 relative">
-                    <label class="absolute -top-3 left-3 bg-white px-2 text-xs font-bold text-primary rounded-full">Guests</label>
-                    <select class="w-full border-none border-b-2 border-primary/20 focus:border-primary focus:ring-0 bg-transparent py-3 px-4 font-body-md">
-                        <option>2 Adults, 0 Children</option>
-                        <option>2 Adults, 1 Child</option>
-                        <option>1 Adult</option>
-                    </select>
-                </div>
-                <button class="w-full md:w-auto px-xl py-4 bg-primary text-white font-button rounded-lg hover:bg-primary/90 transition-all active:scale-95 shadow-md flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">search</span>
-                    Check Availability
-                </button>
+            <div class="slide-button-content">
+                <span class="slide-button-text">Slide to Book</span>
+            </div>
+            <div class="slide-button-status" id="slideStatus">
+                <span class="material-symbols-outlined animate-spin" id="loadingIcon">refresh</span>
+                <span class="material-symbols-outlined hidden" id="successIcon">check</span>
+                <span class="material-symbols-outlined hidden" id="errorIcon">close</span>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- Highlights / Amenities Section -->
-        <section class="max-w-7xl mx-auto px-container-margin py-xl">
-            <div class="text-center mb-xl">
-                <h3 class="font-h2 text-h2 text-on-surface mb-xs">Exceptional Comfort</h3>
-                <p class="font-body-md text-on-surface-variant max-w-2xl mx-auto">Discover the signature hospitality that defines Lumina. Every detail is curated for your ultimate relaxation and operational excellence.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-lg stagger-fade-in">
-                <!-- Card 1 -->
-                <div class="glass-card rounded-xl p-xl flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="material-symbols-outlined scale-150">wifi</span>
-                    </div>
-                    <h4 class="font-h3 text-h3 mb-sm">Free Wi-Fi</h4>
-                    <p class="font-body-sm text-on-surface-variant">Stay connected with ultra-high-speed fiber optic connectivity available throughout the entire property.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="glass-card rounded-xl p-xl flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-md group-hover:bg-secondary group-hover:text-white transition-colors">
-                        <span class="material-symbols-outlined scale-150">restaurant</span>
-                    </div>
-                    <h4 class="font-h3 text-h3 mb-sm">Breakfast Included</h4>
-                    <p class="font-body-sm text-on-surface-variant">Start your day with a curated selection of gourmet local and international delicacies in our glass-walled dining room.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="glass-card rounded-xl p-xl flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="material-symbols-outlined scale-150">pets</span>
-                    </div>
-                    <h4 class="font-h3 text-h3 mb-sm">Pet Friendly</h4>
-                    <p class="font-body-sm text-on-surface-variant">We welcome your furry companions with specialized amenities and dedicated concierge services for their comfort.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Section with Asymmetric Layout -->
-        <section class="max-w-7xl mx-auto px-container-margin py-xl grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
-            <div class="lg:col-span-7 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-                <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbCn4lWQ-Vz4_JWrcR_iOey77Vuj-AnVxDW56qAVIMuYlnUT-4uHmmFk8p3-IJ2l3ZY2PjyvwptWqKIj7W8XgqQhOS52JCq3sbLouaaz__NWHCXajR1mrzEmTH79l7E34zgHR2MGtRS5PbDAxm-j3emHvVVvJ0PmjS0Mxxdxdxd-B2SiuGUWMwpSODgIx44glV0p_w4b8nSEkQjIBVaWgtB-8lHH28vtXS-CydCQ_HkVJYjXXnT7lsosnSExpBZo1aGqQW3n7NWAnOk"/>
-                <div class="absolute inset-0 bg-primary/10 backdrop-overlay"></div>
-                <div class="absolute top-lg right-lg glass-card p-md rounded-xl text-primary font-bold">
-                    Award Winning Service
-                </div>
-            </div>
-            <div class="lg:col-span-5 space-y-md">
-                <span class="text-secondary font-label-md tracking-widest uppercase">The Lumina Experience</span>
-                <h3 class="font-h2 text-h2 leading-tight">Elevating Every Moment of Your Stay</h3>
-                <p class="font-body-lg text-on-surface-variant">From our smart concierge system to bespoke interior design, Lumina Hospitality bridges the gap between digital efficiency and human warmth.</p>
-                <div class="space-y-sm">
-                    <div class="flex items-center gap-md">
-                        <span class="material-symbols-outlined text-secondary icon-filled">check_circle</span>
-                        <span class="font-body-md font-medium">Smart Room Automation</span>
-                    </div>
-                    <div class="flex items-center gap-md">
-                        <span class="material-symbols-outlined text-secondary icon-filled">check_circle</span>
-                        <span class="font-body-md font-medium">24/7 VIP Concierge</span>
-                    </div>
-                    <div class="flex items-center gap-md">
-                        <span class="material-symbols-outlined text-secondary icon-filled">check_circle</span>
-                        <span class="font-body-md font-medium">Sustainable Luxury Practices</span>
-                    </div>
-                </div>
-                <button class="px-xl py-4 border-2 border-primary text-primary font-button rounded-lg hover:bg-primary hover:text-white transition-all active:scale-95 mt-md">
-                    Explore Our Story
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <!-- Bottom Navigation for Mobile -->
-    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-white/70 backdrop-blur-3xl px-container-margin py-sm pb-safe border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
-        <a href="/pages/hotel/home-lumina/" class="flex flex-col items-center justify-center text-primary font-bold">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="font-label-md text-label-md">Home</span>
-        </a>
-        <a href="/pages/hotel/rooms-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant">
-            <span class="material-symbols-outlined">bed</span>
-            <span class="font-label-md text-label-md">Rooms</span>
-        </a>
-        <a href="/pages/hotel/booking-your-stay/" class="flex flex-col items-center justify-center text-on-surface-variant">
-            <span class="material-symbols-outlined">calendar_month</span>
-            <span class="font-label-md text-label-md">Bookings</span>
-        </a>
-        <a href="/pages/hotel/login-lumina/" class="flex flex-col items-center justify-center text-on-surface-variant">
-            <span class="material-symbols-outlined">person</span>
-            <span class="font-label-md text-label-md">Profile</span>
-        </a>
-    </nav>
-
-    <!-- Footer -->
-    <footer class="bg-surface-dim mt-xl py-xl border-t border-outline-variant/30">
-        <div class="max-w-7xl mx-auto px-container-margin grid grid-cols-1 md:grid-cols-4 gap-xl">
-            <div class="col-span-1 md:col-span-2">
-                <h1 class="font-h2 text-h2 text-primary mb-md">Lumina Hospitality</h1>
-                <p class="font-body-md text-on-surface-variant max-w-sm">Setting the standard for modern hospitality management with a focus on luxury, efficiency, and guest satisfaction.</p>
-            </div>
-            <div>
-                <h5 class="font-label-md text-label-md text-on-surface mb-md">Quick Links</h5>
-                <ul class="space-y-sm text-on-surface-variant">
-                    <li><a class="hover:text-primary transition-colors" href="/pages/hotel/rooms-lumina/">Our Properties</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Corporate Services</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-label-md text-label-md text-on-surface mb-md">Legal</h5>
-                <ul class="space-y-sm text-on-surface-variant">
-                    <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
-                    <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-container-margin mt-xl pt-lg border-t border-outline-variant/30 text-center text-on-surface-variant font-label-md">
-            © <span id="copyright-year">2026</span> Lumina Hospitality Group. All rights reserved.
-        </div>
-    </footer>
-
+<!-- Main Content -->
+<main role="main" class="max-w-7xl mx-auto px-container-margin py-xl space-y-24">
+<!-- Amenities Bento Grid -->
+<section class="reveal">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs animate-fade-in-up">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Premium Services</span>
+<h3 class="font-h2 text-h2 text-on-surface">World-Class Amenities</h3>
+</div>
+<button class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
+View All Services <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-md h-[600px]">
+<div class="md:col-span-2 md:row-span-2 glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-1">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A serene luxury spa treatment room with soft, diffused lighting. The interior design features minimalist organic materials like bamboo, smooth river stones, and soft white linens. A subtle teal accent is present in the lighting, reflecting a calm, professional, and high-end wellness experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKx4jfQz7VJ4s3GJJqMrYoFqQKxnOUC8GxJtFqoUE-je96aZ8zcsjDVPxXK9MwqrElduWbiQqlVr-DSEzlSdTro6cNv8xAwcRDY28JXGoyDTkkUzrhAhNgmxfqzX40YN_fv5uoQj5Dzjwlu1muczrRztfV0j3bBOiOzJy45YvbzFw9hhQEVijH-uBKLsYs373EzXcx77Y-GWJTP8GEPK9ED9Wv4TV5FrXN82pF62ZzC51DJ_5VbltuBRo5KNEfD9vP3caz2mBv0oQ"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">spa</span>
+<h4 class="font-h3 text-h3 mb-xs">Holistic Spa &amp; Wellness</h4>
+<p class="font-body-md text-white/80 max-w-sm">Rejuvenating treatments designed for complete physical and mental harmony.</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-2">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-end fine dining restaurant interior with a focus on gold and teal accents. The tables are perfectly set with crystal glassware and silver cutlery. Large windows offer a view of a city skyline at twilight. The mood is sophisticated, elegant, and perfectly controlled, reflecting a premium hospitality service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGRPmHDXWgOicI3FcNOhVeN55mTn4Ain2ovb2u6raiw0yMik6TX9DRJ3-Bg0ZXKSOnXdYpHSgvdLCYuORl8oMQKvuG1UXhjyP_Gw4Y0aknem9IbrGzoeK-2srBpVe5NIUsdADNU9puUQa7njg4IBmVsVZfXIsyMj1S1ljIS7728XHEgqrOsrJ1gyMNGs1AloYLbrvdRB-JCaM43SjDzgBur5uquSb0pK57-jiTQetdMhBoapauw0fzoX8ILfB2Y6i_v0T4JG2CiTk"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute bottom-0 left-0 p-md text-white">
+<h4 class="font-h3 text-h3">Fine Dining</h4>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-3">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A state-of-the-art hotel fitness center with modern equipment and panoramic glass walls. The space is bright and airy with high-key lighting, maintaining a clean and professional aesthetic. The design is modern luxury with metallic finishes and cool-toned flooring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkO6hAv3OLns5LUgLDPoWxIi9D5L0nGPtgfr4X_ExF07MxZJXC32i0W77z4rztpfrlW8TiwIXeN3J8lp5bUBj-bYELGcKlD3ZO3hZ-L_INgc1CYXK2sqjm7FTne7X1goNr7yzpYPWgB9edry3kxvu7fvzhyQ4MPLI-JDXRuUo5qltrMUiWVuBwknD67uUuqRvaRIn6aKX8oxEuTSxzb9I4wJnqDB5JyS-H2gFmxNTN5Pvdr1_MPjYFwxlkFYtqfn02_t7BLGfa4YQ"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute bottom-0 left-0 p-md text-white">
+<h4 class="font-h3 text-h3">Global Fitness</h4>
+</div>
+</div>
+<div class="md:col-span-2 glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-4">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An expansive, modern glass-walled conference room in a luxury hotel. The setting includes high-end executive furniture, advanced presentation technology, and a sophisticated minimalist aesthetic. The lighting is bright and professional, emphasizing efficiency and modern luxury management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdzvyRSG-6wQ_2-YMfiW3ItLwiEy0hrC4A_KAgbFrwwgQ3eOiqCnsPmmj0rLyNl7dT-R_MEmEFF2ReOOvlxG7YqH1rPFts4HAwm9i8ag15fjNR_nZAOYze-cGyR5ioGyuVcB1CeQ-sU_L7OR13MPg232UjgWK2MrsmInSv3s1oI_0TgsIWozNaa9dVyOoDoFIYChlWJbw4S2o76TWSM5w_MX6AHLrhx7HNdZLlmvCqvJCeDXOTCa6rRmtJD051RNDaFA7rBt699-Y"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute bottom-0 left-0 p-md text-white">
+<h4 class="font-h3 text-h3">Executive Business Suites</h4>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Multi-Column -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-xl reveal">
+<div class="lg:col-span-1 space-y-md animate-fade-in-up stagger-1">
+<h3 class="font-h1 text-h1 text-primary">The Future of Guest Experience</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Lumina combines intelligent data with human-centric design to create unforgettable stays. Our platform empowers staff to anticipate guest needs before they arise.</p>
+<div class="pt-md">
+<button class="bg-secondary text-white font-button text-button px-xl py-md rounded-lg hover:opacity-90 transition-standard hover-lift shadow-lg shadow-secondary/30">
+Request a Demo
+</button>
+</div>
+</div>
+<div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-2">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">auto_graph</span>
+</div>
+<h4 class="font-h3 text-h3">Real-time Analytics</h4>
+<p class="font-body-md text-on-surface-variant">Monitor occupancy, revenue, and guest satisfaction scores from a single unified dashboard.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-3">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">concierge</span>
+</div>
+<h4 class="font-h3 text-h3">AI Concierge</h4>
+<p class="font-body-md text-on-surface-variant">Automated request handling for 24/7 guest support, integrated with local services.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-4">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<h4 class="font-h3 text-h3">Inventory Control</h4>
+<p class="font-body-md text-on-surface-variant">Dynamic supply management to reduce waste and ensure premium product availability.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-5">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">team_dashboard</span>
+</div>
+<h4 class="font-h3 text-h3">Staff Coordination</h4>
+<p class="font-body-md text-on-surface-variant">Assign tasks, track performance, and communicate instantly with mobile-first staff tools.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="relative rounded-2xl overflow-hidden py-32 bg-primary flex flex-col items-center justify-center text-center px-md animate-fade-in-up perspective-1000">
+<div class="relative z-10 space-y-lg max-w-3xl animate-fade-in-up stagger-1">
+<h3 class="font-h1 text-h1 text-white">Transform Your Property Management Today</h3>
+<p class="font-body-lg text-body-lg text-white/80">Join 500+ luxury hotels worldwide using Lumina to set the standard for hospitality excellence.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md">
+<button class="bg-white text-primary font-button text-button px-xl py-md rounded-lg hover:bg-surface-bright transition-standard hover-lift shadow-lg shadow-white/30 ripple">Get Started Free</button>
+<button class="bg-transparent text-white font-button text-button px-xl py-md rounded-lg border-2 border-white/30 hover:bg-white/10 transition-standard hover-lift">Schedule Demo</button>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-secondary/20 to-transparent"></div>
+</section>
+</main>
+<!-- Footer -->
+<footer role="contentinfo" class="bg-surface-container-low pt-24 pb-md border-t border-white/30 animate-fade-in-up">
+<div class="max-w-7xl mx-auto px-container-margin grid grid-cols-1 md:grid-cols-4 gap-xl mb-16">
+<div class="space-y-md animate-fade-in-up stagger-1">
+<h2 class="font-h2 text-h2 text-primary">Lumina</h2>
+<p class="font-body-md text-on-surface-variant">Redefining luxury hospitality management through technology and design precision.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-primary cursor-pointer hover-scale">public</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover-scale">mail</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover-scale">call</span>
+</div>
+</div>
+<div class="space-y-md animate-fade-in-up stagger-2">
+<h5 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Solutions</h5>
+<ul class="space-y-sm font-body-md text-on-surface-variant">
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">Property Management</li>
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">Revenue Control</li>
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">Guest Experience</li>
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">Staff Workflow</li>
+</ul>
+</div>
+<div class="space-y-md animate-fade-in-up stagger-3">
+<h5 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Resources</h5>
+<ul class="space-y-sm font-body-md text-on-surface-variant">
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">Industry Reports</li>
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">Success Stories</li>
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">Documentation</li>
+<li class="hover:text-primary cursor-pointer transition-colors hover-scale">API Support</li>
+</ul>
+</div>
+<div class="space-y-md animate-fade-in-up stagger-4">
+<h5 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Newsletter</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Get the latest hospitality trends delivered weekly.</p>
+<div class="flex">
+<input class="flex-1 bg-white border border-outline-variant rounded-l-lg px-md py-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Your email" type="email"/>
+<button class="bg-primary text-white px-md py-sm rounded-r-lg font-button text-button hover-lift">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-container-margin pt-md border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Lumina Hospitality Systems. All rights reserved.</p>
+<div class="flex gap-xl font-body-sm text-body-sm text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer hover-scale">Privacy Policy</span>
+<span class="hover:text-primary cursor-pointer hover-scale">Terms of Service</span>
+</div>
+</div>
+</footer>
+<!-- Floating Action Button (Limited Use) -->
+<button class="fixed bottom-10 right-10 w-16 h-16 bg-secondary text-white rounded-full shadow-xl flex items-center justify-center active:scale-90 transition-standard hover:shadow-2xl z-50 animate-float hover-lift">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
-    <script src="/pages/hotel/home-lumina/home-lumina.js"></script>
-    <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
-</body>
-</html>
+    <script>
+        // Simple Interaction logic
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('py-2', 'shadow-md');
+                header.classList.remove('py-md', 'shadow-sm');
+            } else {
+                header.classList.add('py-md', 'shadow-sm');
+                header.classList.remove('py-2', 'shadow-md');
+            }
+        });
+
+        // Micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'rgba(0, 102, 131, 0.2)';
+                card.style.transform = 'translateY(-4px)';
+                card.style.boxShadow = '0 12px 24px rgba(0, 102, 131, 0.08)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 12px 0 rgba(0, 0, 0, 0.05)';
+            });
+        });
+
+        // Simple carousel sliding logic
+        const slider = document.getElementById('hero-slider');
+        const slides = slider ? slider.children : [];
+        let index = 0;
+        const total = slides.length;
+
+        function slide(dir) {
+            index = (index + dir + total) % total;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        const btns = document.querySelectorAll('section button');
+        if (btns.length >= 2) {
+            btns[0].addEventListener('click', () => slide(-1));
+            btns[1].addEventListener('click', () => slide(1));
+        }
+
+        // Auto-play
+        setInterval(() => slide(1), 5000);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mobileMenuContent = document.getElementById('mobileMenuContent');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            function openMobileMenu() {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuContent.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileMenuFunc() {
+                mobileMenuContent.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+            if (closeMobileMenu) {
+                closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+            }
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
+            }
+
+            // Close menu when clicking a link
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenuFunc);
+            });
+        }
+
+        // Slide Button Functionality
+        const slideButton = document.getElementById('slideButton');
+        const slideHandle = document.getElementById('slideHandle');
+        const slideFill = document.querySelector('.slide-button-fill');
+        const slideStatus = document.getElementById('slideStatus');
+        const loadingIcon = document.getElementById('loadingIcon');
+        const successIcon = document.getElementById('successIcon');
+        const errorIcon = document.getElementById('errorIcon');
+        const slideText = document.querySelector('.slide-button-text');
+
+        if (slideButton && slideHandle) {
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            const maxDrag = 155;
+            const threshold = maxDrag * 0.9;
+            let completed = false;
+
+            slideHandle.addEventListener('mousedown', startDrag);
+            slideHandle.addEventListener('touchstart', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
+
+            function startDrag(e) {
+                if (completed) return;
+                isDragging = true;
+                startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+                slideHandle.style.transition = 'none';
+                slideFill.style.transition = 'none';
+            }
+
+            function drag(e) {
+                if (!isDragging || completed) return;
+                e.preventDefault();
+                const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+                const diff = clientX - startX;
+                currentX = Math.max(0, Math.min(diff, maxDrag));
+                slideHandle.style.transform = `translateX(${currentX}px)`;
+                slideFill.style.width = `${currentX + 10}px`;
+            }
+
+            function endDrag() {
+                if (!isDragging || completed) return;
+                isDragging = false;
+                slideHandle.style.transition = 'transform 0.3s ease';
+                slideFill.style.transition = 'width 0.3s ease';
+
+                if (currentX >= threshold) {
+                    completed = true;
+                    slideButton.classList.add('completed');
+                    slideHandle.style.transform = `translateX(${maxDrag}px)`;
+                    slideFill.style.width = '100%';
+                    slideText.style.opacity = '0';
+                    showLoading();
+                } else {
+                    slideHandle.style.transform = 'translateX(0)';
+                    slideFill.style.width = '0';
+                    currentX = 0;
+                }
+            }
+
+            function showLoading() {
+                slideStatus.classList.add('visible');
+                loadingIcon.classList.remove('hidden');
+                setTimeout(() => {
+                    loadingIcon.classList.add('hidden');
+                    successIcon.classList.remove('hidden');
+                    setTimeout(() => {
+                        window.location.href = '/pages/hotel/booking-your-stay/';
+                    }, 1000);
+                }, 2000);
+            }
+        }
+    </script>
+</body></html>
