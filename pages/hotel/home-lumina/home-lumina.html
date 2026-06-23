@@ -165,58 +165,85 @@
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
 <!-- Top Navigation Bar -->
-<header role="banner" class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm transition-standard">
+<header role="banner" id="mainHeader" class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm transition-standard">
 <div class="flex items-center gap-md">
-<span class="material-symbols-outlined text-primary text-h2 cursor-pointer hover:opacity-80 transition-colors hover:scale-110" id="mobileMenuBtn">menu</span>
+<span class="material-symbols-outlined text-primary text-h2 cursor-pointer hover:opacity-80 transition-colors hover:scale-110 lg:hidden" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" role="button" tabindex="0">menu</span>
 <h1 class="font-h2 text-h2 tracking-tight text-primary font-bold" style="font-family:'Roboto Slab', serif;">Lumina Hospitality</h1>
 </div>
 <nav role="navigation" class="hidden lg:flex items-center gap-lg">
-<a class="font-label-md text-label-md text-primary font-bold hover:text-primary-light transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
+<a class="font-label-md text-label-md text-primary font-bold hover:text-primary-light transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-100 after:transition-transform" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform" href="/pages/hotel/home-lumina/home-lumina.html#dining">Dining</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform" href="/pages/hotel/home-lumina/home-lumina.html#spa-wellness">Spa & Wellness</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
 <div class="relative group">
-<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs">More <span class="material-symbols-outlined text-sm">expand_more</span></button>
-<div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-xl rounded-xl border border-outline-variant/20 p-md top-full left-0 min-w-[200px] z-50">
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs" aria-haspopup="true" aria-expanded="false" id="moreDropdownBtn">More <span class="material-symbols-outlined text-sm">expand_more</span></button>
+<div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-xl rounded-xl border border-outline-variant/20 p-md top-full left-0 min-w-[220px] min-h-[200px] z-50 transition-opacity duration-200 opacity-0 group-hover:opacity-100" role="menu" aria-labelledby="moreDropdownBtn">
+<a class="flex items-center gap-2 py-sm px-2 text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg" href="/pages/hotel/home-lumina/home-lumina.html#local-area" role="menuitem">
+<span class="material-symbols-outlined text-lg">explore</span>
+<span>Local Area Guide</span>
+</a>
+<a class="flex items-center gap-2 py-sm px-2 text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg" href="/pages/hotel/home-lumina/home-lumina.html#meetings-events" role="menuitem">
+<span class="material-symbols-outlined text-lg">event</span>
+<span>Meetings & Events</span>
+</a>
+<a class="flex items-center gap-2 py-sm px-2 text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg" href="/pages/hotel/home-lumina/home-lumina.html#guest-reviews" role="menuitem">
+<span class="material-symbols-outlined text-lg">star</span>
+<span>Guest Reviews</span>
+</a>
+<a class="flex items-center gap-2 py-sm px-2 text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg" href="/pages/hotel/about-lumina/about-lumina.html" role="menuitem">
+<span class="material-symbols-outlined text-lg">info</span>
+<span>About Us</span>
+</a>
+<a class="flex items-center gap-2 py-sm px-2 text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg" href="/pages/hotel/home-lumina/home-lumina.html#contact-us" role="menuitem">
+<span class="material-symbols-outlined text-lg">contact_phone</span>
+<span>Contact Us</span>
+</a>
 </div>
 </div>
 </nav>
 <div class="flex items-center gap-md">
 <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="hidden sm:inline-flex items-center gap-2 bg-primary text-white font-button text-button px-lg py-sm rounded-full hover:bg-primary-light transition-standard shadow-lg shadow-primary/10 hover-lift">Book Stay</a>
-<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm cursor-pointer hover-lift" id="userAvatar">U</div>
+<div class="relative" id="userMenuContainer">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm cursor-pointer hover-lift gap-1 transition-colors" id="userAvatar" aria-haspopup="true" aria-expanded="false" tabindex="0" role="button">
+U
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+<div id="userDropdown" class="absolute right-0 top-full mt-2 w-48 bg-white shadow-xl rounded-xl border border-outline-variant/20 p-2 hidden z-50" role="menu">
+<a class="block py-2 px-3 text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" href="/pages/hotel/profile-lumina/profile-lumina.html" role="menuitem">My Profile</a>
+<a class="block py-2 px-3 text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" href="/pages/hotel/bookings-lumina/bookings-lumina.html" role="menuitem">My Bookings</a>
+<div class="border-t border-outline-variant/20 my-2"></div>
+<a class="block py-2 px-3 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors" href="/pages/hotel/login-lumina/login-lumina.html" role="menuitem">Sign Out</a>
+</div>
+</div>
 </div>
 </header>
 <!-- Mobile Menu Overlay -->
-<div id="mobileMenu" class="fixed inset-0 z-40 hidden">
+<div id="mobileMenu" class="fixed inset-0 z-[70] hidden">
 <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobileMenuOverlay"></div>
-<div class="absolute right-0 top-0 h-full w-80 max-w-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out" id="mobileMenuContent">
+<div class="absolute left-0 top-0 h-full w-[90%] max-w-[400px] bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto scroll-smooth" id="mobileMenuContent">
 <div class="p-6">
 <div class="flex justify-between items-center mb-8">
 <h2 class="font-h2 text-h2 text-primary font-bold" style="font-family:'Roboto Slab', serif;">Menu</h2>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" id="closeMobileMenu">close</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-primary/10" id="closeMobileMenu" aria-label="Close menu">close</button>
 </div>
 <nav class="flex flex-col gap-4">
-<a class="font-label-md text-label-md text-primary font-bold py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
-<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
-<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
-<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
-<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
-<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
+<a class="font-label-md text-label-md text-primary font-bold py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors border-l-4 border-primary bg-primary/5" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors border-l-4 border-transparent hover:border-primary/30" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors border-l-4 border-transparent hover:border-primary/30" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors border-l-4 border-transparent hover:border-primary/30" href="/pages/hotel/home-lumina/home-lumina.html#dining">Dining</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors border-l-4 border-transparent hover:border-primary/30" href="/pages/hotel/home-lumina/home-lumina.html#spa-wellness">Spa & Wellness</a>
+<a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors border-l-4 border-transparent hover:border-primary/30" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
 <div class="border-t border-outline-variant pt-4 mt-4">
 <p class="font-label-md text-label-md text-outline uppercase tracking-widest mb-4">More</p>
-<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
-<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
-<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/home-lumina/home-lumina.html#local-area">Local Area Guide</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/home-lumina/home-lumina.html#meetings-events">Meetings & Events</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/home-lumina/home-lumina.html#guest-reviews">Guest Reviews</a>
 <a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
-<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/home-lumina/home-lumina.html#contact-us">Contact Us</a>
 </div>
 <div class="mt-8 pt-8 border-t border-outline-variant">
 <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="w-full text-center py-4 bg-primary text-white rounded-xl font-button text-button hover:bg-primary/90 transition-all shadow-lg shadow-primary/30 hover-lift">Book Your Stay</a>
@@ -226,7 +253,7 @@
 </div>
 </div>
 <!-- Hero Section with Carousel -->
-<section class="relative h-[85vh] min-h-[600px] max-h-[800px] w-full overflow-hidden perspective-1000">
+<section id="main-content" class="relative h-[85vh] min-h-[600px] max-h-[800px] w-full overflow-hidden perspective-1000">
 <div class="flex h-full transition-transform duration-700 ease-in-out transform-3d" id="hero-slider">
 <!-- Slide 1 -->
 <div class="min-w-full h-full relative animate-fade-in-up">
@@ -330,14 +357,20 @@ Book Now
 </div>
 </section>
 <!-- Sticky Search Bar -->
-<div class="sticky top-[72px] z-40 px-container-margin -mt-10 animate-fade-in-down">
-<div class="max-w-6xl mx-auto glass-card rounded-xl p-sm flex flex-wrap md:flex-nowrap items-center gap-md inner-glow hover-lift">
-<div class="flex-1 min-w-[200px] relative">
-<label class="absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary animate-pulse">search</span>
-<span class="font-body-md">Search properties or guests...</span>
+<div class="sticky top-[80px] z-[60] px-container-margin -mt-10 animate-fade-in-down pb-2">
+<div class="max-w-6xl mx-auto glass-card rounded-xl p-sm flex flex-wrap md:flex-nowrap items-center gap-md inner-glow hover-lift shadow-xl border border-outline-variant/20">
+<div class="flex-1 min-w-[150px] relative">
+<label class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
 </label>
-<input class="w-full bg-transparent border-none focus:ring-0 pl-48 pr-md py-md font-body-md text-on-surface placeholder-transparent" type="text"/>
+<input class="w-full bg-transparent border-none focus:ring-0 pl-10 pr-md py-sm font-body-md text-on-surface placeholder:text-on-surface-variant" type="text" placeholder="City or hotel name"/>
+</div>
+<div class="w-px h-8 bg-outline-variant hidden md:block"></div>
+<div class="flex-1 min-w-[120px] relative">
+<label class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</label>
+<input class="w-full bg-transparent border-none focus:ring-0 pl-10 pr-md py-sm font-body-md text-on-surface placeholder:text-on-surface-variant" type="number" placeholder="Number of guests" min="1"/>
 </div>
 <div class="w-px h-8 bg-outline-variant hidden md:block"></div>
 <div class="flex-1 min-w-[150px] px-md flex items-center justify-between cursor-pointer hover-scale">
@@ -357,7 +390,7 @@ Search Availability
 </div>
 
 <!-- Slide Button Demo -->
-<section class="max-w-7xl mx-auto px-container-margin py-16">
+<section class="max-w-7xl mx-auto px-container-margin py-12">
     <div class="text-center mb-8">
         <h2 class="font-h2 text-h2 text-primary mb-2" style="font-family:'Roboto Slab', serif;">Quick Book</h2>
         <p class="font-body-md text-body-md text-on-surface-variant">Slide to book your stay</p>
@@ -385,12 +418,15 @@ Search Availability
 </section>
 
 <!-- Main Content -->
-<main role="main" class="max-w-7xl mx-auto px-container-margin py-xl space-y-24">
+<main role="main" class="max-w-7xl mx-auto px-container-margin py-lg space-y-16">
 <!-- Amenities Bento Grid -->
 <section class="reveal">
 <div class="flex justify-between items-end mb-lg">
 <div class="space-y-xs animate-fade-in-up">
+<div class="flex items-center gap-sm">
 <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Premium Services</span>
+<div class="flex-1 h-px bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
 <h3 class="font-h2 text-h2 text-on-surface">World-Class Amenities</h3>
 </div>
 <button class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
@@ -472,8 +508,276 @@ Request a Demo
 </div>
 </div>
 </section>
+<!-- Local Area Section -->
+<section id="local-area" class="reveal">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs animate-fade-in-up">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Explore</span>
+<div class="flex-1 h-px bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<h3 class="font-h2 text-h2 text-on-surface">Local Area Guide</h3>
+</div>
+<a href="/pages/hotel/local-area/local-area.html" class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
+View All Attractions <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-1">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Lekki Conservation Centre"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">nature</span>
+<h4 class="font-h3 text-h3 mb-xs">Lekki Conservation Centre</h4>
+<p class="font-body-sm text-white/80">Nature reserve with canopy walkway</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-2">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" alt="Nike Art Gallery"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">palette</span>
+<h4 class="font-h3 text-h3 mb-xs">Nike Art Gallery</h4>
+<p class="font-body-sm text-white/80">Contemporary African art collection</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-3">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80" alt="Eko Atlantic City"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">location_city</span>
+<h4 class="font-h3 text-h3 mb-xs">Eko Atlantic City</h4>
+<p class="font-body-sm text-white/80">Modern city on reclaimed land</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Meetings & Events Section -->
+<section id="meetings-events" class="reveal">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs animate-fade-in-up">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Events</span>
+<div class="flex-1 h-px bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<h3 class="font-h2 text-h2 text-on-surface">Meetings & Events</h3>
+</div>
+<a href="/pages/hotel/meetings-events/meetings-events.html" class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
+View All Venues <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-1">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&q=80" alt="Corporate Events"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">business_center</span>
+<h4 class="font-h3 text-h3 mb-xs">Corporate Meetings</h4>
+<p class="font-body-sm text-white/80">State-of-the-art conference facilities</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-2">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Weddings"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h4 class="font-h3 text-h3 mb-xs">Weddings & Celebrations</h4>
+<p class="font-body-sm text-white/80">Unforgettable special occasions</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Guest Reviews Section -->
+<section id="guest-reviews" class="reveal">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs animate-fade-in-up">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Testimonials</span>
+<div class="flex-1 h-px bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<h3 class="font-h2 text-h2 text-on-surface">Guest Reviews</h3>
+</div>
+<a href="/pages/hotel/reviews-lumina/reviews-lumina.html" class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
+View All Reviews <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-1">
+<div class="flex items-center gap-1 mb-sm">
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-on-surface italic">"An absolutely extraordinary experience. The Presidential Suite offered breathtaking views of the Lagos lagoon."</p>
+<p class="font-body-sm text-primary font-semibold">— Adebayo O.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-2">
+<div class="flex items-center gap-1 mb-sm">
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-on-surface italic">"The attention to detail is remarkable. From the moment we arrived, every interaction felt personalized and genuine."</p>
+<p class="font-body-sm text-primary font-semibold">— Sarah C.</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-3">
+<div class="flex items-center gap-1 mb-sm">
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-on-surface italic">"I've stayed at luxury hotels worldwide, and Lumina truly stands out. The spa treatments were world-class."</p>
+<p class="font-body-sm text-primary font-semibold">— James M.</p>
+</div>
+</div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact-us" class="reveal">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs animate-fade-in-up">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Get in Touch</span>
+<div class="flex-1 h-px bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<h3 class="font-h2 text-h2 text-on-surface">Contact Us</h3>
+</div>
+<a href="/pages/hotel/contact-lumina/contact-lumina.html" class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
+Full Contact Page <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-1">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<h4 class="font-h3 text-h3">Location</h4>
+<p class="font-body-md text-on-surface-variant">Plot 14, Ahmadu Bello Way, Victoria Island, Lagos</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-2">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">call</span>
+</div>
+<h4 class="font-h3 text-h3">Phone</h4>
+<p class="font-body-md text-on-surface-variant">+234 1 277 2700</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-3">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<h4 class="font-h3 text-h3">Email</h4>
+<p class="font-body-md text-on-surface-variant">reservations@lumina.com</p>
+</div>
+<div class="glass-card p-lg rounded-xl space-y-sm inner-glow hover:-translate-y-1 transition-standard card-3d animate-fade-in-up stagger-4">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary animate-float">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<h4 class="font-h3 text-h3">Hours</h4>
+<p class="font-body-md text-on-surface-variant">24/7 Concierge Service</p>
+</div>
+</div>
+</section>
+
+<!-- Spa & Wellness Section -->
+<section id="spa-wellness" class="reveal">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs animate-fade-in-up">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Wellness</span>
+<div class="flex-1 h-px bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<h3 class="font-h2 text-h2 text-on-surface">Spa & Wellness</h3>
+</div>
+<a href="/pages/hotel/spa-wellness/spa-wellness.html" class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
+View All Treatments <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-1">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=600&q=80" alt="Signature Massage"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">spa</span>
+<h4 class="font-h3 text-h3 mb-xs">Signature Massage</h4>
+<p class="font-body-sm text-white/80">90-minute full-body massage</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-2">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80" alt="Couples Retreat"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h4 class="font-h3 text-h3 mb-xs">Couples Retreat</h4>
+<p class="font-body-sm text-white/80">Side-by-side massages & jacuzzi</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-3">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=600&q=80" alt="Detox Program"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">self_improvement</span>
+<h4 class="font-h3 text-h3 mb-xs">Detox & Renewal</h4>
+<p class="font-body-sm text-white/80">Complete wellness program</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Dining Section -->
+<section id="dining" class="reveal">
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-xs animate-fade-in-up">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Culinary</span>
+<div class="flex-1 h-px bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<h3 class="font-h2 text-h2 text-on-surface">Dining</h3>
+</div>
+<a href="/pages/hotel/dining-lumina/dining-lumina.html" class="text-primary font-button text-button flex items-center gap-xs hover:gap-sm transition-all hover-lift">
+View All Restaurants <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-1">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="The Grill Room"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<h4 class="font-h3 text-h3 mb-xs">The Grill Room</h4>
+<p class="font-body-sm text-white/80">Steakhouse & Fine Dining</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-2">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Ocean Terrace"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">set_meal</span>
+<h4 class="font-h3 text-h3 mb-xs">Ocean Terrace</h4>
+<p class="font-body-sm text-white/80">Seafood & Ocean View</p>
+</div>
+</div>
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer relative card-3d animate-fade-in-up stagger-3">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="The Lounge"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-standard"></div>
+<div class="absolute bottom-0 left-0 p-lg text-white">
+<span class="material-symbols-outlined text-xl mb-sm animate-float" style="font-variation-settings: 'FILL' 1;">local_bar</span>
+<h4 class="font-h3 text-h3 mb-xs">The Lounge</h4>
+<p class="font-body-sm text-white/80">Cocktails & Live Jazz</p>
+</div>
+</div>
+</div>
+</section>
+
 <!-- CTA Section -->
-<section class="relative rounded-2xl overflow-hidden py-32 bg-primary flex flex-col items-center justify-center text-center px-md animate-fade-in-up perspective-1000">
+<section class="relative rounded-2xl overflow-hidden py-20 bg-primary flex flex-col items-center justify-center text-center px-md animate-fade-in-up perspective-1000">
 <div class="relative z-10 space-y-lg max-w-3xl animate-fade-in-up stagger-1">
 <h3 class="font-h1 text-h1 text-white">Transform Your Property Management Today</h3>
 <p class="font-body-lg text-body-lg text-white/80">Join 500+ luxury hotels worldwide using Lumina to set the standard for hospitality excellence.</p>
@@ -533,8 +837,9 @@ Request a Demo
 </div>
 </footer>
 <!-- Floating Action Button (Limited Use) -->
-<button class="fixed bottom-10 right-10 w-16 h-16 bg-secondary text-white rounded-full shadow-xl flex items-center justify-center active:scale-90 transition-standard hover:shadow-2xl z-50 animate-float hover-lift">
-<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<button class="fixed bottom-10 right-10 bg-secondary text-white rounded-full shadow-xl flex items-center gap-2 px-5 py-3 active:scale-90 transition-standard hover:shadow-2xl z-60 animate-float hover-lift group" aria-label="Chat with us">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="font-label-md text-label-md font-semibold">Chat</span>
 </button>
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
@@ -585,6 +890,20 @@ Request a Demo
         // Auto-play
         setInterval(() => slide(1), 5000);
 
+        // Sticky Navigation State Indicator
+        const mainHeader = document.getElementById('mainHeader');
+        if (mainHeader) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    mainHeader.classList.add('shadow-lg', 'bg-white/95');
+                    mainHeader.classList.remove('bg-white/80', 'shadow-sm');
+                } else {
+                    mainHeader.classList.remove('shadow-lg', 'bg-white/95');
+                    mainHeader.classList.add('bg-white/80', 'shadow-sm');
+                }
+            });
+        }
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -593,21 +912,61 @@ Request a Demo
         const closeMobileMenu = document.getElementById('closeMobileMenu');
 
         if (mobileMenuBtn && mobileMenu) {
+            let focusableElements;
+            let firstFocusableElement;
+            let lastFocusableElement;
+
             function openMobileMenu() {
                 mobileMenu.classList.remove('hidden');
-                mobileMenuContent.classList.remove('translate-x-full');
+                mobileMenuContent.classList.remove('-translate-x-full');
                 document.body.style.overflow = 'hidden';
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                
+                // Setup focus trap
+                focusableElements = mobileMenuContent.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                firstFocusableElement = focusableElements[0];
+                lastFocusableElement = focusableElements[focusableElements.length - 1];
+                
+                // Focus first element
+                if (firstFocusableElement) {
+                    firstFocusableElement.focus();
+                }
             }
 
             function closeMobileMenuFunc() {
-                mobileMenuContent.classList.add('translate-x-full');
+                mobileMenuContent.classList.add('-translate-x-full');
                 setTimeout(() => {
                     mobileMenu.classList.add('hidden');
                     document.body.style.overflow = '';
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.focus();
                 }, 300);
             }
 
+            // Focus trap handler
+            function trapFocus(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusableElement) {
+                            e.preventDefault();
+                            lastFocusableElement.focus();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusableElement) {
+                            e.preventDefault();
+                            firstFocusableElement.focus();
+                        }
+                    }
+                }
+            }
+
             mobileMenuBtn.addEventListener('click', openMobileMenu);
+            mobileMenuBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openMobileMenu();
+                }
+            });
             if (closeMobileMenu) {
                 closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
             }
@@ -615,10 +974,79 @@ Request a Demo
                 mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
             }
 
+            // Add focus trap listener
+            mobileMenuContent.addEventListener('keydown', trapFocus);
+
             // Close menu when clicking a link
             const mobileMenuLinks = mobileMenu.querySelectorAll('a');
             mobileMenuLinks.forEach(link => {
                 link.addEventListener('click', closeMobileMenuFunc);
+            });
+        }
+
+        // User Dropdown Toggle
+        const userAvatar = document.getElementById('userAvatar');
+        const userDropdown = document.getElementById('userDropdown');
+
+        if (userAvatar && userDropdown) {
+            userAvatar.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isHidden = userDropdown.classList.contains('hidden');
+                userDropdown.classList.toggle('hidden');
+                userAvatar.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+            });
+
+            userAvatar.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const isHidden = userDropdown.classList.contains('hidden');
+                    userDropdown.classList.toggle('hidden');
+                    userAvatar.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+                } else if (e.key === 'Escape') {
+                    userDropdown.classList.add('hidden');
+                    userAvatar.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!userAvatar.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.add('hidden');
+                    userAvatar.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Close dropdown on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !userDropdown.classList.contains('hidden')) {
+                    userDropdown.classList.add('hidden');
+                    userAvatar.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // More Dropdown Keyboard Navigation
+        const moreDropdownBtn = document.getElementById('moreDropdownBtn');
+        const moreDropdownMenu = moreDropdownBtn ? moreDropdownBtn.nextElementSibling : null;
+
+        if (moreDropdownBtn && moreDropdownMenu) {
+            moreDropdownBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    moreDropdownMenu.classList.toggle('hidden');
+                    moreDropdownBtn.setAttribute('aria-expanded', moreDropdownMenu.classList.contains('hidden') ? 'false' : 'true');
+                } else if (e.key === 'Escape') {
+                    moreDropdownMenu.classList.add('hidden');
+                    moreDropdownBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Close dropdown on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !moreDropdownMenu.classList.contains('hidden')) {
+                    moreDropdownMenu.classList.add('hidden');
+                    moreDropdownBtn.setAttribute('aria-expanded', 'false');
+                }
             });
         }
 
