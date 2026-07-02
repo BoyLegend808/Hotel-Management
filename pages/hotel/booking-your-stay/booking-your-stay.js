@@ -40,7 +40,7 @@ const availableRooms = [
     }
 ];
 
-// Navigate between steps
+// Navigate between steps (kept for backward compat, delegation below)
 function nextStep(step) {
     goToStep(step);
 }
@@ -239,7 +239,7 @@ function loadRoomSelection() {
                 </div>
                 <div class="flex justify-between items-end mt-2 md:mt-0">
                     <div class="text-primary font-h3">$${totalPrice.toLocaleString()} <span class="text-body-sm text-outline">total</span></div>
-                    <button class="${buttonClasses}" onclick="selectRoom(${room.id})">
+                    <button class="${buttonClasses}" data-room="${room.id}">
                         ${isSelected ? '<span class="material-symbols-outlined text-sm">check</span> Selected' : 'Select'}
                     </button>
                 </div>
@@ -337,7 +337,7 @@ async function completeBooking() {
     // Show loading state
     const btnText = document.getElementById('btn-text');
     const btnLoader = document.getElementById('btn-loader');
-    const confirmBtn = document.querySelector('button[onclick="completeBooking()"]');
+    const confirmBtn = document.querySelector('button[data-confirm]');
     
     if (btnText && btnLoader && confirmBtn) {
         btnText.textContent = 'Processing...';
@@ -444,6 +444,15 @@ function goBack() {
         window.location.href = '/pages/hotel/rooms-lumina/';
     }
 }
+
+// Event delegation — replaces all onclick attributes
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-step], button[data-room], button[data-confirm]');
+    if (!btn) return;
+    if (btn.dataset.step !== undefined) nextStep(Number(btn.dataset.step));
+    if (btn.dataset.room !== undefined) selectRoom(Number(btn.dataset.room));
+    if (btn.dataset.confirm !== undefined) completeBooking();
+});
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {

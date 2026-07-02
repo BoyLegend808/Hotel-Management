@@ -33,7 +33,7 @@
 
 <main id="main-content">
     <!-- Hero -->
-    <section class="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
+    <section class="page-hero relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
         <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1600&q=80" alt="FAQ Hero" class="absolute inset-0 w-full h-full object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         <div class="relative z-10 text-center px-6">
@@ -58,7 +58,7 @@
         <div class="space-y-4" id="faqList">
 
             <div class="faq-item" data-cat="booking">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     What are the check-in and check-out times?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="faq-item" data-cat="booking">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     What is the cancellation policy?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="faq-item" data-cat="booking">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     Can I request a specific room type or floor?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -88,7 +88,7 @@
             </div>
 
             <div class="faq-item" data-cat="payment">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     What payment methods do you accept?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="faq-item" data-cat="payment">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     Is a deposit required when booking?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="faq-item" data-cat="facilities">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     What are the swimming pool hours?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -118,7 +118,7 @@
             </div>
 
             <div class="faq-item" data-cat="facilities">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     Is parking available at the hotel?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -128,7 +128,7 @@
             </div>
 
             <div class="faq-item" data-cat="facilities">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     Is WiFi available throughout the hotel?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -138,7 +138,7 @@
             </div>
 
             <div class="faq-item" data-cat="policies">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     Are pets allowed at Lumina Hospitality?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -148,7 +148,7 @@
             </div>
 
             <div class="faq-item" data-cat="policies">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question">
                     What is the smoking policy?
                     <span class="material-symbols-outlined icon">expand_more</span>
                 </button>
@@ -167,12 +167,14 @@
 <script src="/js/ui-utils.js"></script>
 <script src="/js/page-init.js"></script>
 <script>
-    function toggleFaq(btn) {
-        const item = btn.closest('.faq-item');
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!wasOpen) item.classList.add('open');
-    }
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const wasOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!wasOpen) item.classList.add('open');
+        });
+    });
 
     document.querySelectorAll('.category-label').forEach(btn => {
         btn.addEventListener('click', () => {
