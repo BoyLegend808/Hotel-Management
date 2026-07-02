@@ -3,6 +3,18 @@
  * Provides toast notifications, loading states, and navigation helpers
  */
 
+/**
+ * Escape a string for safe insertion into HTML (prevents XSS / CWE-94).
+ */
+function escapeHtml(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const UI = {
   // Toast notification system
   showToast(message, type = "info", duration = 3000) {
@@ -10,14 +22,22 @@ const UI = {
       document.getElementById("toast-container") || this.createToastContainer();
 
     const toast = document.createElement("div");
-    toast.className = `toast toast-${type}`;
-    toast.innerHTML = `
-      <div class="toast-content">
-        <span class="material-symbols-outlined">${this.getToastIcon(type)}</span>
-        <span class="toast-message">${message}</span>
-      </div>
-    `;
+    toast.className = `toast toast-${escapeHtml(type)}`;
 
+    const content = document.createElement("div");
+    content.className = "toast-content";
+
+    const icon = document.createElement("span");
+    icon.className = "material-symbols-outlined";
+    icon.textContent = this.getToastIcon(type); // textContent — safe
+
+    const msg = document.createElement("span");
+    msg.className = "toast-message";
+    msg.textContent = message; // textContent — safe, no XSS
+
+    content.appendChild(icon);
+    content.appendChild(msg);
+    toast.appendChild(content);
     toastContainer.appendChild(toast);
 
     setTimeout(() => {
@@ -147,5 +167,5 @@ window.addEventListener("unhandledrejection", (event) => {
 
 // Export for use in modules
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = UI;
+  module.exports = { UI, escapeHtml };
 }

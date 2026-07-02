@@ -11,6 +11,8 @@ function findDemoUser(username, password) {
   const u = clean(username).toLowerCase();
   const p = clean(password);
 
+  // TODO (production): replace plain-text password comparison with
+  // bcrypt.compare(password, user.passwordHash) and store hashed passwords only.
   return DEMO_USERS.find((user) => {
     const names = [user.username, ...(user.aliases || [])];
     return names.includes(u) && user.passwords.includes(p);

@@ -73,45 +73,21 @@ self.addEventListener('activate', (event) => {
 // Fetch event - serve from cache with network fallback
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
-  
-  // Skip cross-origin requests
-  if (url.origin !== location.origin) {
+
+  // Only handle same-origin requests — block cross-origin fetch interception (CWE-346)
+  if (url.origin !== self.location.origin) {
     return;
   }
-  
-  // API requests - network first, cache fallback
+
+  // API requests — always go to network, never cache (prevents SSRF / stale auth data)
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          // Clone response before caching
-          const responseToCache = response.clone();
-          
-          // Cache successful API responses
-          if (response.ok) {
-            caches.open(RUNTIME_CACHE)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-          }
-          
-          return response;
-        })
-        .catch(() => {
-          // Try to serve from cache if network fails
-          return caches.match(event.request)
-            .then((cachedResponse) => {
-              if (cachedResponse) {
-                console.log('[Service Worker] Serving API from cache:', event.request.url);
-                return cachedResponse;
-              }
-              // Return offline fallback for API requests
-              return new Response(
-                JSON.stringify({ success: false, message: 'Offline - no cached data available' }),
-                { headers: { 'Content-Type': 'application/json' } }
-              );
-            });
-        })
+      fetch(event.request).catch(() =>
+        new Response(
+          JSON.stringify({ success: false, message: 'Offline - please reconnect.' }),
+          { status: 503, headers: { 'Content-Type': 'application/json' } }
+        )
+      )
     );
     return;
   }
@@ -250,10 +226,13 @@ function syncOfflineForms() {
 
 // Message handler for cache management
 self.addEventListener('message', (event) => {
+  // Validate message origin (CWE-346 — cross-origin communications)
+  if (!event.origin || event.origin !== self.location.origin) return;
+
   if (event.data && event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
-  
+
   if (event.data && event.data.action === 'clearCache') {
     caches.keys().then((cacheNames) => {
       cacheNames.forEach((cacheName) => {

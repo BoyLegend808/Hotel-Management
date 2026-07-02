@@ -31,18 +31,18 @@ const CACHE_TTL = 5 * 1000; // 5 seconds cache TTL
  */
 async function readDB() {
   const now = Date.now();
-  
-  // Return cached version if fresh
+
+  // Return a deep copy of the cached version if fresh
   if (dbCache && (now - cacheTimestamp) < CACHE_TTL) {
-    return dbCache;
+    return JSON.parse(JSON.stringify(dbCache));
   }
-  
+
   try {
     const raw = await fs.readFile(DB_PATH, "utf8");
     const parsed = JSON.parse(raw);
     dbCache = { ...DEFAULT_DB, ...parsed };
     cacheTimestamp = now;
-    return dbCache;
+    return JSON.parse(JSON.stringify(dbCache));
   } catch (err) {
     console.error("Error reading database:", err.message);
     return { ...DEFAULT_DB };

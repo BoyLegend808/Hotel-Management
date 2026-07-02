@@ -1,11 +1,13 @@
 // Lumina Hospitality - Guest Dashboard JavaScript
 
-// Auth helper
+// Auth helper — includes Bearer token and CSRF token for all mutating requests
 function getAuthHeaders() {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token') || '';
+    const csrfToken = sessionStorage.getItem('csrfToken') || '';
     return {
         'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
+        'Authorization': token ? `Bearer ${token}` : '',
+        'X-CSRF-Token': csrfToken
     };
 }
 
@@ -132,57 +134,185 @@ function switchTab(tab) {
 
 // View booking details
 function viewBookingDetails(bookingId) {
-    // In a real app, this would navigate to a booking detail page
+    // In a real app, this would navigate to a booking detail page or show a modal
     showToast(`Viewing details for booking #${bookingId}`, 'info');
+    // For now, just show a toast - in production, this would open a detail modal or navigate
+    console.log('View booking details:', bookingId);
+}
+
+// Open service request modal
+function openServiceRequestModal() {
+    // Create and show a modal for new service requests
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm';
+    modal.innerHTML = `
+        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 border border-white/40">
+            <div class="flex justify-between items-center mb-lg">
+                <h3 class="font-h2 text-h2">New Service Request</h3>
+                <button onclick="this.closest('.fixed').remove()" class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="space-y-md">
+                <div>
+                    <label class="font-label-md text-primary uppercase tracking-widest mb-xs block">Request Type</label>
+                    <select class="w-full px-md py-sm rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="room_service">Room Service</option>
+                        <option value="housekeeping">Housekeeping</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="spa">Spa & Wellness</option>
+                        <option value="concierge">Concierge</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-label-md text-primary uppercase tracking-widest mb-xs block">Description</label>
+                    <textarea class="w-full px-md py-sm rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:border-transparent h-32 resize-none" placeholder="Please describe your request..."></textarea>
+                </div>
+                <div>
+                    <label class="font-label-md text-primary uppercase tracking-widest mb-xs block">Preferred Time</label>
+                    <input type="datetime-local" class="w-full px-md py-sm rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:border-transparent">
+                </div>
+                <button class="w-full py-md bg-primary text-white rounded-lg font-button hover:bg-primary/90 transition-all" onclick="submitServiceRequest(this)">
+                    Submit Request
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Submit service request
+async function submitServiceRequest(button) {
+    const modal = button.closest('.fixed');
+    const select = modal.querySelector('select');
+    const textarea = modal.querySelector('textarea');
+    const datetime = modal.querySelector('input[type="datetime-local"]');
+    
+    if (!textarea.value.trim()) {
+        showToast('Please provide a description', 'error');
+        return;
+    }
+    
+    button.textContent = 'Submitting...';
+    button.disabled = true;
+    
+    try {
+        // In a real app, this would call the API
+        // const res = await fetch('/api/service-requests', {
+        //     method: 'POST',
+        //     headers: getAuthHeaders(),
+        //     body: JSON.stringify({
+        //         type: select.value,
+        //         description: textarea.value,
+        //         preferredTime: datetime.value
+        //     })
+        // });
+        
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        showToast('Service request submitted successfully', 'success');
+        modal.remove();
+        
+        // In production, reload the service requests list
+        // loadServiceRequests();
+    } catch (err) {
+        showToast('Failed to submit request. Please try again.', 'error');
+        button.textContent = 'Submit Request';
+        button.disabled = false;
+    }
 }
 
 // Cancel booking
 async function cancelBooking(bookingId) {
-    if (!confirm('Are you sure you want to cancel this booking?')) return;
-    try {
-        const res = await fetch(`/api/bookings/${bookingId}/cancel`, {
-            method: 'PUT',
-            headers: getAuthHeaders()
-        });
-        const data = await res.json();
-        if (data.success) {
-            showToast('Booking cancelled successfully', 'success');
-            // Reload bookings
-            const bookingsRes = await fetch('/api/bookings', { headers: getAuthHeaders() });
-            if (bookingsRes.ok) {
-                const bookingsData = await bookingsRes.json();
-                renderUpcomingBookings(bookingsData.bookings || []);
-                renderPastBookings(bookingsData.bookings || []);
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 z-[200] flex items-center justify-center bg-black/50';
+    overlay.innerHTML = `
+        <div class="bg-white rounded-xl p-lg shadow-xl max-w-sm w-full mx-4 text-center">
+            <p class="font-h3 text-h3 mb-md">Cancel booking?</p>
+            <p class="text-body-sm text-on-surface-variant mb-lg">This action cannot be undone.</p>
+            <div class="flex gap-md justify-center">
+                <button id="confirmCancelYes" class="px-lg py-sm bg-primary text-white rounded-lg font-button">Yes, cancel</button>
+                <button id="confirmCancelNo" class="px-lg py-sm border border-outline-variant rounded-lg font-button">Keep booking</button>
+            </div>
+        </div>`;
+    document.body.appendChild(overlay);
+    document.getElementById('confirmCancelNo').onclick = () => overlay.remove();
+    document.getElementById('confirmCancelYes').onclick = async () => {
+        overlay.remove();
+        try {
+            const res = await fetch(`/api/bookings/${encodeURIComponent(bookingId)}/cancel`, {
+                method: 'PUT',
+                headers: getAuthHeaders()
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast('Booking cancelled successfully', 'success');
+                const bookingsRes = await fetch('/api/bookings', { headers: getAuthHeaders() });
+                if (bookingsRes.ok) {
+                    const bookingsData = await bookingsRes.json();
+                    renderUpcomingBookings(bookingsData.bookings || []);
+                    renderPastBookings(bookingsData.bookings || []);
+                }
+            } else {
+                showToast(data.message || 'Could not cancel booking', 'error');
             }
-        } else {
-            showToast(data.message || 'Could not cancel booking', 'error');
+        } catch (err) {
+            showToast('An error occurred. Please try again.', 'error');
         }
-    } catch (err) {
-        showToast('An error occurred. Please try again.', 'error');
-    }
+    };
 }
 
 // Save settings
 function saveSettings() {
-    const name = document.querySelector('#content-settings input[type="text"]').value;
-    const email = document.querySelector('#content-settings input[type="email"]').value;
-    const phone = document.querySelector('#content-settings input[type="tel"]').value;
-    localStorage.setItem('guestSettings', JSON.stringify({ name, email, phone }));
-    showToast('Settings saved locally', 'success');
+    const nameEl = document.querySelector('#content-settings input[type="text"]');
+    const emailEl = document.querySelector('#content-settings input[type="email"]');
+    const phoneEl = document.querySelector('#content-settings input[type="tel"]');
+
+    const name = nameEl ? nameEl.value.trim().slice(0, 100) : '';
+    const email = emailEl ? emailEl.value.trim().slice(0, 200) : '';
+    const phone = phoneEl ? phoneEl.value.trim().slice(0, 30) : '';
+
+    // Basic email format check
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast('Please enter a valid email address', 'error');
+        return;
+    }
+
+    // Store only non-sensitive display preferences; never store payment/auth data in localStorage
+    try {
+        localStorage.setItem('guestSettings', JSON.stringify({ name, email, phone }));
+        showToast('Settings saved', 'success');
+    } catch (e) {
+        showToast('Could not save settings', 'error');
+    }
 }
 
-// Logout
+// Logout — replaced browser confirm() with custom modal
 function logout() {
-    if (confirm('Are you sure you want to logout?')) {
-        // Call API logout
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 z-[200] flex items-center justify-center bg-black/50';
+    overlay.innerHTML = `
+        <div class="bg-white rounded-xl p-lg shadow-xl max-w-sm w-full mx-4 text-center">
+            <p class="font-h3 text-h3 mb-md">Log out?</p>
+            <p class="text-body-sm text-on-surface-variant mb-lg">You will be returned to the login page.</p>
+            <div class="flex gap-md justify-center">
+                <button id="guestLogoutYes" class="px-lg py-sm bg-primary text-white rounded-lg font-button">Log out</button>
+                <button id="guestLogoutNo" class="px-lg py-sm border border-outline-variant rounded-lg font-button">Cancel</button>
+            </div>
+        </div>`;
+    document.body.appendChild(overlay);
+    document.getElementById('guestLogoutNo').onclick = () => overlay.remove();
+    document.getElementById('guestLogoutYes').onclick = () => {
+        overlay.remove();
         fetch('/api/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('token') || '') } })
             .catch(() => {});
         sessionStorage.clear();
         showToast('Logged out successfully', 'success');
-        setTimeout(() => {
-            window.location.href = '/pages/hotel/login-lumina/';
-        }, 1000);
-    }
+        setTimeout(() => { window.location.href = '/pages/hotel/login-lumina/'; }, 1000);
+    };
 }
 
 // Initialize page
@@ -219,6 +349,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
         renderUpcomingBookings([]);
         renderPastBookings([]);
+    }
+
+    // Event listeners for externalized inline handlers
+    // Book New Stay button
+    const bookNewStayBtn = document.getElementById('bookNewStayBtn');
+    if (bookNewStayBtn) {
+        bookNewStayBtn.addEventListener('click', () => {
+            window.location.href = '/pages/hotel/booking-your-stay/';
+        });
+    }
+
+    // View Details buttons
+    const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
+    viewDetailsBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const bookingId = e.target.dataset.bookingId;
+            if (bookingId && typeof viewBookingDetails === 'function') {
+                viewBookingDetails(bookingId);
+            }
+        });
+    });
+
+    // New Request button
+    const newRequestBtn = document.getElementById('newRequestBtn');
+    if (newRequestBtn) {
+        newRequestBtn.addEventListener('click', () => {
+            if (typeof openServiceRequestModal === 'function') {
+                openServiceRequestModal();
+            }
+        });
     }
 });
 

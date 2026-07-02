@@ -1,5 +1,5 @@
 {
-  "name": "lumina-hotel-management",
+  "name": "@lumina/hotel-management",
   "version": "1.0.0",
   "description": "Lumina Hospitality Hotel Management System",
   "main": "server.js",

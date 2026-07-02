@@ -13,6 +13,17 @@ if (togglePassword && passwordInput && eyeIcon) {
     });
 }
 
+// Fetch CSRF token from server
+async function getCsrfToken() {
+    try {
+        const res = await fetch('/api/csrf-token');
+        const data = await res.json();
+        return data.csrfToken || '';
+    } catch {
+        return '';
+    }
+}
+
 // Handle login form submission
 function handleLogin(e) {
     if (e) e.preventDefault();
@@ -25,22 +36,26 @@ function handleLogin(e) {
         return false;
     }
 
-    // Show loading state
     const originalHTML = submitButton.innerHTML;
     submitButton.disabled = true;
     submitButton.innerHTML = '<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;display:inline-block">hourglass_empty</span> Signing in...';
 
+    // Login is CSRF-exempt (token not yet issued), but fetch one for subsequent calls
     fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
     })
     .then(res => res.json())
-    .then(data => {
+    .then(async data => {
         if (data.success) {
             sessionStorage.setItem('token', data.token);
             sessionStorage.setItem('sessionStart', Date.now());
             sessionStorage.setItem('user', JSON.stringify({ name: data.name, role: data.role }));
+
+            // Pre-fetch and cache a CSRF token for use on the next page
+            const csrfToken = await getCsrfToken();
+            sessionStorage.setItem('csrfToken', csrfToken);
 
             showToast('Login successful! Redirecting...', 'success');
 

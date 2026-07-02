@@ -182,22 +182,16 @@ const validateRequest = (schema) => {
  * Prevents injection attacks and invalid query parameters
  */
 const sanitizeQuery = (req, res, next) => {
-  const originalQuery = req.query;
-  
-  // Remove potentially dangerous parameters
-  const dangerousParams = ['__proto__', 'constructor', 'prototype'];
-  
-  for (const param of dangerousParams) {
-    delete originalQuery[param];
+  const dangerous = new Set(['__proto__', 'constructor', 'prototype']);
+  const cleaned = Object.create(null);
+
+  for (const key of Object.keys(req.query)) {
+    if (dangerous.has(key)) continue;
+    const val = req.query[key];
+    cleaned[key] = typeof val === 'string' ? val.trim().substring(0, 1000) : val;
   }
-  
-  // Sanitize string parameters
-  for (const key in originalQuery) {
-    if (typeof originalQuery[key] === 'string') {
-      originalQuery[key] = originalQuery[key].trim().substring(0, 1000);
-    }
-  }
-  
+
+  req.query = cleaned;
   next();
 };
 
@@ -240,7 +234,7 @@ const securityHeaders = (req, res, next) => {
  * Adds unique ID to each request for tracing
  */
 const requestId = (req, res, next) => {
-  req.id = req.headers['x-request-id'] || `req-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  req.id = req.headers['x-request-id'] || `req-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
   res.setHeader('X-Request-ID', req.id);
   next();
 };

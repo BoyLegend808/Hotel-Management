@@ -6,7 +6,6 @@ const { registerPageRoutes } = require("./backend/page-router");
 const {
   apiRateLimiter,
   strictRateLimiter,
-  writeRateLimiter,
   requestLogger,
   errorHandler,
   notFoundHandler,
@@ -16,6 +15,8 @@ const {
   requestId,
   healthCheck
 } = require("./backend/middleware");
+const { requireAuth, requireRole } = require("./backend/auth");
+const { csrfMiddleware, generateToken } = require("./backend/csrf");
 const { logger, performanceMonitor } = require("./backend/logger");
 const { memoryLeakPrevention } = require("./backend/memory-prevention");
 const cacheManager = require("./backend/cache");
@@ -125,13 +126,13 @@ app.get("/:asset", (req, res, next) => {
 // Health check endpoint
 app.get("/health", healthCheck);
 
-// Cache stats endpoint (for monitoring)
-app.get("/api/cache-stats", (req, res) => {
+// Cache stats endpoint (protected — admin only)
+app.get("/api/cache-stats", requireAuth, requireRole("admin"), (req, res) => {
   res.json(cacheManager.getStats());
 });
 
-// Performance monitoring endpoint
-app.get("/api/performance-stats", (req, res) => {
+// Performance monitoring endpoint (protected — admin only)
+app.get("/api/performance-stats", requireAuth, requireRole("admin"), (req, res) => {
   res.json({
     logger: logger.getStats(),
     performance: performanceMonitor.getReport(),
@@ -139,9 +140,18 @@ app.get("/api/performance-stats", (req, res) => {
   });
 });
 
+// CSRF token endpoint — must be before csrfMiddleware
+app.get("/api/csrf-token", (req, res) => {
+  res.json({ csrfToken: generateToken() });
+});
+
 // Apply rate limiting to API routes
 app.use("/api/login", strictRateLimiter.middleware());
 app.use("/api", apiRateLimiter.middleware());
+
+// CSRF protection for all state-changing API routes
+app.use("/api", csrfMiddleware);
+
 app.use("/api", apiRoutes);
 
 // Register page routes (no rate limiting for public pages)

@@ -1,8 +1,12 @@
 const express = require("express");
 const { requireAuth, requireRole } = require("../auth");
 const { readDB, writeDB } = require("../db-optimized");
+const { csrfMiddleware } = require("../csrf");
 
 const router = express.Router();
+
+// Apply CSRF protection to all state-changing routes in this router
+router.use(csrfMiddleware);
 
 // Get all payments (admin only)
 router.get("/", requireAuth, requireRole("admin"), async (req, res) => {
@@ -32,7 +36,7 @@ router.get("/booking/:bookingId", requireAuth, async (req, res) => {
 // Create payment for a booking
 router.post("/", requireAuth, async (req, res) => {
   const db = await readDB();
-  const { bookingId, amount, paymentMethod, cardDetails } = req.body;
+  const { bookingId, paymentMethod } = req.body;
 
   const booking = (db.bookings || []).find(b => b.id === parseInt(bookingId));
   if (!booking) {
@@ -44,12 +48,20 @@ router.post("/", requireAuth, async (req, res) => {
     return res.status(403).json({ success: false, message: "Access denied" });
   }
 
+  // Prevent double-payment
+  const alreadyPaid = (db.payments || []).some(
+    p => p.bookingId === parseInt(bookingId) && p.status === "completed"
+  );
+  if (alreadyPaid) {
+    return res.status(400).json({ success: false, message: "Booking already paid" });
+  }
+
   const newPayment = {
     id: Date.now(),
     bookingId: parseInt(bookingId),
-    amount: amount || booking.total,
-    paymentMethod: paymentMethod || "card",
-    cardLastFour: cardDetails && cardDetails.number ? String(cardDetails.number).replace(/\s/g, "").slice(-4) : null,
+    amount: booking.total, // always use server-calculated total, never client-supplied
+    paymentMethod: ["card", "cash", "transfer"].includes(paymentMethod) ? paymentMethod : "card",
+    // Note: never store raw card details — only a masked last-4 from a real payment gateway
     status: "completed",
     createdAt: new Date().toISOString()
   };

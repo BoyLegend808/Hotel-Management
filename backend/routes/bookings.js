@@ -1,8 +1,12 @@
 const express = require("express");
 const { requireAuth, requireRole } = require("../auth");
 const { readDB, writeDB } = require("../db-optimized");
+const { csrfMiddleware } = require("../csrf");
 
 const router = express.Router();
+
+// Apply CSRF protection to all state-changing routes in this router
+router.use(csrfMiddleware);
 
 // Get all bookings (admin only) or user's bookings (guest)
 router.get("/", requireAuth, async (req, res) => {

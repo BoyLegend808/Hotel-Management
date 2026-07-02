@@ -43,6 +43,8 @@ build/
 .env
 .env.local
 .env.*.local
+.env.config
+.env.config.js
 
 # Temporary files
 *.tmp

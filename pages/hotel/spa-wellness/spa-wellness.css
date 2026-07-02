@@ -1,0 +1,264 @@
+/* ═══════════════════════════════════════
+   Spa & Wellness Page — Lumina Hospitality
+   ═══════════════════════════════════════ */
+
+/* Tall hero variant */
+.page-hero--tall { height: 70vh; min-height: 500px; }
+
+/* Left-aligned hero overlay */
+.page-hero-overlay--left {
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5), transparent);
+}
+
+/* Left-aligned hero content */
+.page-hero-content--left {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 4rem;
+    text-align: left;
+    max-width: 56rem;
+}
+
+.page-hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.btn-ghost-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.875rem 1.75rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: background var(--transition-base);
+}
+
+.btn-ghost-white:hover { background: rgba(255,255,255,0.25); }
+.btn-ghost-white .material-symbols-outlined { font-size: 1.25rem; }
+
+/* Section */
+.spa-section {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+/* Packages grid */
+.spa-packages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 5rem;
+}
+
+.spa-card {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    background: var(--bg-surface);
+    transition: transform var(--transition-luxury), box-shadow var(--transition-luxury);
+}
+
+.spa-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-warm-md);
+}
+
+.spa-card-img {
+    position: relative;
+    height: 18rem;
+    overflow: hidden;
+}
+
+.spa-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 700ms ease;
+}
+
+.spa-card:hover .spa-card-img img { transform: scale(1.08); }
+
+.spa-card-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.spa-card-badge--primary { background: var(--primary); }
+.spa-card-badge--pink    { background: #ec4899; }
+.spa-card-badge--green   { background: #16a34a; }
+
+.spa-card-price {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(255,255,255,0.95);
+    color: var(--primary);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-lg);
+}
+
+.spa-card-body { padding: 1.5rem; }
+
+.spa-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.625rem;
+}
+
+.spa-card-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.spa-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+.spa-card-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.spa-card-rating .material-symbols-outlined {
+    color: var(--accent);
+    font-size: 1rem;
+}
+
+.btn-full { width: 100%; justify-content: center; }
+
+/* Treatment table */
+.spa-menu { margin-top: 2rem; }
+
+.spa-table-wrap {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    margin-top: 2rem;
+}
+
+.spa-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spa-table thead tr {
+    background: var(--bg-warm);
+    border-bottom: 2px solid var(--border-light);
+}
+
+.spa-table th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.spa-table tbody tr {
+    border-bottom: 1px solid var(--border-light);
+    transition: background var(--transition-fast);
+}
+
+.spa-table tbody tr:last-child { border-bottom: none; }
+.spa-table tbody tr:hover { background: var(--bg-warm); }
+
+.spa-table td {
+    padding: 1rem 1.25rem;
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    vertical-align: middle;
+}
+
+.spa-treatment-name {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.125rem;
+}
+
+.spa-treatment-sub {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.spa-price {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.spa-book-link {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    text-align: right;
+    display: block;
+}
+
+.spa-book-link:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .spa-packages { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .spa-section { padding: 3rem 1.25rem; }
+    .spa-packages { grid-template-columns: 1fr; gap: 1.25rem; }
+    .spa-card-img { height: 15rem; }
+    .spa-card-body { padding: 1.25rem; }
+    .spa-card-title { font-size: 1.25rem; }
+
+    .page-hero-content--left { padding: 0 1.25rem; }
+    .page-hero-actions { flex-direction: column; gap: 0.75rem; }
+    .page-hero-actions .btn { width: 100%; justify-content: center; }
+
+    .spa-table-wrap { overflow-x: auto; }
+    .spa-table { min-width: 480px; }
+    .spa-table th, .spa-table td { padding: 0.875rem 1rem; }
+}
+
+@media (max-width: 480px) {
+    .spa-card-img { height: 13rem; }
+    .spa-card-price { font-size: 1rem; padding: 0.375rem 0.75rem; }
+}

@@ -132,23 +132,25 @@ npm start
 
 ### 2. Login with Demo Credentials
 
+> ⚠️ **Security Notice:** Demo credentials are stored in `.env.config.js` (development only). Never commit real credentials to version control. Refer to that file for current login values.
+
 **Admin Portal:**
 
 - URL: `http://localhost:3000/pages/admin/login/`
-- Username: `admin`
-- Password: `demo1234`
+- Username: `<admin-username>` *(see `.env.config.js`)*
+- Password: `<admin-password>` *(see `.env.config.js`)*
 - Redirect: `/pages/admin/dashboard/`
 
 **Staff Portal:**
 
-- Username: `staffnurse` or `staff`
-- Password: `demo1234`
+- Username: `<staff-username>` *(see `.env.config.js`)*
+- Password: `<staff-password>` *(see `.env.config.js`)*
 - Redirect: `/pages/staff-portal/dashboard/`
 
 **Family Portal:**
 
-- Username: `henderson` or `family`
-- Password: `demo1234`
+- Username: `<family-username>` *(see `.env.config.js`)*
+- Password: `<family-password>` *(see `.env.config.js`)*
 - Redirect: `/pages/family-portal/dashboard/`
 
 ### 3. Features to Test
@@ -389,9 +391,7 @@ resources: []      # Care resources/materials
 
 **Demo Credentials Available:**
 
-- Admin Account: `admin` / `demo1234`
-- Staff Account: `staffnurse` / `demo1234`
-- Family Account: `henderson` / `demo1234`
+> Credentials are defined in `.env.config.js`. Do not expose real credentials in documentation.
 
 **Server Status:** http://localhost:3000
 

@@ -107,44 +107,112 @@ function updateProgressIndicators(step) {
     }
 }
 
-// Validate current step
+// Validate current step with enhanced validation
 function validateStep(step) {
     if (step === 1) {
         const checkIn = document.getElementById('checkin').value;
         const checkOut = document.getElementById('checkout').value;
         
         if (!checkIn || !checkOut) {
-            showToast('Please select check-in and check-out dates', 'error');
+            showFieldError('checkin', 'Please select check-in and check-out dates');
             return false;
         }
 
         const checkInDate = new Date(checkIn);
         const checkOutDate = new Date(checkOut);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        if (checkInDate < today) {
+            showFieldError('checkin', 'Check-in date cannot be in the past');
+            return false;
+        }
         
         if (checkOutDate <= checkInDate) {
-            showToast('Check-out date must be after check-in date', 'error');
+            showFieldError('checkout', 'Check-out date must be after check-in date');
+            return false;
+        }
+
+        const maxNights = 30;
+        const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+        if (nights > maxNights) {
+            showFieldError('checkout', `Maximum stay is ${maxNights} nights`);
             return false;
         }
 
         bookingData.checkIn = checkIn;
         bookingData.checkOut = checkOut;
-        // Mock guest count as it's purely UI right now
         bookingData.guests = 2;
+        clearFieldErrors();
     } else if (step === 2) {
         if (!selectedRoom) {
             showToast('Please select a room', 'error');
             return false;
         }
         bookingData.roomId = selectedRoom.id;
+    } else if (step === 3) {
+        const cardName = document.querySelector('input[placeholder="Name on Card"]').value;
+        const cardNumber = document.querySelector('input[placeholder="Card Number"]').value;
+        const cardExpiry = document.querySelector('input[placeholder="Expiry (MM/YY)"]').value;
+        const cardCvc = document.querySelector('input[placeholder="CVC"]').value;
+
+        if (!cardName || cardName.trim().length < 2) {
+            showFieldError('cardName', 'Please enter cardholder name');
+            return false;
+        }
+
+        if (!cardNumber || !/^\d{16}$/.test(cardNumber.replace(/\s/g, ''))) {
+            showFieldError('cardNumber', 'Please enter a valid 16-digit card number');
+            return false;
+        }
+
+        if (!cardExpiry || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(cardExpiry)) {
+            showFieldError('cardExpiry', 'Please enter valid expiry (MM/YY)');
+            return false;
+        }
+
+        if (!cardCvc || !/^\d{3,4}$/.test(cardCvc)) {
+            showFieldError('cardCvc', 'Please enter valid CVC (3-4 digits)');
+            return false;
+        }
+
+        clearFieldErrors();
     }
 
     return true;
 }
 
-// Load room selection
+// Show field-specific error
+function showFieldError(fieldId, message) {
+    clearFieldErrors();
+    const field = document.getElementById(fieldId) || document.querySelector(`input[placeholder="${fieldId}"]`);
+    if (field) {
+        field.classList.add('border-red-500', 'ring-2', 'ring-red-200');
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'text-red-500 text-sm mt-1 font-medium';
+        errorDiv.id = `${fieldId}-error`;
+        errorDiv.textContent = message;
+        field.parentNode.appendChild(errorDiv);
+    }
+    showToast(message, 'error');
+}
+
+// Clear all field errors
+function clearFieldErrors() {
+    document.querySelectorAll('.border-red-500').forEach(el => {
+        el.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+    });
+    document.querySelectorAll('[id$="-error"]').forEach(el => el.remove());
+}
+
+// Load room selection with real-time price calculation
 function loadRoomSelection() {
     const roomSelection = document.getElementById('roomSelection');
     if (!roomSelection) return;
+
+    const checkIn = bookingData.checkIn ? new Date(bookingData.checkIn) : null;
+    const checkOut = bookingData.checkOut ? new Date(bookingData.checkOut) : null;
+    const nights = checkIn && checkOut ? Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24)) : 1;
 
     roomSelection.innerHTML = availableRooms.map(room => {
         const isSelected = selectedRoom && selectedRoom.id === room.id;
@@ -156,6 +224,8 @@ function loadRoomSelection() {
             ? "px-md py-sm bg-primary text-on-primary rounded font-button text-button transition-all flex items-center gap-2"
             : "px-md py-sm bg-primary/10 text-primary border border-primary/20 rounded font-button text-button hover:bg-primary hover:text-on-primary transition-all";
             
+        const totalPrice = room.price * nights;
+            
         return `
         <div class="${containerClasses}">
             <div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
@@ -165,9 +235,10 @@ function loadRoomSelection() {
                 <div>
                     <h4 class="font-h3 text-h3 text-on-surface">${room.name}</h4>
                     <p class="font-body-sm text-body-sm text-on-surface-variant">${room.description}</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">$${room.price}/night × ${nights} night${nights > 1 ? 's' : ''}</p>
                 </div>
                 <div class="flex justify-between items-end mt-2 md:mt-0">
-                    <div class="text-primary font-h3">$${room.price} <span class="text-body-sm text-outline">/ night</span></div>
+                    <div class="text-primary font-h3">$${totalPrice.toLocaleString()} <span class="text-body-sm text-outline">total</span></div>
                     <button class="${buttonClasses}" onclick="selectRoom(${room.id})">
                         ${isSelected ? '<span class="material-symbols-outlined text-sm">check</span> Selected' : 'Select'}
                     </button>
@@ -217,49 +288,62 @@ function loadOrderSummary() {
 
 // Get auth headers from session
 function getAuthHeaders() {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token') || '';
+    const csrfToken = sessionStorage.getItem('csrfToken') || '';
     return {
         'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
+        'Authorization': token ? `Bearer ${token}` : '',
+        'X-CSRF-Token': csrfToken
     };
 }
 
-// Complete booking
+// Complete booking with improved error handling
 async function completeBooking() {
-    const guestName = document.getElementById('guestName').value;
-    const guestEmail = document.getElementById('guestEmail').value;
-    const guestPhone = document.getElementById('guestPhone').value;
-    const cardNumber = document.getElementById('cardNumber').value;
-    const cardExpiry = document.getElementById('cardExpiry').value;
-    const cardCvv = document.getElementById('cardCvv').value;
-    const cardName = document.getElementById('cardName').value;
+    const cardName = document.querySelector('input[placeholder="Name on Card"]').value;
+    const cardNumber = document.querySelector('input[placeholder="Card Number"]').value;
+    const cardExpiry = document.querySelector('input[placeholder="Expiry (MM/YY)"]').value;
+    const cardCvc = document.querySelector('input[placeholder="CVC"]').value;
 
-    if (!guestName || !guestEmail || !guestPhone) {
-        showToast('Please fill in all guest information', 'error');
+    // Validate payment form
+    if (!cardName || cardName.trim().length < 2) {
+        showFieldError('cardName', 'Please enter cardholder name');
         return;
     }
 
-    if (!cardNumber || !cardExpiry || !cardCvv || !cardName) {
-        showToast('Please fill in all payment information', 'error');
+    if (!cardNumber || !/^\d{16}$/.test(cardNumber.replace(/\s/g, ''))) {
+        showFieldError('cardNumber', 'Please enter a valid 16-digit card number');
         return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(guestEmail)) {
-        showToast('Please enter a valid email address', 'error');
+    if (!cardExpiry || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(cardExpiry)) {
+        showFieldError('cardExpiry', 'Please enter valid expiry (MM/YY)');
         return;
     }
 
-    bookingData.guestName = guestName;
-    bookingData.guestEmail = guestEmail;
-    bookingData.guestPhone = guestPhone;
-
-    showToast('Processing your booking...', 'info');
+    if (!cardCvc || !/^\d{3,4}$/.test(cardCvc)) {
+        showFieldError('cardCvc', 'Please enter valid CVC (3-4 digits)');
+        return;
+    }
 
     // Check if logged in
     if (!sessionStorage.getItem('token')) {
         showToast('Please sign in to complete your booking', 'error');
+        setTimeout(() => {
+            window.location.href = '/pages/hotel/login-lumina/';
+        }, 1500);
         return;
+    }
+
+    // Show loading state
+    const btnText = document.getElementById('btn-text');
+    const btnLoader = document.getElementById('btn-loader');
+    const confirmBtn = document.querySelector('button[onclick="completeBooking()"]');
+    
+    if (btnText && btnLoader && confirmBtn) {
+        btnText.textContent = 'Processing...';
+        btnLoader.classList.remove('hidden');
+        confirmBtn.disabled = true;
+        confirmBtn.classList.add('opacity-70', 'cursor-not-allowed');
     }
 
     try {
@@ -273,18 +357,21 @@ async function completeBooking() {
                 checkOut: bookingData.checkOut,
                 guests: bookingData.guests,
                 guestInfo: {
-                    name: guestName,
-                    email: guestEmail,
-                    phone: guestPhone
+                    name: cardName,
+                    email: sessionStorage.getItem('userEmail') || '',
+                    phone: sessionStorage.getItem('userPhone') || ''
                 }
             })
         });
 
+        if (!bookingRes.ok) {
+            throw new Error(`Booking API returned ${bookingRes.status}`);
+        }
+
         const bookingData_res = await bookingRes.json();
 
         if (!bookingData_res.success) {
-            showToast(bookingData_res.message || 'Booking failed', 'error');
-            return;
+            throw new Error(bookingData_res.message || 'Booking failed');
         }
 
         // Process payment
@@ -299,6 +386,10 @@ async function completeBooking() {
             })
         });
 
+        if (!paymentRes.ok) {
+            throw new Error(`Payment API returned ${paymentRes.status}`);
+        }
+
         const paymentData = await paymentRes.json();
 
         if (paymentData.success) {
@@ -307,10 +398,41 @@ async function completeBooking() {
                 window.location.href = '/pages/hotel/guest-dashboard-lumina/';
             }, 2000);
         } else {
-            showToast(paymentData.message || 'Payment failed', 'error');
+            throw new Error(paymentData.message || 'Payment failed');
         }
     } catch (err) {
-        showToast('An error occurred. Please try again.', 'error');
+        console.error('Booking error:', err);
+        
+        // Handle specific error types
+        let errorMessage = 'An error occurred. Please try again.';
+        
+        if (err.message.includes('network') || err.message.includes('fetch')) {
+            errorMessage = 'Network error. Please check your connection and try again.';
+        } else if (err.message.includes('401') || err.message.includes('403')) {
+            errorMessage = 'Session expired. Please sign in again.';
+            setTimeout(() => {
+                window.location.href = '/pages/hotel/login-lumina/';
+            }, 2000);
+        } else if (err.message.includes('409')) {
+            errorMessage = 'This room is already booked for the selected dates.';
+        } else if (err.message.includes('400')) {
+            errorMessage = 'Invalid booking details. Please review and try again.';
+        }
+        
+        showToast(errorMessage, 'error');
+    } finally {
+        // Reset button state
+        if (btnText && btnLoader && confirmBtn) {
+            const checkIn = new Date(bookingData.checkIn);
+            const checkOut = new Date(bookingData.checkOut);
+            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+            const total = selectedRoom.price * nights;
+            
+            btnText.textContent = `Confirm & Pay $${total.toLocaleString()}`;
+            btnLoader.classList.add('hidden');
+            confirmBtn.disabled = false;
+            confirmBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+        }
     }
 }
 

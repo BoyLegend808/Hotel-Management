@@ -1,52 +1,99 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Booking Wizard | Lumina Hospitality</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Roboto+Slab:wght@500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { DEFAULT: '#006683', 50: '#e8f4f8', 100: '#d1e9f4', 200: '#a8d4e9', 300: '#7bb8dd', 400: '#4d9cd1', 500: '#2980b9', 600: '#1f6391', 700: '#164a6a', 800: '#0f3247', 900: '#081e2b', container: '#bde9ff', fixed: '#bde9ff', 'fixed-dim': '#6fd2f9' },
-                        secondary: { DEFAULT: '#4e6778', 50: '#fef9e7', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', container: '#d1e5f5' },
-                        background: '#f5fafd',
-                        surface: { DEFAULT: '#f5fafd', dim: '#d5dbe0', container: '#dde3e7', 'container-low': '#e7edf0' },
-                        'on-surface': '#171c1f', 'on-surface-variant': '#3f484d', 'on-primary': '#ffffff', 'on-secondary': '#ffffff', 'on-background': '#171c1f',
-                        outline: { DEFAULT: '#6f797e', variant: '#bfc8cd' }
-                    },
-                    borderRadius: { 'sm': '0.25rem', DEFAULT: '0.375rem', 'lg': '0.5rem', 'xl': '0.75rem', '2xl': '1rem', '3xl': '1.5rem', 'full': '9999px' },
-                    spacing: { 'gutter': '1.5rem', 'container-margin': '2rem', 'xs': '0.25rem', 'sm': '0.5rem', 'md': '1rem', 'lg': '1.5rem', 'xl': '2rem', '2xl': '3rem', '3xl': '4rem' },
-                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], serif: ['Roboto Slab', 'Georgia', 'serif'], body: ['Inter', 'system-ui', 'sans-serif'] },
-                    boxShadow: { 'soft': '0 4px 20px rgba(0, 0, 0, 0.08)', 'glass': '0 8px 32px rgba(0, 102, 131, 0.12)' },
-                    backdropBlur: { '3xl': '32px' },
-                    maxWidth: { '7xl': '80rem', '6xl': '72rem' },
-                    height: { '707': '707px', '500': '500px' }
-                }
-            }
-        }
-    </script>
+<meta name="description" content="Book your luxury stay at Lumina Hospitality with our easy-to-use booking wizard."/>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<!-- Styles -->
+<link href="/css/lumina-design-system.css" rel="stylesheet"/>
+<link href="/css/global-nav.css" rel="stylesheet"/>
+<link href="/css/global-footer.css" rel="stylesheet"/>
+<link href="/css/hotel-utils.css" rel="stylesheet"/>
+<link href="/css/ui-utils.css" rel="stylesheet"/>
 <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.3);
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .dark .glass-card {
-            background: rgba(30, 30, 30, 0.6);
-            border-color: rgba(255, 255, 255, 0.1);
+        /* Multi-step Wizard Styles */
+        .wizard-container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .floating-label-container {
+        .wizard-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
             position: relative;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s ease;
+        }
+        .wizard-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e8e3d8;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        .wizard-step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .wizard-step-number {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #e8e3d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #6b6b6b;
+            transition: all 0.3s ease;
+        }
+        .wizard-step.active .wizard-step-number {
+            background: #004d61;
+            border-color: #004d61;
+            color: #fff;
+        }
+        .wizard-step.completed .wizard-step-number {
+            background: #c5a059;
+            border-color: #c5a059;
+            color: #fff;
+        }
+        .wizard-step-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6b6b6b;
+        }
+        .wizard-step.active .wizard-step-label {
+            color: #004d61;
+            font-weight: 600;
+        }
+        .wizard-content {
+            display: none;
+        }
+        .wizard-content.active {
+            display: block;
+        }
+        .wizard-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e8e3d8;
         }
         .floating-label-container:focus-within {
             border-color: #006683;
@@ -81,36 +128,117 @@
     </style>
 </head>
 <body class="font-body-md text-on-surface min-h-screen">
-<!-- Top Navigation Bar -->
-<header role="banner" class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm transition-standard">
-<div class="flex items-center gap-md">
-<span class="material-symbols-outlined text-primary text-h2 cursor-pointer hover:opacity-80 transition-opacity" onclick="goBack()">arrow_back</span>
-<h1 class="font-h2 text-h2 tracking-tight text-primary font-bold" style="font-family:'Roboto Slab', serif;">Lumina Hospitality</h1>
-</div>
-<nav role="navigation" class="hidden lg:flex items-center gap-lg">
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
-<a class="font-label-md text-label-md text-primary font-bold hover:text-primary-light transition-colors" href="/pages/hotel/booking-your-stay/booking-your-stay.html">Bookings</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
-<div class="relative group">
-<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs">More <span class="material-symbols-outlined text-sm">expand_more</span></button>
-<div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-xl rounded-xl border border-outline-variant/20 p-md top-full left-0 min-w-[200px] z-50">
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
-<a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
-</div>
-</div>
+<!-- Global Navigation -->
+<nav class="global-nav">
+    <div class="nav-container">
+        <a href="/pages/hotel/home-lumina/home-lumina.html" class="nav-logo">Lumina Hospitality</a>
+        
+        <div class="nav-links">
+            <a href="/pages/hotel/home-lumina/home-lumina.html" class="nav-link">Home</a>
+            <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="nav-link">Rooms & Suites</a>
+            <a href="/pages/hotel/special-offers/special-offers.html" class="nav-link">Offers</a>
+            <a href="/pages/hotel/dining-lumina/dining-lumina.html" class="nav-link">Dining</a>
+            <a href="/pages/hotel/spa-wellness/spa-wellness.html" class="nav-link">Spa</a>
+            <a href="/pages/hotel/gallery-lumina/gallery-lumina.html" class="nav-link">Gallery</a>
+            
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-toggle nav-link">
+                    More <span class="material-symbols-outlined">expand_more</span>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="/pages/hotel/local-area/local-area.html" class="nav-dropdown-item">
+                        <span class="material-symbols-outlined">place</span>
+                        Local Area Guide
+                    </a>
+                    <a href="/pages/hotel/meetings-events/meetings-events.html" class="nav-dropdown-item">
+                        <span class="material-symbols-outlined">event</span>
+                        Meetings & Events
+                    </a>
+                    <a href="/pages/hotel/reviews-lumina/reviews-lumina.html" class="nav-dropdown-item">
+                        <span class="material-symbols-outlined">star</span>
+                        Guest Reviews
+                    </a>
+                    <a href="/pages/hotel/about-lumina/about-lumina.html" class="nav-dropdown-item">
+                        <span class="material-symbols-outlined">info</span>
+                        About Us
+                    </a>
+                    <a href="/pages/hotel/contact-lumina/contact-lumina.html" class="nav-dropdown-item">
+                        <span class="material-symbols-outlined">contact_phone</span>
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-actions">
+            <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="nav-cta active">Book Your Stay</a>
+            <button class="mobile-menu-btn" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
 </nav>
-<div class="flex items-center gap-md">
-<a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="hidden sm:inline-flex items-center gap-2 bg-primary text-white font-button text-button px-lg py-sm rounded-full hover:bg-primary-light transition-standard shadow-lg shadow-primary/10">Book Stay</a>
-<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm" id="userAvatar">U</div>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="/pages/hotel/home-lumina/home-lumina.html" class="nav-logo">Lumina Hospitality</a>
+        <button class="mobile-menu-close" aria-label="Close menu">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+    <nav class="mobile-menu-links">
+        <a href="/pages/hotel/home-lumina/home-lumina.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">home</span>
+            Home
+        </a>
+        <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">bed</span>
+            Rooms & Suites
+        </a>
+        <a href="/pages/hotel/special-offers/special-offers.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">local_offer</span>
+            Special Offers
+        </a>
+        <a href="/pages/hotel/dining-lumina/dining-lumina.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">restaurant</span>
+            Dining
+        </a>
+        <a href="/pages/hotel/spa-wellness/spa-wellness.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">spa</span>
+            Spa & Wellness
+        </a>
+        <a href="/pages/hotel/gallery-lumina/gallery-lumina.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">photo_library</span>
+            Gallery
+        </a>
+        <a href="/pages/hotel/local-area/local-area.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">place</span>
+            Local Area Guide
+        </a>
+        <a href="/pages/hotel/meetings-events/meetings-events.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">event</span>
+            Meetings & Events
+        </a>
+        <a href="/pages/hotel/reviews-lumina/reviews-lumina.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">star</span>
+            Guest Reviews
+        </a>
+        <a href="/pages/hotel/about-lumina/about-lumina.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">info</span>
+            About Us
+        </a>
+        <a href="/pages/hotel/contact-lumina/contact-lumina.html" class="mobile-menu-link">
+            <span class="material-symbols-outlined">contact_phone</span>
+            Contact Us
+        </a>
+    </nav>
 </div>
-</header>
 <main role="main" class="pt-32 pb-20 px-container-margin max-w-7xl mx-auto">
 <!-- Step Indicator -->
 <div class="flex justify-center mb-xl">
@@ -324,26 +452,92 @@
 </aside>
 </div>
 </main>
-<!-- Bottom Mobile Nav -->
-<footer role="contentinfo" class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-sm pb-safe bg-white/70 backdrop-blur-3xl border-t border-white/30 shadow-[0_-8px_32px_0_rgba(0,0,0,0.08)] rounded-t-xl">
-<div class="flex flex-col items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
-</div>
-<div class="flex flex-col items-center justify-center text-primary font-bold">
-<span class="material-symbols-outlined">bed</span>
-<span class="font-label-md text-label-md">Rooms</span>
-</div>
-<div class="flex flex-col items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">calendar_month</span>
-<span class="font-label-md text-label-md">Bookings</span>
-</div>
-<div class="flex flex-col items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">person</span>
-<span class="font-label-md text-label-md">Profile</span>
-</div>
+
+<!-- Global Footer -->
+<footer class="global-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <!-- Brand Column -->
+            <div class="footer-column">
+                <a href="/pages/hotel/home-lumina/home-lumina.html" class="footer-logo">Lumina Hospitality</a>
+                <p class="footer-description">Experience world-class hospitality in the heart of Lagos. From stunning ocean views to our award-winning spa, every moment is crafted for perfection.</p>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link" aria-label="Facebook">
+                        <span class="material-symbols-outlined">facebook</span>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Instagram">
+                        <span class="material-symbols-outlined">photo_camera</span>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Twitter">
+                        <span class="material-symbols-outlined">alternate_email</span>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <span class="material-symbols-outlined">work</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="footer-column">
+                <h4 class="footer-heading">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="footer-link">Rooms & Suites</a>
+                    <a href="/pages/hotel/special-offers/special-offers.html" class="footer-link">Special Offers</a>
+                    <a href="/pages/hotel/dining-lumina/dining-lumina.html" class="footer-link">Dining</a>
+                    <a href="/pages/hotel/spa-wellness/spa-wellness.html" class="footer-link">Spa & Wellness</a>
+                </div>
+            </div>
+            
+            <!-- Explore -->
+            <div class="footer-column">
+                <h4 class="footer-heading">Explore</h4>
+                <div class="footer-links">
+                    <a href="/pages/hotel/local-area/local-area.html" class="footer-link">Local Area Guide</a>
+                    <a href="/pages/hotel/meetings-events/meetings-events.html" class="footer-link">Meetings & Events</a>
+                    <a href="/pages/hotel/gallery-lumina/gallery-lumina.html" class="footer-link">Gallery</a>
+                    <a href="/pages/hotel/about-lumina/about-lumina.html" class="footer-link">About Us</a>
+                </div>
+            </div>
+            
+            <!-- Contact -->
+            <div class="footer-column">
+                <h4 class="footer-heading">Contact Us</h4>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <span class="footer-contact-text">Plot 14, Ahmadu Bello Way, Victoria Island, Lagos</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">call</span>
+                    <span class="footer-contact-text">+234 1 277 2700</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="material-symbols-outlined">mail</span>
+                    <span class="footer-contact-text">reservations@lumina.com</span>
+                </div>
+                <div class="footer-newsletter">
+                    <form class="footer-newsletter-form">
+                        <input type="email" class="footer-newsletter-input" placeholder="Your email address" />
+                        <button type="submit" class="footer-newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2024 Lumina Hospitality. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                <a href="#" class="footer-bottom-link">Terms of Service</a>
+                <a href="#" class="footer-bottom-link">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
 </footer>
-    <script src="/js/ui-utils.js"></script>
-    <script src="/js/page-init.js"></script>
-    <script src="/pages/hotel/booking-your-stay/booking-your-stay.js"></script>
+
+<!-- Scripts -->
+<script src="/js/global-nav.js"></script>
+<script src="/js/ui-utils.js"></script>
+<script src="/js/page-init.js"></script>
+<script src="/pages/hotel/booking-your-stay/booking-your-stay.js"></script>
 </body></html>

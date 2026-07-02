@@ -72,11 +72,13 @@ function setupLogout() {
             e.preventDefault();
             try {
                 const token = sessionStorage.getItem('token') || '';
+                const csrfToken = sessionStorage.getItem('csrfToken') || '';
                 await fetch('/api/logout', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`,
+                        'X-CSRF-Token': csrfToken
                     }
                 });
             } catch (error) {

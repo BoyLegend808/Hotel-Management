@@ -3,15 +3,13 @@
  * Provides tools and utilities to prevent memory leaks in the application
  */
 
-const logger = require('./logger');
+const { logger } = require('./logger');
 
 /**
  * Helper function for safe logging
  */
 function safeLog(level, message, meta = {}) {
-  if (logger.log) {
-    logger.log(level, message, meta);
-  } else if (logger[level]) {
+  if (typeof logger[level] === 'function') {
     logger[level](message, meta);
   } else {
     console.log(`[${level.toUpperCase()}] ${message}`, meta);
@@ -153,7 +151,7 @@ class MemoryLeakPrevention {
    * Track a request
    */
   trackRequest(req, res, id = null) {
-    const requestId = id || `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const requestId = id || `req_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
     this.requests.set(requestId, {
       req,
       res,

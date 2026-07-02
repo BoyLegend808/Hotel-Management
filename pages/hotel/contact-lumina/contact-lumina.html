@@ -1,314 +1,143 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Contact Us & Location Map | Lumina Hospitality</title>
-    <link href="/css/ui-utils.css" rel="stylesheet"/>
-    <link href="/css/lumina-design-system.css" rel="stylesheet"/>
-    <link href="/css/tailwind-output.css" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { DEFAULT: '#006683', 50: '#e8f4f8', 100: '#d1e9f4', 200: '#a8d4e9', 300: '#7bb8dd', 400: '#4d9cd1', 500: '#2980b9', 600: '#1f6391', 700: '#164a6a', 800: '#0f3247', 900: '#081e2b', container: '#bde9ff', fixed: '#bde9ff', 'fixed-dim': '#6fd2f9' },
-                        secondary: { DEFAULT: '#4e6778', 50: '#fef9e7', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', container: '#d1e5f5' },
-                        background: '#f5fafd',
-                        surface: { DEFAULT: '#f5fafd', dim: '#d5dbe0', container: '#dde3e7', 'container-low': '#e7edf0' },
-                        'on-surface': '#171c1f', 'on-surface-variant': '#3f484d', 'on-primary': '#ffffff', 'on-secondary': '#ffffff', 'on-background': '#171c1f',
-                        outline: { DEFAULT: '#6f797e', variant: '#bfc8cd' }
-                    },
-                    borderRadius: { 'sm': '0.25rem', DEFAULT: '0.375rem', 'lg': '0.5rem', 'xl': '0.75rem', '2xl': '1rem', '3xl': '1.5rem', 'full': '9999px' },
-                    spacing: { 'gutter': '1.5rem', 'container-margin': '2rem', 'xs': '0.25rem', 'sm': '0.5rem', 'md': '1rem', 'lg': '1.5rem', 'xl': '2rem', '2xl': '3rem', '3xl': '4rem' },
-                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], serif: ['Roboto Slab', 'Georgia', 'serif'], body: ['Inter', 'system-ui', 'sans-serif'] },
-                    boxShadow: { 'soft': '0 4px 20px rgba(0, 0, 0, 0.08)', 'glass': '0 8px 32px rgba(0, 102, 131, 0.12)' },
-                    backdropBlur: { '3xl': '32px' },
-                    maxWidth: { '7xl': '80rem', '6xl': '72rem' },
-                    height: { '707': '707px', '500': '500px' }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <style>
-        .nav-link{display:flex;align-items:center;padding:0.5rem 0.75rem;font-size:0.8rem;font-weight:500;color:var(--on-surface-variant);border-radius:0.5rem;transition:all .2s ease;text-decoration:none;white-space:nowrap}
-        .nav-link:hover{color:var(--primary);background:rgba(0,102,131,0.05)}
-        .dropdown-menu{position:absolute;top:100%;left:0;min-width:200px;background:#fff;border-radius:0.75rem;box-shadow:0 12px 40px rgba(0,0,0,0.12);border:1px solid var(--outline-variant);padding:0.5rem;z-index:100}
-        .dropdown-menu a{display:block;padding:0.5rem 1rem;font-size:0.8rem;color:var(--on-surface);border-radius:0.5rem;transition:all .2s;text-decoration:none}
-        .dropdown-menu a:hover{background:rgba(0,102,131,0.05);color:var(--primary)}
-        .contact-input{width:100%;padding:0.75rem 1rem;border:1px solid var(--outline-variant);border-radius:0.75rem;font-size:0.875rem;transition:border-color .2s;background:white}
-        .contact-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,102,131,0.1)}
-        .contact-input::placeholder{color:var(--on-surface-variant)}
-    </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact Us &amp; Location | Lumina Hospitality</title>
+<meta name="description" content="Get in touch with Lumina Hospitality — reservations, inquiries, and feedback."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<link href="/css/lumina-design-system.css" rel="stylesheet"/>
+<link href="/css/global-nav.css" rel="stylesheet"/>
+<link href="/css/global-footer.css" rel="stylesheet"/>
+<link href="/css/hotel-utils.css" rel="stylesheet"/>
+<link href="/css/ui-utils.css" rel="stylesheet"/>
+<link href="/pages/hotel/amenities-lumina/amenities-lumina.css" rel="stylesheet"/>
+<link href="/pages/hotel/contact-lumina/contact-lumina.css" rel="stylesheet"/>
 </head>
-<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<body>
 
-    <!-- Header -->
-    <header role="banner" class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-md bg-white/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm transition-standard">
-        <div class="flex items-center gap-md">
-            <span class="material-symbols-outlined text-primary text-h2 cursor-pointer hover:opacity-80 transition-colors hover:scale-110" id="mobileMenuBtn">menu</span>
-            <a href="/pages/hotel/home-lumina/home-lumina.html" class="font-h2 text-h2 tracking-tight text-primary font-bold" style="font-family:'Roboto Slab', serif;">Lumina Hospitality</a>
+<a href="#main-content" class="sr-only">Skip to main content</a>
+<div id="global-nav"></div>
+
+<main id="main-content">
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80" alt="Contact Lumina Hospitality"/>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">Get in Touch</h1>
+      <p class="page-hero-sub">We'd love to hear from you. Reach out for reservations, inquiries, or feedback.</p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="contact-section">
+
+    <!-- Info cards -->
+    <div class="contact-info-grid">
+      <div class="contact-info-card">
+        <div class="contact-info-icon">
+          <span class="material-symbols-outlined">location_on</span>
         </div>
-        <nav role="navigation" class="hidden lg:flex items-center gap-lg">
-            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/amenities-lumina/amenities-lumina.html">Amenities</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
-            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
-            <div class="relative group">
-                <button class="font-label-md text-label-md text-primary font-bold hover:text-primary-light transition-colors flex items-center gap-xs">More <span class="material-symbols-outlined text-sm">expand_more</span></button>
-                <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-xl rounded-xl border border-outline-variant/20 p-md top-full left-0 min-w-[200px] z-50">
-                    <a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
-                    <a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
-                    <a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
-                    <a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
-                    <a class="block py-sm text-sm text-on-surface-variant hover:text-primary transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
-                    <a class="block py-sm text-sm text-primary font-bold hover:text-primary-light transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
-                </div>
-            </div>
-        </nav>
-        <div class="flex items-center gap-md">
-            <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="hidden sm:inline-flex items-center gap-2 bg-primary text-white font-button text-button px-lg py-sm rounded-full hover:bg-primary-light transition-standard shadow-lg shadow-primary/10 hover-lift">Book Now</a>
-            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-sm cursor-pointer hover-lift" id="userAvatar">U</div>
+        <h3 class="contact-info-title">Address</h3>
+        <p class="contact-info-text">Plot 14, Ahmadu Bello Way<br/>Victoria Island, Lagos, Nigeria</p>
+      </div>
+      <div class="contact-info-card">
+        <div class="contact-info-icon">
+          <span class="material-symbols-outlined">call</span>
         </div>
-    </header>
-    <!-- Mobile Menu Overlay -->
-    <div id="mobileMenu" class="fixed inset-0 z-40 hidden">
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobileMenuOverlay"></div>
-        <div class="absolute right-0 top-0 h-full w-80 max-w-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out" id="mobileMenuContent">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="font-h2 text-h2 text-primary font-bold" style="font-family:'Roboto Slab', serif;">Menu</h2>
-                    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" id="closeMobileMenu">close</button>
-                </div>
-                <nav class="flex flex-col gap-4">
-                    <a class="font-label-md text-label-md text-primary font-bold py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/home-lumina/home-lumina.html">Home</a>
-                    <a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/rooms-lumina/rooms-lumina.html">Rooms & Suites</a>
-                    <a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/special-offers/special-offers.html">Special Offers</a>
-                    <a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/dining-lumina/dining-lumina.html">Dining</a>
-                    <a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/amenities-lumina/amenities-lumina.html">Amenities</a>
-                    <a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/spa-wellness/spa-wellness.html">Spa & Wellness</a>
-                    <a class="font-label-md text-label-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
-                    <div class="border-t border-outline-variant pt-4 mt-4">
-                        <p class="font-label-md text-label-md text-outline uppercase tracking-widest mb-4">More</p>
-                        <a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/local-area/local-area.html">Local Area Guide</a>
-                        <a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/meetings-events/meetings-events.html">Meetings & Events</a>
-                        <a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/gallery-lumina/gallery-lumina.html">Gallery</a>
-                        <a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/reviews-lumina/reviews-lumina.html">Guest Reviews</a>
-                        <a class="font-body-md text-body-md text-on-surface-variant py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/about-lumina/about-lumina.html">About Us</a>
-                        <a class="font-body-md text-body-md text-primary font-bold py-3 px-4 rounded-lg hover:bg-primary/10 transition-colors" href="/pages/hotel/contact-lumina/contact-lumina.html">Contact Us</a>
-                    </div>
-                </nav>
-            </div>
+        <h3 class="contact-info-title">Phone</h3>
+        <p class="contact-info-text">Reservations: +234 1 277 2700<br/>Front Desk: +234 1 277 2710</p>
+      </div>
+      <div class="contact-info-card">
+        <div class="contact-info-icon">
+          <span class="material-symbols-outlined">mail</span>
         </div>
+        <h3 class="contact-info-title">Email</h3>
+        <p class="contact-info-text">reservations@lumina.com<br/>info@lumina.com</p>
+      </div>
     </div>
 
-    <main role="main">
-    <!-- Hero -->
-    <section class="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80" alt="Contact Hero" class="absolute inset-0 w-full h-full object-cover"/>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-        <div class="relative z-10 text-center px-6">
-            <h1 style="font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:#fff;margin-bottom:0.75rem">Get in Touch</h1>
-            <p style="color:rgba(255,255,255,0.8);font-size:1.05rem;max-width:500px;margin:0 auto">We'd love to hear from you. Reach out for reservations, inquiries, or feedback.</p>
+    <!-- Form + Map -->
+    <div class="contact-body">
+
+      <!-- Form -->
+      <div>
+        <h2 class="contact-form-title">Send Us a Message</h2>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="contact-form-row">
+            <div class="contact-field">
+              <label for="contactName">Full Name</label>
+              <input type="text" id="contactName" name="name" placeholder="Your name" required/>
+            </div>
+            <div class="contact-field">
+              <label for="contactEmail">Email</label>
+              <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required/>
+            </div>
+          </div>
+          <div class="contact-field">
+            <label for="contactPhone">Phone Number</label>
+            <input type="tel" id="contactPhone" name="phone" placeholder="+234 ..."/>
+          </div>
+          <div class="contact-field">
+            <label for="contactSubject">Subject</label>
+            <select id="contactSubject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option>Reservation Inquiry</option>
+              <option>Group Booking</option>
+              <option>Event Hosting</option>
+              <option>Spa Appointment</option>
+              <option>Feedback</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="contact-field">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary contact-submit">
+            <span class="material-symbols-outlined">send</span>
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Map + Hours -->
+      <div class="contact-right">
+        <h2 class="contact-form-title">Find Us</h2>
+        <div class="contact-map-placeholder">
+          <span class="material-symbols-outlined">map</span>
+          <p>Interactive Map</p>
+          <p class="contact-map-addr">Plot 14, Ahmadu Bello Way, Victoria Island</p>
         </div>
-    </section>
 
-    <!-- Contact Content -->
-    <section class="max-w-7xl mx-auto px-6 py-16">
+        <h3 class="contact-hours-title">Office Hours</h3>
+        <table class="contact-hours-table">
+          <tbody>
+            <tr><td>Reception / Front Desk</td><td>24 hours</td></tr>
+            <tr><td>Reservations</td><td>8:00 AM – 10:00 PM</td></tr>
+            <tr><td>Restaurant</td><td>6:30 AM – 11:00 PM</td></tr>
+            <tr><td>Spa &amp; Wellness</td><td>7:00 AM – 9:00 PM</td></tr>
+            <tr><td>Swimming Pool</td><td>6:00 AM – 10:00 PM</td></tr>
+            <tr><td>Business Center</td><td>7:00 AM – 8:00 PM</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Contact Info Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div class="bg-white rounded-2xl border border-outline-variant p-8 text-center">
-                <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="material-symbols-outlined text-primary text-2xl">location_on</span>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Address</h3>
-                <p class="text-on-surface-variant text-sm leading-relaxed">Plot 14, Ahmadu Bello Way<br/>Victoria Island, Lagos, Nigeria</p>
-            </div>
-            <div class="bg-white rounded-2xl border border-outline-variant p-8 text-center">
-                <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="material-symbols-outlined text-primary text-2xl">call</span>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Phone</h3>
-                <p class="text-on-surface-variant text-sm leading-relaxed">Reservations: +234 1 277 2700<br/>Front Desk: +234 1 277 2710</p>
-            </div>
-            <div class="bg-white rounded-2xl border border-outline-variant p-8 text-center">
-                <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="material-symbols-outlined text-primary text-2xl">mail</span>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Email</h3>
-                <p class="text-on-surface-variant text-sm leading-relaxed">reservations@lumina.com<br/>info@lumina.com</p>
-            </div>
-        </div>
+    </div>
+  </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+</main>
 
-            <!-- Contact Form -->
-            <div>
-                <h2 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;margin-bottom:1.5rem">Send Us a Message</h2>
-                <form class="space-y-5" onsubmit="event.preventDefault();alert('Thank you! We will respond within 24 hours.')">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-sm font-medium mb-1.5">Full Name</label>
-                            <input type="text" class="contact-input" placeholder="Your name" required/>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-1.5">Email</label>
-                            <input type="email" class="contact-input" placeholder="your@email.com" required/>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1.5">Phone Number</label>
-                        <input type="tel" class="contact-input" placeholder="+234 ..."/>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1.5">Subject</label>
-                        <select class="contact-input" required>
-                            <option value="">Select a subject</option>
-                            <option>Reservation Inquiry</option>
-                            <option>Group Booking</option>
-                            <option>Event Hosting</option>
-                            <option>Spa Appointment</option>
-                            <option>Feedback</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1.5">Message</label>
-                        <textarea class="contact-input" rows="5" placeholder="How can we help you?" required></textarea>
-                    </div>
-                    <button type="submit" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all">
-                        <span class="material-symbols-outlined text-[18px]">send</span>
-                        Send Message
-                    </button>
-                </form>
-            </div>
+<div id="global-footer"></div>
 
-            <!-- Map & Hours -->
-            <div class="space-y-8">
-                <div>
-                    <h2 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;margin-bottom:1.5rem">Find Us</h2>
-                    <div class="bg-gray-100 rounded-2xl h-64 flex items-center justify-center border border-outline-variant">
-                        <div class="text-center">
-                            <span class="material-symbols-outlined text-4xl text-primary mb-2">map</span>
-                            <p class="text-on-surface-variant text-sm">Interactive Map</p>
-                            <p class="text-on-surface-variant text-xs mt-1">Plot 14, Ahmadu Bello Way, Victoria Island</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:1rem">Office Hours</h3>
-                    <div class="bg-white rounded-2xl border border-outline-variant overflow-hidden">
-                        <table class="w-full text-sm">
-                            <tbody>
-                                <tr class="border-b border-outline-variant/50"><td class="px-5 py-3 font-medium">Reception / Front Desk</td><td class="px-5 py-3 text-on-surface-variant text-right">24 hours</td></tr>
-                                <tr class="border-b border-outline-variant/50"><td class="px-5 py-3 font-medium">Reservations</td><td class="px-5 py-3 text-on-surface-variant text-right">8:00 AM – 10:00 PM</td></tr>
-                                <tr class="border-b border-outline-variant/50"><td class="px-5 py-3 font-medium">Restaurant</td><td class="px-5 py-3 text-on-surface-variant text-right">6:30 AM – 11:00 PM</td></tr>
-                                <tr class="border-b border-outline-variant/50"><td class="px-5 py-3 font-medium">Spa & Wellness</td><td class="px-5 py-3 text-on-surface-variant text-right">7:00 AM – 9:00 PM</td></tr>
-                                <tr class="border-b border-outline-variant/50"><td class="px-5 py-3 font-medium">Swimming Pool</td><td class="px-5 py-3 text-on-surface-variant text-right">6:00 AM – 10:00 PM</td></tr>
-                                <tr><td class="px-5 py-3 font-medium">Business Center</td><td class="px-5 py-3 text-on-surface-variant text-right">7:00 AM – 8:00 PM</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    </main>
-
-    <!-- Footer -->
-    <footer role="contentinfo" class="bg-primary-800 text-white">
-        <div class="max-w-7xl mx-auto px-6 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                <div>
-                    <h3 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;margin-bottom:1rem">Lumina Hospitality</h3>
-                    <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;line-height:1.6">A world-class luxury hotel and resort on Victoria Island, Lagos.</p>
-                </div>
-                <div>
-                    <h4 style="font-weight:600;margin-bottom:1rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">Quick Links</h4>
-                    <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.7)">
-                        <li><a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="hover:text-white transition-colors">Rooms & Suites</a></li>
-                        <li><a href="/pages/hotel/special-offers/special-offers.html" class="hover:text-white transition-colors">Special Offers</a></li>
-                        <li><a href="/pages/hotel/dining-lumina/dining-lumina.html" class="hover:text-white transition-colors">Dining</a></li>
-                        <li><a href="/pages/hotel/spa-wellness/spa-wellness.html" class="hover:text-white transition-colors">Spa & Wellness</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="font-weight:600;margin-bottom:1rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">Discover</h4>
-                    <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.7)">
-                        <li><a href="/pages/hotel/local-area/local-area.html" class="hover:text-white transition-colors">Local Area Guide</a></li>
-                        <li><a href="/pages/hotel/meetings-events/meetings-events.html" class="hover:text-white transition-colors">Meetings & Events</a></li>
-                        <li><a href="/pages/hotel/gallery-lumina/gallery-lumina.html" class="hover:text-white transition-colors">Gallery</a></li>
-                        <li><a href="/pages/hotel/reviews-lumina/reviews-lumina.html" class="hover:text-white transition-colors">Guest Reviews</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="font-weight:600;margin-bottom:1rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">Contact</h4>
-                    <ul class="space-y-3 text-sm" style="color:rgba(255,255,255,0.7)">
-                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-[16px] mt-0.5">location_on</span> Plot 14, Ahmadu Bello Way, Victoria Island, Lagos</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">call</span> +234 1 277 2700</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">mail</span> reservations@lumina.com</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="border-t border-white/10">
-            <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p style="color:rgba(255,255,255,0.5);font-size:0.8rem">&copy; 2026 Lumina Hospitality. All rights reserved.</p>
-                <div class="flex gap-6 text-xs" style="color:rgba(255,255,255,0.5)">
-                    <a href="/pages/hotel/policies/policies.html" class="hover:text-white transition-colors">Hotel Policies</a>
-                    <a href="/pages/hotel/privacy/privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="/pages/hotel/faq-lumina/faq-lumina.html" class="hover:text-white transition-colors">FAQ</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const mobileMenuContent = document.getElementById('mobileMenuContent');
-        const closeMobileMenu = document.getElementById('closeMobileMenu');
-
-        if (mobileMenuBtn && mobileMenu) {
-            function openMobileMenu() {
-                mobileMenu.classList.remove('hidden');
-                mobileMenuContent.classList.remove('translate-x-full');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeMobileMenuFunc() {
-                mobileMenuContent.classList.add('translate-x-full');
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }, 300);
-            }
-
-            mobileMenuBtn.addEventListener('click', openMobileMenu);
-            if (closeMobileMenu) {
-                closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
-            }
-            if (mobileMenuOverlay) {
-                mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
-            }
-
-            // Close menu when clicking a link
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', closeMobileMenuFunc);
-            });
-        }
-    </script>
-</body></html>
-
+<script src="/js/global-nav.js"></script>
+<script src="/js/ui-utils.js"></script>
+<script src="/js/page-init.js"></script>
+<script src="/pages/hotel/contact-lumina/contact-lumina.js"></script>
+</body>
+</html>

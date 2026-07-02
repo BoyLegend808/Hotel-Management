@@ -1,0 +1,209 @@
+/* ═══════════════════════════════════════
+   Reviews Page — Lumina Hospitality
+   ═══════════════════════════════════════ */
+
+/* Hero stats */
+.reviews-hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9375rem;
+}
+
+.reviews-hero-score {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reviews-hero-score .material-symbols-outlined {
+    color: var(--accent);
+    font-size: 1.5rem;
+}
+
+.reviews-hero-num {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.reviews-hero-count { font-size: 0.875rem; }
+
+/* Section */
+.reviews-section {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.reviews-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Summary sidebar */
+.reviews-summary {
+    position: sticky;
+    top: 6rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-warm-sm);
+}
+
+.reviews-summary-score {
+    font-family: var(--font-serif);
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.reviews-summary-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.125rem;
+    margin-bottom: 0.75rem;
+}
+
+.reviews-summary-stars .material-symbols-outlined {
+    color: var(--accent);
+    font-size: 1.75rem;
+}
+
+.reviews-summary-count {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* Rating bars */
+.reviews-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.reviews-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.reviews-bar-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    width: 3rem;
+    flex-shrink: 0;
+}
+
+.reviews-bar {
+    flex: 1;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--border-light);
+    overflow: hidden;
+}
+
+.reviews-bar-fill {
+    height: 100%;
+    width: var(--pct);
+    background: var(--accent);
+    border-radius: var(--radius-full);
+}
+
+.reviews-bar-pct {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    width: 2.5rem;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* Review cards */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.review-card-full {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    transition: box-shadow var(--transition-luxury);
+}
+
+.review-card-full:hover { box-shadow: var(--shadow-warm-md); }
+
+.review-card-full-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.review-card-full-name {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.review-card-full-meta {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.review-card-full-stars {
+    display: flex;
+    gap: 0.125rem;
+    flex-shrink: 0;
+}
+
+.review-card-full-stars .material-symbols-outlined {
+    color: var(--accent);
+    font-size: 1.125rem;
+}
+
+.review-card-full-text {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .reviews-layout { grid-template-columns: 1fr; }
+    .reviews-summary { position: static; }
+    .reviews-summary-score { font-size: 3.5rem; }
+}
+
+@media (max-width: 768px) {
+    .reviews-section { padding: 3rem 1.25rem; }
+    .reviews-hero-stats { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+    .review-card-full { padding: 1.25rem; }
+    .review-card-full-header { flex-direction: column; gap: 0.5rem; }
+    .review-card-full-name { font-size: 1rem; }
+    .review-card-full-text { font-size: 0.9rem; }
+    .reviews-bars { gap: 0.625rem; }
+}
+
+@media (max-width: 480px) {
+    .reviews-summary { padding: 1.5rem; }
+    .reviews-summary-stars .material-symbols-outlined { font-size: 1.375rem; }
+}

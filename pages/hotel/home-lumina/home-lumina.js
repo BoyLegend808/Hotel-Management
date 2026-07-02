@@ -1,87 +1,148 @@
-// Lumina Ultra - Homepage Luxury JS
+/**
+ * Lumina Hospitality — Homepage JavaScript
+ *
+ * Handles: hero carousel, scroll-reveal, slide-to-book, animated stat
+ * counters, 3D tilt, room grid rendering, booking-bar search, and the
+ * newsletter form. No inline handlers — all listeners attached here.
+ *
+ * NOTE: Global nav (scroll-to-solid, mobile menu, dropdowns) is handled
+ * separately by /js/global-nav.js. Do not duplicate that logic here.
+ */
 
-// --- Header Transition Logic ---
-const header = document.getElementById('mainHeader');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.remove('header-transparent');
-    } else {
-        header.classList.add('header-transparent');
-    }
-});
+(function () {
+    'use strict';
 
-// --- Reveal on Scroll Animation ---
-const revealElements = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
+    function ready(fn) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fn);
+        } else {
+            fn();
         }
-    });
-}, { threshold: 0.1 });
+    }
 
-revealElements.forEach(el => revealObserver.observe(el));
+    /* ────────────────────────────────────────────
+       Hero Carousel
+       ──────────────────────────────────────────── */
+    function initHeroCarousel() {
+        const slider = document.getElementById('hero-slider');
+        if (!slider) return;
 
-// --- Hero Carousel Logic ---
-let currentSlide = 0;
-const track = document.getElementById('hero-slider');
-const slides = track ? track.children : [];
-const totalSlides = slides.length;
+        const slides = slider.children;
+        const dots = document.querySelectorAll('.hero-dot');
+        const prevBtn = document.getElementById('heroPrev');
+        const nextBtn = document.getElementById('heroNext');
+        let index = 0;
+        const total = slides.length;
+        let autoTimer = null;
 
-function goToSlide(index) {
-    if (!slides.length) return;
-    currentSlide = (index + totalSlides) % totalSlides;
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    
-    // Update indicators
-    document.querySelectorAll('[data-slide]').forEach((btn, i) => {
-        btn.classList.toggle('bg-white', i === currentSlide);
-        btn.classList.toggle('bg-white/50', i !== currentSlide);
-    });
-}
+        if (!total) return;
 
-function moveCarousel(direction) { 
-    goToSlide(currentSlide + direction); 
-}
+        function go(n) {
+            index = (n + total) % total;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        }
 
-let autoPlayTimer = null;
-if (totalSlides > 0) {
-    // Setup navigation buttons
-    const prevBtn = document.querySelector('[class*="chevron_left"]')?.parentElement;
-    const nextBtn = document.querySelector('[class*="chevron_right"]')?.parentElement;
-    
-    if (prevBtn) prevBtn.addEventListener('click', () => moveCarousel(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => moveCarousel(1));
-    
-    // Setup indicators
-    document.querySelectorAll('[data-slide]').forEach((btn, i) => {
-        btn.addEventListener('click', () => goToSlide(i));
-    });
-    
-    // Auto-play
-    autoPlayTimer = setInterval(() => moveCarousel(1), 6000);
-    
-    // Initialize first slide indicator
-    goToSlide(0);
-}
+        const next = () => go(index + 1);
+        const prev = () => go(index - 1);
 
-// --- Asymmetric Room Grid ---
-const roomsData = [
-    { id: 1, name: "The Horizon Loft", type: "EXECUTIVE SUITE", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80", description: "Expansive 80sqm space with panoramic views and designer furnishings." },
-    { id: 2, name: "Royal Heritage Room", type: "DELUXE KING", price: 320, rating: 4.8, image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&q=80", description: "Classic elegance meets modern amenities in our heritage wing." },
-    { id: 3, name: "Azure Pool Villa", type: "VIP SANCTUARY", price: 890, rating: 5.0, image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80", description: "Private heated infinity pool and 24-hour butler service." }
-];
+        function startAuto() {
+            stopAuto();
+            autoTimer = setInterval(next, 6000);
+        }
+        function stopAuto() {
+            if (autoTimer) clearInterval(autoTimer);
+        }
 
-function renderLuxuryRooms() {
-    const grid = document.getElementById('roomGrid');
-    if (!grid) return;
-    
-    grid.innerHTML = roomsData.map((room, index) => {
-        const isLarge = index === 0; // First room gets more space
-        return `
+        if (nextBtn) nextBtn.addEventListener('click', () => { next(); startAuto(); });
+        if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startAuto(); });
+        dots.forEach((d) =>
+            d.addEventListener('click', () => {
+                go(parseInt(d.dataset.slide, 10));
+                startAuto();
+            })
+        );
+
+        const wrap = slider.parentElement;
+        if (wrap) {
+            wrap.addEventListener('mouseenter', stopAuto);
+            wrap.addEventListener('mouseleave', startAuto);
+        }
+
+        startAuto();
+    }
+
+    /* ────────────────────────────────────────────
+       Scroll Reveal (uses .visible — matches design system)
+       ──────────────────────────────────────────── */
+    function initScrollReveal() {
+        const revealEls = document.querySelectorAll(
+            '.reveal, .reveal-left, .reveal-right, .reveal-scale'
+        );
+        if (!revealEls.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+            revealEls.forEach((el) => el.classList.add('visible'));
+            return;
+        }
+        const obs = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+        revealEls.forEach((el) => obs.observe(el));
+    }
+
+    /* ────────────────────────────────────────────
+       Room Showcase Grid
+       ──────────────────────────────────────────── */
+    const roomsData = [
+        {
+            id: 1,
+            name: 'The Horizon Loft',
+            type: 'EXECUTIVE SUITE',
+            price: 450,
+            rating: 4.9,
+            image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
+            description: 'Expansive 80sqm space with panoramic views and designer furnishings.'
+        },
+        {
+            id: 2,
+            name: 'Royal Heritage Room',
+            type: 'DELUXE KING',
+            price: 320,
+            rating: 4.8,
+            image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80',
+            description: 'Classic elegance meets modern amenities in our heritage wing.'
+        },
+        {
+            id: 3,
+            name: 'Azure Pool Villa',
+            type: 'VIP SANCTUARY',
+            price: 890,
+            rating: 5.0,
+            image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
+            description: 'Private heated infinity pool and 24-hour butler service.'
+        }
+    ];
+
+    function renderLuxuryRooms() {
+        const grid = document.getElementById('roomGrid');
+        if (!grid) return;
+
+        grid.innerHTML = roomsData
+            .map((room, index) => {
+                const isLarge = index === 0;
+                return `
         <div class="reveal ${isLarge ? 'md:col-span-7' : 'md:col-span-5'} group cursor-pointer" style="transition-delay: ${index * 0.2}s">
-            <div class="relative overflow-hidden rounded-2xl shadow-lg">
-                <img src="${room.image}" alt="${room.name}" class="img-editorial w-full h-full object-cover aspect-[${isLarge ? '4/3' : '3/4'}]" />
+            <div class="relative overflow-hidden rounded-2xl shadow-lg room-card-media">
+                <img src="${room.image}" alt="${room.name}" class="w-full h-full object-cover ${isLarge ? 'room-img-lg' : 'room-img'}" loading="lazy" />
                 <div class="absolute top-6 left-6 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
                     ${room.type}
                 </div>
@@ -90,42 +151,410 @@ function renderLuxuryRooms() {
                 </div>
             </div>
             <div class="mt-6">
-                <h3 class="text-luxury-h2 text-xl mb-2 group-hover:text-primary transition-colors">${room.name}</h3>
-                <p class="text-luxury-body text-sm line-clamp-2 mb-4">${room.description}</p>
-                <a href="/pages/hotel/room-detail-lumina/?id=${room.id}" class="text-xs uppercase tracking-widest font-bold text-primary hover:text-secondary transition-colors">View Details →</a>
+                <h3 class="text-xl mb-2 group-hover:text-primary transition-colors" style="font-family:var(--font-serif)">${room.name}</h3>
+                <p class="text-sm line-clamp-2 mb-4 text-on-surface-variant">${room.description}</p>
+                <a href="/pages/hotel/room-detail-lumina/room-detail-lumina.html?id=${room.id}" class="text-xs uppercase tracking-widest font-bold text-primary hover:text-secondary transition-colors">View Details →</a>
             </div>
-        </div>
-    `}).join('');
-}
+        </div>`;
+            })
+            .join('');
 
-// Search
-function searchRooms() {
-    const ci = document.getElementById('homeCheckIn');
-    const co = document.getElementById('homeCheckOut');
-    const params = new URLSearchParams();
-    if (ci && ci.value) params.set('checkIn', ci.value);
-    if (co && co.value) params.set('checkOut', co.value);
-    window.location.href = `/pages/hotel/rooms-lumina/${params.toString() ? '?' + params.toString() : ''}`;
-}
-
-// Mobile menu
-document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
-    document.getElementById('mobileMenu')?.classList.toggle('hidden');
-});
-
-// Init
-document.addEventListener('DOMContentLoaded', () => {
-    renderLuxuryRooms();
-    
-    // Initialize dates
-    const ci = document.getElementById('homeCheckIn');
-    const co = document.getElementById('homeCheckOut');
-    if (ci && co) {
-        const today = new Date();
-        const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
-        ci.value = today.toISOString().split('T')[0];
-        co.value = tomorrow.toISOString().split('T')[0];
-        ci.min = today.toISOString().split('T')[0];
-        co.min = tomorrow.toISOString().split('T')[0];
+        // Re-observe newly rendered reveal elements
+        document.querySelectorAll('#roomGrid .reveal').forEach((el) => {
+            if (!el.classList.contains('visible')) el.classList.add('visible');
+        });
     }
-});
+
+    /* ────────────────────────────────────────────
+       Booking Bar Search
+       ──────────────────────────────────────────── */
+    function initBookingSearch() {
+        const checkin = document.getElementById('checkin-date');
+        const checkout = document.getElementById('checkout-date');
+        const guests = document.getElementById('guest-count');
+        const searchBtn = document.getElementById('searchAvailabilityBtn');
+
+        // Default dates: today + tomorrow
+        if (checkin && checkout) {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            const fmt = (d) => d.toISOString().split('T')[0];
+            checkin.value = fmt(today);
+            checkout.value = fmt(tomorrow);
+            checkin.min = fmt(today);
+            checkout.min = fmt(tomorrow);
+            checkin.addEventListener('change', () => {
+                checkout.min = checkin.value || fmt(today);
+            });
+        }
+
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                const params = new URLSearchParams();
+                if (checkin && checkin.value) params.set('checkIn', checkin.value);
+                if (checkout && checkout.value) params.set('checkOut', checkout.value);
+                if (guests && guests.value) params.set('guests', guests.value);
+                window.location.href = `/pages/hotel/rooms-lumina/rooms-lumina.html${params.toString() ? '?' + params.toString() : ''}`;
+            });
+        }
+    }
+
+    /* ────────────────────────────────────────────
+       Slide-to-Book Button
+       ──────────────────────────────────────────── */
+    function initSlideToBook() {
+        const slideButton = document.getElementById('slideButton');
+        const slideHandle = document.getElementById('slideHandle');
+        const slideFill = slideButton ? slideButton.querySelector('.slide-button-fill') : null;
+        const slideStatus = document.getElementById('slideStatus');
+        const loadingIcon = document.getElementById('loadingIcon');
+        const successIcon = document.getElementById('successIcon');
+        const slideText = slideButton ? slideButton.querySelector('.slide-button-text') : null;
+
+        if (!slideButton || !slideHandle || !slideFill) return;
+
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        const maxDrag = 155;
+        const threshold = maxDrag * 0.9;
+        let completed = false;
+
+        function startDrag(e) {
+            if (completed) return;
+            isDragging = true;
+            startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+            slideHandle.style.transition = 'none';
+            slideFill.style.transition = 'none';
+        }
+        function drag(e) {
+            if (!isDragging || completed) return;
+            e.preventDefault();
+            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+            const diff = clientX - startX;
+            currentX = Math.max(0, Math.min(diff, maxDrag));
+            slideHandle.style.transform = `translateX(${currentX}px)`;
+            slideFill.style.width = `${currentX + 10}px`;
+        }
+        function endDrag() {
+            if (!isDragging || completed) return;
+            isDragging = false;
+            slideHandle.style.transition = 'transform 0.3s ease';
+            slideFill.style.transition = 'width 0.3s ease';
+
+            if (currentX >= threshold) {
+                completed = true;
+                slideButton.classList.add('completed');
+                slideHandle.style.transform = `translateX(${maxDrag}px)`;
+                slideFill.style.width = '100%';
+                if (slideText) slideText.style.opacity = '0';
+                showLoading();
+            } else {
+                slideHandle.style.transform = 'translateX(0)';
+                slideFill.style.width = '0';
+                currentX = 0;
+            }
+        }
+        function showLoading() {
+            if (slideStatus) slideStatus.classList.add('visible');
+            if (loadingIcon) loadingIcon.style.display = 'block';
+            if (successIcon) successIcon.style.display = 'none';
+            setTimeout(() => {
+                if (loadingIcon) loadingIcon.style.display = 'none';
+                if (successIcon) successIcon.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = '/pages/hotel/booking-your-stay/booking-your-stay.html';
+                }, 1000);
+            }, 2000);
+        }
+
+        slideHandle.addEventListener('mousedown', startDrag);
+        slideHandle.addEventListener('touchstart', startDrag, { passive: true });
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+    }
+
+    /* ────────────────────────────────────────────
+       Animated Stat Counters
+       ──────────────────────────────────────────── */
+    function initCounters() {
+        const counters = document.querySelectorAll('.stat-counter');
+        if (!counters.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+            counters.forEach((c) => (c.innerText = c.getAttribute('data-target')));
+            return;
+        }
+
+        const obs = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000;
+                        const start = performance.now();
+
+                        function update(now) {
+                            const elapsed = now - start;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const easeOut = progress * (2 - progress);
+                            counter.innerText = Math.floor(easeOut * target);
+                            if (progress < 1) {
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        }
+                        requestAnimationFrame(update);
+                        obs.unobserve(counter);
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+
+        counters.forEach((c) => obs.observe(c));
+    }
+
+    /* ────────────────────────────────────────────
+       3D Tilt Effect
+       ──────────────────────────────────────────── */
+    function init3DTilt() {
+        const tourContainer = document.getElementById('tourContainer');
+        const tiltText = document.querySelector('.tilt-text');
+        if (!tourContainer || !tiltText) return;
+
+        tourContainer.style.transformStyle = 'preserve-3d';
+
+        tourContainer.addEventListener('mousemove', (e) => {
+            const rect = tourContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -15;
+            const rotateY = ((x - centerX) / centerX) * 15;
+
+            tiltText.style.transform = `translateZ(50px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        tourContainer.addEventListener('mouseleave', () => {
+            tiltText.style.transform = 'translateZ(0) rotateX(0) rotateY(0)';
+        });
+    }
+
+    /* ────────────────────────────────────────────
+       Testimonial Carousel
+       ──────────────────────────────────────────── */
+    function initTestimonialCarousel() {
+        const track = document.getElementById('testimonialTrack');
+        if (!track) return;
+
+        const cards = track.querySelectorAll('.testimonial-card');
+        const prevBtn = document.getElementById('testimonialPrev');
+        const nextBtn = document.getElementById('testimonialNext');
+        const dotsContainer = document.getElementById('testimonialDots');
+        
+        if (!cards.length) return;
+
+        let currentIndex = 0;
+        let cardsPerView = 1;
+
+        // Calculate cards per view based on screen size
+        function updateCardsPerView() {
+            if (window.innerWidth >= 1024) {
+                cardsPerView = 3;
+            } else if (window.innerWidth >= 768) {
+                cardsPerView = 2;
+            } else {
+                cardsPerView = 1;
+            }
+        }
+
+        // Create dots
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            const totalDots = Math.ceil(cards.length / cardsPerView);
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'testimonial-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function goToSlide(index) {
+            const maxIndex = Math.ceil(cards.length / cardsPerView) - 1;
+            currentIndex = Math.max(0, Math.min(index, maxIndex));
+            const cardWidth = cards[0].offsetWidth + 32; // Including gap
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            
+            // Update dots
+            const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+        }
+
+        function next() {
+            const maxIndex = Math.ceil(cards.length / cardsPerView) - 1;
+            goToSlide(currentIndex + 1);
+        }
+
+        function prev() {
+            goToSlide(currentIndex - 1);
+        }
+
+        // Initialize
+        updateCardsPerView();
+        createDots();
+
+        // Event listeners
+        if (prevBtn) prevBtn.addEventListener('click', prev);
+        if (nextBtn) nextBtn.addEventListener('click', next);
+
+        // Update on resize
+        window.addEventListener('resize', () => {
+            updateCardsPerView();
+            createDots();
+            goToSlide(0);
+        });
+    }
+
+    /* ────────────────────────────────────────────
+       Parallax Effect
+       ──────────────────────────────────────────── */
+    function initParallax() {
+        const parallaxElements = document.querySelectorAll('[data-parallax]');
+        
+        if (!parallaxElements.length) return;
+
+        window.addEventListener('scroll', () => {
+            parallaxElements.forEach(el => {
+                const speed = parseFloat(el.dataset.parallax) || 0.5;
+                const rect = el.getBoundingClientRect();
+                const scrolled = window.pageYOffset;
+                
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const yPos = -(scrolled * speed);
+                    const img = el.querySelector('img');
+                    if (img) {
+                        img.style.transform = `translateY(${yPos}px) scale(1.1)`;
+                    }
+                }
+            });
+        });
+    }
+
+/* ────────────────────────────────────────────
+        Instagram Lightbox
+        ──────────────────────────────────────────── */
+    function initLightbox() {
+        const lightboxLinks = document.querySelectorAll('[data-lightbox]');
+        if (!lightboxLinks.length) return;
+
+        // Create lightbox element
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <button class="lightbox-close" aria-label="Close lightbox">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="lightbox-content">
+                <img src="" alt="" id="lightboxImg" />
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+
+        const lightboxImg = lightbox.querySelector('#lightboxImg');
+        const closeBtn = lightbox.querySelector('.lightbox-close');
+
+        lightboxLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const imgSrc = link.getAttribute('href');
+                const imgAlt = link.querySelector('img').alt;
+                lightboxImg.src = imgSrc;
+                lightboxImg.alt = imgAlt;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+                closeLightbox();
+            }
+        });
+    }
+
+    /* ────────────────────────────────────────────
+        Newsletter Form
+        ──────────────────────────────────────────── */
+    function initNewsletter() {
+        const form = document.getElementById('newsletterForm');
+        if (!form) return;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            if (input && input.value) {
+                showToast('Thank you for subscribing! Welcome to the Lumina Club.');
+                form.reset();
+            }
+        });
+    }
+
+    /* ────────────────────────────────────────────
+        Toast helper (shared with global-nav.js toast)
+        ──────────────────────────────────────────── */
+    function showToast(message) {
+        if (window.UI && typeof UI.showToast === 'function') {
+            UI.showToast(message, 'success');
+            return;
+        }
+        let toast = document.querySelector('.nav-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'nav-toast';
+            toast.innerHTML =
+                '<span class="material-symbols-outlined">check_circle</span><span class="toast-msg"></span>';
+            document.body.appendChild(toast);
+        }
+        toast.querySelector('.toast-msg').textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+/* ────────────────────────────────────────────
+        Init
+        ──────────────────────────────────────────── */
+    ready(() => {
+        renderLuxuryRooms();
+        initHeroCarousel();
+        initScrollReveal();
+        initBookingSearch();
+        initSlideToBook();
+        initCounters();
+        init3DTilt();
+        initTestimonialCarousel();
+        initParallax();
+        initLightbox();
+        initNewsletter();
+    });
+})();

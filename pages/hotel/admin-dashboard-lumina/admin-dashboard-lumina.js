@@ -1,11 +1,20 @@
 // Lumina Hospitality - Admin Dashboard JavaScript
 
-// Auth helper
+// Escape helper (inline, since this file may load before ui-utils.js)
+function esc(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// Auth helper — includes Bearer token and CSRF token for all mutating requests
 function getAuthHeaders() {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token') || '';
+    const csrfToken = sessionStorage.getItem('csrfToken') || '';
     return {
         'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
+        'Authorization': token ? `Bearer ${token}` : '',
+        'X-CSRF-Token': csrfToken
     };
 }
 
@@ -41,15 +50,15 @@ function renderRecentBookings(bookings) {
         return `
             <div class="booking-item">
                 <div>
-                    <div class="font-medium">${booking.guestName || 'Unknown Guest'}</div>
-                    <div class="text-body-sm text-on-surface-variant">${booking.roomId ? 'Room #' + booking.roomId : 'N/A'}</div>
+                    <div class="font-medium">${esc(booking.guestName || 'Unknown Guest')}</div>
+                    <div class="text-body-sm text-on-surface-variant">${booking.roomId ? 'Room #' + esc(String(booking.roomId)) : 'N/A'}</div>
                     <div class="text-body-sm text-on-surface-variant">
-                        ${booking.checkIn ? formatDate(booking.checkIn) : '—'} → ${booking.checkOut ? formatDate(booking.checkOut) : '—'}
+                        ${booking.checkIn ? esc(formatDate(booking.checkIn)) : '&mdash;'} &rarr; ${booking.checkOut ? esc(formatDate(booking.checkOut)) : '&mdash;'}
                     </div>
                 </div>
                 <div class="text-right">
-                    <span class="booking-status ${statusClass} px-sm py-xs rounded-full text-label-md">${booking.status}</span>
-                    <div class="font-bold text-primary mt-sm">$${Number(booking.total || 0).toFixed(2)}</div>
+                    <span class="booking-status ${esc(statusClass)} px-sm py-xs rounded-full text-label-md">${esc(booking.status)}</span>
+                    <div class="font-bold text-primary mt-sm">$${esc(Number(booking.total || 0).toFixed(2))}</div>
                 </div>
             </div>`;
     }).join('');
@@ -113,19 +122,28 @@ const sampleBookings = [
     { id: 4, guestName: 'Sarah Davis',   roomId: 105, checkIn: '2025-11-22', checkOut: '2025-11-27', status: 'confirmed', total: 2800 }
 ];
 
-// Logout
+// Logout — replaced browser confirm() with toast + inline confirm UI
 function logout() {
-    if (confirm('Are you sure you want to logout?')) {
-        fetch('/api/logout', {
-            method: 'POST',
-            headers: getAuthHeaders()
-        }).catch(() => {});
+    const confirmed = document.createElement('div');
+    confirmed.className = 'fixed inset-0 z-[200] flex items-center justify-center bg-black/50';
+    confirmed.innerHTML = `
+        <div class="bg-white rounded-xl p-lg shadow-xl max-w-sm w-full mx-4 text-center">
+            <p class="font-h3 text-h3 mb-md">Log out?</p>
+            <p class="text-body-sm text-on-surface-variant mb-lg">You will be returned to the login page.</p>
+            <div class="flex gap-md justify-center">
+                <button id="confirmLogoutYes" class="px-lg py-sm bg-primary text-white rounded-lg font-button">Log out</button>
+                <button id="confirmLogoutNo" class="px-lg py-sm border border-outline-variant rounded-lg font-button">Cancel</button>
+            </div>
+        </div>`;
+    document.body.appendChild(confirmed);
+    document.getElementById('confirmLogoutNo').onclick = () => confirmed.remove();
+    document.getElementById('confirmLogoutYes').onclick = () => {
+        confirmed.remove();
+        fetch('/api/logout', { method: 'POST', headers: getAuthHeaders() }).catch(() => {});
         sessionStorage.clear();
         showToast('Logged out successfully', 'success');
-        setTimeout(() => {
-            window.location.href = '/pages/hotel/login-lumina/';
-        }, 1000);
-    }
+        setTimeout(() => { window.location.href = '/pages/hotel/login-lumina/'; }, 1000);
+    };
 }
 
 // Initialize page

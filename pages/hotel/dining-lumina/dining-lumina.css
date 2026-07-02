@@ -1,0 +1,149 @@
+/* ═══════════════════════════════════════
+   Dining Page — Lumina Hospitality
+   ═══════════════════════════════════════ */
+
+.dining-section {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.dining-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dining-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-warm-sm);
+    transition: box-shadow var(--transition-luxury);
+}
+
+.dining-card:hover { box-shadow: var(--shadow-warm-md); }
+
+.dining-card--reverse { direction: rtl; }
+.dining-card--reverse > * { direction: ltr; }
+
+.dining-card-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.dining-card-img img {
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    display: block;
+    transition: transform 500ms ease;
+}
+
+.dining-card:hover .dining-card-img img { transform: scale(1.04); }
+
+.dining-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.dining-badge--gold   { background: var(--accent); }
+.dining-badge--blue   { background: #3b82f6; }
+.dining-badge--purple { background: #7c3aed; }
+.dining-badge--green  { background: #16a34a; }
+.dining-badge--orange { background: #ea580c; }
+
+.dining-card-body {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dining-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.375rem;
+}
+
+.dining-card-type {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.dining-card-desc {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+}
+
+.dining-card-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+.dining-card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.dining-card-meta .material-symbols-outlined { font-size: 1rem; }
+
+.dining-reserve-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: gap var(--transition-base);
+}
+
+.dining-reserve-link:hover { gap: 0.625rem; }
+.dining-reserve-link .material-symbols-outlined { font-size: 1rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dining-section { padding: 3rem 1.25rem; }
+
+    .dining-card,
+    .dining-card--reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+    }
+
+    .dining-card-img img { min-height: 220px; }
+    .dining-card-body { padding: 1.5rem; }
+    .dining-card-title { font-size: 1.375rem; }
+    .dining-card-meta { flex-wrap: wrap; gap: 0.75rem; }
+    .dining-reserve-link { font-size: 0.875rem; }
+}
+
+@media (max-width: 480px) {
+    .dining-card-img img { min-height: 180px; }
+    .dining-card-body { padding: 1.25rem; }
+}
