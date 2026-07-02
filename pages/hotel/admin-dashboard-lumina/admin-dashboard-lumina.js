@@ -136,8 +136,8 @@ function logout() {
             </div>
         </div>`;
     document.body.appendChild(confirmed);
-    document.getElementById('confirmLogoutNo').onclick = () => confirmed.remove();
-    document.getElementById('confirmLogoutYes').onclick = () => {
+    confirmed.querySelector('#confirmLogoutNo').addEventListener('click', () => confirmed.remove());
+    confirmed.querySelector('#confirmLogoutYes').addEventListener('click', () => {
         confirmed.remove();
         fetch('/api/logout', { method: 'POST', headers: getAuthHeaders() }).catch(() => {});
         sessionStorage.clear();

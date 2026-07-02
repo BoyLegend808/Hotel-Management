@@ -7,6 +7,13 @@
 (function () {
     'use strict';
 
+    /* ── XSS helper ── */
+    function esc(str) {
+        return String(str == null ? '' : str)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
     /* ── Room Data ── */
     const roomsData = [
         {
@@ -130,26 +137,26 @@
         grid.innerHTML = rooms.map(room => `
             <article class="room-card reveal" role="listitem">
                 <div class="room-card-media">
-                    <img src="${room.image}" alt="${room.name}" loading="lazy"/>
+                    <img src="${esc(room.image)}" alt="${esc(room.name)}" loading="lazy"/>
                     <div class="room-card-media-overlay"></div>
-                    <span class="room-card-badge ${room.badge}">${room.typeLabel}</span>
+                    <span class="room-card-badge ${esc(room.badge)}">${esc(room.typeLabel)}</span>
                     <div class="room-card-rating">
                         <span class="material-symbols-outlined filled">star</span>
-                        ${room.rating.toFixed(1)}
+                        ${esc(String(room.rating.toFixed(1)))}
                     </div>
                     <div class="room-card-price">
-                        $${room.price.toLocaleString()} <span>/ night</span>
+                        $${esc(String(room.price.toLocaleString()))} <span>/ night</span>
                     </div>
                 </div>
                 <div class="room-card-body">
-                    <h3 class="room-card-name">${room.name}</h3>
-                    <p class="room-card-details">${room.details}</p>
+                    <h3 class="room-card-name">${esc(room.name)}</h3>
+                    <p class="room-card-details">${esc(room.details)}</p>
                     <div class="room-card-tags">
-                        ${room.tags.map(t => `<span class="room-tag">${t}</span>`).join('')}
+                        ${room.tags.map(t => `<span class="room-tag">${esc(t)}</span>`).join('')}
                     </div>
                     <div class="room-card-actions">
-                        <a href="/pages/hotel/room-detail-lumina/room-detail-lumina.html?id=${room.id}" class="btn btn-primary">View Details</a>
-                        <a href="/pages/hotel/booking-your-stay/booking-your-stay.html?roomId=${room.id}" class="btn btn-outline-primary">Book Now</a>
+                        <a href="/pages/hotel/room-detail-lumina/room-detail-lumina.html?id=${esc(String(room.id))}" class="btn btn-primary">View Details</a>
+                        <a href="/pages/hotel/booking-your-stay/booking-your-stay.html?roomId=${esc(String(room.id))}" class="btn btn-outline-primary">Book Now</a>
                     </div>
                 </div>
             </article>

@@ -1,5 +1,12 @@
 // Lumina Hospitality - Guest Dashboard JavaScript
 
+// XSS escape helper
+function esc(str) {
+    return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 // Auth helper — includes Bearer token and CSRF token for all mutating requests
 function getAuthHeaders() {
     const token = sessionStorage.getItem('token') || '';
@@ -26,39 +33,40 @@ function renderBookingCard(booking) {
     const statusClass = statusColors[booking.status] || 'bg-gray-100 text-gray-800';
 
     return `
-        <div class="glass-card rounded-xl overflow-hidden booking-card">
+        <div class="glass-card rounded-xl overflow-hidden booking-card" data-booking-id="${esc(String(booking.id))}">
             <div class="h-48 overflow-hidden bg-surface-container">
-                ${booking.image ? `<img src="${booking.image}" alt="${booking.roomName || 'Room'}" class="w-full h-full object-cover"/>` : 
-                  `<div class="w-full h-full flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined text-5xl">bed</span></div>`}
+                ${booking.image
+                    ? `<img src="${esc(booking.image)}" alt="${esc(booking.roomName || 'Room')}" class="w-full h-full object-cover"/>`
+                    : `<div class="w-full h-full flex items-center justify-center text-on-surface-variant"><span class="material-symbols-outlined text-5xl">bed</span></div>`}
             </div>
             <div class="p-md">
                 <div class="flex justify-between items-start mb-sm">
                     <div>
-                        <h4 class="font-h3 text-h3">${booking.roomName || 'Room #' + booking.roomId}</h4>
-                        <p class="text-body-sm text-on-surface-variant">${booking.roomType || ''}</p>
+                        <h4 class="font-h3 text-h3">${esc(booking.roomName || 'Room #' + booking.roomId)}</h4>
+                        <p class="text-body-sm text-on-surface-variant">${esc(booking.roomType || '')}</p>
                     </div>
-                    <span class="px-sm py-xs rounded-full text-label-md font-bold ${statusClass}">${booking.status}</span>
+                    <span class="px-sm py-xs rounded-full text-label-md font-bold ${esc(statusClass)}">${esc(booking.status)}</span>
                 </div>
                 <div class="space-y-sm mt-md">
                     <div class="flex justify-between text-body-sm">
                         <span class="text-on-surface-variant">Check-in</span>
-                        <span class="font-medium">${booking.checkIn ? formatDate(booking.checkIn) : '—'}</span>
+                        <span class="font-medium">${booking.checkIn ? esc(formatDate(booking.checkIn)) : '&mdash;'}</span>
                     </div>
                     <div class="flex justify-between text-body-sm">
                         <span class="text-on-surface-variant">Check-out</span>
-                        <span class="font-medium">${booking.checkOut ? formatDate(booking.checkOut) : '—'}</span>
+                        <span class="font-medium">${booking.checkOut ? esc(formatDate(booking.checkOut)) : '&mdash;'}</span>
                     </div>
                     <div class="flex justify-between text-body-sm">
                         <span class="text-on-surface-variant">Total</span>
-                        <span class="font-bold text-primary">$${Number(booking.total || booking.totalPrice || 0).toFixed(2)}</span>
+                        <span class="font-bold text-primary">$${esc(Number(booking.total || booking.totalPrice || 0).toFixed(2))}</span>
                     </div>
                 </div>
                 <div class="flex gap-sm mt-lg">
-                    <button class="flex-1 py-sm border border-primary text-primary rounded-lg font-button text-button hover:bg-primary hover:text-white transition-all" onclick="viewBookingDetails(${booking.id})">
+                    <button class="flex-1 py-sm border border-primary text-primary rounded-lg font-button text-button hover:bg-primary hover:text-white transition-all" data-action="view-details">
                         View Details
                     </button>
                     ${booking.status === 'confirmed' || booking.status === 'pending' ? `
-                        <button class="flex-1 py-sm border border-outline-variant text-on-surface-variant rounded-lg font-button text-button hover:bg-surface-container transition-all" onclick="cancelBooking(${booking.id})">
+                        <button class="flex-1 py-sm border border-outline-variant text-on-surface-variant rounded-lg font-button text-button hover:bg-surface-container transition-all" data-action="cancel">
                             Cancel
                         </button>
                     ` : ''}
@@ -86,7 +94,7 @@ function renderUpcomingBookings(bookings) {
             <div class="glass-card rounded-xl p-lg text-center col-span-full">
                 <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-md" style="display:block;">calendar_today</span>
                 <p class="text-body-md text-on-surface-variant">No upcoming bookings</p>
-                <button class="mt-md bg-primary text-white py-md px-xl rounded-lg font-button hover:bg-primary/90 transition-all" onclick="window.location.href='/pages/hotel/rooms-lumina/'">
+                <button class="mt-md bg-primary text-white py-md px-xl rounded-lg font-button hover:bg-primary/90 transition-all" data-action="book-room">
                     Book a Room
                 </button>
             </div>`;
@@ -149,7 +157,7 @@ function openServiceRequestModal() {
         <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 border border-white/40">
             <div class="flex justify-between items-center mb-lg">
                 <h3 class="font-h2 text-h2">New Service Request</h3>
-                <button onclick="this.closest('.fixed').remove()" class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                <button data-action="close-modal" class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
@@ -160,7 +168,7 @@ function openServiceRequestModal() {
                         <option value="room_service">Room Service</option>
                         <option value="housekeeping">Housekeeping</option>
                         <option value="maintenance">Maintenance</option>
-                        <option value="spa">Spa & Wellness</option>
+                        <option value="spa">Spa &amp; Wellness</option>
                         <option value="concierge">Concierge</option>
                         <option value="transportation">Transportation</option>
                         <option value="other">Other</option>
@@ -174,13 +182,15 @@ function openServiceRequestModal() {
                     <label class="font-label-md text-primary uppercase tracking-widest mb-xs block">Preferred Time</label>
                     <input type="datetime-local" class="w-full px-md py-sm rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:border-transparent">
                 </div>
-                <button class="w-full py-md bg-primary text-white rounded-lg font-button hover:bg-primary/90 transition-all" onclick="submitServiceRequest(this)">
+                <button data-action="submit-request" class="w-full py-md bg-primary text-white rounded-lg font-button hover:bg-primary/90 transition-all">
                     Submit Request
                 </button>
             </div>
         </div>
     `;
     document.body.appendChild(modal);
+    modal.querySelector('[data-action="close-modal"]').addEventListener('click', () => modal.remove());
+    modal.querySelector('[data-action="submit-request"]').addEventListener('click', (e) => submitServiceRequest(e.currentTarget));
 }
 
 // Submit service request
@@ -239,8 +249,8 @@ async function cancelBooking(bookingId) {
             </div>
         </div>`;
     document.body.appendChild(overlay);
-    document.getElementById('confirmCancelNo').onclick = () => overlay.remove();
-    document.getElementById('confirmCancelYes').onclick = async () => {
+    overlay.querySelector('#confirmCancelNo').addEventListener('click', () => overlay.remove());
+    overlay.querySelector('#confirmCancelYes').addEventListener('click', async () => {
         overlay.remove();
         try {
             const res = await fetch(`/api/bookings/${encodeURIComponent(bookingId)}/cancel`, {
@@ -304,8 +314,8 @@ function logout() {
             </div>
         </div>`;
     document.body.appendChild(overlay);
-    document.getElementById('guestLogoutNo').onclick = () => overlay.remove();
-    document.getElementById('guestLogoutYes').onclick = () => {
+    overlay.querySelector('#guestLogoutNo').addEventListener('click', () => overlay.remove());
+    overlay.querySelector('#guestLogoutYes').addEventListener('click', () => {
         overlay.remove();
         fetch('/api/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('token') || '') } })
             .catch(() => {});
@@ -314,6 +324,18 @@ function logout() {
         setTimeout(() => { window.location.href = '/pages/hotel/login-lumina/'; }, 1000);
     };
 }
+
+// Event delegation for dynamically rendered booking card buttons
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    const card = btn.closest('[data-booking-id]');
+    const bookingId = card ? card.dataset.bookingId : null;
+    if (action === 'view-details' && bookingId) viewBookingDetails(bookingId);
+    if (action === 'cancel' && bookingId) cancelBooking(bookingId);
+    if (action === 'book-room') window.location.href = '/pages/hotel/rooms-lumina/';
+});
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', async () => {

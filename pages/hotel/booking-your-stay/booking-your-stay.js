@@ -1,5 +1,12 @@
 // Lumina Hospitality - Booking Page JavaScript
 
+// XSS escape helper
+function esc(str) {
+    return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 let currentStep = 1;
 let selectedRoom = null;
 let bookingData = {
@@ -227,19 +234,19 @@ function loadRoomSelection() {
         const totalPrice = room.price * nights;
             
         return `
-        <div class="${containerClasses}">
+        <div class="${esc(containerClasses)}">
             <div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
-                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${room.image}" alt="${room.name}"/>
+                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${esc(room.image)}" alt="${esc(room.name)}"/>
             </div>
             <div class="flex-grow flex flex-col justify-between py-xs">
                 <div>
-                    <h4 class="font-h3 text-h3 text-on-surface">${room.name}</h4>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant">${room.description}</p>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">$${room.price}/night × ${nights} night${nights > 1 ? 's' : ''}</p>
+                    <h4 class="font-h3 text-h3 text-on-surface">${esc(room.name)}</h4>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">${esc(room.description)}</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">$${esc(String(room.price))}/night × ${esc(String(nights))} night${nights > 1 ? 's' : ''}</p>
                 </div>
                 <div class="flex justify-between items-end mt-2 md:mt-0">
-                    <div class="text-primary font-h3">$${totalPrice.toLocaleString()} <span class="text-body-sm text-outline">total</span></div>
-                    <button class="${buttonClasses}" data-room="${room.id}">
+                    <div class="text-primary font-h3">$${esc(String(totalPrice.toLocaleString()))} <span class="text-body-sm text-outline">total</span></div>
+                    <button class="${esc(buttonClasses)}" data-room="${esc(String(room.id))}">
                         ${isSelected ? '<span class="material-symbols-outlined text-sm">check</span> Selected' : 'Select'}
                     </button>
                 </div>
@@ -268,20 +275,20 @@ function loadOrderSummary() {
 
     orderSummary.innerHTML = `
         <div class="order-item">
-            <span class="text-body-md">${selectedRoom.name}</span>
-            <span class="text-body-md">$${selectedRoom.price} x ${nights} nights</span>
+            <span class="text-body-md">${esc(selectedRoom.name)}</span>
+            <span class="text-body-md">$${esc(String(selectedRoom.price))} x ${esc(String(nights))} nights</span>
         </div>
         <div class="order-item">
             <span class="text-body-md">Room Total</span>
-            <span class="text-body-md">$${roomTotal.toFixed(2)}</span>
+            <span class="text-body-md">$${esc(roomTotal.toFixed(2))}</span>
         </div>
         <div class="order-item">
             <span class="text-body-md">Tax (10%)</span>
-            <span class="text-body-md">$${tax.toFixed(2)}</span>
+            <span class="text-body-md">$${esc(tax.toFixed(2))}</span>
         </div>
         <div class="order-total">
             <span class="text-h3">Total</span>
-            <span class="text-h3 text-primary">$${total.toFixed(2)}</span>
+            <span class="text-h3 text-primary">$${esc(total.toFixed(2))}</span>
         </div>
     `;
 }
