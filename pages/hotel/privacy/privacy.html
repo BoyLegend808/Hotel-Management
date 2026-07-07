@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Privacy Policy &amp; Terms | Lumina Hospitality</title>
+<title>Privacy Policy & Terms | Lumina Hospitality</title>
+<meta name="description" content="Your privacy matters. Learn how Lumina Hospitality protects your information and the terms governing our services."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -13,96 +14,238 @@
 <link href="/css/global-footer.css" rel="stylesheet"/>
 <link href="/css/hotel-utils.css" rel="stylesheet"/>
 <link href="/css/ui-utils.css" rel="stylesheet"/>
-<link href="/css/tailwind-output.css" rel="stylesheet"/>
+<style>
+  /* ═══════════════════════════════════════
+     Privacy & Terms — Lumina Hospitality
+     ═══════════════════════════════════════ */
+
+  .legal-hero {
+    position: relative;
+    height: 50vh;
+    min-height: 360px;
+    overflow: hidden;
+  }
+
+  .legal-hero img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .legal-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 55%, transparent 100%);
+  }
+
+  .legal-hero-content {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    max-width: 80rem; margin: 0 auto; padding: 0 2rem;
+  }
+
+  .legal-hero-inner { max-width: 700px; }
+
+  .legal-hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,77,97,0.8); backdrop-filter: blur(12px);
+    color: #fff; padding: 0.5rem 1.25rem; border-radius: 100px;
+    font-size: 0.8125rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .legal-hero-badge .material-symbols-outlined {
+    font-size: 1rem; font-variation-settings: 'FILL' 1;
+  }
+
+  .legal-hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700; color: #fff;
+    line-height: 1.12; margin-bottom: 1rem;
+  }
+
+  .legal-hero-sub {
+    font-size: 1.125rem; color: rgba(255,255,255,0.88);
+    max-width: 580px; line-height: 1.65;
+  }
+
+  /* Body */
+  .legal-body {
+    max-width: 56rem; margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .legal-body > * + * { margin-top: 2rem; }
+
+  .legal-section-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4375rem 1rem; border-radius: 100px;
+    font-size: 0.8125rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 1rem;
+    background: rgba(0,77,97,0.08); color: var(--primary);
+  }
+
+  .legal-section-badge .material-symbols-outlined {
+    font-size: 1rem; font-variation-settings: 'FILL' 1;
+  }
+
+  .legal-section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 700; color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-updated {
+    color: var(--text-secondary); font-size: 1.0625rem;
+    margin-bottom: 2rem;
+  }
+
+  .legal-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 0.75rem;
+  }
+
+  .legal-card-text {
+    color: var(--text-secondary);
+    font-size: 0.975rem; line-height: 1.75;
+  }
+
+  .legal-card-text a {
+    color: var(--primary); text-decoration: none;
+  }
+
+  .legal-card-text a:hover { text-decoration: underline; }
+
+  .legal-divider {
+    border: none; border-top: 1px solid var(--border-light);
+    margin: 3rem 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .legal-hero { height: 45vh; min-height: 300px; }
+    .legal-hero-content { padding: 0 1.5rem; }
+    .legal-body { padding: 3rem 1.25rem; }
+    .legal-card { padding: 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .legal-hero { height: 40vh; min-height: 260px; }
+    .legal-hero-content { padding: 0 1.25rem; }
+    .legal-body { padding: 2.5rem 1rem; }
+    .legal-card { padding: 1.25rem; }
+    .legal-card-title { font-size: 1.125rem; }
+    .legal-card-text { font-size: 0.925rem; }
+  }
+
+  @media (max-width: 360px) {
+    .legal-body { padding: 2rem 0.875rem; }
+    .legal-card { padding: 1rem; }
+  }
+</style>
 </head>
 <body>
+
 <a href="#main-content" class="sr-only">Skip to main content</a>
 <div id="global-nav"></div>
 
 <main id="main-content">
-    <section class="page-hero relative h-[50vh] min-h-[400px] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80" alt="Legal" class="absolute inset-0 w-full h-full object-cover"/>
-        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-        <div class="absolute inset-0 flex items-center px-container-margin">
-            <div class="max-w-3xl">
-                <span class="inline-flex items-center gap-2 bg-secondary/90 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider border border-white/30">
-                    <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">gavel</span>
-                    Legal Information
-                </span>
-                <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight" style="font-family:var(--font-serif)">Privacy Policy & Terms</h1>
-                <p class="text-xl text-white/90 max-w-2xl leading-relaxed">Your privacy is important to us. Learn how we protect your information and the terms that govern our services.</p>
-            </div>
-        </div>
+
+  <!-- Hero -->
+  <section class="legal-hero">
+    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80" alt="Lumina Hospitality" loading="eager"/>
+    <div class="legal-hero-overlay"></div>
+    <div class="legal-hero-content">
+      <div class="legal-hero-inner">
+        <span class="legal-hero-badge">
+          <span class="material-symbols-outlined">gavel</span>
+          Legal Information
+        </span>
+        <h1 class="legal-hero-title">Privacy Policy & Terms</h1>
+        <p class="legal-hero-sub">Your privacy is important to us. Learn how we protect your information and the terms that govern our services.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <div class="legal-body">
+
+    <!-- Privacy Policy -->
+    <section>
+      <span class="legal-section-badge">
+        <span class="material-symbols-outlined">shield</span>
+        Privacy Policy
+      </span>
+      <h2 class="legal-section-title">Privacy Policy</h2>
+      <p class="legal-updated"><em>Last updated: June 2026</em></p>
+
+      <div class="legal-card">
+        <h3 class="legal-card-title">1. Information We Collect</h3>
+        <p class="legal-card-text">When you make a reservation or use our services, we may collect personal information including your name, email address, phone number, payment details, and travel preferences. We also collect usage data through cookies and analytics tools to improve our website and services.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">2. How We Use Your Information</h3>
+        <p class="legal-card-text">Your information is used to process reservations, provide personalized services, communicate about your stay, send promotional offers (with your consent), and improve our website functionality. We may also use your data for internal analytics and operational purposes.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">3. Information Sharing</h3>
+        <p class="legal-card-text">We do not sell your personal information. We may share your data with trusted third-party service providers who assist in operating our hotel, such as payment processors and booking platforms. These providers are contractually obligated to protect your information.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">4. Data Security</h3>
+        <p class="legal-card-text">We implement industry-standard security measures including SSL encryption, secure payment processing, and regular security audits to protect your personal information from unauthorized access, disclosure, or misuse.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">5. Cookies</h3>
+        <p class="legal-card-text">Our website uses cookies to enhance your browsing experience, remember your preferences, and analyze site traffic. You can control cookie settings through your browser preferences. Essential cookies required for booking functionality cannot be disabled.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">6. Your Rights</h3>
+        <p class="legal-card-text">You have the right to access, correct, or delete your personal information. To exercise these rights, please contact our privacy team at <a href="mailto:privacy@lumina.com">privacy@lumina.com</a>.</p>
+      </div>
     </section>
 
-    <div class="max-w-4xl mx-auto px-6 py-20 space-y-20">
-        <!-- Privacy Policy -->
-        <section>
-            <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
-                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">shield</span>
-                Privacy Policy
-            </span>
-            <h2 class="text-4xl md:text-5xl font-bold text-on-surface mb-4" style="font-family:var(--font-serif)">Privacy Policy</h2>
-            <p class="text-on-surface-variant text-lg mb-8"><em>Last updated: June 2026</em></p>
+    <hr class="legal-divider"/>
 
-            <div class="space-y-8">
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">1. Information We Collect</h3>
-                    <p class="text-on-surface-variant leading-relaxed">When you make a reservation or use our services, we may collect personal information including your name, email address, phone number, payment details, and travel preferences. We also collect usage data through cookies and analytics tools to improve our website and services.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">2. How We Use Your Information</h3>
-                    <p class="text-on-surface-variant leading-relaxed">Your information is used to process reservations, provide personalized services, communicate about your stay, send promotional offers (with your consent), and improve our website functionality. We may also use your data for internal analytics and operational purposes.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">3. Information Sharing</h3>
-                    <p class="text-on-surface-variant leading-relaxed">We do not sell your personal information. We may share your data with trusted third-party service providers who assist in operating our hotel, such as payment processors and booking platforms. These providers are contractually obligated to protect your information.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">4. Data Security</h3>
-                    <p class="text-on-surface-variant leading-relaxed">We implement industry-standard security measures including SSL encryption, secure payment processing, and regular security audits to protect your personal information from unauthorized access, disclosure, or misuse.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">5. Cookies</h3>
-                    <p class="text-on-surface-variant leading-relaxed">Our website uses cookies to enhance your browsing experience, remember your preferences, and analyze site traffic. You can control cookie settings through your browser preferences. Essential cookies required for booking functionality cannot be disabled.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">6. Your Rights</h3>
-                    <p class="text-on-surface-variant leading-relaxed">You have the right to access, correct, or delete your personal information. To exercise these rights, please contact our privacy team at <a href="mailto:privacy@lumina.com" class="text-primary hover:underline">privacy@lumina.com</a>.</p>
-                </div>
-            </div>
-        </section>
+    <!-- Terms of Service -->
+    <section>
+      <span class="legal-section-badge">
+        <span class="material-symbols-outlined">description</span>
+        Terms of Service
+      </span>
+      <h2 class="legal-section-title">Terms of Service</h2>
 
-        <div class="border-t border-outline-variant/20"></div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">1. Booking Terms</h3>
+        <p class="legal-card-text">All bookings are subject to availability and confirmation. A valid credit card is required at the time of booking. The cardholder must be at least 18 years old and present during check-in. Rates are subject to change without notice until a booking is confirmed.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">2. Liability</h3>
+        <p class="legal-card-text">Lumina Hospitality is not liable for loss, theft, or damage to personal property unless caused by our negligence. We maintain comprehensive insurance for guest accommodations. Our liability is limited to the total amount paid for the reservation.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">3. Amendments</h3>
+        <p class="legal-card-text">Lumina Hospitality reserves the right to amend these terms at any time. Changes take effect upon posting to the website. Continued use of our services constitutes acceptance of the amended terms.</p>
+      </div>
+      <div class="legal-card">
+        <h3 class="legal-card-title">4. Governing Law</h3>
+        <p class="legal-card-text">These terms are governed by the laws of the Federal Republic of Nigeria. Any disputes shall be resolved in the courts of Lagos State, Nigeria.</p>
+      </div>
+    </section>
 
-        <!-- Terms of Service -->
-        <section>
-            <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
-                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">description</span>
-                Terms of Service
-            </span>
-            <h2 class="text-4xl md:text-5xl font-bold text-on-surface mb-8" style="font-family:var(--font-serif)">Terms of Service</h2>
-
-            <div class="space-y-8">
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">1. Booking Terms</h3>
-                    <p class="text-on-surface-variant leading-relaxed">All bookings are subject to availability and confirmation. A valid credit card is required at the time of booking. The cardholder must be at least 18 years old and present during check-in. Rates are subject to change without notice until a booking is confirmed.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">2. Liability</h3>
-                    <p class="text-on-surface-variant leading-relaxed">Lumina Hospitality is not liable for loss, theft, or damage to personal property unless caused by our negligence. We maintain comprehensive insurance for guest accommodations. Our liability is limited to the total amount paid for the reservation.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">3. Amendments</h3>
-                    <p class="text-on-surface-variant leading-relaxed">Lumina Hospitality reserves the right to amend these terms at any time. Changes take effect upon posting to the website. Continued use of our services constitutes acceptance of the amended terms.</p>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold text-on-surface mb-3" style="font-family:var(--font-serif)">4. Governing Law</h3>
-                    <p class="text-on-surface-variant leading-relaxed">These terms are governed by the laws of the Federal Republic of Nigeria. Any disputes shall be resolved in the courts of Lagos State, Nigeria.</p>
-                </div>
-            </div>
-        </section>
-    </div>
+  </div>
 
 </main>
 
@@ -113,4 +256,3 @@
 <script src="/js/page-init.js"></script>
 </body>
 </html>
-

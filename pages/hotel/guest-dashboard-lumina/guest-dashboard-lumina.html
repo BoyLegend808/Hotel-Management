@@ -1,352 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lumina Hospitality | Guest Dashboard</title>
-<meta name="description" content="Manage your bookings and preferences at Lumina Hospitality."/>
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
-<!-- Styles -->
-<link href="/css/lumina-design-system.css" rel="stylesheet"/>
-<link href="/css/global-nav.css" rel="stylesheet"/>
-<link href="/css/global-footer.css" rel="stylesheet"/>
-<link href="/css/hotel-utils.css" rel="stylesheet"/>
-<link href="/css/ui-utils.css" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.05);
-        }
-        .glass-card-hover {
-            transition: all 0.3s ease-out;
-        }
-        .glass-card-hover:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.85);
-            box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.1);
-        }
-        .inner-glow {
-            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
-        }
-        body {
-            background-color: #f7fafc;
-            color: #181c1e;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Lumina Hospitality | Guest Dashboard</title>
+    <meta name="description" content="Manage your bookings and preferences at Lumina Hospitality." />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+        rel="stylesheet" />
+    <!-- Styles -->
+    <link href="/css/lumina-design-system.css" rel="stylesheet" />
+    <link href="/css/global-nav.css" rel="stylesheet" />
+    <link href="/css/global-footer.css" rel="stylesheet" />
+    <link href="/css/tailwind-output.css" rel="stylesheet" />
+    <link href="/css/ui-utils.css" rel="stylesheet" />
+    <link href="/pages/hotel/guest-dashboard-lumina/guest-dashboard-responsive.css" rel="stylesheet" />
 </head>
-<body class="font-body-md text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
-<!-- Sidebar Navigation Shell -->
-<nav role="navigation" class="fixed left-0 top-0 h-full w-80 glass-panel border-r border-white/30 z-50 flex flex-col p-lg gap-md transition-all duration-300" id="main-sidebar">
-<div class="flex items-center gap-md mb-xl px-sm">
-<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-h3">loupe</span>
-</div>
-<h1 class="font-h2 text-h3 tracking-tight text-primary">Lumina</h1>
-</div>
-<div class="flex flex-col gap-xs flex-1">
-        <a class="flex items-center gap-md px-md py-sm rounded-xl bg-primary/10 text-primary font-bold transition-all duration-300" href="/pages/hotel/guest-dashboard-lumina/guest-dashboard-lumina.html">
-        <span class="material-symbols-outlined">dashboard</span>
-        <span class="font-body-md">Dashboard</span>
-        </a>
-        <a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all duration-300" href="/pages/hotel/booking-your-stay/booking-your-stay.html">
-        <span class="material-symbols-outlined">bed</span>
-        <span class="font-body-md">Stays</span>
-        </a>
-        <a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all duration-300" href="/pages/hotel/reviews-lumina/reviews-lumina.html">
-        <span class="material-symbols-outlined">reviews</span>
-        <span class="font-body-md">Reviews</span>
-        </a>
-        <a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all duration-300" href="/pages/hotel/contact-lumina/contact-lumina.html">
-        <span class="material-symbols-outlined">settings</span>
-        <span class="font-body-md">Settings</span>
-        </a>
-</div>
-<!-- Manager Context from JSON Reference -->
-<div class="mt-auto glass-panel p-md rounded-xl flex items-center gap-md border border-white/20">
-<img alt="Julian Reed" class="w-12 h-12 rounded-full object-cover border-2 border-primary-fixed" data-alt="A professional headshot of a middle-aged man with a friendly smile, Julian Reed, the general manager. He is wearing a sharp, tailored navy blue suit against a soft-focus background of a luxury hotel lobby. The lighting is warm and cinematic, reflecting a high-end hospitality environment with golden and teal highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVkXPwWqmxYMMZCGHoEkcTX4IEqq0KW0XvxIgcxhSQePmJ22ixEqdIL5peV5KTY1NaRAqFLvCWJFnG6L1BcfE6aPlwwAcdGj0AfPag1HNYpbNj0KEXHLvbVDaPP-UlJurc9JBmAopIaQOg-4HOYEn_UO2hSnu9_uVcOMtnOqyfiF1Jl6cDLWhvKfftWNafwvGPQHaep2cXvO8AIyHKFVfY0ynY0e6k9_oOyeTSqozw9nIyKDkqWoWBUsUdglnfZZ5y6SybEZm7LTI"/>
-<div class="flex flex-col overflow-hidden">
-<p class="font-body-md font-bold truncate">Julian Reed</p>
-<p class="font-label-md text-on-surface-variant">General Manager</p>
-</div>
-</div>
-</nav>
-<!-- Main Content Area -->
-<main role="main" class="ml-80 min-h-screen px-container-margin py-xl relative">
-<!-- Header -->
-<header role="banner" class="flex justify-between items-end mb-xl">
-<div>
-<p class="font-label-md text-primary tracking-widest mb-xs">WELCOME BACK</p>
-<h2 class="font-h1 text-h1 text-on-surface">Your Lumina Journey</h2>
-</div>
-<div class="flex gap-md">
-        <button class="bg-primary text-white font-button px-lg py-md rounded-full shadow-lg hover:brightness-90 transition-all duration-300 active:scale-95 flex items-center gap-sm" id="bookNewStayBtn">
-        <span class="material-symbols-outlined">add_circle</span>
-                        Book New Stay
-                    </button>
-</div>
-</header>
-<!-- Stats Grid (Bento Style) -->
-<div class="grid grid-cols-12 gap-lg mb-xl">
-<div class="col-span-12 md:col-span-4 glass-panel inner-glow p-lg rounded-2xl flex flex-col justify-between h-48 border border-white/40">
-<div class="flex justify-between items-start">
-<div class="p-sm bg-primary/10 rounded-lg text-primary">
-<span class="material-symbols-outlined">calendar_month</span>
-</div>
-<span class="text-secondary font-bold font-label-md">+2 Upcoming</span>
-</div>
-<div>
-<h3 class="font-h3 text-on-surface">Upcoming Nights</h3>
-<p class="text-h1 font-h1 text-primary">12</p>
-</div>
-</div>
-<div class="col-span-12 md:col-span-4 glass-panel inner-glow p-lg rounded-2xl flex flex-col justify-between h-48 border border-white/40">
-<div class="flex justify-between items-start">
-<div class="p-sm bg-tertiary-container/10 rounded-lg text-tertiary">
-<span class="material-symbols-outlined">stars</span>
-</div>
-<span class="text-primary font-bold font-label-md">Platinum Member</span>
-</div>
-<div>
-<h3 class="font-h3 text-on-surface">Reward Points</h3>
-<p class="text-h1 font-h1 text-tertiary">48,250</p>
-</div>
-</div>
-<div class="col-span-12 md:col-span-4 glass-panel inner-glow p-lg rounded-2xl flex flex-col justify-between h-48 border border-white/40 bg-gradient-to-br from-primary/5 to-secondary/5">
-<div class="flex justify-between items-start">
-<div class="p-sm bg-secondary-container/10 rounded-lg text-secondary">
-<span class="material-symbols-outlined">verified</span>
-</div>
-</div>
-<div>
-<h3 class="font-h3 text-on-surface">Member Since</h3>
-<p class="font-h2 text-h2 text-on-surface">October 2021</p>
-</div>
-</div>
-</div>
-<!-- Upcoming Stays -->
-<section class="mb-xl">
-<div class="flex items-center gap-sm mb-lg">
-<h3 class="font-h2 text-h2">Upcoming Stays</h3>
-<div class="h-1 flex-1 bg-surface-variant/30 rounded-full"></div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
-<!-- Stay Card 1 -->
-<div class="glass-panel glass-card-hover rounded-3xl overflow-hidden group">
-<div class="relative h-64 w-full">
-<img alt="Lumina Maldives" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A breathtaking luxury overwater villa in the Maldives at dusk. The sky is a gradient of deep indigo and soft pink, reflected in the crystal clear turquoise lagoon. The villa features warm wooden architecture and large glass windows glowing with amber interior light. A private infinity pool seamlessly blends with the ocean horizon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV1wBOABLiVSlyyHNV_Qwb0AWCuCAWFv6tMwcDLXsy1wwJRKcr_jhwfIrPfmtvFQvkhK276gxM9cThtckQJ1SQCWq0FJsNzdrFarlf1nP3P-1Vx-m3QRIC-EAEHMHcOcJCnkMhFl2hgvc9bj1oMVmZqXE0vTXpNPz6QoinL0TLj4Afjyb8OTlpLHBVmEuR-clJ3ZU7idQuOW5jXHRGQDXxJ_M9hH1m63zFXNoXWLnItPfwlak1ez9AiIeKUYc2TKj-qY9CF8Grxsk"/>
-<div class="absolute top-md right-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full shadow-sm">
-<span class="font-label-md text-primary">In 14 Days</span>
-</div>
-</div>
-<div class="p-lg">
-<div class="flex justify-between items-start mb-md">
-<div>
-<h4 class="font-h3 text-on-surface">Lumina Maldives Resort</h4>
-<p class="text-on-surface-variant font-body-sm flex items-center gap-xs">
-<span class="material-symbols-outlined text-[18px]">location_on</span> North Malé Atoll
-                                </p>
-</div>
-<div class="text-right">
-<p class="font-label-md text-on-surface-variant">CONFIRMATION</p>
-<p class="font-bold text-primary">#LUM-88219</p>
-</div>
-</div>
-<div class="flex items-center justify-between py-md border-t border-white/20">
-<div class="flex gap-lg">
-<div>
-<p class="font-label-md text-on-surface-variant">CHECK-IN</p>
-<p class="font-bold">Nov 24, 2024</p>
-</div>
-<div>
-<p class="font-label-md text-on-surface-variant">CHECK-OUT</p>
-<p class="font-bold">Nov 30, 2024</p>
-</div>
-</div>
-<div class="flex gap-sm">
-<button class="px-md py-sm bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-sm font-medium view-details-btn" data-booking-id="LUM-88219">View Details</button>
-<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Stay Card 2 -->
-<div class="glass-panel glass-card-hover rounded-3xl overflow-hidden group">
-<div class="relative h-64 w-full">
-<img alt="Lumina Tokyo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A modern high-rise luxury hotel room in Tokyo overlooking the glowing city skyline at night. The interior is minimalist and elegant with dark wood accents and soft, recessed lighting in shades of teal and gold. Large floor-to-ceiling windows capture the vibrant neon lights of the metropolis below, creating a sophisticated urban atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9T2eAIEVH5jhRnkEptFCqp-neO-HSNU0lMGKJoSSSeLRsULqHT55xqecaXkYKb6EvnQ5HplAfo_axmRyaIpffBv7hcjI0xiY3R6l5i7cEM8-3a8EtrJ1VsDCOQS38amft7CRzXP3jiTCLUBLdg4c71ODptnKIJiOfGilb7_dWR3xuL9EEF5uTvVw7lafDS10FVolmyqef48Dcm_88qy-yRXLs1ICjZrlePTrHrS51OcOvYxQeh0aLVir9mQm6_aa8eJWsYsvRh5o"/>
-<div class="absolute top-md right-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full shadow-sm">
-<span class="font-label-md text-primary">In 45 Days</span>
-</div>
-</div>
-<div class="p-lg">
-<div class="flex justify-between items-start mb-md">
-<div>
-<h4 class="font-h3 text-on-surface">Lumina Tokyo Sky</h4>
-<p class="text-on-surface-variant font-body-sm flex items-center gap-xs">
-<span class="material-symbols-outlined text-[18px]">location_on</span> Minato City, Tokyo
-                                </p>
-</div>
-<div class="text-right">
-<p class="font-label-md text-on-surface-variant">CONFIRMATION</p>
-<p class="font-bold text-primary">#LUM-92104</p>
-</div>
-</div>
-<div class="flex items-center justify-between py-md border-t border-white/20">
-<div class="flex gap-lg">
-<div>
-<p class="font-label-md text-on-surface-variant">CHECK-IN</p>
-<p class="font-bold">Dec 20, 2024</p>
-</div>
-<div>
-<p class="font-label-md text-on-surface-variant">CHECK-OUT</p>
-<p class="font-bold">Dec 27, 2024</p>
-</div>
-</div>
-<div class="flex gap-sm">
-<button class="px-md py-sm bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-sm font-medium view-details-btn" data-booking-id="LUM-92104">View Details</button>
-<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Service Requests -->
-<section class="mb-xl">
-<div class="flex items-center justify-between mb-lg">
-<div class="flex items-center gap-sm">
-<h3 class="font-h2 text-h2">Service Requests</h3>
-<div class="h-1 flex-1 bg-surface-variant/30 rounded-full"></div>
-</div>
-<button class="px-md py-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium flex items-center gap-xs" id="newRequestBtn">
-<span class="material-symbols-outlined text-[18px]">add</span>
-New Request
-</button>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
-<!-- Service Request 1 -->
-<div class="glass-panel p-md rounded-2xl border border-white/40">
-<div class="flex items-start justify-between mb-md">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined">room_service</span>
-</div>
-<div>
-<h4 class="font-bold text-on-surface">Room Service</h4>
-<p class="text-on-surface-variant text-label-md">Lumina Maldives Resort</p>
-</div>
-</div>
-<span class="px-sm py-xs bg-green-100 text-green-700 rounded-full text-xs font-medium">Completed</span>
-</div>
-<p class="text-on-surface-variant text-body-sm mb-md">Extra towels and toiletries delivered to room 302</p>
-<div class="flex items-center justify-between text-label-md text-on-surface-variant">
-<span>Nov 15, 2024</span>
-<span class="text-primary cursor-pointer hover:underline">View Details</span>
-</div>
-</div>
-<!-- Service Request 2 -->
-<div class="glass-panel p-md rounded-2xl border border-white/40">
-<div class="flex items-start justify-between mb-md">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">spa</span>
-</div>
-<div>
-<h4 class="font-bold text-on-surface">Spa Appointment</h4>
-<p class="text-on-surface-variant text-label-md">Lumina Maldives Resort</p>
-</div>
-</div>
-<span class="px-sm py-xs bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Scheduled</span>
-</div>
-<p class="text-on-surface-variant text-body-sm mb-md">Deep tissue massage - Nov 25, 2024 at 2:00 PM</p>
-<div class="flex items-center justify-between text-label-md text-on-surface-variant">
-<span>Nov 10, 2024</span>
-<span class="text-primary cursor-pointer hover:underline">View Details</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Past Experiences -->
-<section class="mb-xl">
-<div class="flex items-center gap-sm mb-lg">
-<h3 class="font-h2 text-h2">Past Experiences</h3>
-<div class="h-1 flex-1 bg-surface-variant/30 rounded-full"></div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
-<!-- Past Stay Item 1 -->
-<div class="glass-panel p-md rounded-2xl flex items-center gap-md border border-white/40">
-<img alt="Lumina Paris" class="w-20 h-20 rounded-xl object-cover" data-alt="A charming boutique hotel facade in Paris with classic wrought-iron balconies and blooming flower boxes. The scene is set in the soft, golden light of early morning. The cobblestone street below is quiet, and the architectural details of the Haussmann-style building are crisp and elegant, conveying a romantic and historic European atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw4OI3PPnAFOo2F2k6STkqatr7BDxVYHSBfFTG2mpR3tITtfKAkgv-kZKsFEbFIegcwZWQaLeTscpL-63Wqelav0sbl0iLedYx9xYlXnCXWiROQA5MQJpGG_rMPQ_l0EYEgAQQSfiHox3auO2pfTTJdFTQh0Etg_5MJuI92-Fa0it9pbque8TF_ijYINQHuus1b5yvwFFfoQF7PV2lxnfT2uvlb4sN-3rm9nyNHW6IUoGz7tebiV3ktHbGR3rxkHctPAAFCSOUyE0"/>
-<div class="flex-1">
-<h4 class="font-bold text-on-surface">Lumina Paris Loft</h4>
-<p class="text-on-surface-variant text-label-md">October 2024</p>
-<div class="flex text-secondary mt-xs">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-</div>
-</div>
-</div>
-<!-- Past Stay Item 2 -->
-<div class="glass-panel p-md rounded-2xl flex items-center gap-md border border-white/40">
-<img alt="Lumina Alps" class="w-20 h-20 rounded-xl object-cover" data-alt="A cozy, high-end mountain chalet in the Swiss Alps surrounded by snow-covered pine trees and majestic white peaks. The building features large windows and a spacious balcony where golden light spills out onto the fresh snow. The mood is serene and warm, highlighting the contrast between the cold winter landscape and the inviting, luxury interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHuKC1hHKlJM_1ihG_62xwOP2_7dAIhYu74wBhOHVc77ymsdploQvxn1zezQtPIesO_t9CITRTDM_M3Pmq-JUQM_lFI6_HM6_0PwXpzv9BIK_4oFTEsVsKRqmZTTmA9rppfh_KetxSVHlDP7PQmSSeUk8KCyedsdAP5sTVAICrJeKYAmlH3yyCCfyvCskYvEGMfbV3rQdTFx88AM68exhGYiRZl3ArP5RoISpnen-fpwtUmcHE5KvH2dbbzYyJmzRP1QQlELmS22I"/>
-<div class="flex-1">
-<h4 class="font-bold text-on-surface">Lumina Alpine Lodge</h4>
-<p class="text-on-surface-variant text-label-md">February 2024</p>
-<div class="flex text-secondary mt-xs">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 0;">star</span>
-</div>
-</div>
-</div>
-<!-- Past Stay Item 3 -->
-<div class="glass-panel p-md rounded-2xl flex items-center gap-md border border-white/40">
-<img alt="Lumina Santorini" class="w-20 h-20 rounded-xl object-cover" data-alt="The iconic white-washed architecture of Santorini, Greece, with bright blue domes overlooking the deep blue Aegean Sea. The bright midday sun creates sharp, clean shadows and highlights the vibrant Mediterranean colors. The scene is tranquil and expansive, capturing the essence of luxury island travel with a sophisticated and airy aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDINQImW2bcjL0P40hE_4fcNNcjyPFEnCJ09smtKcManwrzNu6_bu5bcYLxsloAPpfMuBzvBGib7muf2l3zhY39I9hTLzqKEsp47CyqsKHIjCfDDO241qRSvaba2LVO38EEIIt_0yblptlUZ-3FXpBwLyIM8yXAas-j_Lj-IskHWw1biCQD6RgBXQzr6yCfepbl2qrY7UCLfao9UaoTzHyXbvXtKSFWl-0p44ZCn0rjtcImtKEjL4UYxWlR_Janoi7mlLeshgd3_oo"/>
-<div class="flex-1">
-<h4 class="font-bold text-on-surface">Lumina Santorini Cliff</h4>
-<p class="text-on-surface-variant text-label-md">August 2023</p>
-<div class="flex text-secondary mt-xs">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
 
-<div id="global-footer"></div>
+<body
+    class="font-body-md text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
+    <!-- Sidebar Navigation Shell -->
+    <nav role="navigation"
+        class="fixed left-0 top-0 h-full w-80 glass-panel border-r border-white/30 z-50 flex flex-col p-lg gap-md transition-all duration-300"
+        id="main-sidebar">
+        <div class="flex items-center gap-md mb-xl px-sm">
+            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-h3">loupe</span>
+            </div>
+            <h1 class="font-h2 text-h3 tracking-tight text-primary">Lumina</h1>
+        </div>
+        <div class="flex flex-col gap-xs flex-1">
+            <a class="flex items-center gap-md px-md py-sm rounded-xl bg-primary/10 text-primary font-bold transition-all duration-300"
+                href="/pages/hotel/guest-dashboard-lumina/guest-dashboard-lumina.html">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-body-md">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all duration-300"
+                href="/pages/hotel/booking-your-stay/booking-your-stay.html">
+                <span class="material-symbols-outlined">bed</span>
+                <span class="font-body-md">Stays</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all duration-300"
+                href="/pages/hotel/reviews-lumina/reviews-lumina.html">
+                <span class="material-symbols-outlined">reviews</span>
+                <span class="font-body-md">Reviews</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all duration-300"
+                href="/pages/hotel/contact-lumina/contact-lumina.html">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-body-md">Settings</span>
+            </a>
+        </div>
+        <!-- Manager Context from JSON Reference -->
+        <div class="mt-auto glass-panel p-md rounded-xl flex items-center gap-md border border-white/20">
+            <img alt="Julian Reed" class="w-12 h-12 rounded-full object-cover border-2 border-primary-fixed"
+                data-alt="A professional headshot of a middle-aged man with a friendly smile, Julian Reed, the general manager. He is wearing a sharp, tailored navy blue suit against a soft-focus background of a luxury hotel lobby. The lighting is warm and cinematic, reflecting a high-end hospitality environment with golden and teal highlights."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVkXPwWqmxYMMZCGHoEkcTX4IEqq0KW0XvxIgcxhSQePmJ22ixEqdIL5peV5KTY1NaRAqFLvCWJFnG6L1BcfE6aPlwwAcdGj0AfPag1HNYpbNj0KEXHLvbVDaPP-UlJurc9JBmAopIaQOg-4HOYEn_UO2hSnu9_uVcOMtnOqyfiF1Jl6cDLWhvKfftWNafwvGPQHaep2cXvO8AIyHKFVfY0ynY0e6k9_oOyeTSqozw9nIyKDkqWoWBUsUdglnfZZ5y6SybEZm7LTI" />
+            <div class="flex flex-col overflow-hidden">
+                <p class="font-body-md font-bold truncate">Julian Reed</p>
+                <p class="font-label-md text-on-surface-variant">General Manager</p>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content Area -->
+    <main role="main" class="ml-80 min-h-screen px-container-margin py-xl relative">
+        <!-- Header -->
+        <header role="banner" class="flex justify-between items-end mb-xl">
+            <div>
+                <p class="font-label-md text-primary tracking-widest mb-xs">WELCOME BACK</p>
+                <h2 class="font-h1 text-h1 text-on-surface">Your Lumina Journey</h2>
+            </div>
+            <div class="flex gap-md">
+                <button
+                    class="bg-primary text-white font-button px-lg py-md rounded-full shadow-lg hover:brightness-90 transition-all duration-300 active:scale-95 flex items-center gap-sm"
+                    id="bookNewStayBtn">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    Book New Stay
+                </button>
+            </div>
+        </header>
+        <!-- Stats Grid (Bento Style) -->
+        <div class="grid grid-cols-12 gap-lg mb-xl">
+            <div
+                class="col-span-12 md:col-span-4 glass-panel inner-glow p-lg rounded-2xl flex flex-col justify-between h-48 border border-white/40">
+                <div class="flex justify-between items-start">
+                    <div class="p-sm bg-primary/10 rounded-lg text-primary">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </div>
+                    <span class="text-secondary font-bold font-label-md">+2 Upcoming</span>
+                </div>
+                <div>
+                    <h3 class="font-h3 text-on-surface">Upcoming Nights</h3>
+                    <p class="text-h1 font-h1 text-primary">12</p>
+                </div>
+            </div>
+            <div
+                class="col-span-12 md:col-span-4 glass-panel inner-glow p-lg rounded-2xl flex flex-col justify-between h-48 border border-white/40">
+                <div class="flex justify-between items-start">
+                    <div class="p-sm bg-tertiary-container/10 rounded-lg text-tertiary">
+                        <span class="material-symbols-outlined">stars</span>
+                    </div>
+                    <span class="text-primary font-bold font-label-md">Platinum Member</span>
+                </div>
+                <div>
+                    <h3 class="font-h3 text-on-surface">Reward Points</h3>
+                    <p class="text-h1 font-h1 text-tertiary">48,250</p>
+                </div>
+            </div>
+            <div
+                class="col-span-12 md:col-span-4 glass-panel inner-glow p-lg rounded-2xl flex flex-col justify-between h-48 border border-white/40 bg-gradient-to-br from-primary/5 to-secondary/5">
+                <div class="flex justify-between items-start">
+                    <div class="p-sm bg-secondary-container/10 rounded-lg text-secondary">
+                        <span class="material-symbols-outlined">verified</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-h3 text-on-surface">Member Since</h3>
+                    <p class="font-h2 text-h2 text-on-surface">October 2021</p>
+                </div>
+            </div>
+        </div>
+        <!-- Upcoming Stays -->
+        <section class="mb-xl">
+            <div class="flex items-center gap-sm mb-lg">
+                <h3 class="font-h2 text-h2">Upcoming Stays</h3>
+                <div class="h-1 flex-1 bg-surface-variant/30 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                <!-- Stay Card 1 -->
+                <div class="glass-panel glass-card-hover rounded-3xl overflow-hidden group">
+                    <div class="relative h-64 w-full">
+                        <img alt="Lumina Maldives"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            data-alt="A breathtaking luxury overwater villa in the Maldives at dusk. The sky is a gradient of deep indigo and soft pink, reflected in the crystal clear turquoise lagoon. The villa features warm wooden architecture and large glass windows glowing with amber interior light. A private infinity pool seamlessly blends with the ocean horizon."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV1wBOABLiVSlyyHNV_Qwb0AWCuCAWFv6tMwcDLXsy1wwJRKcr_jhwfIrPfmtvFQvkhK276gxM9cThtckQJ1SQCWq0FJsNzdrFarlf1nP3P-1Vx-m3QRIC-EAEHMHcOcJCnkMhFl2hgvc9bj1oMVmZqXE0vTXpNPz6QoinL0TLj4Afjyb8OTlpLHBVmEuR-clJ3ZU7idQuOW5jXHRGQDXxJ_M9hH1m63zFXNoXWLnItPfwlak1ez9AiIeKUYc2TKj-qY9CF8Grxsk" />
+                        <div
+                            class="absolute top-md right-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full shadow-sm">
+                            <span class="font-label-md text-primary">In 14 Days</span>
+                        </div>
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-md">
+                            <div>
+                                <h4 class="font-h3 text-on-surface">Lumina Maldives Resort</h4>
+                                <p class="text-on-surface-variant font-body-sm flex items-center gap-xs">
+                                    <span class="material-symbols-outlined text-[18px]">location_on</span> North Malé
+                                    Atoll
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-label-md text-on-surface-variant">CONFIRMATION</p>
+                                <p class="font-bold text-primary">#LUM-88219</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between py-md border-t border-white/20">
+                            <div class="flex gap-lg">
+                                <div>
+                                    <p class="font-label-md text-on-surface-variant">CHECK-IN</p>
+                                    <p class="font-bold">Nov 24, 2024</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-md text-on-surface-variant">CHECK-OUT</p>
+                                    <p class="font-bold">Nov 30, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-sm">
+                                <button
+                                    class="px-md py-sm bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-sm font-medium view-details-btn"
+                                    data-booking-id="LUM-88219">View Details</button>
+                                <button
+                                    class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Stay Card 2 -->
+                <div class="glass-panel glass-card-hover rounded-3xl overflow-hidden group">
+                    <div class="relative h-64 w-full">
+                        <img alt="Lumina Tokyo"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            data-alt="A modern high-rise luxury hotel room in Tokyo overlooking the glowing city skyline at night. The interior is minimalist and elegant with dark wood accents and soft, recessed lighting in shades of teal and gold. Large floor-to-ceiling windows capture the vibrant neon lights of the metropolis below, creating a sophisticated urban atmosphere."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9T2eAIEVH5jhRnkEptFCqp-neO-HSNU0lMGKJoSSSeLRsULqHT55xqecaXkYKb6EvnQ5HplAfo_axmRyaIpffBv7hcjI0xiY3R6l5i7cEM8-3a8EtrJ1VsDCOQS38amft7CRzXP3jiTCLUBLdg4c71ODptnKIJiOfGilb7_dWR3xuL9EEF5uTvVw7lafDS10FVolmyqef48Dcm_88qy-yRXLs1ICjZrlePTrHrS51OcOvYxQeh0aLVir9mQm6_aa8eJWsYsvRh5o" />
+                        <div
+                            class="absolute top-md right-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full shadow-sm">
+                            <span class="font-label-md text-primary">In 45 Days</span>
+                        </div>
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-md">
+                            <div>
+                                <h4 class="font-h3 text-on-surface">Lumina Tokyo Sky</h4>
+                                <p class="text-on-surface-variant font-body-sm flex items-center gap-xs">
+                                    <span class="material-symbols-outlined text-[18px]">location_on</span> Minato City,
+                                    Tokyo
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-label-md text-on-surface-variant">CONFIRMATION</p>
+                                <p class="font-bold text-primary">#LUM-92104</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between py-md border-t border-white/20">
+                            <div class="flex gap-lg">
+                                <div>
+                                    <p class="font-label-md text-on-surface-variant">CHECK-IN</p>
+                                    <p class="font-bold">Dec 20, 2024</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-md text-on-surface-variant">CHECK-OUT</p>
+                                    <p class="font-bold">Dec 27, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-sm">
+                                <button
+                                    class="px-md py-sm bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-sm font-medium view-details-btn"
+                                    data-booking-id="LUM-92104">View Details</button>
+                                <button
+                                    class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Service Requests -->
+        <section class="mb-xl">
+            <div class="flex items-center justify-between mb-lg">
+                <div class="flex items-center gap-sm">
+                    <h3 class="font-h2 text-h2">Service Requests</h3>
+                    <div class="h-1 flex-1 bg-surface-variant/30 rounded-full"></div>
+                </div>
+                <button
+                    class="px-md py-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium flex items-center gap-xs"
+                    id="newRequestBtn">
+                    <span class="material-symbols-outlined text-[18px]">add</span>
+                    New Request
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                <!-- Service Request 1 -->
+                <div class="glass-panel p-md rounded-2xl border border-white/40">
+                    <div class="flex items-start justify-between mb-md">
+                        <div class="flex items-center gap-md">
+                            <div
+                                class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+                                <span class="material-symbols-outlined">room_service</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-on-surface">Room Service</h4>
+                                <p class="text-on-surface-variant text-label-md">Lumina Maldives Resort</p>
+                            </div>
+                        </div>
+                        <span
+                            class="px-sm py-xs bg-green-100 text-green-700 rounded-full text-xs font-medium">Completed</span>
+                    </div>
+                    <p class="text-on-surface-variant text-body-sm mb-md">Extra towels and toiletries delivered to room
+                        302</p>
+                    <div class="flex items-center justify-between text-label-md text-on-surface-variant">
+                        <span>Nov 15, 2024</span>
+                        <span class="text-primary cursor-pointer hover:underline">View Details</span>
+                    </div>
+                </div>
+                <!-- Service Request 2 -->
+                <div class="glass-panel p-md rounded-2xl border border-white/40">
+                    <div class="flex items-start justify-between mb-md">
+                        <div class="flex items-center gap-md">
+                            <div
+                                class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">spa</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-on-surface">Spa Appointment</h4>
+                                <p class="text-on-surface-variant text-label-md">Lumina Maldives Resort</p>
+                            </div>
+                        </div>
+                        <span
+                            class="px-sm py-xs bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Scheduled</span>
+                    </div>
+                    <p class="text-on-surface-variant text-body-sm mb-md">Deep tissue massage - Nov 25, 2024 at 2:00 PM
+                    </p>
+                    <div class="flex items-center justify-between text-label-md text-on-surface-variant">
+                        <span>Nov 10, 2024</span>
+                        <span class="text-primary cursor-pointer hover:underline">View Details</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Past Experiences -->
+        <section class="mb-xl">
+            <div class="flex items-center gap-sm mb-lg">
+                <h3 class="font-h2 text-h2">Past Experiences</h3>
+                <div class="h-1 flex-1 bg-surface-variant/30 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+                <!-- Past Stay Item 1 -->
+                <div class="glass-panel p-md rounded-2xl flex items-center gap-md border border-white/40">
+                    <img alt="Lumina Paris" class="w-20 h-20 rounded-xl object-cover"
+                        data-alt="A charming boutique hotel facade in Paris with classic wrought-iron balconies and blooming flower boxes. The scene is set in the soft, golden light of early morning. The cobblestone street below is quiet, and the architectural details of the Haussmann-style building are crisp and elegant, conveying a romantic and historic European atmosphere."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw4OI3PPnAFOo2F2k6STkqatr7BDxVYHSBfFTG2mpR3tITtfKAkgv-kZKsFEbFIegcwZWQaLeTscpL-63Wqelav0sbl0iLedYx9xYlXnCXWiROQA5MQJpGG_rMPQ_l0EYEgAQQSfiHox3auO2pfTTJdFTQh0Etg_5MJuI92-Fa0it9pbque8TF_ijYINQHuus1b5yvwFFfoQF7PV2lxnfT2uvlb4sN-3rm9nyNHW6IUoGz7tebiV3ktHbGR3rxkHctPAAFCSOUyE0" />
+                    <div class="flex-1">
+                        <h4 class="font-bold text-on-surface">Lumina Paris Loft</h4>
+                        <p class="text-on-surface-variant text-label-md">October 2024</p>
+                        <div class="flex text-secondary mt-xs">
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Past Stay Item 2 -->
+                <div class="glass-panel p-md rounded-2xl flex items-center gap-md border border-white/40">
+                    <img alt="Lumina Alps" class="w-20 h-20 rounded-xl object-cover"
+                        data-alt="A cozy, high-end mountain chalet in the Swiss Alps surrounded by snow-covered pine trees and majestic white peaks. The building features large windows and a spacious balcony where golden light spills out onto the fresh snow. The mood is serene and warm, highlighting the contrast between the cold winter landscape and the inviting, luxury interior."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHuKC1hHKlJM_1ihG_62xwOP2_7dAIhYu74wBhOHVc77ymsdploQvxn1zezQtPIesO_t9CITRTDM_M3Pmq-JUQM_lFI6_HM6_0PwXpzv9BIK_4oFTEsVsKRqmZTTmA9rppfh_KetxSVHlDP7PQmSSeUk8KCyedsdAP5sTVAICrJeKYAmlH3yyCCfyvCskYvEGMfbV3rQdTFx88AM68exhGYiRZl3ArP5RoISpnen-fpwtUmcHE5KvH2dbbzYyJmzRP1QQlELmS22I" />
+                    <div class="flex-1">
+                        <h4 class="font-bold text-on-surface">Lumina Alpine Lodge</h4>
+                        <p class="text-on-surface-variant text-label-md">February 2024</p>
+                        <div class="flex text-secondary mt-xs">
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined text-[16px]">star</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Past Stay Item 3 -->
+                <div class="glass-panel p-md rounded-2xl flex items-center gap-md border border-white/40">
+                    <img alt="Lumina Santorini" class="w-20 h-20 rounded-xl object-cover"
+                        data-alt="The iconic white-washed architecture of Santorini, Greece, with bright blue domes overlooking the deep blue Aegean Sea. The bright midday sun creates sharp, clean shadows and highlights the vibrant Mediterranean colors. The scene is tranquil and expansive, capturing the essence of luxury island travel with a sophisticated and airy aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDINQImW2bcjL0P40hE_4fcNNcjyPFEnCJ09smtKcManwrzNu6_bu5bcYLxsloAPpfMuBzvBGib7muf2l3zhY39I9hTLzqKEsp47CyqsKHIjCfDDO241qRSvaba2LVO38EEIIt_0yblptlUZ-3FXpBwLyIM8yXAas-j_Lj-IskHWw1biCQD6RgBXQzr6yCfepbl2qrY7UCLfao9UaoTzHyXbvXtKSFWl-0p44ZCn0rjtcImtKEjL4UYxWlR_Janoi7mlLeshgd3_oo" />
+                    <div class="flex-1">
+                        <h4 class="font-bold text-on-surface">Lumina Santorini Cliff</h4>
+                        <p class="text-on-surface-variant text-label-md">August 2023</p>
+                        <div class="flex text-secondary mt-xs">
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                            <span class="material-symbols-outlined icon-filled text-[16px]">star</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<!-- Success Toast - Micro interaction example -->
-<div class="fixed top-md right-md z-[100] translate-x-[150%] transition-transform duration-500 glass-panel rounded-xl overflow-hidden border-l-4 border-primary flex items-center gap-md p-md pr-lg" id="toast">
-<span class="material-symbols-outlined text-primary">check_circle</span>
-<div>
-<p class="font-bold text-on-surface">Welcome Back!</p>
-<p class="text-label-md text-on-surface-variant">Your preferences have been synchronized.</p>
-</div>
-</div>
+    <div id="global-footer"></div>
+
+    <!-- Success Toast - Micro interaction example -->
+    <div class="fixed top-md right-md z-[100] translate-x-[150%] transition-transform duration-500 glass-panel rounded-xl overflow-hidden border-l-4 border-primary flex items-center gap-md p-md pr-lg"
+        id="toast">
+        <span class="material-symbols-outlined text-primary">check_circle</span>
+        <div>
+            <p class="font-bold text-on-surface">Welcome Back!</p>
+            <p class="text-label-md text-on-surface-variant">Your preferences have been synchronized.</p>
+        </div>
+    </div>
     <script src="/js/global-nav.js"></script>
     <script src="/js/ui-utils.js"></script>
     <script src="/js/page-init.js"></script>
     <script src="/pages/hotel/guest-dashboard-lumina/guest-dashboard-lumina.js"></script>
 </body>
+
 </html>

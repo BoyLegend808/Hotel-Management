@@ -205,6 +205,24 @@
 }
 
 @media (max-width: 480px) {
+    .contact-section { padding: 2.5rem 1rem; }
     .contact-info-icon { width: 3rem; height: 3rem; }
+    .contact-info-card { padding: 1.25rem; }
     .contact-hours-table td:last-child { text-align: left; }
+    .contact-field input,
+    .contact-field select,
+    .contact-field textarea {
+        font-size: 1rem; /* prevent iOS zoom */
+        padding: 0.875rem 1rem;
+    }
+    .contact-submit {
+        min-height: 48px;
+    }
+}
+
+@media (max-width: 360px) {
+    .contact-section { padding: 2rem 0.875rem; }
+    .contact-info-title { font-size: 1rem; }
+    .contact-info-text { font-size: 0.85rem; }
+    .contact-form-title { font-size: 1.125rem; }
 }

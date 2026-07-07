@@ -1,0 +1,61 @@
+/* resource-management-lumina.css */
+
+.room-node {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), filter var(--transition-base);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.room-node:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-warm-md);
+    z-index: 10;
+}
+
+/* Status Colors */
+.room-available {
+    background-color: var(--success);
+}
+.room-occupied {
+    background-color: var(--primary);
+}
+.room-cleaning {
+    background-color: var(--warning);
+}
+.room-maintenance {
+    background-color: var(--error);
+}
+
+/* Hover overlay */
+.room-node::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.2);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.room-node:hover::after {
+    opacity: 1;
+}
+
+/* Slide-over Classes */
+.slide-over-open {
+    transform: translateX(0) !important;
+}
+
+.backdrop-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}

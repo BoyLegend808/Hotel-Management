@@ -14,6 +14,7 @@
 <link href="/css/hotel-utils.css" rel="stylesheet"/>
 <link href="/css/ui-utils.css" rel="stylesheet"/>
 <link href="/css/tailwind-output.css" rel="stylesheet"/>
+<link href="/pages/hotel/local-area/local-area.css" rel="stylesheet"/>
 </head>
 <body>
 <a href="#main-content" class="sr-only">Skip to main content</a>
@@ -21,109 +22,100 @@
 
 <main id="main-content">
     <!-- Hero -->
-    <section class="page-hero relative w-full h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=1400&q=80" alt="Lagos" class="absolute inset-0 w-full h-full object-cover"/>
-        <div class="absolute inset-0 bg-black/50"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 style="font-family:var(--font-serif);font-size:3rem;font-weight:700;margin-bottom:1rem">Explore Lagos</h1>
-            <p class="text-lg max-w-xl mx-auto" style="color:rgba(255,255,255,0.85)">Discover the vibrant culture, art, and nature of Lagos from our prime Victoria Island location.</p>
+    <section class="page-hero">
+        <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=1400&q=80" alt="Lagos skyline and waterfront"/>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Explore Lagos</h1>
+            <p>Discover the vibrant culture, art, and nature of Lagos from our prime Victoria Island location.</p>
         </div>
     </section>
 
     <!-- Attractions Grid -->
-    <section class="max-w-7xl mx-auto px-6 py-20">
-        <div class="text-center mb-16">
-            <h2 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;margin-bottom:0.75rem">Popular Attractions</h2>
-            <p style="color:var(--on-surface-variant);max-width:600px;margin:0 auto">Explore the best of Lagos, from nature reserves to world-class art galleries, all within easy reach of Lumina Hospitality.</p>
+    <section class="attractions-section">
+        <div class="attractions-section-header">
+            <h2>Popular Attractions</h2>
+            <p>Explore the best of Lagos, from nature reserves to world-class art galleries, all within easy reach of Lumina Hospitality.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="attractions-grid">
             <!-- Card 1 -->
-            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
-                <div class="aspect-[16/9] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Lekki Conservation Centre" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <div class="attraction-card">
+                <div class="attraction-card-img">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Lekki Conservation Centre"/>
                 </div>
-                <div class="p-6">
-                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Lekki Conservation Centre</h3>
-                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">A sprawling nature reserve featuring a canopy walkway, diverse wildlife, and tranquil mangrove forests. Perfect for nature lovers and bird watchers.</p>
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 12 km away</span>
-                    </div>
+                <div class="attraction-card-body">
+                    <h3>Lekki Conservation Centre</h3>
+                    <p>A sprawling nature reserve featuring a canopy walkway, diverse wildlife, and tranquil mangrove forests. Perfect for nature lovers and bird watchers.</p>
+                    <span class="attraction-tag"><span class="material-symbols-outlined">location_on</span> 12 km away</span>
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
-                <div class="aspect-[16/9] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" alt="Nike Art Gallery" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <div class="attraction-card">
+                <div class="attraction-card-img">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" alt="Nike Art Gallery"/>
                 </div>
-                <div class="p-6">
-                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Nike Art Gallery</h3>
-                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">One of West Africa's largest art galleries, housing an extensive collection of contemporary African art, sculptures, and traditional textiles.</p>
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 8 km away</span>
-                    </div>
+                <div class="attraction-card-body">
+                    <h3>Nike Art Gallery</h3>
+                    <p>One of West Africa's largest art galleries, housing an extensive collection of contemporary African art, sculptures, and traditional textiles.</p>
+                    <span class="attraction-tag"><span class="material-symbols-outlined">location_on</span> 8 km away</span>
                 </div>
             </div>
             <!-- Card 3 -->
-            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
-                <div class="aspect-[16/9] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80" alt="Eko Atlantic City" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <div class="attraction-card">
+                <div class="attraction-card-img">
+                    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80" alt="Eko Atlantic City"/>
                 </div>
-                <div class="p-6">
-                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Eko Atlantic City</h3>
-                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">A modern, ambitious city built on reclaimed land featuring luxury residences, offices, retail centers, and world-class entertainment venues.</p>
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 5 km away</span>
-                    </div>
+                <div class="attraction-card-body">
+                    <h3>Eko Atlantic City</h3>
+                    <p>A modern, ambitious city built on reclaimed land featuring luxury residences, offices, retail centers, and world-class entertainment venues.</p>
+                    <span class="attraction-tag"><span class="material-symbols-outlined">location_on</span> 5 km away</span>
                 </div>
             </div>
             <!-- Card 4 -->
-            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
-                <div class="aspect-[16/9] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Balogun Market" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <div class="attraction-card">
+                <div class="attraction-card-img">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Balogun Market"/>
                 </div>
-                <div class="p-6">
-                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Balogun Market</h3>
-                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">Lagos's iconic open-air marketplace offering a sensory feast of fabrics, spices, accessories, and local crafts. A true cultural experience.</p>
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 15 km away</span>
-                    </div>
+                <div class="attraction-card-body">
+                    <h3>Balogun Market</h3>
+                    <p>Lagos's iconic open-air marketplace offering a sensory feast of fabrics, spices, accessories, and local crafts. A true cultural experience.</p>
+                    <span class="attraction-tag"><span class="material-symbols-outlined">location_on</span> 15 km away</span>
                 </div>
             </div>
             <!-- Card 5 -->
-            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
-                <div class="aspect-[16/9] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Tafawa Balewa Square" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <div class="attraction-card">
+                <div class="attraction-card-img">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Tafawa Balewa Square"/>
                 </div>
-                <div class="p-6">
-                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Tafawa Balewa Square</h3>
-                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">A historic landmark and ceremonial ground in Lagos Island, notable for its independence-day significance and surrounding colonial architecture.</p>
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 14 km away</span>
-                    </div>
+                <div class="attraction-card-body">
+                    <h3>Tafawa Balewa Square</h3>
+                    <p>A historic landmark and ceremonial ground in Lagos Island, notable for its independence-day significance and surrounding colonial architecture.</p>
+                    <span class="attraction-tag"><span class="material-symbols-outlined">location_on</span> 14 km away</span>
                 </div>
             </div>
             <!-- Card 6 -->
-            <div class="rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/20">
-                <div class="aspect-[16/9] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80" alt="Ikoyi Club" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <div class="attraction-card">
+                <div class="attraction-card-img">
+                    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80" alt="Ikoyi Club"/>
                 </div>
-                <div class="p-6">
-                    <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem">Ikoyi Club</h3>
-                    <p style="color:var(--on-surface-variant);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">An exclusive social and recreational club featuring an 18-hole golf course, tennis courts, swimming pools, and fine dining restaurants.</p>
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"><span class="material-symbols-outlined text-[14px]">location_on</span> 3 km away</span>
-                    </div>
+                <div class="attraction-card-body">
+                    <h3>Ikoyi Club</h3>
+                    <p>An exclusive social and recreational club featuring an 18-hole golf course, tennis courts, swimming pools, and fine dining restaurants.</p>
+                    <span class="attraction-tag"><span class="material-symbols-outlined">location_on</span> 3 km away</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact CTA -->
-    <section class="max-w-7xl mx-auto px-6 pb-20">
-        <div class="bg-primary/5 rounded-3xl p-12 text-center border border-primary/10">
-            <h2 style="font-family:var(--font-serif);font-size:1.75rem;font-weight:700;margin-bottom:0.75rem">Need Help Planning Your Excursion?</h2>
-            <p style="color:var(--on-surface-variant);max-width:500px;margin:0 auto 1.5rem">Our concierge team can arrange private tours, transportation, and exclusive access to Lagos's best attractions.</p>
-            <a href="/pages/hotel/contact-lumina/contact-lumina.html" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all">Contact Concierge</a>
+    <section class="local-cta">
+        <div class="local-cta-inner">
+            <h2>Need Help Planning Your Excursion?</h2>
+            <p>Our concierge team can arrange private tours, transportation, and exclusive access to Lagos's best attractions.</p>
+            <a href="/pages/hotel/contact-lumina/contact-lumina.html" class="btn btn-primary">
+                <span class="material-symbols-outlined">contact_phone</span>
+                Contact Concierge
+            </a>
         </div>
     </section>
 </main>

@@ -144,6 +144,17 @@
 }
 
 @media (max-width: 480px) {
+    .dining-section { padding: 2.5rem 1rem; }
     .dining-card-img img { min-height: 180px; }
     .dining-card-body { padding: 1.25rem; }
+    .dining-card-title { font-size: 1.25rem; }
+    .dining-card-desc { font-size: 0.875rem; }
+    .dining-badge { font-size: 0.6875rem; padding: 0.3rem 0.75rem; }
+}
+
+@media (max-width: 360px) {
+    .dining-section { padding: 2rem 0.875rem; }
+    .dining-card-body { padding: 1rem; }
+    .dining-card-title { font-size: 1.125rem; }
+    .dining-card-meta { font-size: 0.8125rem; }
 }

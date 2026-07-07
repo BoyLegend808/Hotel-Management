@@ -11,7 +11,7 @@
 /* Offers grid */
 .offers-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
 }
@@ -132,6 +132,36 @@
     color: var(--text-muted);
 }
 
+/* btn-full helper */
+.btn-full {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+/* btn-ghost-white */
+.btn-ghost-white {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all var(--transition-luxury);
+    text-decoration: none;
+}
+
+.btn-ghost-white:hover {
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
 /* CTA Banner */
 .offers-cta {
     position: relative;
@@ -198,14 +228,39 @@
     .offer-card-img { height: 15rem; }
     .offer-card-body { padding: 1.25rem; }
     .offer-card-title { font-size: 1.25rem; }
-    .offers-cta img { height: 260px; }
-    .offers-cta-content { padding: 1.5rem; }
+
+    /* CTA banner: stack layout vertically */
+    .offers-cta img { height: 320px; object-position: center; }
+    .offers-cta-overlay {
+        background: linear-gradient(
+            to bottom,
+            rgba(0,77,97,0.95) 0%,
+            rgba(0,77,97,0.85) 60%,
+            rgba(0,77,97,0.7) 100%
+        );
+        align-items: flex-end;
+    }
+    .offers-cta-content {
+        padding: 1.5rem;
+        max-width: 100%;
+        width: 100%;
+    }
     .offers-cta-title { font-size: 1.375rem; }
     .offers-cta-text { font-size: 0.875rem; }
 }
 
 @media (max-width: 480px) {
+    .offers-section { padding: 2.5rem 1rem; }
+    .offers-grid { gap: 1rem; }
     .offer-card-img { height: 13rem; }
     .offer-price-new { font-size: 1.375rem; }
-    .offers-cta img { height: 220px; }
+    .offers-cta img { height: 260px; }
+    .offers-cta-content { padding: 1.25rem; }
+    .offers-cta-title { font-size: 1.25rem; }
+}
+
+@media (max-width: 360px) {
+    .offer-card-img { height: 11rem; }
+    .offer-card-body { padding: 1rem; }
+    .offer-card-title { font-size: 1.125rem; }
 }

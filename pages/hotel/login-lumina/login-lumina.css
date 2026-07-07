@@ -1,236 +1,36 @@
 /* Lumina Hospitality - Login Page Styles */
 
-/* Page-specific overrides using design system variables */
-body {
-    background-color: var(--background-primary);
-    color: var(--text-primary);
+/* Base Reset & Staggered Form Enter Animations */
+.form-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Icon Styles */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-enter.d1 { animation-delay: 0.1s; }
+.form-enter.d2 { animation-delay: 0.2s; }
+.form-enter.d3 { animation-delay: 0.3s; }
+.form-enter.d4 { animation-delay: 0.4s; }
+.form-enter.d5 { animation-delay: 0.5s; }
+
+/* Custom autofill styles to prevent background color override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Icon fill utility */
 .icon-filled {
     font-variation-settings: 'FILL' 1;
-}
-
-/* Glass Card Effect */
-.glass-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: var(--shadow-lg);
-}
-
-.glass-card:hover {
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-2px);
-    transition: all var(--transition-base);
-}
-
-/* Login Card */
-.login-card {
-    max-width: 28rem;
-    width: 100%;
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-xl);
-}
-
-.login-header {
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-}
-
-.login-icon {
-    width: 5rem;
-    height: 5rem;
-    border-radius: var(--radius-full);
-    background: var(--primary-50);
-    color: var(--primary-600);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--spacing-md);
-}
-
-.login-icon .material-symbols-outlined {
-    font-size: 3rem;
-}
-
-.login-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-3xl);
-    font-weight: var(--font-bold);
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.login-subtitle {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-}
-
-/* Form Elements */
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.form-label {
-    font-size: var(--text-xs);
-    font-weight: var(--font-bold);
-    color: var(--text-secondary);
-    letter-spacing: 0.05em;
-}
-
-.form-input {
-    padding: var(--spacing-md);
-    border: 1px solid var(--border-medium);
-    border-radius: var(--radius-lg);
-    font-size: var(--text-base);
-    transition: border-color var(--transition-base), box-shadow var(--transition-base);
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: var(--primary-500);
-    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
-}
-
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    cursor: pointer;
-}
-
-.checkbox-label input[type="checkbox"] {
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-medium);
-    accent-color: var(--primary-600);
-}
-
-.forgot-link {
-    font-size: var(--text-sm);
-    color: var(--primary-600);
-    text-decoration: none;
-}
-
-.forgot-link:hover {
-    text-decoration: underline;
-}
-
-/* Submit Button */
-.submit-btn {
-    width: 100%;
-    padding: var(--spacing-md);
-    background: var(--primary-600);
-    color: white;
-    border: none;
-    border-radius: var(--radius-lg);
-    font-size: var(--text-base);
-    font-weight: var(--font-semibold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    cursor: pointer;
-    transition: all var(--transition-base);
-}
-
-.submit-btn:hover {
-    background: var(--primary-700);
-}
-
-.submit-btn:active {
-    transform: scale(0.95);
-}
-
-/* Sign Up Link */
-.signup-link {
-    text-align: center;
-    margin-top: var(--spacing-xl);
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-}
-
-.signup-link a {
-    color: var(--primary-600);
-    font-weight: var(--font-semibold);
-    text-decoration: none;
-}
-
-.signup-link a:hover {
-    text-decoration: underline;
-}
-
-/* Demo Credentials */
-.demo-credentials {
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--border-light);
-}
-
-.demo-title {
-    font-size: var(--text-xs);
-    font-weight: var(--font-bold);
-    color: var(--text-secondary);
-    text-align: center;
-    margin-bottom: var(--spacing-md);
-    letter-spacing: 0.05em;
-}
-
-.demo-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: var(--text-sm);
-    padding: var(--spacing-xs) 0;
-}
-
-.demo-label {
-    color: var(--text-secondary);
-}
-
-.demo-value {
-    font-weight: var(--font-semibold);
-    color: var(--text-primary);
-}
-
-/* Spacing Utilities */
-.px-container-margin {
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
-}
-
-@media (min-width: 768px) {
-    .px-container-margin {
-        padding-left: var(--spacing-xl);
-        padding-right: var(--spacing-xl);
-    }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .login-card {
-        padding: var(--spacing-lg);
-    }
-    
-    .form-options {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-sm);
-    }
 }

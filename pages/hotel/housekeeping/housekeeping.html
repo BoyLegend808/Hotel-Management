@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housekeeping Dashboard | Lumina Hospitality</title>
+    <link href="/css/lumina-design-system.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="housekeeping.js" defer></script>
+</head>
+<body class="bg-surface text-primary min-h-screen font-['Inter'] flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-primary text-white p-4 shadow-md flex justify-between items-center">
+        <div class="text-2xl font-['Playfair_Display'] font-semibold">Lumina Housekeeping</div>
+        <div class="flex items-center gap-4">
+            <span id="userNameDisplay" class="font-medium">Housekeeper</span>
+            <button id="logoutBtn" class="px-4 py-2 bg-secondary text-primary font-medium rounded hover:bg-opacity-90 transition-colors">Sign Out</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-8 max-w-7xl mx-auto w-full">
+        <h1 class="text-3xl font-['Playfair_Display'] mb-8">Rooms to Clean</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tasksContainer">
+            <div class="p-8 text-center text-gray-500 col-span-full">Loading tasks...</div>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"></div>
+</body>
+</html>

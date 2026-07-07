@@ -13,18 +13,66 @@ if (togglePassword && passwordInput && eyeIcon) {
     });
 }
 
-// Fetch CSRF token from server
-async function getCsrfToken() {
+// Add event listeners for buttons that previously used inline onclick
+const goBackBtn = document.getElementById('goBackBtn');
+if (goBackBtn) {
+    goBackBtn.addEventListener('click', goBack);
+}
+
+const resetPasswordBtn = document.getElementById('resetPasswordBtn');
+if (resetPasswordBtn) {
+    resetPasswordBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        _toast('Password recovery is currently under maintenance', 'info');
+    });
+}
+
+const googleLoginBtn = document.getElementById('googleLoginBtn');
+if (googleLoginBtn) {
+    googleLoginBtn.addEventListener('click', () => {
+        _toast('External authentication is currently under maintenance', 'info');
+    });
+}
+
+const createAccountBtn = document.getElementById('createAccountBtn');
+if (createAccountBtn) {
+    createAccountBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        _toast('Account registration is currently under maintenance', 'info');
+    });
+}
+
+// Unified toast helper — works regardless of which global is available
+function _toast(message, type) {
+    if (typeof showToast === 'function') {
+        showToast(message, type);
+    } else if (typeof UI !== 'undefined' && UI.showToast) {
+        UI.showToast(message, type);
+    } else {
+        alert(message);
+    }
+}
+
+// Fetch CSRF token from server and store it
+async function fetchAndStoreCsrfToken() {
     try {
         const res = await fetch('/api/csrf-token');
         const data = await res.json();
+        if (data.csrfToken) {
+            sessionStorage.setItem('csrfToken', data.csrfToken);
+        }
         return data.csrfToken || '';
     } catch {
         return '';
     }
 }
 
-// Handle login form submission
+// Handle login form submission — uses real API
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+}
+
 function handleLogin(e) {
     if (e) e.preventDefault();
     const username = document.getElementById('username').value.trim();
@@ -32,7 +80,7 @@ function handleLogin(e) {
     const submitButton = document.querySelector('button[type="submit"]');
 
     if (!username || !password) {
-        showToast('Please enter your username and password.', 'error');
+        _toast('Please enter your username and password.', 'error');
         return false;
     }
 
@@ -40,45 +88,54 @@ function handleLogin(e) {
     submitButton.disabled = true;
     submitButton.innerHTML = '<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;display:inline-block">hourglass_empty</span> Signing in...';
 
-    // Login is CSRF-exempt (token not yet issued), but fetch one for subsequent calls
-    fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    })
-    .then(res => res.json())
-    .then(async data => {
-        if (data.success) {
-            sessionStorage.setItem('token', data.token);
-            sessionStorage.setItem('sessionStart', Date.now());
-            sessionStorage.setItem('user', JSON.stringify({ name: data.name, role: data.role }));
-
-            // Pre-fetch and cache a CSRF token for use on the next page
-            const csrfToken = await getCsrfToken();
-            sessionStorage.setItem('csrfToken', csrfToken);
-
-            showToast('Login successful! Redirecting...', 'success');
-
-            setTimeout(() => {
-                if (data.redirect) {
-                    window.location.href = data.redirect;
-                } else if (data.role === 'admin') {
-                    window.location.href = '/pages/hotel/admin-dashboard-lumina/';
-                } else {
-                    window.location.href = '/pages/hotel/guest-dashboard-lumina/';
-                }
-            }, 1000);
-        } else {
-            showToast(data.message || 'Invalid credentials. Please try again.', 'error');
+    // Fetch CSRF token first
+    fetchAndStoreCsrfToken().then(csrfToken => {
+        // Use the real backend /api/login endpoint
+        fetch('/api/login', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken
+            },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(async (data) => {
+            if (data.success) {
+                // Store real auth token from server
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('sessionStart', Date.now());
+                sessionStorage.setItem('user', JSON.stringify({
+                    name: data.name,
+                    role: data.role
+                }));
+    
+                // Fetch and store CSRF token for subsequent API calls just in case
+                await fetchAndStoreCsrfToken();
+    
+                _toast('Login successful! Redirecting...', 'success');
+    
+                setTimeout(() => {
+                    const rolePathMap = {
+                        'manager': '/pages/hotel/admin-dashboard-lumina/',
+                        'receptionist': '/pages/hotel/reception/reception.html',
+                        'housekeeper': '/pages/hotel/housekeeping/housekeeping.html',
+                        'guest': '/pages/hotel/guest-dashboard-lumina/'
+                    };
+                    window.location.href = data.redirect || rolePathMap[data.role] || '/';
+                }, 1000);
+            } else {
+                _toast(data.message || 'Invalid credentials. Please try again.', 'error');
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalHTML;
+            }
+        })
+        .catch((err) => {
+            console.error('Login error:', err);
+            _toast('Connection error. Please try again.', 'error');
             submitButton.disabled = false;
             submitButton.innerHTML = originalHTML;
-        }
-    })
-    .catch(error => {
-        console.error('Login error:', error);
-        showToast('Unable to connect. Please check your connection and try again.', 'error');
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalHTML;
+        });
     });
 
     return false;
@@ -101,11 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (token && user) {
         try {
             const userData = JSON.parse(user);
-            if (userData.role === 'admin') {
-                window.location.href = '/pages/hotel/admin-dashboard-lumina/';
-            } else {
-                window.location.href = '/pages/hotel/guest-dashboard-lumina/';
-            }
+            const rolePathMap = {
+                'manager': '/pages/hotel/admin-dashboard-lumina/',
+                'receptionist': '/pages/hotel/reception/reception.html',
+                'housekeeper': '/pages/hotel/housekeeping/housekeeping.html',
+                'guest': '/pages/hotel/guest-dashboard-lumina/'
+            };
+            window.location.href = rolePathMap[userData.role] || '/';
         } catch (e) {
             sessionStorage.clear();
         }

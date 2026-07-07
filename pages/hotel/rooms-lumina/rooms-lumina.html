@@ -1,189 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Rooms &amp; Suites | Lumina Hospitality</title>
-<meta name="description" content="Browse our collection of luxury rooms and suites at Lumina Hospitality, Victoria Island, Lagos."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
-<link href="/css/lumina-design-system.css" rel="stylesheet"/>
-<link href="/css/global-nav.css" rel="stylesheet"/>
-<link href="/css/global-footer.css" rel="stylesheet"/>
-<link href="/css/hotel-utils.css" rel="stylesheet"/>
-<link href="/css/ui-utils.css" rel="stylesheet"/>
-<link href="/pages/hotel/rooms-lumina/rooms-lumina.css" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rooms &amp; Suites | Lumina Hospitality</title>
+  <meta name="description"
+    content="Browse our collection of luxury rooms and suites at Lumina Hospitality, Victoria Island, Lagos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+    rel="stylesheet" />
+  <link href="/css/lumina-design-system.css" rel="stylesheet" />
+  <link href="/css/tailwind-output.css" rel="stylesheet" />
+  <link href="/css/global-nav.css" rel="stylesheet" />
+  <link href="/css/global-footer.css" rel="stylesheet" />
+  <link href="/css/ui-utils.css" rel="stylesheet" />
+  <link href="/pages/hotel/rooms-lumina/rooms-lumina.css" rel="stylesheet" />
+  <link href="/pages/hotel/rooms-lumina/rooms-responsive.css" rel="stylesheet" />
 </head>
+
 <body class="overflow-x-hidden">
 
-<a href="#main-content" class="sr-only">Skip to main content</a>
+  <a href="#main-content" class="sr-only">Skip to main content</a>
 
-<div id="global-nav"></div>
+  <div id="global-nav"></div>
 
-<main id="main-content">
+  <main id="main-content">
 
-  <!-- ═══ Hero ═══ -->
-  <section class="rooms-hero">
-    <img src="https://i.pinimg.com/1200x/6c/d7/72/6cd772ac19e49abe687b652e37754e91.jpg" alt="Lumina Hospitality luxury accommodations" loading="eager"/>
-    <div class="rooms-hero-overlay"></div>
-    <div class="rooms-hero-content">
-      <span class="badge-gold">
-        <span class="material-symbols-outlined">hotel_class</span>
-        Luxury Accommodations
-      </span>
-      <h1 class="rooms-hero-title">Discover Your Perfect Sanctuary</h1>
-      <p class="rooms-hero-sub">Experience unparalleled comfort in our collection of elegantly appointed rooms and suites, each crafted for ultimate luxury.</p>
-      <div class="rooms-hero-actions">
-        <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="btn btn-accent btn-lg">
-          <span class="material-symbols-outlined">calendar_today</span>
-          Book Your Stay
-        </a>
-        <a href="/pages/hotel/special-offers/special-offers.html" class="btn btn-outline btn-lg">
-          <span class="material-symbols-outlined">local_offer</span>
-          Special Offers
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Rooms Layout ═══ -->
-  <div class="rooms-layout">
-
-    <!-- Filter Sidebar -->
-    <aside class="filter-sidebar" id="filterSidebar" aria-label="Room filters">
-      <div>
-        <p class="filter-sidebar-title">Filter Catalogue</p>
-        <p class="filter-sidebar-sub">Refine your selection</p>
-      </div>
-
-      <!-- Search -->
-      <div>
-        <label class="filter-group-label" for="roomSearch">Search</label>
-        <div class="filter-search-wrap">
-          <span class="filter-search-icon material-symbols-outlined">search</span>
-          <input type="text" id="roomSearch" placeholder="Search room name..." autocomplete="off"/>
+    <!-- ═══ Hero ═══ -->
+    <section class="rooms-hero">
+      <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1600&q=80"
+        alt="Lumina Hospitality luxury accommodations" loading="eager" />
+      <div class="rooms-hero-overlay"></div>
+      <div class="rooms-hero-content stagger-fade-in">
+        <span class="badge-gold fade-in-up" style="animation-delay: 0.1s;">
+          <span class="material-symbols-outlined">hotel_class</span>
+          Luxury Accommodations
+        </span>
+        <h1 class="rooms-hero-title fade-in-up" style="animation-delay: 0.2s; text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5);">Discover Your Perfect Sanctuary</h1>
+        <p class="rooms-hero-sub fade-in-up font-semibold" style="animation-delay: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,0.8);">Experience unparalleled comfort in our collection of elegantly appointed rooms and
+          suites, each crafted for ultimate luxury.</p>
+        <div class="rooms-hero-actions fade-in-up" style="animation-delay: 0.4s;">
+          <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="btn btn-accent btn-lg">
+            <span class="material-symbols-outlined">calendar_today</span>
+            Book Your Stay
+          </a>
+          <a href="/pages/hotel/special-offers/special-offers.html" class="btn btn-outline btn-lg">
+            <span class="material-symbols-outlined">local_offer</span>
+            Special Offers
+          </a>
         </div>
       </div>
+    </section>
 
-      <!-- Room Type -->
-      <div>
-        <span class="filter-group-label">Room Type</span>
-        <div class="filter-options">
-          <label class="filter-option">
-            <span class="material-symbols-outlined">bed</span>
-            <span class="filter-option-name">Suites &amp; Villas</span>
-            <input type="checkbox" value="suite" data-filter-type/>
-          </label>
-          <label class="filter-option">
-            <span class="material-symbols-outlined">meeting_room</span>
-            <span class="filter-option-name">Deluxe Rooms</span>
-            <input type="checkbox" value="deluxe" data-filter-type/>
-          </label>
-          <label class="filter-option">
-            <span class="material-symbols-outlined">apartment</span>
-            <span class="filter-option-name">Penthouse</span>
-            <input type="checkbox" value="presidential" data-filter-type/>
-          </label>
-          <label class="filter-option">
-            <span class="material-symbols-outlined">family_restroom</span>
-            <span class="filter-option-name">Family Rooms</span>
-            <input type="checkbox" value="family" data-filter-type/>
-          </label>
-          <label class="filter-option">
-            <span class="material-symbols-outlined">work</span>
-            <span class="filter-option-name">Studio / Extended Stay</span>
-            <input type="checkbox" value="studio" data-filter-type/>
-          </label>
-        </div>
-      </div>
+    <!-- ═══ Rooms Layout ═══ -->
+    <div class="rooms-layout">
 
-      <!-- Availability -->
-      <div>
-        <span class="filter-group-label">Availability</span>
-        <div class="filter-toggle">
-          <span class="filter-toggle-label">Available Only</span>
-          <label class="toggle-switch">
-            <input type="checkbox" id="availableOnly" data-filter-available/>
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </label>
-        </div>
-      </div>
-
-      <!-- Price Range -->
-      <div>
-        <span class="filter-group-label">Rate Per Night</span>
-        <div class="price-range-display">
-          <span>From <span id="priceMin">$200</span></span>
-          <span>Up to <span id="priceMax">$2,500</span></span>
-        </div>
-        <input type="range" class="filter-range" id="priceRange" min="200" max="2500" value="2500" step="50" aria-label="Maximum price per night"/>
-      </div>
-
-      <!-- Guests -->
-      <div>
-        <label class="filter-group-label" for="guestFilter">Minimum Guests</label>
-        <select id="guestFilter" class="sort-select" style="width:100%;" data-filter-guests>
-          <option value="1">Any capacity</option>
-          <option value="2">2+ Guests</option>
-          <option value="3">3+ Guests</option>
-          <option value="4">4+ Guests</option>
-        </select>
-      </div>
-
-      <button class="filter-apply-btn" id="applyFiltersBtn">
-        <span class="material-symbols-outlined">filter_list</span>
-        Apply Filters
-      </button>
-      <button class="filter-reset-btn" id="resetFiltersBtn">Reset All Filters</button>
-    </aside>
-
-    <!-- Room Grid Area -->
-    <section class="rooms-grid-area">
-
-      <!-- Mobile filter toggle -->
-      <button class="mobile-filter-btn" id="mobileFilterBtn" aria-expanded="false" aria-controls="filterSidebar">
-        <span class="material-symbols-outlined">tune</span>
-        Filter Rooms
-        <span id="activeFilterCount"></span>
-      </button>
-
-      <!-- Header -->
-      <div class="rooms-grid-header">
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar scroll-reveal" id="filterSidebar" aria-label="Room filters">
         <div>
-          <div class="rooms-count-tag">
-            <span class="material-symbols-outlined">hotel</span>
-            <span id="roomResultCount">6</span> Rooms Available
-          </div>
-          <h2 class="rooms-grid-title">Luxury Rooms &amp; Suites</h2>
-          <p class="rooms-grid-sub">Our collection of elegantly appointed accommodations</p>
+          <p class="filter-sidebar-title">Filter Catalogue</p>
+          <p class="filter-sidebar-sub">Refine your selection</p>
         </div>
-        <div class="sort-wrap">
-          <span class="sort-label">Sort By:</span>
-          <select class="sort-select" id="sortSelect" aria-label="Sort rooms by">
-            <option value="recommended">Recommended</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-            <option value="rating">Rating</option>
+
+        <!-- Search -->
+        <div>
+          <label class="filter-group-label" for="roomSearch">Search</label>
+          <div class="filter-search-wrap">
+            <span class="filter-search-icon material-symbols-outlined">search</span>
+            <input type="text" id="roomSearch" placeholder="Search room name..." autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Room Type -->
+        <div>
+          <span class="filter-group-label">Room Type</span>
+          <div class="filter-options">
+            <label class="filter-option">
+              <span class="material-symbols-outlined">bed</span>
+              <span class="filter-option-name">Suites &amp; Villas</span>
+              <input type="checkbox" value="suite" data-filter-type />
+            </label>
+            <label class="filter-option">
+              <span class="material-symbols-outlined">meeting_room</span>
+              <span class="filter-option-name">Deluxe Rooms</span>
+              <input type="checkbox" value="deluxe" data-filter-type />
+            </label>
+            <label class="filter-option">
+              <span class="material-symbols-outlined">apartment</span>
+              <span class="filter-option-name">Penthouse</span>
+              <input type="checkbox" value="presidential" data-filter-type />
+            </label>
+            <label class="filter-option">
+              <span class="material-symbols-outlined">family_restroom</span>
+              <span class="filter-option-name">Family Rooms</span>
+              <input type="checkbox" value="family" data-filter-type />
+            </label>
+            <label class="filter-option">
+              <span class="material-symbols-outlined">work</span>
+              <span class="filter-option-name">Studio / Extended Stay</span>
+              <input type="checkbox" value="studio" data-filter-type />
+            </label>
+          </div>
+        </div>
+
+        <!-- Availability -->
+        <div>
+          <span class="filter-group-label">Availability</span>
+          <div class="filter-toggle">
+            <span class="filter-toggle-label">Available Only</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="availableOnly" data-filter-available />
+              <div class="toggle-track"></div>
+              <div class="toggle-thumb"></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Price Range -->
+        <div>
+          <span class="filter-group-label">Rate Per Night</span>
+          <div class="price-range-display">
+            <span>From <span id="priceMin">$200</span></span>
+            <span>Up to <span id="priceMax">$2,500</span></span>
+          </div>
+          <input type="range" class="filter-range" id="priceRange" min="200" max="2500" value="2500" step="50"
+            aria-label="Maximum price per night" />
+        </div>
+
+        <!-- Guests -->
+        <div>
+          <label class="filter-group-label" for="guestFilter">Minimum Guests</label>
+          <select id="guestFilter" class="sort-select w-full" data-filter-guests>
+            <option value="1">Any capacity</option>
+            <option value="2">2+ Guests</option>
+            <option value="3">3+ Guests</option>
+            <option value="4">4+ Guests</option>
           </select>
         </div>
-      </div>
 
-      <!-- Room Cards — rendered by rooms-lumina.js -->
-      <div class="rooms-grid" id="roomCardGrid" role="list" aria-live="polite" aria-label="Available rooms"></div>
+        <button class="filter-apply-btn" id="applyFiltersBtn">
+          <span class="material-symbols-outlined">filter_list</span>
+          Apply Filters
+        </button>
+        <button class="filter-reset-btn" id="resetFiltersBtn">Reset All Filters</button>
+      </aside>
 
-    </section>
-  </div>
+      <!-- Room Grid Area -->
+      <section class="rooms-grid-area">
 
-</main>
+        <!-- Mobile filter toggle -->
+        <button class="mobile-filter-btn" id="mobileFilterBtn" aria-expanded="false" aria-controls="filterSidebar">
+          <span class="material-symbols-outlined">tune</span>
+          Filter Rooms
+          <span id="activeFilterCount"></span>
+        </button>
 
-<div id="global-footer"></div>
+        <!-- Header -->
+        <div class="rooms-grid-header">
+          <div>
+            <div class="rooms-count-tag">
+              <span class="material-symbols-outlined">hotel</span>
+              <span id="roomResultCount">6</span> Rooms Available
+            </div>
+            <h2 class="rooms-grid-title">Luxury Rooms &amp; Suites</h2>
+            <p class="rooms-grid-sub">Our collection of elegantly appointed accommodations</p>
+          </div>
+          <div class="sort-wrap">
+            <span class="sort-label">Sort By:</span>
+            <select class="sort-select" id="sortSelect" aria-label="Sort rooms by">
+              <option value="recommended">Recommended</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Rating</option>
+            </select>
+          </div>
+        </div>
 
-<script src="/js/global-nav.js"></script>
-<script src="/js/ui-utils.js"></script>
-<script src="/js/page-init.js"></script>
-<script src="/pages/hotel/rooms-lumina/rooms-lumina.js"></script>
+        <!-- Room Cards — rendered by rooms-lumina.js -->
+        <div class="rooms-grid" id="roomCardGrid" role="list" aria-live="polite" aria-label="Available rooms"></div>
+
+      </section>
+    </div>
+
+  </main>
+
+  <div id="global-footer"></div>
+
+  <script src="/js/global-nav.js"></script>
+  <script src="/js/ui-utils.js"></script>
+  <script src="/js/page-init.js"></script>
+  <script src="/js/scroll-reveal.js"></script>
+  <script src="/pages/hotel/rooms-lumina/rooms-lumina.js"></script>
 </body>
+
 </html>

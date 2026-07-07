@@ -1,6 +1,6 @@
 /**
  * Room Detail Page — Lumina Hospitality
- * Targets the rebuilt room-detail-lumina.html structure.
+ * Fetches room data from /api/rooms/:id and enriches with local detail data.
  * No inline handlers — all via addEventListener.
  */
 
@@ -10,205 +10,141 @@
     /* ── XSS helper ── */
     function esc(str) {
         return String(str == null ? '' : str)
-            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/&/g, '&amp;').replace(/<</g, '&lt;')
             .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
-    /* ── Room Data (mirrors rooms-lumina.js) ── */
-    const roomsData = [
-        {
-            id: 1,
-            name: 'Oceanview Executive Suite',
-            type: 'suite',
-            typeLabel: 'Premium Suite',
-            price: 850,
-            rating: 4.9,
-            reviewCount: 128,
-            capacity: 2,
-            available: true,
-            location: 'Floor 18, Ocean Wing',
-            size: '85 sqm',
+    /* ── Enrichment data keyed by room ID ── */
+    /* db.json has basic info; this adds gallery images, detailed amenities, location, etc. */
+    const enrichmentData = {
+        1: {
+            location: 'Floor 18, Executive Wing',
+            size: '860 sqft',
             bed: 'King Bed',
-            description: 'Perched on the 18th floor with unobstructed Atlantic views, this suite blends bespoke Italian furnishings with cutting-edge smart-home technology. A private balcony, butler service, and dedicated workspace make it ideal for both romantic escapes and executive retreats. Every detail — from the hand-stitched linens to the curated minibar — reflects Lumina\'s commitment to understated luxury.',
+            longDescription: 'Perched on the 18th floor with panoramic city views, The Horizon Loft blends bespoke Italian furnishings with cutting-edge smart-home technology. A dedicated workspace, climate control, and high-speed connectivity make it ideal for both romantic escapes and executive retreats.',
             amenities: [
-                { icon: 'wifi', name: 'Gigabit Wi-Fi', desc: 'Complimentary high-speed' },
-                { icon: 'balcony', name: 'Private Balcony', desc: 'Ocean panorama' },
-                { icon: 'coffee_maker', name: 'Nespresso Bar', desc: 'Premium capsule selection' },
+                { icon: 'wifi', name: 'Ultra Fast Wi-Fi', desc: 'Complimentary high-speed' },
+                { icon: 'group', name: '2 Guests', desc: 'Max occupancy' },
+                { icon: 'desk', name: 'Work Station', desc: 'Ergonomic setup' },
                 { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
-                { icon: 'room_service', name: '24/7 Butler', desc: 'Dedicated concierge' },
+                { icon: 'room_service', name: 'Room Service', desc: '24/7 available' },
                 { icon: 'spa', name: 'Spa Access', desc: 'Full facility pass' }
             ],
             images: [
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80',
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuAxi0wjU6aLr44vsc3N063QAcEDEQM9Cv_MImZtSci66HzHWmuEI1UYwKsCF6sUkq7G7qaH5JuacNzh_a81nzUGG9tWMl1uHBWxh-tPU8Uspt_ZTciCarVyGerQz9D-BYgOpSZd3Bxb_Dbe82m11YHPJ3AAJy2UaIbgLrxaSbgdEwnisnNrfgsNIar8UbY0-W34S7O9PUWpMETQPAWpwtWwog5Jle5uvR_PYQTpIkch7nhIkiIKeFbPTwihSWHciu0v75ouoFScCXQ',
+                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
                 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80',
-                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
-                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
-                'https://images.unsplash.com/photo-1522708323590-d24dbb1b0267?w=800&q=80'
-            ],
-            tags: ['Free WiFi', 'Breakfast', 'Spa Access']
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80'
+            ]
         },
-        {
-            id: 2,
-            name: 'Urban Deluxe Suite',
-            type: 'deluxe',
-            typeLabel: 'Executive',
-            price: 650,
-            rating: 4.8,
-            reviewCount: 94,
-            capacity: 2,
-            available: true,
-            location: 'Floor 12, City Wing',
-            size: '65 sqm',
+        2: {
+            location: 'Floor 10, Heritage Wing',
+            size: '540 sqft',
             bed: 'King Bed',
-            description: 'A sophisticated urban retreat with sweeping city skyline views. The suite features a dedicated workspace with ergonomic seating, a curated minibar, and floor-to-ceiling windows that flood the space with natural light. Perfect for the modern executive who demands both comfort and connectivity.',
+            longDescription: 'Classic elegance meets modern amenities in our most requested heritage wing chamber. The Royal Heritage Room features warm wood accents, a Nespresso bar, and high-speed connectivity, ideal for the discerning traveler who appreciates timeless style.',
             amenities: [
-                { icon: 'wifi', name: 'Gigabit Wi-Fi', desc: 'Complimentary high-speed' },
-                { icon: 'desk', name: 'Work Station', desc: 'Ergonomic setup' },
+                { icon: 'group', name: '2 Guests', desc: 'Max occupancy' },
                 { icon: 'coffee_maker', name: 'Nespresso Bar', desc: 'Premium capsule selection' },
+                { icon: 'wifi', name: 'High-Speed Wi-Fi', desc: 'Complimentary' },
+                { icon: 'room_service', name: 'Room Service', desc: '24/7 available' },
                 { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
-                { icon: 'fitness_center', name: 'Gym Access', desc: 'Full facility pass' },
-                { icon: 'local_bar', name: 'Mini Bar', desc: 'Curated selection' }
-            ],
-            images: [
-                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&q=80',
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
-                'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80'
-            ],
-            tags: ['Free WiFi', 'Breakfast', 'Gym Access']
-        },
-        {
-            id: 3,
-            name: 'Panoramic Family Suite',
-            type: 'family',
-            typeLabel: 'Family Suite',
-            price: 1200,
-            rating: 4.9,
-            reviewCount: 76,
-            capacity: 4,
-            available: true,
-            location: 'Floor 8, Garden Wing',
-            size: '120 sqm',
-            bed: '2 Bedrooms',
-            description: 'Designed for families who refuse to compromise on luxury, this expansive suite features two fully appointed bedrooms, a kitchenette, and a wraparound balcony overlooking the manicured gardens. Connecting rooms and child-friendly amenities ensure every family member feels at home.',
-            amenities: [
-                { icon: 'wifi', name: 'Gigabit Wi-Fi', desc: 'Complimentary high-speed' },
-                { icon: 'kitchen', name: 'Kitchenette', desc: 'Full appliances' },
-                { icon: 'balcony', name: 'Garden Balcony', desc: 'Wraparound terrace' },
-                { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
-                { icon: 'child_friendly', name: 'Family Amenities', desc: 'Child-safe setup' },
-                { icon: 'pool', name: 'Pool Access', desc: 'Family pool included' }
-            ],
-            images: [
-                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80',
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
-                'https://images.unsplash.com/photo-1522708323590-d24dbb1b0267?w=800&q=80'
-            ],
-            tags: ['Free WiFi', 'Breakfast', 'Kitchen']
-        },
-        {
-            id: 4,
-            name: 'Presidential Ocean Suite',
-            type: 'presidential',
-            typeLabel: 'Presidential',
-            price: 2500,
-            rating: 5.0,
-            reviewCount: 42,
-            capacity: 2,
-            available: true,
-            location: 'Floor 24, Penthouse',
-            size: '200 sqm',
-            bed: 'King Bed + Jacuzzi',
-            description: 'The pinnacle of Lumina hospitality. This 200 sqm penthouse suite commands the entire top floor, offering a private terrace, plunge pool, and dedicated butler team. Bespoke furnishings, a private dining room, and exclusive VIP services make this the ultimate expression of luxury living.',
-            amenities: [
-                { icon: 'wifi', name: 'Gigabit Wi-Fi', desc: 'Complimentary high-speed' },
-                { icon: 'pool', name: 'Private Plunge Pool', desc: 'Rooftop terrace' },
-                { icon: 'room_service', name: 'Dedicated Butler', desc: 'Round-the-clock' },
-                { icon: 'local_airport', name: 'Airport Transfer', desc: 'Private vehicle' },
-                { icon: 'spa', name: 'Full Spa Access', desc: 'Priority booking' },
-                { icon: 'restaurant', name: 'Private Dining', desc: 'In-suite chef available' }
-            ],
-            images: [
-                'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80',
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80',
-                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
-                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80'
-            ],
-            tags: ['All Inclusive', 'VIP Service', 'Airport Transfer']
-        },
-        {
-            id: 5,
-            name: 'Garden Retreat Room',
-            type: 'deluxe',
-            typeLabel: 'Garden View',
-            price: 450,
-            rating: 4.7,
-            reviewCount: 113,
-            capacity: 2,
-            available: true,
-            location: 'Floor 3, Garden Wing',
-            size: '45 sqm',
-            bed: 'Queen Bed',
-            description: 'A serene escape surrounded by lush tropical gardens. This room opens directly onto a private terrace with pool views, offering a tranquil retreat from the city. Warm earthy tones, natural materials, and curated botanical accents create a calming sanctuary.',
-            amenities: [
-                { icon: 'wifi', name: 'Gigabit Wi-Fi', desc: 'Complimentary high-speed' },
-                { icon: 'pool', name: 'Pool Access', desc: 'Garden pool' },
-                { icon: 'balcony', name: 'Private Terrace', desc: 'Garden views' },
-                { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
-                { icon: 'coffee_maker', name: 'Coffee Station', desc: 'Complimentary' },
-                { icon: 'spa', name: 'Spa Discount', desc: '20% off treatments' }
-            ],
-            images: [
-                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80',
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-                'https://images.unsplash.com/photo-1522708323590-d24dbb1b0267?w=800&q=80',
-                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80'
-            ],
-            tags: ['Free WiFi', 'Breakfast', 'Pool Access']
-        },
-        {
-            id: 6,
-            name: 'Executive Studio',
-            type: 'studio',
-            typeLabel: 'Studio',
-            price: 380,
-            rating: 4.6,
-            reviewCount: 87,
-            capacity: 2,
-            available: true,
-            location: 'Floor 6, East Wing',
-            size: '40 sqm',
-            bed: 'King Bed',
-            description: 'Thoughtfully designed for extended stays, the Executive Studio combines a fully equipped kitchenette with a dedicated work area and premium bedding. Weekly rates and flexible checkout make it the smart choice for business travellers and long-stay guests.',
-            amenities: [
-                { icon: 'wifi', name: 'Gigabit Wi-Fi', desc: 'Complimentary high-speed' },
-                { icon: 'kitchen', name: 'Kitchenette', desc: 'Full appliances' },
-                { icon: 'desk', name: 'Work Station', desc: 'Ergonomic setup' },
-                { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
-                { icon: 'local_laundry_service', name: 'Laundry', desc: 'In-room washer' },
                 { icon: 'fitness_center', name: 'Gym Access', desc: 'Full facility pass' }
             ],
             images: [
-                'https://images.unsplash.com/photo-1522708323590-d24dbb1b0267?w=1200&q=80',
-                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuC19eUlmgJWbWeAf0lnzVzsqE5UlsJ7Nqr5b0gy5DSaxM-PHFp3X3lGJ-Cg_DI4RK5YfJAkZcWkRUyRnpMwo41TKGXCxQF2yE827K3OP07qsBfTUB-c9yFRfg8QYFKv6xa-BT7p3QmtSKH5RbdxoLZw8cf4AR-PuqZo3oN7XV22ETDR312PkUsk8mf3gIaZ6wXO0MZjEfxOygHvOeRKY6-wFN0Byvz9XIYOcq9y7EfTlohzCWKQRm_prBdoux9YheMj3IwqrZcLE4Q',
                 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80',
-                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80'
+                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
+                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80'
+            ]
+        },
+        3: {
+            location: 'Floor 1, Private Villa',
+            size: '1600 sqft',
+            bed: 'King Bed + Sofa Bed',
+            longDescription: 'The ultimate in privacy featuring a private heated infinity pool and 24-hour butler service. The Azure Pool Villa is a self-contained sanctuary with expansive living areas, a full kitchen, and direct pool access — the crown jewel of Lumina Hospitality.',
+            amenities: [
+                { icon: 'pool', name: 'Private Pool', desc: 'Heated infinity pool' },
+                { icon: 'room_service', name: 'Butler Service', desc: '24/7 dedicated' },
+                { icon: 'wifi', name: 'Gigabit Wi-Fi', desc: 'Complimentary' },
+                { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
+                { icon: 'kitchen', name: 'Full Kitchen', desc: 'Complete appliances' },
+                { icon: 'spa', name: 'Spa Access', desc: 'Priority booking' }
             ],
-            tags: ['Free WiFi', 'Kitchen', 'Weekly Rates']
+            images: [
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuAm7EtnzitMANt2-UME2fY9aLJLCkLdpGi8ka-IvidgCJCvI2U_rFfVpGyPj16jGngYysv4mEBbfQs2WZrVtNK8RIly3Nl2fS5ZiR6plduwT-gc-N_o__ARr4HWaV7Xo3oDemGtCQEuPHX40_8QIfqtn4ga7MgAcgUkcA35dWHsB6vjnNcYujTzTyZWZQyZuNjmpwgfQ6Ur-_qA7H-dS5gnPJcRVISF7LgiTJKzSqj6P_roE7l3B6w5hQrCxM5Xtn0Q_6jX11QJrkw',
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
+                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
+                'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80'
+            ]
+        },
+        4: {
+            location: 'Floor 6, East Wing',
+            size: '380 sqft',
+            bed: 'Queen Bed',
+            longDescription: 'Modern industrial design for the business traveler who appreciates raw aesthetics and function. The Industrial Loft combines exposed-brick charm with a full ergonomic work station, gym access, and premium coffee — perfect for productive extended stays.',
+            amenities: [
+                { icon: 'desk', name: 'Work Station', desc: 'Ergonomic setup' },
+                { icon: 'fitness_center', name: 'Gym Access', desc: 'Full facility pass' },
+                { icon: 'wifi', name: 'High-Speed Wi-Fi', desc: 'Complimentary' },
+                { icon: 'coffee_maker', name: 'Coffee Maker', desc: 'Premium selection' },
+                { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
+                { icon: 'local_laundry_service', name: 'Laundry', desc: 'In-room washer' }
+            ],
+            images: [
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuCfxHE8EtEkaf7zGr0INy2_PIa2VHS32zPM2WmHK5Igl1nmnAEof5EPz_EtaFkzrV4Ghx_yXK0dZOGne1Gul8SHRguyJDDcs4edywvKMfzwiAyfaFCu5dG3DfXjnJ53aaOZJ7Lv8wqPaJMV0rJtm27SylpshsxyJAVwm3H1g1CW-atuzh6EIWzjhJskxb0NVCANxiyvKFlZm3PtVuiLfyg26UC6Sv_5tk1Z7c31xe3i5bB7jujhRPaRVwhX3YpSEhgYfYe7Qrlictg',
+                'https://images.unsplash.com/photo-1522708323590-d24dbb1b0267?w=800&q=80',
+                'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
+                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80'
+            ]
+        },
+        5: {
+            location: 'Floor 15, Alpine Wing',
+            size: '720 sqft',
+            bed: 'King Bed',
+            longDescription: 'Experience mountain luxury with a real wood fireplace and private terrace overlooking the peaks. Peak View Cabin brings the warmth of alpine living with premium spa access, climate control, and Wi-Fi — a serene retreat for those who seek nature without sacrificing comfort.',
+            amenities: [
+                { icon: 'fireplace', name: 'Fireplace', desc: 'Real wood burning' },
+                { icon: 'spa', name: 'Private Spa', desc: 'In-room treatments' },
+                { icon: 'wifi', name: 'Wi-Fi', desc: 'Complimentary high-speed' },
+                { icon: 'ac_unit', name: 'Climate Control', desc: 'Individual zone control' },
+                { icon: 'balcony', name: 'Private Terrace', desc: 'Mountain views' },
+                { icon: 'coffee_maker', name: 'Coffee Station', desc: 'Complimentary' }
+            ],
+            images: [
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuAFxkqrMt1GmGKYJfSCYgn2H9WMZPlWKbl9yci7Od6p9ffT5HLYaa-PVV0axf5LuGH0llQ-KVbi9U1ykms8W1XA3FxCW1xohYWvWj60itCEftceR-oWaNVplq5F_N0XiJv6rtew0vEhBUNNiDe5tc7tRVgLNiUTyzLQw0U35mixv6iYWwVnfmHiddZ_xqrOp5N1lbICmjaqaJzVY8xph-SquNuOhPboIApwyUqu5NcTkPuq1acgjdLjqvGXdqlOPvuiadiJcynNnzI',
+                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
+                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80'
+            ]
         }
-    ];
+    };
 
-    /* ── Sample reviews per room ── */
-    const sampleReviews = [
-        { author: 'James O.', date: 'March 2025', stars: 5, text: 'Absolutely flawless experience. The butler service was attentive without being intrusive, and the view from the balcony at sunrise is something I will never forget.' },
-        { author: 'Amara N.', date: 'February 2025', stars: 5, text: 'We celebrated our anniversary here and Lumina exceeded every expectation. The room was immaculate, the champagne was chilled on arrival, and the staff remembered our names throughout.' },
-        { author: 'David K.', date: 'January 2025', stars: 4, text: 'Outstanding comfort and design. The bed is the most comfortable I have slept in at any hotel. Minor note: the in-room dining took slightly longer than expected, but the quality made up for it.' }
-    ];
+    /* ── Default enrichment for rooms not in the map ── */
+    function getEnrichment(room) {
+        if (enrichmentData[room.id]) return enrichmentData[room.id];
+        // Build fallback enrichment from db.json fields
+        return {
+            location: 'Lumina Hospitality',
+            size: room.totalArea ? `${room.totalArea} sqft` : '450 sqft',
+            bed: room.bedding || 'King Bed',
+            longDescription: room.description || 'Experience luxury accommodation at Lumina Hospitality.',
+            amenities: (room.amenities || []).map((icon, i) => ({
+                icon: icon,
+                name: (room.amenityLabels && room.amenityLabels[i]) || icon,
+                desc: 'Premium feature'
+            })),
+            images: [
+                room.image || 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
+                'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80',
+                'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
+                'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80'
+            ]
+        };
+    }
 
     /* ── State ── */
     let currentRoom = null;
+    let allRooms = [];
     let lightboxIndex = 0;
 
     /* ── Helpers ── */
@@ -227,29 +163,68 @@
         ).join('');
     }
 
+    /* ── Fetch room from API ── */
+    async function fetchRoom(id) {
+        try {
+            const res = await fetch(`/api/rooms/${id}`);
+            const data = await res.json();
+            if (data.success && data.room) return data.room;
+            return null;
+        } catch (err) {
+            console.error('Failed to fetch room:', err);
+            return null;
+        }
+    }
+
+    /* ── Fetch all rooms from API ── */
+    async function fetchAllRooms() {
+        try {
+            const res = await fetch('/api/rooms');
+            const data = await res.json();
+            if (data.success && Array.isArray(data.rooms)) return data.rooms;
+            return [];
+        } catch (err) {
+            console.error('Failed to fetch rooms:', err);
+            return [];
+        }
+    }
+
+    /* ── Fetch reviews from API ── */
+    async function fetchReviews(roomId) {
+        try {
+            const res = await fetch(`/api/reviews?roomId=${roomId}`);
+            const data = await res.json();
+            if (data.success && Array.isArray(data.reviews)) return data.reviews;
+            return [];
+        } catch (err) {
+            console.error('Failed to fetch reviews:', err);
+            return [];
+        }
+    }
+
     /* ── Populate static text fields ── */
-    function populateHeader(room) {
+    function populateHeader(room, enrichment, reviewCount) {
         const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
         setText('roomName', room.name);
-        setText('roomLocation', room.location);
-        setText('roomRating', room.rating.toFixed(1));
-        setText('roomReviewCount', `· ${room.reviewCount} reviews`);
+        setText('roomLocation', enrichment.location);
+        setText('roomRating', (room.rating || 4.5).toFixed(1));
+        setText('roomReviewCount', `· ${reviewCount} reviews`);
         setText('widgetPrice', `$${room.price.toLocaleString()}`);
-        setText('widgetRating', room.rating.toFixed(1));
-        setText('widgetReviewCount', `(${room.reviewCount} reviews)`);
+        setText('widgetRating', (room.rating || 4.5).toFixed(1));
+        setText('widgetReviewCount', `(${reviewCount} reviews)`);
         setText('breadcrumbRoom', room.name);
         document.title = `${room.name} | Lumina Hospitality`;
     }
 
     /* ── Specs row ── */
-    function renderSpecs(room) {
+    function renderSpecs(room, enrichment) {
         const el = document.getElementById('roomSpecs');
         if (!el) return;
         const specs = [
-            { icon: 'straighten', label: room.size },
-            { icon: 'bed', label: room.bed },
-            { icon: 'group', label: `Up to ${room.capacity} guests` },
-            { icon: 'layers', label: room.location }
+            { icon: 'straighten', label: enrichment.size },
+            { icon: 'bed', label: enrichment.bed },
+            { icon: 'group', label: `Up to ${room.capacity || 2} guests` },
+            { icon: 'layers', label: enrichment.location }
         ];
         el.innerHTML = specs.map(s => `
             <div class="room-spec-item">
@@ -260,17 +235,17 @@
     }
 
     /* ── Description ── */
-    function renderDescription(room) {
+    function renderDescription(enrichment) {
         const el = document.getElementById('roomDescription');
         if (!el) return;
-        el.innerHTML = `<p>${esc(room.description)}</p>`;
+        el.innerHTML = `<p>${esc(enrichment.longDescription)}</p>`;
     }
 
     /* ── Amenities bento ── */
-    function renderAmenities(room) {
+    function renderAmenities(enrichment) {
         const el = document.getElementById('amenitiesGrid');
         if (!el) return;
-        el.innerHTML = room.amenities.map(a => `
+        el.innerHTML = enrichment.amenities.map(a => `
             <div class="amenity-item">
                 <span class="material-symbols-outlined">${esc(a.icon)}</span>
                 <span class="amenity-item-name">${esc(a.name)}</span>
@@ -280,19 +255,20 @@
     }
 
     /* ── Gallery ── */
-    function renderGallery(room) {
+    function renderGallery(enrichment, roomName) {
         const el = document.getElementById('galleryGrid');
         if (!el) return;
-        el.innerHTML = room.images.map((src, i) => `
+        const images = enrichment.images;
+        el.innerHTML = images.map((src, i) => `
             <div class="gallery-item${i === 0 ? ' main' : ''}" data-index="${i}">
-                <img src="${esc(src)}" alt="${esc(room.name)} photo ${i + 1}" loading="${i === 0 ? 'eager' : 'lazy'}"/>
+                <img src="${esc(src)}" alt="${esc(roomName)} photo ${i + 1}" loading="${i === 0 ? 'eager' : 'lazy'}"/>
                 <div class="gallery-overlay">
                     <span class="material-symbols-outlined">zoom_in</span>
                 </div>
-                ${i === room.images.length - 1 && room.images.length > 1 ? `
+                ${i === images.length - 1 && images.length > 1 ? `
                 <button class="gallery-view-all" id="viewAllBtn" aria-label="View all photos">
                     <span class="material-symbols-outlined">photo_library</span>
-                    View all ${room.images.length} photos
+                    View all ${images.length} photos
                 </button>` : ''}
             </div>
         `).join('');
@@ -328,8 +304,9 @@
 
     function showLightboxImage() {
         const img = document.getElementById('lightboxImg');
-        if (!img || !currentRoom) return;
-        img.src = currentRoom.images[lightboxIndex];
+        const enrichment = currentRoom ? getEnrichment(currentRoom) : null;
+        if (!img || !enrichment) return;
+        img.src = enrichment.images[lightboxIndex];
         img.alt = `${currentRoom.name} photo ${lightboxIndex + 1}`;
     }
 
@@ -337,12 +314,14 @@
         document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
 
         document.getElementById('lightboxPrev').addEventListener('click', () => {
-            lightboxIndex = (lightboxIndex - 1 + currentRoom.images.length) % currentRoom.images.length;
+            const enrichment = getEnrichment(currentRoom);
+            lightboxIndex = (lightboxIndex - 1 + enrichment.images.length) % enrichment.images.length;
             showLightboxImage();
         });
 
         document.getElementById('lightboxNext').addEventListener('click', () => {
-            lightboxIndex = (lightboxIndex + 1) % currentRoom.images.length;
+            const enrichment = getEnrichment(currentRoom);
+            lightboxIndex = (lightboxIndex + 1) % enrichment.images.length;
             showLightboxImage();
         });
 
@@ -360,41 +339,55 @@
     }
 
     /* ── Reviews ── */
-    function renderReviews(room) {
+    function renderReviews(reviews, room) {
         const el = document.getElementById('reviewsList');
         if (!el) return;
-        el.innerHTML = sampleReviews.map(r => `
+
+        if (reviews.length === 0) {
+            el.innerHTML = `
+                <div style="text-align:center; padding:2rem; color: var(--text-muted);">
+                    <span class="material-symbols-outlined" style="font-size:2.5rem; display:block; margin-bottom:0.5rem;">rate_review</span>
+                    <p>No reviews yet for this room. Be the first to review!</p>
+                </div>`;
+            return;
+        }
+
+        el.innerHTML = reviews.map(r => {
+            const date = r.createdAt ? new Date(r.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '';
+            return `
             <div class="review-item">
                 <div class="review-header">
                     <div>
-                        <span class="review-author">${esc(r.author)}</span>
-                        <span class="review-date">${esc(r.date)}</span>
+                        <span class="review-author">${esc(r.guestName || 'Guest')}</span>
+                        <span class="review-date">${esc(date)}</span>
                     </div>
-                    <div class="review-stars" aria-label="${r.stars} out of 5 stars">
-                        ${starHTML(r.stars)}
+                    <div class="review-stars" aria-label="${r.rating} out of 5 stars">
+                        ${starHTML(r.rating)}
                     </div>
                 </div>
-                <p class="review-text">"${esc(r.text)}"</p>
+                <p class="review-text">"${esc(r.comment)}"</p>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     /* ── Similar rooms ── */
-    function renderSimilarRooms(room) {
+    function renderSimilarRooms(currentId) {
         const el = document.getElementById('similarRoomsGrid');
         if (!el) return;
-        const similar = roomsData.filter(r => r.id !== room.id).slice(0, 2);
-        el.innerHTML = similar.map(r => `
+        const similar = allRooms.filter(r => r.id !== currentId).slice(0, 2);
+        el.innerHTML = similar.map(r => {
+            const enrichment = getEnrichment(r);
+            return `
             <a href="/pages/hotel/room-detail-lumina/room-detail-lumina.html?id=${r.id}" class="similar-room-card">
                 <div class="similar-room-img">
-                    <img src="${esc(r.images[0])}" alt="${esc(r.name)}" loading="lazy"/>
+                    <img src="${esc(enrichment.images[0])}" alt="${esc(r.name)}" loading="lazy"/>
                 </div>
                 <div class="similar-room-info">
                     <p class="similar-room-name">${esc(r.name)}</p>
                     <p class="similar-room-price">$${r.price.toLocaleString()} / night</p>
                 </div>
             </a>
-        `).join('');
+        `}).join('');
     }
 
     /* ── Booking widget ── */
@@ -507,19 +500,41 @@
     }
 
     /* ── Init ── */
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
         const params = new URLSearchParams(window.location.search);
         const id = parseInt(params.get('id'), 10);
 
-        currentRoom = roomsData.find(r => r.id === id) || roomsData[0];
+        // Fetch room and all rooms in parallel
+        const [room, rooms] = await Promise.all([
+            fetchRoom(id || 1),
+            fetchAllRooms()
+        ]);
 
-        populateHeader(currentRoom);
-        renderSpecs(currentRoom);
-        renderDescription(currentRoom);
-        renderAmenities(currentRoom);
-        renderGallery(currentRoom);
-        renderReviews(currentRoom);
-        renderSimilarRooms(currentRoom);
+        allRooms = rooms;
+
+        if (!room) {
+            // Fallback: use the first room from the list
+            currentRoom = rooms[0] || null;
+            if (!currentRoom) {
+                document.getElementById('roomName').textContent = 'Room Not Found';
+                return;
+            }
+        } else {
+            currentRoom = room;
+        }
+
+        const enrichment = getEnrichment(currentRoom);
+
+        // Fetch reviews for this room
+        const reviews = await fetchReviews(currentRoom.id);
+
+        populateHeader(currentRoom, enrichment, reviews.length);
+        renderSpecs(currentRoom, enrichment);
+        renderDescription(enrichment);
+        renderAmenities(enrichment);
+        renderGallery(enrichment, currentRoom.name);
+        renderReviews(reviews, currentRoom);
+        renderSimilarRooms(currentRoom.id);
         initLightbox();
         initBookingWidget(currentRoom);
         initShare();

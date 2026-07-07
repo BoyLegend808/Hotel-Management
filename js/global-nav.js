@@ -45,6 +45,7 @@
     if (p.includes('reviews-lumina')) return 'reviews';
     if (p.includes('about-lumina')) return 'about';
     if (p.includes('contact-lumina')) return 'contact';
+    if (p.includes('booking-your-stay')) return 'book';
     return 'home';
   }
   const activePage = getActivePage();
@@ -80,7 +81,7 @@
       </div>
     </div>
     <div class="nav-actions">
-      <a href="${BOOK}" class="nav-cta">Book Your Stay</a>
+      <a href="${BOOK}" class="nav-cta ${activePage === 'book' ? 'nav-cta-active' : ''}">Book Your Stay</a>
       <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -206,16 +207,28 @@
 
     // Add solid class only on pages WITHOUT a hero (transparent on home/hero pages)
     const nav = document.querySelector('.global-nav');
-    const hasHero = document.querySelector('.hero-wrap, .page-hero, .hero-slider-wrap');
-    if (nav && !hasHero && !nav.classList.contains('solid')) {
-      nav.classList.add('solid');
+
+    // Hero detection — add .has-hero to nav so CSS makes it transparent.
+    // Any page with a hero section gets the transparent-to-solid effect.
+    // Default CSS state is solid, so pages with no hero stay solid automatically.
+    const heroSelectors = [
+      '.hero-wrap',
+      '.hero-slider-wrap',
+      '.page-hero',
+      '.rooms-hero',
+      '.about-hero',
+    ].join(',');
+
+    const hasHero = document.querySelector(heroSelectors);
+
+    if (nav && hasHero) {
+      nav.classList.add('has-hero');
     }
 
     // Add solid class to header if no hero behind it (header-based nav pattern)
     if (header && !hasHero && !header.classList.contains('solid')) {
       header.classList.add('solid');
     }
-
     initScroll();
     initMobileMenu();
     initDropdowns();
@@ -299,11 +312,19 @@
     const nav = document.querySelector('.global-nav');
     if (!nav) return;
 
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
+    const scrollThreshold = 50;
 
-    nav.classList.toggle('scrolled', window.scrollY > 50);
+    function onScroll() {
+      const scrolled = window.scrollY > scrollThreshold;
+      if (scrolled) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // set correct state on load
   }
 
   /* ── Mobile menu with focus trap ── */

@@ -103,7 +103,8 @@ if (CDN_URL) {
 const topLevelAssets = new Set([
   "favicon.svg",
   "favicon.ico",
-  "logo.png"
+  "logo.png",
+  "The Canopy Lodge_.jpg"
 ]);
 
 app.get("/:asset", (req, res, next) => {

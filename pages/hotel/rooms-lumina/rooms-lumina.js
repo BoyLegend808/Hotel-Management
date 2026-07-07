@@ -1,6 +1,7 @@
 /**
  * Rooms & Suites Page — Lumina Hospitality
  * Handles: card rendering, filtering, sorting, search, mobile sidebar toggle.
+ * Fetches room data from the /api/rooms endpoint (unified with db.json).
  * No inline handlers — all listeners attached here.
  */
 
@@ -14,96 +15,9 @@
             .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
-    /* ── Room Data ── */
-    const roomsData = [
-        {
-            id: 1,
-            name: 'Oceanview Executive Suite',
-            type: 'suite',
-            typeLabel: 'Premium Suite',
-            price: 850,
-            rating: 4.9,
-            capacity: 2,
-            available: true,
-            details: '85 sqm · King Bed · Ocean Front · Private Balcony · Butler Service',
-            tags: ['Free WiFi', 'Breakfast', 'Spa Access'],
-            badge: 'primary',
-            image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80'
-        },
-        {
-            id: 2,
-            name: 'Urban Deluxe Suite',
-            type: 'deluxe',
-            typeLabel: 'Executive',
-            price: 650,
-            rating: 4.8,
-            capacity: 2,
-            available: true,
-            details: '65 sqm · King Bed · City View · Workspace · Mini Bar',
-            tags: ['Free WiFi', 'Breakfast', 'Gym Access'],
-            badge: 'accent',
-            image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80'
-        },
-        {
-            id: 3,
-            name: 'Panoramic Family Suite',
-            type: 'family',
-            typeLabel: 'Family Suite',
-            price: 1200,
-            rating: 4.9,
-            capacity: 4,
-            available: true,
-            details: '120 sqm · 2 Bedrooms · Kitchenette · Balcony · Connecting Rooms',
-            tags: ['Free WiFi', 'Breakfast', 'Kitchen'],
-            badge: 'primary',
-            image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80'
-        },
-        {
-            id: 4,
-            name: 'Presidential Ocean Suite',
-            type: 'presidential',
-            typeLabel: 'Presidential',
-            price: 2500,
-            rating: 5.0,
-            capacity: 2,
-            available: true,
-            details: '200 sqm · Private Terrace · Butler Service · Jacuzzi · Premium Amenities',
-            tags: ['All Inclusive', 'VIP Service', 'Airport Transfer'],
-            badge: 'accent',
-            image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80'
-        },
-        {
-            id: 5,
-            name: 'Garden Retreat Room',
-            type: 'deluxe',
-            typeLabel: 'Garden View',
-            price: 450,
-            rating: 4.7,
-            capacity: 2,
-            available: true,
-            details: '45 sqm · Queen Bed · Garden Access · Pool View · Terrace',
-            tags: ['Free WiFi', 'Breakfast', 'Pool Access'],
-            badge: 'primary',
-            image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80'
-        },
-        {
-            id: 6,
-            name: 'Executive Studio',
-            type: 'studio',
-            typeLabel: 'Studio',
-            price: 380,
-            rating: 4.6,
-            capacity: 2,
-            available: true,
-            details: '40 sqm · King Bed · Kitchenette · Work Area · Extended Stay',
-            tags: ['Free WiFi', 'Kitchen', 'Weekly Rates'],
-            badge: 'accent',
-            image: 'https://images.unsplash.com/photo-1522708323590-d24dbb1b0267?w=800&q=80'
-        }
-    ];
-
     /* ── State ── */
-    let currentRooms = [...roomsData];
+    let roomsData = [];
+    let currentRooms = [];
 
     /* ── DOM Refs ── */
     const grid = document.getElementById('roomCardGrid');
@@ -116,6 +30,65 @@
     const resetBtn = document.getElementById('resetFiltersBtn');
     const mobileFilterBtn = document.getElementById('mobileFilterBtn');
     const filterSidebar = document.getElementById('filterSidebar');
+
+    /* ── Map DB room type to filter category ── */
+    function mapRoomType(typeStr) {
+        const t = (typeStr || '').toLowerCase();
+        if (t.includes('suite') || t.includes('villa') || t.includes('vip') || t.includes('sanctuary')) return 'suite';
+        if (t.includes('deluxe') || t.includes('king') || t.includes('heritage')) return 'deluxe';
+        if (t.includes('presidential') || t.includes('penthouse')) return 'presidential';
+        if (t.includes('family')) return 'family';
+        if (t.includes('studio') || t.includes('urban') || t.includes('loft') || t.includes('industrial')) return 'studio';
+        if (t.includes('alpine') || t.includes('cabin') || t.includes('escape') || t.includes('retreat')) return 'deluxe';
+        return 'deluxe'; // default
+    }
+
+    /* ── Map DB room type to badge style ── */
+    function badgeStyle(typeStr) {
+        const t = (typeStr || '').toLowerCase();
+        if (t.includes('vip') || t.includes('presidential') || t.includes('penthouse') || t.includes('urban') || t.includes('studio')) return 'accent';
+        return 'primary';
+    }
+
+    /* ── Map DB room to amenity tags ── */
+    function roomTags(room) {
+        if (room.amenityLabels && room.amenityLabels.length > 0) {
+            return room.amenityLabels.slice(0, 3);
+        }
+        const tags = ['Free WiFi'];
+        if (room.price >= 500) tags.push('Breakfast');
+        if (room.price >= 800) tags.push('VIP Service');
+        else tags.push('Pool Access');
+        return tags;
+    }
+
+    /* ── Fetch rooms from API ── */
+    async function fetchRooms() {
+        try {
+            const res = await fetch('/api/rooms');
+            const data = await res.json();
+            if (data.success && Array.isArray(data.rooms)) {
+                return data.rooms.map(room => ({
+                    id: room.id,
+                    name: room.name,
+                    type: mapRoomType(room.type),
+                    typeLabel: room.type,
+                    price: room.price,
+                    rating: room.rating || 4.5,
+                    capacity: room.capacity || 2,
+                    available: room.status === 'available',
+                    details: room.description || `${room.totalArea ? room.totalArea + ' sqft' : ''} · ${room.bedding || 'Luxury Bedding'} · ${room.type}`,
+                    tags: roomTags(room),
+                    badge: badgeStyle(room.type),
+                    image: room.image || 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80'
+                }));
+            }
+            return [];
+        } catch (err) {
+            console.error('Failed to fetch rooms:', err);
+            return [];
+        }
+    }
 
     /* ── Render Cards ── */
     function renderRooms(rooms) {
@@ -134,8 +107,14 @@
 
         if (resultCount) resultCount.textContent = rooms.length;
 
-        grid.innerHTML = rooms.map(room => `
-            <article class="room-card reveal" role="listitem">
+        // Skeleton loading effect
+        grid.innerHTML = Array(Math.min(rooms.length, 6)).fill(0).map(() => `
+            <article class="room-card skeleton-loading" style="min-height: 400px; background: rgba(0,0,0,0.05); border-radius: var(--radius-xl); animation: pulse 1.5s infinite;"></article>
+        `).join('');
+
+        setTimeout(() => {
+            grid.innerHTML = rooms.map(room => `
+            <article class="room-card scroll-reveal hover-lift" role="listitem">
                 <div class="room-card-media">
                     <img src="${esc(room.image)}" alt="${esc(room.name)}" loading="lazy"/>
                     <div class="room-card-media-overlay"></div>
@@ -161,13 +140,20 @@
                 </div>
             </article>
         `).join('');
+            
+            if (typeof window.initScrollReveals === 'function') {
+                window.initScrollReveals();
+            }
+        }, 400); // 400ms skeleton display
+    }
 
-        // Trigger scroll reveal on newly rendered cards
-        requestAnimationFrame(() => {
-            document.querySelectorAll('#roomCardGrid .reveal').forEach(el => {
-                el.classList.add('visible');
-            });
-        });
+    /* ── Render loading state ── */
+    function renderLoading() {
+        if (!grid) return;
+        grid.innerHTML = Array(4).fill(0).map(() => `
+            <article class="room-card skeleton-loading" style="min-height: 400px; background: rgba(0,0,0,0.05); border-radius: var(--radius-xl); animation: pulse 1.5s infinite;"></article>
+        `).join('');
+        if (resultCount) resultCount.textContent = '...';
     }
 
     /* ── Get Filters ── */
@@ -231,8 +217,6 @@
     /* ── URL Params → pre-fill filters ── */
     function initURLParams() {
         const params = new URLSearchParams(window.location.search);
-        const checkIn = params.get('checkIn');
-        const checkOut = params.get('checkOut');
         const guests = params.get('guests');
 
         if (guests) {
@@ -240,7 +224,7 @@
             if (guestFilter) guestFilter.value = guests;
         }
 
-        if (checkIn || checkOut || guests) {
+        if (guests) {
             applyFilters();
         }
     }
@@ -280,12 +264,18 @@
     }
 
     /* ── Init ── */
-    document.addEventListener('DOMContentLoaded', () => {
-        renderRooms(roomsData);
-        initURLParams();
+    document.addEventListener('DOMContentLoaded', async () => {
+        renderLoading();
         initMobileFilter();
         initPriceRange();
         initListeners();
+
+        // Fetch rooms from API
+        roomsData = await fetchRooms();
+        currentRooms = [...roomsData];
+
+        renderRooms(roomsData);
+        initURLParams();
     });
 
 })();

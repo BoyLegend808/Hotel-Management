@@ -240,3 +240,15 @@ body {
         gap: var(--spacing-sm);
     }
 }
+
+/* Progress Bar Widths */
+.w-pct-94-8 {
+    width: 94.8%;
+}
+.w-pct-90 {
+    width: 90%;
+}
+.w-pct-95 {
+    width: 95%;
+}
+

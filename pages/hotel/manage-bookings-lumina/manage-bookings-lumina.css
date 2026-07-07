@@ -1,0 +1,63 @@
+/* manage-bookings-lumina.css */
+
+/* Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-upcoming {
+    background: rgba(0, 102, 131, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(0, 102, 131, 0.2);
+}
+
+.status-checked-in {
+    background: rgba(45, 138, 86, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(45, 138, 86, 0.2);
+}
+
+.status-checked-out {
+    background: rgba(107, 107, 107, 0.1);
+    color: var(--text-muted);
+    border: 1px solid rgba(107, 107, 107, 0.2);
+}
+
+.status-cancelled {
+    background: rgba(192, 70, 58, 0.1);
+    color: var(--error);
+    border: 1px solid rgba(192, 70, 58, 0.2);
+}
+
+/* Table Row Hover */
+#bookingsTableBody tr {
+    transition: background-color var(--transition-base);
+}
+
+#bookingsTableBody tr:hover {
+    background-color: var(--surface-container-low);
+    cursor: pointer;
+}
+
+/* Slide-over Classes */
+.slide-over-open {
+    transform: translateX(0) !important;
+}
+
+.backdrop-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Utilities */
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}

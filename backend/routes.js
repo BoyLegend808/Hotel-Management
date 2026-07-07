@@ -6,6 +6,9 @@ const roomsRouter = require("./routes/rooms");
 const bookingsRouter = require("./routes/bookings");
 const paymentsRouter = require("./routes/payments");
 const reviewsRouter = require("./routes/reviews");
+const housekeepingRouter = require("./routes/housekeeping");
+const settingsRouter = require("./routes/settings");
+const managerRouter = require("./routes/manager");
 
 const router = express.Router();
 
@@ -38,9 +41,12 @@ router.use("/rooms", roomsRouter);
 router.use("/bookings", bookingsRouter);
 router.use("/payments", paymentsRouter);
 router.use("/reviews", reviewsRouter);
+router.use("/housekeeping", housekeepingRouter);
+router.use("/settings", settingsRouter);
+router.use("/manager", managerRouter);
 
-// Stats endpoint (admin only)
-router.get("/stats", requireAuth, requireRole("admin"), async (req, res) => {
+// Stats endpoint (manager only)
+router.get("/stats", requireAuth, requireRole("manager"), async (req, res) => {
   const db = await readDB();
   const totalBookings = (db.bookings || []).length;
   const confirmedBookings = (db.bookings || []).filter(b => b.status === "confirmed").length;

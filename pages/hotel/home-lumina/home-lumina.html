@@ -1,510 +1,476 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lumina Hospitality | Luxury Hotel — Victoria Island, Lagos</title>
-<meta name="description" content="Experience world-class hospitality at Lumina, Victoria Island's premier luxury hotel. Book your stay today."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
-<link href="/css/lumina-design-system.css" rel="stylesheet"/>
-<link href="/css/global-nav.css" rel="stylesheet"/>
-<link href="/css/global-footer.css" rel="stylesheet"/>
-<link href="/css/hotel-utils.css" rel="stylesheet"/>
-<link href="/css/ui-utils.css" rel="stylesheet"/>
-<link href="/pages/hotel/home-lumina/home-lumina.css" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumina Hospitality | Luxury Hotel — Victoria Island, Lagos</title>
+  <meta name="description"
+    content="Experience world-class hospitality at Lumina, Victoria Island's premier luxury hotel. Book your stay today." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+    rel="stylesheet" />
+  <link href="/css/lumina-design-system.css" rel="stylesheet" />
+  <link href="/css/tailwind-output.css" rel="stylesheet" />
+  <link href="/css/global-nav.css" rel="stylesheet" />
+  <link href="/css/global-footer.css" rel="stylesheet" />
+  <link href="/css/ui-utils.css" rel="stylesheet" />
+  <link href="/pages/hotel/home-lumina/home-lumina.css" rel="stylesheet" />
+  <link href="/pages/hotel/home-lumina/home-lumina-responsive.css" rel="stylesheet" />
 </head>
+
 <body class="overflow-x-hidden">
 
-<a href="#main-content" class="sr-only">Skip to main content</a>
+  <a href="#main-content" class="sr-only">Skip to main content</a>
 
-<!-- Global Nav injected here -->
-<div id="global-nav"></div>
+  <!-- Global Nav injected here -->
+  <div id="global-nav"></div>
 
-<main id="main-content">
+  <main id="main-content">
 
-  <!-- ═══ Hero Carousel ═══ -->
-  <section class="hero-wrap" aria-label="Featured hotel highlights">
-    <div class="hero-slider" id="hero-slider">
-
-      <!-- Slide 1 -->
-      <div class="hero-slide">
-        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80" alt="Lumina Hotel infinity pool overlooking Lagos lagoon at sunset" loading="eager"/>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <span class="hero-badge">
-            <span class="material-symbols-outlined">location_on</span>
-            Victoria Island, Lagos
-          </span>
-          <h1 class="hero-title">Where Luxury Meets Nigerian Excellence</h1>
-          <p class="hero-subtitle">Experience world-class hospitality in the heart of Lagos. From stunning ocean views to our award-winning spa, every moment is crafted for perfection.</p>
-          <div class="hero-actions">
-            <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="btn btn-accent btn-lg">
-              <span class="material-symbols-outlined">bed</span>
-              Explore Rooms
-            </a>
-            <a href="/pages/hotel/special-offers/special-offers.html" class="btn btn-outline btn-lg">
-              <span class="material-symbols-outlined">local_offer</span>
-              View Offers
-            </a>
+    <!-- ═══ New Hero Section ═══ -->
+    <section class="w-full overflow-hidden relative page-hero" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 100px;" aria-label="Featured hotel highlights">
+      
+      <!-- Full-screen Background Image with Dark Overlay -->
+      <div class="hero-bg-container">
+        <img src="/The%20Canopy%20Lodge_.jpg" class="hero-bg-img" alt="The Canopy Lodge">
+      </div>
+      <!-- Lighter overlay so the image pops -->
+      <div class="hero-bg-overlay-light"></div>
+      <div class="hero-bg-overlay-gradient"></div>
+      
+      <div class="container mx-auto px-4 md:px-8 max-w-5xl relative z-10 flex flex-col items-center text-center stagger-fade-in">
+        
+        <span class="hero-badge fade-in-up" style="animation-delay: 0.1s;">
+          <span class="material-symbols-outlined">star</span>
+          Lumina Excellence
+        </span>
+        
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl mb-6 fade-in-up font-serif" style="animation-delay: 0.2s; line-height: 1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5);">
+          Where Luxury Meets <br /> Nigerian Excellence
+        </h1>
+        
+        <p class="mt-2 max-w-2xl text-lg md:text-xl text-white fade-in-up font-semibold" style="animation-delay: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6);">
+          Experience world-class hospitality in the heart of Lagos. From stunning ocean views to our award-winning spa, every moment is crafted for perfection.
+        </p>
+        
+        <div class="mt-8 flex flex-wrap justify-center gap-4 fade-in-up" style="animation-delay: 0.4s;">
+          <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="btn btn-accent btn-lg inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium transition-colors h-12 px-10 shadow-lg shadow-amber-500/20">
+            Book Your Stay
+          </a>
+          <a href="/pages/hotel/dining-lumina/dining-lumina.html" class="btn btn-outline btn-lg inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium transition-colors h-12 px-10 bg-transparent border border-white/50 text-white hover:bg-white/10">
+            Explore Dining
+          </a>
+        </div>
+        
+        <div class="mt-12 flex flex-wrap justify-center gap-8 md:gap-16 fade-in-up bg-black/40 backdrop-blur-md rounded-2xl p-6 md:px-12 border border-white/20 shadow-2xl" style="animation-delay: 0.5s;">
+          <div class="flex flex-col items-center gap-1">
+            <p class="text-4xl font-serif font-bold text-white drop-shadow-md" style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">15.2K</p>
+            <p class="text-sm tracking-wider text-white font-medium">Happy Guests</p>
           </div>
-          <div class="hero-meta">
-            <span class="hero-meta-item">
+          
+          <div class="flex flex-col items-center gap-1">
+            <p class="text-4xl font-serif font-bold text-white drop-shadow-md" style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">4.9</p>
+            <p class="text-sm tracking-wider text-white font-medium">Average Rating</p>
+          </div>
+          
+          <div class="flex flex-col items-center gap-1">
+            <p class="text-4xl font-serif font-bold text-white drop-shadow-md" style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">3</p>
+            <p class="text-sm tracking-wider text-white font-medium">Award Restaurants</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Booking Bar ═══ -->
+    <div class="booking-bar-wrap">
+      <div class="booking-bar">
+        <div class="booking-field">
+          <label for="checkin-date">Check-in</label>
+          <input type="date" id="checkin-date" name="checkin" />
+        </div>
+        <div class="booking-field">
+          <label for="checkout-date">Check-out</label>
+          <input type="date" id="checkout-date" name="checkout" />
+        </div>
+        <div class="booking-field">
+          <label for="guest-count">Guests</label>
+          <select id="guest-count" name="guests" aria-label="Number of guests">
+            <option value="1">1 Guest</option>
+            <option value="2" selected>2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5+ Guests</option>
+          </select>
+        </div>
+        <div class="booking-field">
+          <label for="room-type">Room Type</label>
+          <select id="room-type" name="type" aria-label="Room type">
+            <option value="">Any Room</option>
+            <option value="suite">Suite</option>
+            <option value="deluxe">Deluxe</option>
+            <option value="villa">Villa</option>
+          </select>
+        </div>
+        <div class="booking-bar-submit">
+          <button class="btn btn-primary" id="searchAvailabilityBtn">
+            <span class="material-symbols-outlined">search</span>
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Stats Bar ═══ -->
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="500">0</span>
+          <span class="stat-label">Luxury Properties</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="50000">0</span>
+          <span class="stat-label">Happy Guests</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="15">0</span>
+          <span class="stat-label">Years of Excellence</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="98">0</span>
+          <span class="stat-label">Satisfaction Rate %</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Featured Rooms ═══ -->
+    <section class="page-section">
+      <div class="section-actions reveal">
+        <div class="section-head">
+          <span class="section-label">Accommodations</span>
+          <h2 class="section-title">Curated for Excellence</h2>
+        </div>
+        <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="section-link">
+          View All Rooms
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+      <div class="room-showcase" id="roomGrid">
+        <!-- Rendered by home-lumina.js -->
+      </div>
+    </section>
+
+    <!-- ═══ Amenities ═══ -->
+    <section class="page-section pt-0">
+      <div class="section-head reveal">
+        <span class="section-label">Facilities</span>
+        <h2 class="section-title">Everything You Need</h2>
+      </div>
+      <div class="amenities-grid">
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><span class="material-symbols-outlined">wifi</span></div>
+          <p class="amenity-name">Gigabit Wi-Fi</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><span class="material-symbols-outlined">pool</span></div>
+          <p class="amenity-name">Infinity Pool</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><span class="material-symbols-outlined">spa</span></div>
+          <p class="amenity-name">Luxury Spa</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><span class="material-symbols-outlined">fitness_center</span></div>
+          <p class="amenity-name">Fitness Centre</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><span class="material-symbols-outlined">restaurant</span></div>
+          <p class="amenity-name">Fine Dining</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><span class="material-symbols-outlined">local_parking</span></div>
+          <p class="amenity-name">Valet Parking</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Bento Services Grid ═══ -->
+    <section class="page-section pt-0">
+      <div class="section-actions reveal">
+        <div class="section-head">
+          <span class="section-label">Premium Services</span>
+          <h2 class="section-title">World-Class Amenities</h2>
+        </div>
+        <a href="/pages/hotel/spa-wellness/spa-wellness.html" class="section-link">
+          Explore All
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+      <div class="bento-grid reveal">
+        <div class="bento-item large">
+          <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80"
+            alt="Holistic spa treatment room" />
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <span class="bento-icon material-symbols-outlined filled">spa</span>
+            <h3 class="bento-title">Holistic Spa &amp; Wellness</h3>
+            <p class="bento-desc">Rejuvenating treatments for complete physical and mental harmony.</p>
+          </div>
+        </div>
+        <div class="bento-item">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
+            alt="Fine dining restaurant" />
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <span class="bento-icon material-symbols-outlined filled">restaurant</span>
+            <h3 class="bento-title">Fine Dining</h3>
+          </div>
+        </div>
+        <div class="bento-item">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80"
+            alt="State-of-the-art fitness centre" />
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <span class="bento-icon material-symbols-outlined filled">fitness_center</span>
+            <h3 class="bento-title">Global Fitness</h3>
+          </div>
+        </div>
+        <div class="bento-item wide">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80"
+            alt="Executive conference facilities" />
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <span class="bento-icon material-symbols-outlined filled">business_center</span>
+            <h3 class="bento-title">Executive Business Suites</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Local Area ═══ -->
+    <section class="page-section pt-0">
+      <div class="section-actions reveal">
+        <div class="section-head">
+          <span class="section-label">Explore</span>
+          <h2 class="section-title">Local Area Guide</h2>
+        </div>
+        <a href="/pages/hotel/local-area/local-area.html" class="section-link">
+          All Attractions
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="image-card reveal h-[280px]">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80"
+            alt="Lekki Conservation Centre" />
+          <div class="overlay"></div>
+          <div class="card-content">
+            <span class="card-icon material-symbols-outlined filled">nature</span>
+            <h4 class="card-title">Lekki Conservation Centre</h4>
+            <p class="card-desc">Nature reserve with canopy walkway</p>
+          </div>
+        </div>
+        <div class="image-card reveal h-[280px]">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" alt="Nike Art Gallery" />
+          <div class="overlay"></div>
+          <div class="card-content">
+            <span class="card-icon material-symbols-outlined filled">palette</span>
+            <h4 class="card-title">Nike Art Gallery</h4>
+            <p class="card-desc">Contemporary African art collection</p>
+          </div>
+        </div>
+        <div class="image-card reveal h-[280px]">
+          <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80" alt="Eko Atlantic City" />
+          <div class="overlay"></div>
+          <div class="card-content">
+            <span class="card-icon material-symbols-outlined filled">location_city</span>
+            <h4 class="card-title">Eko Atlantic City</h4>
+            <p class="card-desc">Modern city on reclaimed land</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Meetings & Events ═══ -->
+    <section class="page-section pt-0">
+      <div class="section-actions reveal">
+        <div class="section-head">
+          <span class="section-label">Events</span>
+          <h2 class="section-title">Meetings &amp; Events</h2>
+        </div>
+        <a href="/pages/hotel/meetings-events/meetings-events.html" class="section-link">
+          View All Venues
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="image-card reveal h-[320px]">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80"
+            alt="Corporate meetings venue" />
+          <div class="overlay"></div>
+          <div class="card-content">
+            <span class="card-icon material-symbols-outlined filled">business_center</span>
+            <h4 class="card-title">Corporate Meetings</h4>
+            <p class="card-desc">State-of-the-art conference facilities for up to 500 delegates</p>
+          </div>
+        </div>
+        <div class="image-card reveal h-[320px]">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80"
+            alt="Weddings and celebrations" />
+          <div class="overlay"></div>
+          <div class="card-content">
+            <span class="card-icon material-symbols-outlined filled">favorite</span>
+            <h4 class="card-title">Weddings &amp; Celebrations</h4>
+            <p class="card-desc">Unforgettable special occasions crafted to perfection</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Testimonials ═══ -->
+    <section class="page-section pt-0">
+      <div class="section-head centered reveal">
+        <span class="section-label">Testimonials</span>
+        <h2 class="section-title">What Our Guests Say</h2>
+      </div>
+      <div class="testimonials-track-wrap reveal">
+        <div class="testimonials-track" id="testimonialTrack">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
               <span class="material-symbols-outlined filled">star</span>
-              4.9 · 2,847 reviews
-            </span>
-            <span class="hero-meta-item">
-              <span class="material-symbols-outlined filled">emoji_events</span>
-              Award-Winning Resort
-            </span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+            </div>
+            <p class="testimonial-text">"An absolutely extraordinary experience. The Presidential Suite offered
+              breathtaking views of the Lagos lagoon. Every detail was flawlessly executed."</p>
+            <p class="testimonial-author">— Adebayo O., Lagos</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+            </div>
+            <p class="testimonial-text">"The attention to detail is remarkable. From the moment we arrived, every
+              interaction felt personalized and genuine. Truly world-class."</p>
+            <p class="testimonial-author">— Sarah C., London</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+            </div>
+            <p class="testimonial-text">"I've stayed at luxury hotels worldwide, and Lumina truly stands out. The spa
+              treatments were world-class, the dining unforgettable."</p>
+            <p class="testimonial-author">— James M., New York</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+            </div>
+            <p class="testimonial-text">"The concierge service was exceptional — they arranged everything seamlessly.
+              The infinity pool at sunset is something I will never forget."</p>
+            <p class="testimonial-author">— Chinwe A., Abuja</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+              <span class="material-symbols-outlined filled">star</span>
+            </div>
+            <p class="testimonial-text">"Perfect for our business retreat. State-of-the-art meeting facilities,
+              incredible food, and rooms that made us never want to leave."</p>
+            <p class="testimonial-author">— David K., Nairobi</p>
           </div>
         </div>
       </div>
-
-      <!-- Slide 2 -->
-      <div class="hero-slide">
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1600&q=80" alt="Lumina fine dining restaurant with panoramic city views" loading="lazy"/>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <span class="hero-badge">
-            <span class="material-symbols-outlined">restaurant</span>
-            Culinary Excellence
-          </span>
-          <h2 class="hero-title">Taste the Extraordinary</h2>
-          <p class="hero-subtitle">From authentic Nigerian cuisine to international fine dining, our award-winning chefs create unforgettable culinary journeys.</p>
-          <div class="hero-actions">
-            <a href="/pages/hotel/dining-lumina/dining-lumina.html" class="btn btn-accent btn-lg">
-              <span class="material-symbols-outlined">restaurant_menu</span>
-              Our Restaurants
-            </a>
-            <a href="/pages/hotel/spa-wellness/spa-wellness.html" class="btn btn-outline btn-lg">
-              <span class="material-symbols-outlined">spa</span>
-              Spa &amp; Wellness
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="hero-slide">
-        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1600&q=80" alt="Lumina luxury suite with floor-to-ceiling ocean views" loading="lazy"/>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <span class="hero-badge">
-            <span class="material-symbols-outlined">bed</span>
-            Luxury Accommodations
-          </span>
-          <h2 class="hero-title">Your Sanctuary Awaits</h2>
-          <p class="hero-subtitle">Discover our collection of elegantly appointed rooms and suites, each designed to provide the ultimate in comfort and sophistication.</p>
-          <div class="hero-actions">
-            <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="btn btn-accent btn-lg">
-              <span class="material-symbols-outlined">bed</span>
-              Explore Rooms
-            </a>
-            <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="btn btn-outline btn-lg">
-              <span class="material-symbols-outlined">calendar_today</span>
-              Book Now
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Controls -->
-    <div class="hero-dots" role="tablist" aria-label="Slide indicators">
-      <button class="hero-dot active" data-slide="0" role="tab" aria-label="Slide 1" aria-selected="true"></button>
-      <button class="hero-dot" data-slide="1" role="tab" aria-label="Slide 2" aria-selected="false"></button>
-      <button class="hero-dot" data-slide="2" role="tab" aria-label="Slide 3" aria-selected="false"></button>
-    </div>
-
-    <div class="hero-controls">
-      <button class="hero-ctrl-btn" id="heroPrev" aria-label="Previous slide">
-        <span class="material-symbols-outlined">chevron_left</span>
-      </button>
-      <button class="hero-ctrl-btn" id="heroNext" aria-label="Next slide">
-        <span class="material-symbols-outlined">chevron_right</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- ═══ Booking Bar ═══ -->
-  <div class="booking-bar-wrap">
-    <div class="booking-bar">
-      <div class="booking-field">
-        <label for="checkin-date">Check-in</label>
-        <input type="date" id="checkin-date" name="checkin"/>
-      </div>
-      <div class="booking-field">
-        <label for="checkout-date">Check-out</label>
-        <input type="date" id="checkout-date" name="checkout"/>
-      </div>
-      <div class="booking-field">
-        <label for="guest-count">Guests</label>
-        <select id="guest-count" name="guests" aria-label="Number of guests">
-          <option value="1">1 Guest</option>
-          <option value="2" selected>2 Guests</option>
-          <option value="3">3 Guests</option>
-          <option value="4">4 Guests</option>
-          <option value="5">5+ Guests</option>
-        </select>
-      </div>
-      <div class="booking-field">
-        <label for="room-type">Room Type</label>
-        <select id="room-type" name="type" aria-label="Room type">
-          <option value="">Any Room</option>
-          <option value="suite">Suite</option>
-          <option value="deluxe">Deluxe</option>
-          <option value="villa">Villa</option>
-        </select>
-      </div>
-      <div class="booking-bar-submit">
-        <button class="btn btn-primary" id="searchAvailabilityBtn">
-          <span class="material-symbols-outlined">search</span>
-          Search
+      <div class="testimonial-controls">
+        <button class="testimonial-ctrl-btn" id="testimonialPrev" aria-label="Previous testimonial">
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <div class="testimonial-dots" id="testimonialDots"></div>
+        <button class="testimonial-ctrl-btn" id="testimonialNext" aria-label="Next testimonial">
+          <span class="material-symbols-outlined">chevron_right</span>
         </button>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- ═══ Stats Bar ═══ -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="500">0</span>
-        <span class="stat-label">Luxury Properties</span>
+    <!-- ═══ Instagram ═══ -->
+    <section class="page-section pt-0">
+      <div class="section-head centered reveal">
+        <span class="section-label">Follow Our Journey</span>
+        <h2 class="section-title">@LuminaHospitality</h2>
       </div>
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="50000">0</span>
-        <span class="stat-label">Happy Guests</span>
+      <div class="instagram-grid reveal">
+        <a href="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" class="instagram-item"
+          data-lightbox aria-label="Hotel pool view">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80" alt="Lumina pool at sunset"
+            loading="lazy" />
+          <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" class="instagram-item"
+          data-lightbox aria-label="Luxury suite">
+          <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&q=80" alt="Lumina luxury suite"
+            loading="lazy" />
+          <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" class="instagram-item"
+          data-lightbox aria-label="Garden view room">
+          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400&q=80" alt="Lumina garden view"
+            loading="lazy" />
+          <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80" class="instagram-item"
+          data-lightbox aria-label="Spa treatment">
+          <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=400&q=80" alt="Lumina spa"
+            loading="lazy" />
+          <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" class="instagram-item"
+          data-lightbox aria-label="Fine dining">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Lumina dining"
+            loading="lazy" />
+          <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80" class="instagram-item"
+          data-lightbox aria-label="Deluxe room">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400&q=80" alt="Lumina deluxe room"
+            loading="lazy" />
+          <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
+        </a>
       </div>
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="15">0</span>
-        <span class="stat-label">Years of Excellence</span>
+      <div class="text-center mt-8">
+        <a href="https://instagram.com" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined">photo_camera</span>
+          Follow on Instagram
+        </a>
       </div>
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="98">0</span>
-        <span class="stat-label">Satisfaction Rate %</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ Featured Rooms ═══ -->
-  <section class="page-section">
-    <div class="section-actions reveal">
-      <div class="section-head">
-        <span class="section-label">Accommodations</span>
-        <h2 class="section-title">Curated for Excellence</h2>
-      </div>
-      <a href="/pages/hotel/rooms-lumina/rooms-lumina.html" class="section-link">
-        View All Rooms
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-    </div>
-    <div class="room-showcase" id="roomGrid">
-      <!-- Rendered by home-lumina.js -->
-    </div>
-  </section>
-
-  <!-- ═══ Amenities ═══ -->
-  <section class="page-section" style="padding-top: 0;">
-    <div class="section-head reveal">
-      <span class="section-label">Facilities</span>
-      <h2 class="section-title">Everything You Need</h2>
-    </div>
-    <div class="amenities-grid">
-      <div class="amenity-card reveal">
-        <div class="amenity-icon"><span class="material-symbols-outlined">wifi</span></div>
-        <p class="amenity-name">Gigabit Wi-Fi</p>
-      </div>
-      <div class="amenity-card reveal">
-        <div class="amenity-icon"><span class="material-symbols-outlined">pool</span></div>
-        <p class="amenity-name">Infinity Pool</p>
-      </div>
-      <div class="amenity-card reveal">
-        <div class="amenity-icon"><span class="material-symbols-outlined">spa</span></div>
-        <p class="amenity-name">Luxury Spa</p>
-      </div>
-      <div class="amenity-card reveal">
-        <div class="amenity-icon"><span class="material-symbols-outlined">fitness_center</span></div>
-        <p class="amenity-name">Fitness Centre</p>
-      </div>
-      <div class="amenity-card reveal">
-        <div class="amenity-icon"><span class="material-symbols-outlined">restaurant</span></div>
-        <p class="amenity-name">Fine Dining</p>
-      </div>
-      <div class="amenity-card reveal">
-        <div class="amenity-icon"><span class="material-symbols-outlined">local_parking</span></div>
-        <p class="amenity-name">Valet Parking</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Bento Services Grid ═══ -->
-  <section class="page-section" style="padding-top: 0;">
-    <div class="section-actions reveal">
-      <div class="section-head">
-        <span class="section-label">Premium Services</span>
-        <h2 class="section-title">World-Class Amenities</h2>
-      </div>
-      <a href="/pages/hotel/spa-wellness/spa-wellness.html" class="section-link">
-        Explore All
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-    </div>
-    <div class="bento-grid reveal">
-      <div class="bento-item large">
-        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80" alt="Holistic spa treatment room"/>
-        <div class="bento-overlay"></div>
-        <div class="bento-content">
-          <span class="bento-icon material-symbols-outlined filled">spa</span>
-          <h3 class="bento-title">Holistic Spa &amp; Wellness</h3>
-          <p class="bento-desc">Rejuvenating treatments for complete physical and mental harmony.</p>
-        </div>
-      </div>
-      <div class="bento-item">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Fine dining restaurant"/>
-        <div class="bento-overlay"></div>
-        <div class="bento-content">
-          <span class="bento-icon material-symbols-outlined filled">restaurant</span>
-          <h3 class="bento-title">Fine Dining</h3>
-        </div>
-      </div>
-      <div class="bento-item">
-        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="State-of-the-art fitness centre"/>
-        <div class="bento-overlay"></div>
-        <div class="bento-content">
-          <span class="bento-icon material-symbols-outlined filled">fitness_center</span>
-          <h3 class="bento-title">Global Fitness</h3>
-        </div>
-      </div>
-      <div class="bento-item wide">
-        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80" alt="Executive conference facilities"/>
-        <div class="bento-overlay"></div>
-        <div class="bento-content">
-          <span class="bento-icon material-symbols-outlined filled">business_center</span>
-          <h3 class="bento-title">Executive Business Suites</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Local Area ═══ -->
-  <section class="page-section" style="padding-top: 0;">
-    <div class="section-actions reveal">
-      <div class="section-head">
-        <span class="section-label">Explore</span>
-        <h2 class="section-title">Local Area Guide</h2>
-      </div>
-      <a href="/pages/hotel/local-area/local-area.html" class="section-link">
-        All Attractions
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="image-card reveal" style="height:280px;">
-        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Lekki Conservation Centre"/>
-        <div class="overlay"></div>
-        <div class="card-content">
-          <span class="card-icon material-symbols-outlined filled">nature</span>
-          <h4 class="card-title">Lekki Conservation Centre</h4>
-          <p class="card-desc">Nature reserve with canopy walkway</p>
-        </div>
-      </div>
-      <div class="image-card reveal" style="height:280px;">
-        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80" alt="Nike Art Gallery"/>
-        <div class="overlay"></div>
-        <div class="card-content">
-          <span class="card-icon material-symbols-outlined filled">palette</span>
-          <h4 class="card-title">Nike Art Gallery</h4>
-          <p class="card-desc">Contemporary African art collection</p>
-        </div>
-      </div>
-      <div class="image-card reveal" style="height:280px;">
-        <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80" alt="Eko Atlantic City"/>
-        <div class="overlay"></div>
-        <div class="card-content">
-          <span class="card-icon material-symbols-outlined filled">location_city</span>
-          <h4 class="card-title">Eko Atlantic City</h4>
-          <p class="card-desc">Modern city on reclaimed land</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Meetings & Events ═══ -->
-  <section class="page-section" style="padding-top: 0;">
-    <div class="section-actions reveal">
-      <div class="section-head">
-        <span class="section-label">Events</span>
-        <h2 class="section-title">Meetings &amp; Events</h2>
-      </div>
-      <a href="/pages/hotel/meetings-events/meetings-events.html" class="section-link">
-        View All Venues
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="image-card reveal" style="height:320px;">
-        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80" alt="Corporate meetings venue"/>
-        <div class="overlay"></div>
-        <div class="card-content">
-          <span class="card-icon material-symbols-outlined filled">business_center</span>
-          <h4 class="card-title">Corporate Meetings</h4>
-          <p class="card-desc">State-of-the-art conference facilities for up to 500 delegates</p>
-        </div>
-      </div>
-      <div class="image-card reveal" style="height:320px;">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Weddings and celebrations"/>
-        <div class="overlay"></div>
-        <div class="card-content">
-          <span class="card-icon material-symbols-outlined filled">favorite</span>
-          <h4 class="card-title">Weddings &amp; Celebrations</h4>
-          <p class="card-desc">Unforgettable special occasions crafted to perfection</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Testimonials ═══ -->
-  <section class="page-section" style="padding-top: 0;">
-    <div class="section-head centered reveal">
-      <span class="section-label">Testimonials</span>
-      <h2 class="section-title">What Our Guests Say</h2>
-    </div>
-    <div class="testimonials-track-wrap reveal">
-      <div class="testimonials-track" id="testimonialTrack">
-        <div class="testimonial-card">
-          <div class="testimonial-stars">
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-          </div>
-          <p class="testimonial-text">"An absolutely extraordinary experience. The Presidential Suite offered breathtaking views of the Lagos lagoon. Every detail was flawlessly executed."</p>
-          <p class="testimonial-author">— Adebayo O., Lagos</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-          </div>
-          <p class="testimonial-text">"The attention to detail is remarkable. From the moment we arrived, every interaction felt personalized and genuine. Truly world-class."</p>
-          <p class="testimonial-author">— Sarah C., London</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-          </div>
-          <p class="testimonial-text">"I've stayed at luxury hotels worldwide, and Lumina truly stands out. The spa treatments were world-class, the dining unforgettable."</p>
-          <p class="testimonial-author">— James M., New York</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-          </div>
-          <p class="testimonial-text">"The concierge service was exceptional — they arranged everything seamlessly. The infinity pool at sunset is something I will never forget."</p>
-          <p class="testimonial-author">— Chinwe A., Abuja</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-            <span class="material-symbols-outlined filled">star</span>
-          </div>
-          <p class="testimonial-text">"Perfect for our business retreat. State-of-the-art meeting facilities, incredible food, and rooms that made us never want to leave."</p>
-          <p class="testimonial-author">— David K., Nairobi</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-controls">
-      <button class="testimonial-ctrl-btn" id="testimonialPrev" aria-label="Previous testimonial">
-        <span class="material-symbols-outlined">chevron_left</span>
-      </button>
-      <div class="testimonial-dots" id="testimonialDots"></div>
-      <button class="testimonial-ctrl-btn" id="testimonialNext" aria-label="Next testimonial">
-        <span class="material-symbols-outlined">chevron_right</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- ═══ Instagram ═══ -->
-  <section class="page-section" style="padding-top: 0;">
-    <div class="section-head centered reveal">
-      <span class="section-label">Follow Our Journey</span>
-      <h2 class="section-title">@LuminaHospitality</h2>
-    </div>
-    <div class="instagram-grid reveal">
-      <a href="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" class="instagram-item" data-lightbox aria-label="Hotel pool view">
-        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80" alt="Lumina pool at sunset" loading="lazy"/>
-        <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
-      </a>
-      <a href="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" class="instagram-item" data-lightbox aria-label="Luxury suite">
-        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&q=80" alt="Lumina luxury suite" loading="lazy"/>
-        <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
-      </a>
-      <a href="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" class="instagram-item" data-lightbox aria-label="Garden view room">
-        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400&q=80" alt="Lumina garden view" loading="lazy"/>
-        <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
-      </a>
-      <a href="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80" class="instagram-item" data-lightbox aria-label="Spa treatment">
-        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=400&q=80" alt="Lumina spa" loading="lazy"/>
-        <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
-      </a>
-      <a href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" class="instagram-item" data-lightbox aria-label="Fine dining">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Lumina dining" loading="lazy"/>
-        <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
-      </a>
-      <a href="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80" class="instagram-item" data-lightbox aria-label="Deluxe room">
-        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400&q=80" alt="Lumina deluxe room" loading="lazy"/>
-        <div class="instagram-overlay"><span class="material-symbols-outlined">photo_camera</span></div>
-      </a>
-    </div>
-    <div style="text-align:center; margin-top:2rem;">
-      <a href="https://instagram.com" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">
-        <span class="material-symbols-outlined">photo_camera</span>
-        Follow on Instagram
-      </a>
-    </div>
-  </section>
-
-  <!-- ═══ CTA Band ═══ -->
-  <div class="cta-band">
-    <div class="cta-band-inner reveal">
-      <h2 class="cta-band-title">Ready for an Unforgettable Stay?</h2>
-      <p class="cta-band-text">Join thousands of discerning guests who have made Lumina their home away from home. Book directly for the best rates and exclusive benefits.</p>
-      <div class="cta-band-actions">
-        <a href="/pages/hotel/booking-your-stay/booking-your-stay.html" class="btn btn-accent btn-lg">Reserve Your Room</a>
-        <a href="/pages/hotel/contact-lumina/contact-lumina.html" class="btn btn-outline btn-lg">Contact Concierge</a>
-      </div>
-    </div>
-  </div>
-
-</main>
-
-<!-- Global Footer injected here -->
-<div id="global-footer"></div>
-
-<!-- Scripts -->
-<script src="/js/global-nav.js"></script>
-<script src="/js/ui-utils.js"></script>
-<script src="/js/page-init.js"></script>
-<script src="/pages/hotel/home-lumina/home-lumina.js"></script>
+    </section>
+  </main>
+  
+  <div id="global-footer"></div>
+  
+  <script src="/js/global-nav.js"></script>
+  <script src="/js/ui-utils.js"></script>
+  <script src="/js/page-init.js"></script>
+  <script src="/pages/hotel/home-lumina/home-lumina.js"></script>
 </body>
 </html>

@@ -136,28 +136,56 @@
         const grid = document.getElementById('roomGrid');
         if (!grid) return;
 
-        grid.innerHTML = roomsData
-            .map((room, index) => {
-                const isLarge = index === 0;
-                return `
-        <div class="reveal ${isLarge ? 'md:col-span-7' : 'md:col-span-5'} group cursor-pointer" style="transition-delay: ${index * 0.2}s">
-            <div class="relative overflow-hidden rounded-2xl shadow-lg room-card-media">
-                <img src="${room.image}" alt="${room.name}" class="w-full h-full object-cover ${isLarge ? 'room-img-lg' : 'room-img'}" loading="lazy" />
-                <div class="absolute top-6 left-6 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
-                    ${room.type}
+        if (roomsData.length >= 3) {
+            const mainRoom = roomsData[0];
+            const sideRooms = roomsData.slice(1, 3);
+
+            grid.className = "room-showcase";
+            grid.innerHTML = `
+                <!-- Main Room -->
+                <div class="room-showcase-main reveal group cursor-pointer">
+                    <div class="room-img-wrap">
+                        <img src="${mainRoom.image}" alt="${mainRoom.name}" loading="lazy" />
+                        <div class="room-type-badge">
+                            ${mainRoom.type}
+                        </div>
+                        <div class="room-price-badge">
+                            $${mainRoom.price} / night
+                        </div>
+                    </div>
+                    <div class="room-card-info">
+                        <h3 class="room-card-name">${mainRoom.name}</h3>
+                        <p class="room-card-desc">${mainRoom.description}</p>
+                        <a href="/pages/hotel/room-detail-lumina/room-detail-lumina.html?id=${mainRoom.id}" class="room-card-link">
+                            View Details <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="absolute bottom-6 right-6 bg-primary text-white px-4 py-2 rounded-full text-xs font-bold">
-                    $${room.price} / night
+                <!-- Side Rooms -->
+                <div class="room-showcase-side">
+                    ${sideRooms.map((room, index) => `
+                        <div class="reveal group cursor-pointer" style="transition-delay: ${(index + 1) * 0.2}s">
+                            <div class="room-img-wrap">
+                                <img src="${room.image}" alt="${room.name}" loading="lazy" />
+                                <div class="room-type-badge">
+                                    ${room.type}
+                                </div>
+                                <div class="room-price-badge">
+                                    $${room.price} / night
+                                </div>
+                            </div>
+                            <div class="room-card-info">
+                                <h3 class="room-card-name">${room.name}</h3>
+                                <p class="room-card-desc">${room.description}</p>
+                                <a href="/pages/hotel/room-detail-lumina/room-detail-lumina.html?id=${room.id}" class="room-card-link">
+                                    View Details <span class="material-symbols-outlined">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    `).join('')}
                 </div>
-            </div>
-            <div class="mt-6">
-                <h3 class="text-xl mb-2 group-hover:text-primary transition-colors" style="font-family:var(--font-serif)">${room.name}</h3>
-                <p class="text-sm line-clamp-2 mb-4 text-on-surface-variant">${room.description}</p>
-                <a href="/pages/hotel/room-detail-lumina/room-detail-lumina.html?id=${room.id}" class="text-xs uppercase tracking-widest font-bold text-primary hover:text-secondary transition-colors">View Details →</a>
-            </div>
-        </div>`;
-            })
-            .join('');
+            `;
+        }
 
         // Re-observe newly rendered reveal elements
         document.querySelectorAll('#roomGrid .reveal').forEach((el) => {
@@ -433,21 +461,28 @@
         
         if (!parallaxElements.length) return;
 
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            parallaxElements.forEach(el => {
-                const speed = parseFloat(el.dataset.parallax) || 0.5;
-                const rect = el.getBoundingClientRect();
-                const scrolled = window.pageYOffset;
-                
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    const yPos = -(scrolled * speed);
-                    const img = el.querySelector('img');
-                    if (img) {
-                        img.style.transform = `translateY(${yPos}px) scale(1.1)`;
-                    }
-                }
-            });
-        });
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    parallaxElements.forEach(el => {
+                        const speed = parseFloat(el.dataset.parallax) || 0.5;
+                        const rect = el.getBoundingClientRect();
+                        const scrolled = window.pageYOffset;
+                        
+                        if (rect.top < window.innerHeight && rect.bottom > 0) {
+                            const yPos = -(scrolled * speed);
+                            const img = el.querySelector('img');
+                            if (img) {
+                                img.style.transform = `translateY(${yPos}px) scale(1.1)`;
+                            }
+                        }
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
     }
 
 /* ────────────────────────────────────────────

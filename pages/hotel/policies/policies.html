@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Hotel Policies | Lumina Hospitality</title>
+<meta name="description" content="Important information about your stay at Lumina Hospitality — check-in, cancellation, pet, smoking, and payment policies."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -13,86 +14,223 @@
 <link href="/css/global-footer.css" rel="stylesheet"/>
 <link href="/css/hotel-utils.css" rel="stylesheet"/>
 <link href="/css/ui-utils.css" rel="stylesheet"/>
-<link href="/css/tailwind-output.css" rel="stylesheet"/>
+<style>
+  /* ═══════════════════════════════════════
+     Policies Page — Lumina Hospitality
+     ═══════════════════════════════════════ */
+
+  .policy-hero {
+    position: relative;
+    height: 50vh;
+    min-height: 360px;
+    overflow: hidden;
+  }
+
+  .policy-hero img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .policy-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 55%, transparent 100%);
+  }
+
+  .policy-hero-content {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    max-width: 80rem; margin: 0 auto; padding: 0 2rem;
+  }
+
+  .policy-hero-inner { max-width: 700px; }
+
+  .policy-hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,77,97,0.8); backdrop-filter: blur(12px);
+    color: #fff; padding: 0.5rem 1.25rem; border-radius: 100px;
+    font-size: 0.8125rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .policy-hero-badge .material-symbols-outlined {
+    font-size: 1rem; font-variation-settings: 'FILL' 1;
+  }
+
+  .policy-hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700; color: #fff;
+    line-height: 1.12; margin-bottom: 1rem;
+  }
+
+  .policy-hero-sub {
+    font-size: 1.125rem; color: rgba(255,255,255,0.88);
+    max-width: 580px; line-height: 1.65;
+  }
+
+  /* Body */
+  .policy-body {
+    max-width: 56rem; margin: 0 auto;
+    padding: 5rem 2rem;
+    display: flex; flex-direction: column; gap: 1.25rem;
+  }
+
+  .policy-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow var(--transition-luxury);
+  }
+
+  .policy-card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .policy-card-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .policy-card-header .material-symbols-outlined {
+    font-size: 2.25rem; color: var(--primary);
+    font-variation-settings: 'FILL' 1;
+    flex-shrink: 0;
+  }
+
+  .policy-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.375rem; font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .policy-card-text {
+    color: var(--text-secondary);
+    font-size: 1rem; line-height: 1.75;
+  }
+
+  .policy-card-text strong {
+    color: var(--primary); font-weight: 600;
+  }
+
+  .policy-card-text a {
+    color: var(--primary); text-decoration: none;
+  }
+
+  .policy-card-text a:hover { text-decoration: underline; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .policy-hero { height: 45vh; min-height: 300px; }
+    .policy-hero-content { padding: 0 1.5rem; }
+    .policy-body { padding: 3rem 1.25rem; }
+    .policy-card { padding: 1.5rem; }
+    .policy-card-title { font-size: 1.25rem; }
+  }
+
+  @media (max-width: 480px) {
+    .policy-hero { height: 40vh; min-height: 260px; }
+    .policy-hero-content { padding: 0 1.25rem; }
+    .policy-body { padding: 2.5rem 1rem; gap: 1rem; }
+    .policy-card { padding: 1.25rem; }
+    .policy-card-header .material-symbols-outlined { font-size: 1.75rem; }
+    .policy-card-title { font-size: 1.125rem; }
+    .policy-card-text { font-size: 0.925rem; }
+  }
+
+  @media (max-width: 360px) {
+    .policy-body { padding: 2rem 0.875rem; }
+    .policy-card { padding: 1rem; }
+    .policy-card-header { gap: 0.75rem; }
+  }
+</style>
 </head>
 <body>
+
 <a href="#main-content" class="sr-only">Skip to main content</a>
 <div id="global-nav"></div>
 
 <main id="main-content">
-    <section class="page-hero relative h-[50vh] min-h-[400px] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1400&q=80" alt="Policies" class="absolute inset-0 w-full h-full object-cover"/>
-        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-        <div class="absolute inset-0 flex items-center px-container-margin">
-            <div class="max-w-3xl">
-                <span class="inline-flex items-center gap-2 bg-secondary/90 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider border border-white/30">
-                    <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">policy</span>
-                    Hotel Policies
-                </span>
-                <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight" style="font-family:var(--font-serif)">Hotel Policies</h1>
-                <p class="text-xl text-white/90 max-w-2xl leading-relaxed">Important information about your stay with us. Please review our policies to ensure a smooth and enjoyable experience.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Content -->
-    <div class="max-w-4xl mx-auto px-6 py-20 space-y-8">
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">login</span>
-                <h2 class="text-2xl font-bold text-on-surface" style="font-family:var(--font-serif)">Check-in / Check-out</h2>
-            </div>
-            <p class="text-on-surface-variant leading-relaxed text-lg">Check-in time is <strong class="text-primary">3:00 PM</strong> and check-out time is <strong class="text-primary">11:00 AM</strong>. Early check-in and late check-out are subject to availability and may incur additional charges. Please contact the front desk on the day of arrival for availability. Guests arriving before check-in time are welcome to use the hotel facilities while their room is being prepared.</p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">event_busy</span>
-                <h2 class="text-2xl font-bold text-on-surface" style="font-family:var(--font-serif)">Cancellation Policy</h2>
-            </div>
-            <p class="text-on-surface-variant leading-relaxed text-lg">Cancellations made <strong class="text-primary">24 hours or more</strong> before the scheduled arrival time are free of charge. Cancellations made <strong class="text-primary">within 24 hours</strong> of arrival will be charged at 50% of the first night's rate. No-shows will be charged the full amount of the first night. During peak periods and special events, a 72-hour cancellation policy may apply.</p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">pets</span>
-                <h2 class="text-2xl font-bold text-on-surface" style="font-family:var(--font-serif)">Pet Policy</h2>
-            </div>
-            <p class="text-on-surface-variant leading-relaxed text-lg">We welcome well-behaved small dogs (under 15kg) in designated pet-friendly rooms. A pet fee of <strong class="text-primary">$50 per night</strong> applies, with a maximum of 2 pets per room. Pets must be leashed in all public areas. Please inform us at the time of booking if you wish to bring a pet. Pet amenities including beds, bowls, and treats are available upon request.</p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">smoking_rooms</span>
-                <h2 class="text-2xl font-bold text-on-surface" style="font-family:var(--font-serif)">Smoking Policy</h2>
-            </div>
-            <p class="text-on-surface-variant leading-relaxed text-lg">All guest rooms and indoor areas are <strong class="text-primary">strictly non-smoking</strong>. Designated outdoor smoking areas are available on the terrace and near the pool deck. A cleaning fee of $250 will be charged for smoking in non-smoking areas.</p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">child_care</span>
-                <h2 class="text-2xl font-bold text-on-surface" style="font-family:var(--font-serif)">Children Policy</h2>
-            </div>
-            <p class="text-on-surface-variant leading-relaxed text-lg">Children <strong class="text-primary">under 12 years old stay free</strong> when occupying the same room as their parents. Extra beds are available for $30 per night. Cribs are provided complimentary upon request. Our Kids Club offers supervised activities for children aged 4-12 daily.</p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">credit_card</span>
-                <h2 class="text-2xl font-bold text-on-surface" style="font-family:var(--font-serif)">Payment Policy</h2>
-            </div>
-            <p class="text-on-surface-variant leading-relaxed text-lg">We accept <strong class="text-primary">Visa, MasterCard, and American Express</strong>. A deposit equal to one night's stay is required at the time of booking. The remaining balance is due upon check-in. All rates are subject to applicable taxes. Currency exchange services are available at the front desk.</p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">groups</span>
-                <h2 class="text-2xl font-bold text-on-surface" style="font-family:var(--font-serif)">Group Bookings</h2>
-            </div>
-            <p class="text-on-surface-variant leading-relaxed text-lg">Groups booking <strong class="text-primary">10 or more rooms</strong> qualify for a 10% discount on room rates. Special corporate and event rates are available. Please contact our sales team at <a href="mailto:sales@lumina.com" class="text-primary hover:underline">sales@lumina.com</a> or call +234 1 277 2701 for group inquiries.</p>
-        </div>
+  <!-- Hero -->
+  <section class="policy-hero">
+    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1400&q=80" alt="Lumina Hospitality hotel policies" loading="eager"/>
+    <div class="policy-hero-overlay"></div>
+    <div class="policy-hero-content">
+      <div class="policy-hero-inner">
+        <span class="policy-hero-badge">
+          <span class="material-symbols-outlined">policy</span>
+          Hotel Policies
+        </span>
+        <h1 class="policy-hero-title">Hotel Policies</h1>
+        <p class="policy-hero-sub">Important information about your stay with us. Please review our policies to ensure a smooth and enjoyable experience.</p>
+      </div>
     </div>
+  </section>
+
+  <!-- Content -->
+  <div class="policy-body">
+
+    <div class="policy-card reveal">
+      <div class="policy-card-header">
+        <span class="material-symbols-outlined">login</span>
+        <h2 class="policy-card-title">Check-in / Check-out</h2>
+      </div>
+      <p class="policy-card-text">Check-in time is <strong>3:00 PM</strong> and check-out time is <strong>11:00 AM</strong>. Early check-in and late check-out are subject to availability and may incur additional charges. Please contact the front desk on the day of arrival for availability. Guests arriving before check-in time are welcome to use the hotel facilities while their room is being prepared.</p>
+    </div>
+
+    <div class="policy-card reveal">
+      <div class="policy-card-header">
+        <span class="material-symbols-outlined">event_busy</span>
+        <h2 class="policy-card-title">Cancellation Policy</h2>
+      </div>
+      <p class="policy-card-text">Cancellations made <strong>24 hours or more</strong> before the scheduled arrival time are free of charge. Cancellations made <strong>within 24 hours</strong> of arrival will be charged at 50% of the first night's rate. No-shows will be charged the full amount of the first night. During peak periods and special events, a 72-hour cancellation policy may apply.</p>
+    </div>
+
+    <div class="policy-card reveal">
+      <div class="policy-card-header">
+        <span class="material-symbols-outlined">pets</span>
+        <h2 class="policy-card-title">Pet Policy</h2>
+      </div>
+      <p class="policy-card-text">We welcome well-behaved small dogs (under 15kg) in designated pet-friendly rooms. A pet fee of <strong>$50 per night</strong> applies, with a maximum of 2 pets per room. Pets must be leashed in all public areas. Please inform us at the time of booking if you wish to bring a pet. Pet amenities including beds, bowls, and treats are available upon request.</p>
+    </div>
+
+    <div class="policy-card reveal">
+      <div class="policy-card-header">
+        <span class="material-symbols-outlined">smoking_rooms</span>
+        <h2 class="policy-card-title">Smoking Policy</h2>
+      </div>
+      <p class="policy-card-text">All guest rooms and indoor areas are <strong>strictly non-smoking</strong>. Designated outdoor smoking areas are available on the terrace and near the pool deck. A cleaning fee of $250 will be charged for smoking in non-smoking areas.</p>
+    </div>
+
+    <div class="policy-card reveal">
+      <div class="policy-card-header">
+        <span class="material-symbols-outlined">child_care</span>
+        <h2 class="policy-card-title">Children Policy</h2>
+      </div>
+      <p class="policy-card-text">Children <strong>under 12 years old stay free</strong> when occupying the same room as their parents. Extra beds are available for $30 per night. Cribs are provided complimentary upon request. Our Kids Club offers supervised activities for children aged 4-12 daily.</p>
+    </div>
+
+    <div class="policy-card reveal">
+      <div class="policy-card-header">
+        <span class="material-symbols-outlined">credit_card</span>
+        <h2 class="policy-card-title">Payment Policy</h2>
+      </div>
+      <p class="policy-card-text">We accept <strong>Visa, MasterCard, and American Express</strong>. A deposit equal to one night's stay is required at the time of booking. The remaining balance is due upon check-in. All rates are subject to applicable taxes. Currency exchange services are available at the front desk.</p>
+    </div>
+
+    <div class="policy-card reveal">
+      <div class="policy-card-header">
+        <span class="material-symbols-outlined">groups</span>
+        <h2 class="policy-card-title">Group Bookings</h2>
+      </div>
+      <p class="policy-card-text">Groups booking <strong>10 or more rooms</strong> qualify for a 10% discount on room rates. Special corporate and event rates are available. Please contact our sales team at <a href="mailto:sales@lumina.com">sales@lumina.com</a> or call +234 1 277 2701 for group inquiries.</p>
+    </div>
+
+  </div>
 
 </main>
 
@@ -103,4 +241,3 @@
 <script src="/js/page-init.js"></script>
 </body>
 </html>
-

@@ -1,0 +1,233 @@
+/* ═══════════════════════════════════════
+   Accessibility Page — Lumina Hospitality
+   ═══════════════════════════════════════ */
+
+/* Hero */
+.access-hero {
+  position: relative;
+  height: 45vh;
+  min-height: 320px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.access-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.access-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 77, 97, 0.88) 0%,
+    rgba(0, 77, 97, 0.65) 60%,
+    rgba(0, 77, 97, 0.35) 100%
+  );
+}
+
+.access-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.access-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  line-height: 1.15;
+}
+
+.access-hero-sub {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  max-width: 500px;
+  line-height: 1.65;
+}
+
+/* Page Body */
+.access-body {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.access-intro {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 4rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* Cards Grid */
+.access-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-bottom: 4rem;
+}
+
+.access-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-luxury), box-shadow var(--transition-luxury);
+}
+
+.access-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.access-card-icon-wrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(0, 77, 97, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+}
+
+.access-card-icon-wrap .material-symbols-outlined {
+  font-size: 1.75rem;
+  color: var(--primary);
+}
+
+.access-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.access-card-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* Contact Card */
+.access-contact-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.access-contact-card .material-symbols-outlined {
+  font-size: 2rem;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.access-contact-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.access-contact-sub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.access-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.access-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: color var(--transition-base), gap var(--transition-base);
+}
+
+.access-contact-link:hover {
+  color: var(--accent);
+  gap: 0.625rem;
+}
+
+.access-contact-link .material-symbols-outlined {
+  font-size: 1.125rem;
+  display: inline;
+  margin-bottom: 0;
+  color: inherit;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .access-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .access-hero { height: 40vh; min-height: 280px; }
+  .access-hero-content { padding: 0 1.5rem; }
+  .access-body { padding: 3rem 1.25rem; }
+  .access-intro { font-size: 0.975rem; margin-bottom: 2.5rem; }
+  .access-grid { gap: 1.25rem; }
+  .access-card { padding: 1.5rem 1.25rem; }
+  .access-contact-card { padding: 1.75rem 1.25rem; }
+}
+
+@media (max-width: 640px) {
+  .access-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .access-contact-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .access-hero { height: 35vh; min-height: 240px; }
+  .access-hero-content { padding: 0 1.25rem; }
+  .access-body { padding: 2.5rem 1rem; }
+  .access-card { padding: 1.25rem 1rem; }
+}
+
+@media (max-width: 360px) {
+  .access-card-title { font-size: 1rem; }
+  .access-card-text { font-size: 0.85rem; }
+  .access-body { padding: 2rem 0.875rem; }
+}

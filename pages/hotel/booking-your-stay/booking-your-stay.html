@@ -1,353 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Booking Wizard | Lumina Hospitality</title>
-<meta name="description" content="Book your luxury stay at Lumina Hospitality with our easy-to-use booking wizard."/>
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
-<!-- Styles -->
-<link href="/css/lumina-design-system.css" rel="stylesheet"/>
-<link href="/css/global-nav.css" rel="stylesheet"/>
-<link href="/css/global-footer.css" rel="stylesheet"/>
-<link href="/css/hotel-utils.css" rel="stylesheet"/>
-<link href="/css/ui-utils.css" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        /* Multi-step Wizard Styles */
-        .wizard-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .wizard-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        .wizard-steps::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #e8e3d8;
-            transform: translateY(-50%);
-            z-index: 0;
-        }
-        .wizard-step {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .wizard-step-number {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            background: #fff;
-            border: 2px solid #e8e3d8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #6b6b6b;
-            transition: all 0.3s ease;
-        }
-        .wizard-step.active .wizard-step-number {
-            background: #004d61;
-            border-color: #004d61;
-            color: #fff;
-        }
-        .wizard-step.completed .wizard-step-number {
-            background: #c5a059;
-            border-color: #c5a059;
-            color: #fff;
-        }
-        .wizard-step-label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #6b6b6b;
-        }
-        .wizard-step.active .wizard-step-label {
-            color: #004d61;
-            font-weight: 600;
-        }
-        .wizard-content {
-            display: none;
-        }
-        .wizard-content.active {
-            display: block;
-        }
-        .wizard-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e8e3d8;
-        }
-        .floating-label-container:focus-within {
-            border-color: #006683;
-        }
-        .floating-label-container input:focus ~ label,
-        .floating-label-container input:not(:placeholder-shown) ~ label {
-            transform: translateY(-1.25rem) scale(0.85);
-            color: #006683;
-        }
-        .floating-label-container label {
-            position: absolute;
-            left: 0;
-            top: 0.75rem;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        .step-transition {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-        }
-        .loading-sweep {
-            animation: sweep 1.5s infinite linear;
-        }
-        @keyframes sweep {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        body {
-            background-color: #f7fafc;
-            background-image: radial-gradient(at 0% 0%, rgba(0, 102, 131, 0.05) 0px, transparent 50%), 
-                              radial-gradient(at 100% 100%, rgba(132, 84, 0, 0.05) 0px, transparent 50%);
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Booking Wizard | Lumina Hospitality</title>
+    <meta name="description"
+        content="Book your luxury stay at Lumina Hospitality with our easy-to-use booking wizard." />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+        rel="stylesheet" />
+    <!-- Styles -->
+    <link href="/css/lumina-design-system.css" rel="stylesheet" />
+    <link href="/css/tailwind-output.css" rel="stylesheet" />
+    <link href="/css/global-nav.css" rel="stylesheet" />
+    <link href="/css/global-footer.css" rel="stylesheet" />
+    <link href="/css/ui-utils.css" rel="stylesheet" />
+    <link href="/pages/hotel/booking-your-stay/booking-wizard.css" rel="stylesheet" />
 </head>
+
 <body class="font-body-md text-on-surface min-h-screen">
-<div id="global-nav"></div>
-<main role="main" class="pt-32 pb-20 px-container-margin max-w-7xl mx-auto">
-<!-- Step Indicator -->
-<div class="flex justify-center mb-xl">
-<div class="flex items-center w-full max-w-2xl relative">
-<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-variant -translate-y-1/2 z-0"></div>
-<div class="absolute top-1/2 left-0 h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-500" id="progress-bar" style="width: 33%;"></div>
-<div class="relative z-10 flex justify-between w-full">
-<div class="flex flex-col items-center gap-sm">
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg transition-transform duration-300">
-<span class="material-symbols-outlined text-[20px]">calendar_today</span>
-</div>
-<span class="font-label-md text-label-md text-primary">Dates</span>
-</div>
-<div class="flex flex-col items-center gap-sm">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center transition-all duration-300" id="step-2-indicator">
-<span class="material-symbols-outlined text-[20px]">bed</span>
-</div>
-<span class="font-label-md text-label-md text-on-surface-variant">Selection</span>
-</div>
-<div class="flex flex-col items-center gap-sm">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center transition-all duration-300" id="step-3-indicator">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-</div>
-<span class="font-label-md text-label-md text-on-surface-variant">Payment</span>
-</div>
-</div>
-</div>
-</div>
-<div class="flex flex-col lg:flex-row gap-lg items-start">
-<!-- Left Side: Step Content -->
-<div class="flex-grow w-full lg:w-2/3 space-y-lg">
-<!-- Section Header -->
-<div class="mb-md">
-<h2 class="font-h1 text-h1 text-on-surface" id="step-title">Plan Your Stay</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs" id="step-subtitle">Select your preferred dates and guest count.</p>
-</div>
-<!-- Wizard Steps Wrapper -->
-<div class="relative overflow-hidden min-h-[500px]">
-<!-- Step 1: Dates & Guests -->
-<div class="step-transition glass-card p-lg rounded-xl space-y-xl" id="step-1">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
-<div class="space-y-md">
-<label class="font-label-md text-label-md text-primary uppercase tracking-widest">Check-in Date</label>
-<div class="floating-label-container">
-<input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md" id="checkin" placeholder=" " type="date"/>
-<label class="font-body-md text-outline">Select Date</label>
-</div>
-</div>
-<div class="space-y-md">
-<label class="font-label-md text-label-md text-primary uppercase tracking-widest">Check-out Date</label>
-<div class="floating-label-container">
-<input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md" id="checkout" placeholder=" " type="date"/>
-<label class="font-body-md text-outline">Select Date</label>
-</div>
-</div>
-</div>
-<div class="space-y-md pt-md">
-<label class="font-label-md text-label-md text-primary uppercase tracking-widest">Occupancy</label>
-<div class="flex flex-wrap gap-md">
-<button class="flex-1 px-lg py-md rounded-lg border border-outline/20 hover:bg-primary/5 transition-all flex flex-col items-center gap-xs">
-<span class="material-symbols-outlined text-primary">person</span>
-<span class="font-body-sm text-body-sm">Single</span>
-</button>
-<button class="flex-1 px-lg py-md rounded-lg border-2 border-primary bg-primary/5 transition-all flex flex-col items-center gap-xs">
-<span class="material-symbols-outlined text-primary">group</span>
-<span class="font-body-sm text-body-sm">Couple</span>
-</button>
-<button class="flex-1 px-lg py-md rounded-lg border border-outline/20 hover:bg-primary/5 transition-all flex flex-col items-center gap-xs">
-<span class="material-symbols-outlined text-primary">family_restroom</span>
-<span class="font-body-sm text-body-sm">Family</span>
-</button>
-</div>
-</div>
-<div class="flex justify-end pt-lg">
-<button class="px-xl py-md bg-primary text-on-primary rounded-lg font-button text-button hover:opacity-90 transition-all shadow-md active:scale-95" data-step="2">
+    <div id="global-nav"></div>
+    <main role="main" class="pt-32 pb-20 px-container-margin max-w-7xl mx-auto">
+        <!-- Step Indicator -->
+        <div class="flex justify-center mb-xl">
+            <div class="flex items-center w-full max-w-2xl relative">
+                <div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-variant -translate-y-1/2 z-0"></div>
+                <div class="absolute top-1/2 left-0 h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-500 w-1/3"
+                    id="progress-bar"></div>
+                <div class="relative z-10 flex justify-between w-full">
+                    <div class="flex flex-col items-center gap-sm">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg transition-transform duration-300">
+                            <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-primary">Dates</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-sm">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center transition-all duration-300"
+                            id="step-2-indicator">
+                            <span class="material-symbols-outlined text-[20px]">bed</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-on-surface-variant">Selection</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-sm">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center transition-all duration-300"
+                            id="step-3-indicator">
+                            <span class="material-symbols-outlined text-[20px]">payments</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-on-surface-variant">Payment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-lg items-start">
+            <!-- Left Side: Step Content -->
+            <div class="flex-grow w-full lg:w-2/3 space-y-lg">
+                <!-- Section Header -->
+                <div class="mb-md">
+                    <h2 class="font-h1 text-h1 text-on-surface" id="step-title">Plan Your Stay</h2>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mt-xs" id="step-subtitle">Select your
+                        preferred dates and guest count.</p>
+                </div>
+                <!-- Wizard Steps Wrapper -->
+                <div class="relative overflow-hidden min-h-[500px]">
+                    <!-- Step 1: Dates & Guests -->
+                    <div class="step-transition glass-card p-lg rounded-xl space-y-xl" id="step-1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                            <div class="space-y-md">
+                                <label
+                                    class="font-label-md text-label-md text-primary uppercase tracking-widest">Check-in
+                                    Date</label>
+                                <div class="floating-label-container">
+                                    <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                        id="checkin" placeholder=" " type="date" />
+                                    <label class="font-body-md text-outline">Select Date</label>
+                                </div>
+                            </div>
+                            <div class="space-y-md">
+                                <label
+                                    class="font-label-md text-label-md text-primary uppercase tracking-widest">Check-out
+                                    Date</label>
+                                <div class="floating-label-container">
+                                    <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                        id="checkout" placeholder=" " type="date" />
+                                    <label class="font-body-md text-outline">Select Date</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-md pt-md">
+                            <label class="font-label-md text-label-md text-primary uppercase tracking-widest">Occupancy</label>
+                            <div class="flex flex-wrap gap-md" id="occupancy-buttons">
+                                <button data-guests="1" class="occupancy-btn flex-1 px-lg py-md rounded-lg border border-outline/20 hover:bg-primary/5 transition-all flex flex-col items-center gap-xs">
+                                    <span class="material-symbols-outlined text-primary">person</span>
+                                    <span class="font-body-sm text-body-sm">Single</span>
+                                </button>
+                                <button data-guests="2" class="occupancy-btn flex-1 px-lg py-md rounded-lg border-2 border-primary bg-primary/5 transition-all flex flex-col items-center gap-xs">
+                                    <span class="material-symbols-outlined text-primary">group</span>
+                                    <span class="font-body-sm text-body-sm">Couple</span>
+                                </button>
+                                <button data-guests="4" class="occupancy-btn flex-1 px-lg py-md rounded-lg border border-outline/20 hover:bg-primary/5 transition-all flex flex-col items-center gap-xs">
+                                    <span class="material-symbols-outlined text-primary">family_restroom</span>
+                                    <span class="font-body-sm text-body-sm">Family</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-end pt-lg">
+                            <button
+                                class="px-xl py-md bg-primary text-on-primary rounded-lg font-button text-button hover:opacity-90 transition-all shadow-md active:scale-95"
+                                data-step="2">
                                 Select Room Types
                             </button>
-</div>
-</div>
-<!-- Step 2: Room Selection (Hidden by default) -->
-<div class="step-transition absolute top-0 left-0 w-full glass-card p-lg rounded-xl space-y-lg opacity-0 translate-x-20 pointer-events-none" id="step-2">
-<div class="grid grid-cols-1 gap-md" id="roomSelection">
-<!-- Room Items will be injected here -->
-<div class="group relative flex flex-col md:flex-row gap-md p-sm rounded-lg border border-outline/10 hover:border-primary/30 transition-all bg-white/20">
-<div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A luxurious hotel suite with a large plush bed, neutral color palette, and high-end furnishings under soft, atmospheric lighting. The room features expansive windows showing a city skyline at dusk, evoking a sense of modern luxury and serene comfort for a premium hospitality brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl4cpL_-Ip5oZmoxv0RGyuhwHeHKgKirKecUb4apcXDdxKOntFWZ1Uk6oZRhS46khhLtr4nLsMGpfAbZ6DdAgxcd5BAdWoEFI-bARLK_P14jREIfyDu8RhaG3LDdNu9jx_3b3w430AMTxCtsd9mPSqgNvrrFN9y_M9UGG48J5DCnJOsNUGeF78Cb31xkgu2sdntvatutX7IS8LTdoCPP1dAA82DZllCPE7oanNjUPupJ2XSbuD8yxQH0l_8qIuKWu9at-YqSBpoWY"/>
-</div>
-<div class="flex-grow flex flex-col justify-between py-xs">
-<div>
-<h4 class="font-h3 text-h3 text-on-surface">Lumina Executive Suite</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">45 sqm • King Bed • City View • Spa Access</p>
-</div>
-<div class="flex justify-between items-end">
-<div class="text-primary font-h3">$450 <span class="text-body-sm text-outline">/ night</span></div>
-<button class="px-md py-sm bg-primary/10 text-primary border border-primary/20 rounded font-button text-button hover:bg-primary hover:text-on-primary transition-all" data-room="1">Select</button>
-</div>
-</div>
-</div>
-<!-- Room Item 2 -->
-<div class="group relative flex flex-col md:flex-row gap-md p-sm rounded-lg border border-primary/30 bg-primary/5 shadow-inner">
-<div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A bright and airy hotel room with floor-to-ceiling glass doors opening onto a private balcony with ocean views. The interior design uses light wood, white linens, and teal accents, creating a calm and professional tropical resort atmosphere. Professional photography style with natural morning light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOq_SMJ-smtgbQimJZ3vkeBH-CE-F9SFor-PAgnETu_mH9gLdA2_djP1_3kf7_7qTd-kRe8JWsYR5KnSpr3x5YlTQsQilCkga_NmhRQKB8iozZyw3k-U9r3nVzEQW8197BWPRTqDzGYoFC8xyjRlxEqdfCR5gWnOkHfap_HvfJmayL2EZYyAMZa3cdqtND5E41iC2V-mxq-pKlFC6BMsincsG-d9UJxzPy-YIFlgYDCJLq9UWnlbrKCMG1Ah_KG5YHNSwnjFmqndg"/>
-</div>
-<div class="flex-grow flex flex-col justify-between py-xs">
-<div>
-<h4 class="font-h3 text-h3 text-on-surface">Panorama Sea View</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">38 sqm • Queen Bed • Ocean Front • Breakfast Included</p>
-</div>
-<div class="flex justify-between items-end">
-<div class="text-primary font-h3">$380 <span class="text-body-sm text-outline">/ night</span></div>
-<button class="px-md py-sm bg-primary/10 text-primary border border-primary/20 rounded font-button text-button hover:bg-primary hover:text-on-primary transition-all" data-room="2">Select</button>
-</div>
-</div>
-</div>
-</div>
-<div class="flex justify-between pt-lg">
-<button class="px-lg py-md border border-outline/30 rounded-lg font-button text-button hover:bg-surface-container-low transition-all" data-step="1">Back</button>
-<button class="px-xl py-md bg-primary text-on-primary rounded-lg font-button text-button hover:opacity-90 transition-all shadow-md active:scale-95" data-step="3">Secure Payment</button>
-</div>
-</div>
-<!-- Step 3: Payment (Hidden by default) -->
-<div class="step-transition absolute top-0 left-0 w-full glass-card p-lg rounded-xl space-y-xl opacity-0 translate-x-20 pointer-events-none" id="step-3">
-<div class="space-y-lg">
-<div class="flex items-center gap-md p-md bg-secondary-container/10 border border-secondary/20 rounded-lg">
-<span class="material-symbols-outlined text-secondary">verified_user</span>
-<span class="text-body-md text-on-secondary-container">Your connection is secured with 256-bit SSL encryption.</span>
-</div>
-<div class="space-y-md">
-<div class="floating-label-container">
-<input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md" placeholder=" " type="text"/>
-<label class="font-body-md text-outline">Name on Card</label>
-</div>
-<div class="floating-label-container">
-<input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md" placeholder=" " type="text"/>
-<label class="font-body-md text-outline">Card Number</label>
-</div>
-<div class="grid grid-cols-2 gap-lg">
-<div class="floating-label-container">
-<input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md" placeholder=" " type="text"/>
-<label class="font-body-md text-outline">Expiry (MM/YY)</label>
-</div>
-<div class="floating-label-container">
-<input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md" placeholder=" " type="password"/>
-<label class="font-body-md text-outline">CVC</label>
-</div>
-</div>
-</div>
-</div>
-<div class="flex justify-between pt-lg">
-<button class="px-lg py-md border border-outline/30 rounded-lg font-button text-button hover:bg-surface-container-low transition-all" data-step="2">Back</button>
-<button class="px-xl py-md bg-tertiary-container text-on-tertiary-container rounded-lg font-button text-button hover:opacity-90 transition-all shadow-md active:scale-95 flex items-center gap-md" data-confirm>
-<span id="btn-text">Confirm &amp; Pay $1,140</span>
-<div class="hidden w-5 h-5 border-2 border-white/30 border-t-white rounded-full loading-sweep" id="btn-loader"></div>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Right Side: Sticky Booking Summary -->
-<aside class="w-full lg:w-1/3 lg:sticky lg:top-32">
-<div class="glass-card p-lg rounded-xl shadow-xl overflow-hidden relative">
-<!-- Subtle shimmer effect -->
-<div class="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none rotate-45"></div>
-<h3 class="font-h3 text-h3 text-on-surface mb-lg border-b border-outline/10 pb-md">Booking Summary</h3>
-<div class="space-y-lg">
-<div class="flex items-start gap-md">
-<span class="material-symbols-outlined text-primary mt-1">hotel</span>
-<div>
-<p class="font-label-md text-label-md text-primary uppercase tracking-wider">Property</p>
-<p class="font-body-md text-body-md font-bold">Lumina Grand Resort &amp; Spa</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Malibu Beach Front, CA</p>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-md">
-<div class="p-md rounded-lg bg-surface-container-low">
-<p class="font-label-md text-label-md text-outline">CHECK-IN</p>
-<p class="font-body-md font-bold">Oct 12, 2024</p>
-</div>
-<div class="p-md rounded-lg bg-surface-container-low">
-<p class="font-label-md text-label-md text-outline">CHECK-OUT</p>
-<p class="font-body-md font-bold">Oct 15, 2024</p>
-</div>
-</div>
-<div class="flex items-center justify-between p-md rounded-lg border border-primary/10">
-<div>
-<p class="font-label-md text-label-md text-outline">ROOM SELECTED</p>
-<p class="font-body-md font-bold text-primary">Panorama Sea View</p>
-</div>
-<span class="material-symbols-outlined text-primary">info</span>
-</div>
-<div class="space-y-sm pt-md border-t border-outline/10">
-<div class="flex justify-between text-body-sm text-on-surface-variant">
-<span>$380.00 x 3 nights</span>
-<span>$1,140.00</span>
-</div>
-<div class="flex justify-between text-body-sm text-on-surface-variant">
-<span>Service Fee &amp; Taxes</span>
-<span class="text-primary">Included</span>
-</div>
-<div class="flex justify-between items-end pt-md">
-<span class="font-h3 text-h3 text-on-surface">Total</span>
-<span class="font-h2 text-h2 text-primary">$1,140.00</span>
-</div>
-</div>
-<div class="flex items-center gap-sm mt-lg text-body-sm text-on-surface-variant italic">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-                            Free cancellation until Oct 10
                         </div>
-</div>
-</div>
-</aside>
-</div>
-</main>
+                    </div>
+                    <!-- Step 2: Room Selection (Hidden by default) -->
+                    <div class="step-transition absolute top-0 left-0 w-full glass-card p-lg rounded-xl space-y-lg opacity-0 translate-x-20 pointer-events-none"
+                        id="step-2">
+                        <div class="grid grid-cols-1 gap-md" id="roomSelection">
+                            <!-- Room Items will be injected here -->
+                            <div
+                                class="group relative flex flex-col md:flex-row gap-md p-sm rounded-lg border border-outline/10 hover:border-primary/30 transition-all bg-white/20">
+                                <div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
+                                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        data-alt="A luxurious hotel suite with a large plush bed, neutral color palette, and high-end furnishings under soft, atmospheric lighting. The room features expansive windows showing a city skyline at dusk, evoking a sense of modern luxury and serene comfort for a premium hospitality brand."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl4cpL_-Ip5oZmoxv0RGyuhwHeHKgKirKecUb4apcXDdxKOntFWZ1Uk6oZRhS46khhLtr4nLsMGpfAbZ6DdAgxcd5BAdWoEFI-bARLK_P14jREIfyDu8RhaG3LDdNu9jx_3b3w430AMTxCtsd9mPSqgNvrrFN9y_M9UGG48J5DCnJOsNUGeF78Cb31xkgu2sdntvatutX7IS8LTdoCPP1dAA82DZllCPE7oanNjUPupJ2XSbuD8yxQH0l_8qIuKWu9at-YqSBpoWY" />
+                                </div>
+                                <div class="flex-grow flex flex-col justify-between py-xs">
+                                    <div>
+                                        <h4 class="font-h3 text-h3 text-on-surface">Lumina Executive Suite</h4>
+                                        <p class="font-body-sm text-body-sm text-on-surface-variant">45 sqm • King Bed •
+                                            City View • Spa Access</p>
+                                    </div>
+                                    <div class="flex justify-between items-end">
+                                        <div class="text-primary font-h3">$450 <span class="text-body-sm text-outline">/
+                                                night</span></div>
+                                        <button
+                                            class="px-md py-sm bg-primary/10 text-primary border border-primary/20 rounded font-button text-button hover:bg-primary hover:text-on-primary transition-all"
+                                            data-room="1">Select</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Room Item 2 -->
+                            <div
+                                class="group relative flex flex-col md:flex-row gap-md p-sm rounded-lg border border-primary/30 bg-primary/5 shadow-inner">
+                                <div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
+                                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        data-alt="A bright and airy hotel room with floor-to-ceiling glass doors opening onto a private balcony with ocean views. The interior design uses light wood, white linens, and teal accents, creating a calm and professional tropical resort atmosphere. Professional photography style with natural morning light."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOq_SMJ-smtgbQimJZ3vkeBH-CE-F9SFor-PAgnETu_mH9gLdA2_djP1_3kf7_7qTd-kRe8JWsYR5KnSpr3x5YlTQsQilCkga_NmhRQKB8iozZyw3k-U9r3nVzEQW8197BWPRTqDzGYoFC8xyjRlxEqdfCR5gWnOkHfap_HvfJmayL2EZYyAMZa3cdqtND5E41iC2V-mxq-pKlFC6BMsincsG-d9UJxzPy-YIFlgYDCJLq9UWnlbrKCMG1Ah_KG5YHNSwnjFmqndg" />
+                                </div>
+                                <div class="flex-grow flex flex-col justify-between py-xs">
+                                    <div>
+                                        <h4 class="font-h3 text-h3 text-on-surface">Panorama Sea View</h4>
+                                        <p class="font-body-sm text-body-sm text-on-surface-variant">38 sqm • Queen Bed
+                                            • Ocean Front • Breakfast Included</p>
+                                    </div>
+                                    <div class="flex justify-between items-end">
+                                        <div class="text-primary font-h3">$380 <span class="text-body-sm text-outline">/
+                                                night</span></div>
+                                        <button
+                                            class="px-md py-sm bg-primary/10 text-primary border border-primary/20 rounded font-button text-button hover:bg-primary hover:text-on-primary transition-all"
+                                            data-room="2">Select</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between pt-lg">
+                            <button
+                                class="px-lg py-md border border-outline/30 rounded-lg font-button text-button hover:bg-surface-container-low transition-all"
+                                data-step="1">Back</button>
+                            <button
+                                class="px-xl py-md bg-primary text-on-primary rounded-lg font-button text-button hover:opacity-90 transition-all shadow-md active:scale-95"
+                                data-step="3">Secure Payment</button>
+                        </div>
+                    </div>
+                    <!-- Step 3: Payment (Hidden by default) -->
+                    <div class="step-transition absolute top-0 left-0 w-full glass-card p-lg rounded-xl space-y-xl opacity-0 translate-x-20 pointer-events-none"
+                        id="step-3">
+                        <div class="space-y-lg">
+                            <h3 class="font-h3 text-h3 text-on-surface mb-md">Payment Method</h3>
+                            <div class="flex gap-4 mb-lg">
+                                <label class="flex-1 cursor-pointer">
+                                    <input type="radio" name="paymentMethod" value="card" class="peer hidden" checked>
+                                    <div class="p-4 border-2 border-outline/20 rounded-xl text-center peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                                        <span class="material-symbols-outlined block text-2xl mb-2 text-primary">credit_card</span>
+                                        <span class="font-medium">Credit Card</span>
+                                    </div>
+                                </label>
+                                <label class="flex-1 cursor-pointer">
+                                    <input type="radio" name="paymentMethod" value="transfer" class="peer hidden">
+                                    <div class="p-4 border-2 border-outline/20 rounded-xl text-center peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                                        <span class="material-symbols-outlined block text-2xl mb-2 text-primary">account_balance</span>
+                                        <span class="font-medium">Bank Transfer</span>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <!-- Credit Card Form -->
+                            <div id="cardPaymentForm" class="space-y-md">
+                                <div class="floating-label-container">
+                                    <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                        placeholder=" " type="text" id="cardName" />
+                                    <label class="font-body-md text-outline">Name on Card</label>
+                                </div>
+                                <div class="floating-label-container">
+                                    <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                        placeholder=" " type="text" id="cardNumber" />
+                                    <label class="font-body-md text-outline">Card Number</label>
+                                </div>
+                                <div class="grid grid-cols-2 gap-lg">
+                                    <div class="floating-label-container">
+                                        <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                            placeholder=" " type="text" id="cardExpiry" />
+                                        <label class="font-body-md text-outline">Expiry (MM/YY)</label>
+                                    </div>
+                                    <div class="floating-label-container">
+                                        <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                            placeholder=" " type="password" id="cardCvc" />
+                                        <label class="font-body-md text-outline">CVC</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <hr class="border-outline/10 my-md">
+                            
+                            <!-- Initial Guest Info Form (Moved up before payment generation) -->
+                            <h3 class="font-h3 text-h3 text-on-surface mb-md">Guest Details</h3>
+                            <div class="space-y-md">
+                                <div class="floating-label-container">
+                                    <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                        placeholder=" " type="text" id="guestName" />
+                                    <label class="font-body-md text-outline">Full Name</label>
+                                </div>
+                                <div class="floating-label-container">
+                                    <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                        placeholder=" " type="email" id="guestEmail" />
+                                    <label class="font-body-md text-outline">Email Address (for receipt)</label>
+                                </div>
+                                <div class="floating-label-container">
+                                    <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                        placeholder=" " type="tel" id="guestPhone" />
+                                    <label class="font-body-md text-outline">Phone Number (for booking code)</label>
+                                </div>
+                                <div class="grid grid-cols-2 gap-lg">
+                                    <div class="floating-label-container">
+                                        <select class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md text-on-surface" id="arrivalTime">
+                                            <option value="" disabled selected></option>
+                                            <option value="14:00 - 15:00">14:00 - 15:00</option>
+                                            <option value="15:00 - 16:00">15:00 - 16:00</option>
+                                            <option value="16:00 - 18:00">16:00 - 18:00</option>
+                                            <option value="18:00 - 20:00">18:00 - 20:00</option>
+                                            <option value="Late Arrival (After 20:00)">Late Arrival (After 20:00)</option>
+                                        </select>
+                                        <label class="font-body-md text-outline">Estimated Arrival</label>
+                                    </div>
+                                    <div class="floating-label-container">
+                                        <input class="w-full bg-transparent border-none py-md focus:ring-0 font-body-md"
+                                            placeholder=" " type="text" id="specialRequests" />
+                                        <label class="font-body-md text-outline">Special Requests (Optional)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between pt-lg">
+                            <button
+                                class="px-lg py-md border border-outline/30 rounded-lg font-button text-button hover:bg-surface-container-low transition-all"
+                                data-step="2">Back</button>
+                            <button
+                                class="px-xl py-md bg-tertiary-container text-on-tertiary-container rounded-lg font-button text-button hover:opacity-90 transition-all shadow-md active:scale-95 flex items-center gap-md"
+                                data-confirm>
+                                <span id="btn-text">Confirm &amp; Pay $1,140</span>
+                                <div class="hidden w-5 h-5 border-2 border-white/30 border-t-white rounded-full loading-sweep"
+                                    id="btn-loader"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side: Sticky Booking Summary -->
+            <aside id="booking-summary-sidebar" class="w-full lg:w-1/3 lg:sticky lg:top-32 opacity-0 pointer-events-none transition-opacity duration-500 hidden">
+                <div class="glass-card p-lg rounded-xl shadow-xl overflow-hidden relative">
+                    <!-- Subtle shimmer effect -->
+                    <div
+                        class="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none rotate-45">
+                    </div>
+                    <h3 class="font-h3 text-h3 text-on-surface mb-lg border-b border-outline/10 pb-md">Booking Summary
+                    </h3>
+                    <div class="space-y-lg">
+                        <div class="flex items-start gap-md">
+                            <span class="material-symbols-outlined text-primary mt-1">hotel</span>
+                            <div>
+                                <p class="font-label-md text-label-md text-primary uppercase tracking-wider">Property
+                                </p>
+                                <p class="font-body-md text-body-md font-bold">Lumina Grand Resort &amp; Spa</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Malibu Beach Front, CA</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-md">
+                            <div class="p-md rounded-lg bg-surface-container-low">
+                                <p class="font-label-md text-label-md text-outline">CHECK-IN</p>
+                                <p class="font-body-md font-bold" id="summary-checkin">...</p>
+                            </div>
+                            <div class="p-md rounded-lg bg-surface-container-low">
+                                <p class="font-label-md text-label-md text-outline">CHECK-OUT</p>
+                                <p class="font-body-md font-bold" id="summary-checkout">...</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-md rounded-lg border border-primary/10">
+                            <div>
+                                <p class="font-label-md text-label-md text-outline">ROOM SELECTED</p>
+                                <p class="font-body-md font-bold text-primary" id="summary-room">None Selected</p>
+                            </div>
+                            <span class="material-symbols-outlined text-primary">info</span>
+                        </div>
+                        <div class="space-y-sm pt-md border-t border-outline/10">
+                            <div class="flex justify-between text-body-sm text-on-surface-variant">
+                                <span id="summary-calc">...</span>
+                                <span id="summary-calc-total">...</span>
+                            </div>
+                            <div class="flex justify-between text-body-sm text-on-surface-variant">
+                                <span>Service Fee &amp; Taxes</span>
+                                <span class="text-primary">Included</span>
+                            </div>
+                            <div class="flex justify-between items-end pt-md">
+                                <span class="font-h3 text-h3 text-on-surface">Total</span>
+                                <span class="font-h2 text-h2 text-primary" id="summary-total">...</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-sm mt-lg text-body-sm text-on-surface-variant italic" id="summary-cancellation">
+                            <span class="material-symbols-outlined text-[18px]">verified</span>
+                            Free cancellation until <span id="summary-cancel-date">...</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
 
-<div id="global-footer"></div>
+    <div id="global-footer"></div>
 
-<!-- Scripts -->
-<script src="/js/global-nav.js"></script>
-<script src="/js/ui-utils.js"></script>
-<script src="/js/page-init.js"></script>
-<script src="/pages/hotel/booking-your-stay/booking-your-stay.js"></script>
-</body></html>
+    <!-- Scripts -->
+    <script src="/js/global-nav.js"></script>
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/page-init.js"></script>
+    <script src="/pages/hotel/booking-your-stay/booking-your-stay.js"></script>
+    <script src="/pages/hotel/booking-your-stay/booking-wizard-handler.js"></script>
+</body>
+
+</html>
