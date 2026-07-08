@@ -84,7 +84,6 @@ const config = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-syntax-dynamic-import'],
           },
         },
       },
@@ -129,8 +128,8 @@ const config = {
       : []),
     // Add HtmlWebpackPlugin for critical HTML files
     new HtmlWebpackPlugin({
-      template: './pages/public/home/home.html',
-      filename: 'pages/public/home/home.html',
+      template: './pages/hotel/home-lumina/home-lumina.html',
+      filename: 'pages/hotel/home-lumina/home-lumina.html',
       chunks: ['app'],
       inject: 'body',
       minify: isProduction,
