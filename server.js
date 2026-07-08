@@ -218,10 +218,14 @@ process.on('unhandledRejection', (reason, promise) => {
   });
 });
 
-const server = app.listen(PORT, '0.0.0.0', () => {
-  logger.info(`Lumina Hospitality running at: http://localhost:${PORT} and http://127.0.0.1:${PORT}`);
-  logger.info('Performance monitoring enabled');
-  
-  // Initial memory snapshot
-  memoryLeakPrevention.takeSnapshot('startup');
-});
+if (require.main === module || !process.env.VERCEL) {
+  const server = app.listen(PORT, '0.0.0.0', () => {
+    logger.info(`Lumina Hospitality running at: http://localhost:${PORT} and http://127.0.0.1:${PORT}`);
+    logger.info('Performance monitoring enabled');
+    
+    // Initial memory snapshot
+    memoryLeakPrevention.takeSnapshot('startup');
+  });
+}
+
+module.exports = app;
