@@ -89,6 +89,11 @@ app.use("/pages", express.static(path.join(ROOT_DIR, "pages"), staticOptions));
 app.use("/hero%20imgs", express.static(path.join(ROOT_DIR, "hero imgs"), staticOptions));
 app.use("/hero imgs", express.static(path.join(ROOT_DIR, "hero imgs"), staticOptions));
 
+// Staff Portal easy link
+app.get("/staff-portal", (req, res) => {
+  res.sendFile(path.join(ROOT_DIR, "pages/hotel/login-lumina/login-lumina.html"));
+});
+
 // CDN URL injection middleware
 if (CDN_URL) {
   app.use((req, res, next) => {
@@ -213,8 +218,8 @@ process.on('unhandledRejection', (reason, promise) => {
   });
 });
 
-const server = app.listen(PORT, () => {
-  logger.info(`Lumina Hospitality running at: http://localhost:${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  logger.info(`Lumina Hospitality running at: http://localhost:${PORT} and http://127.0.0.1:${PORT}`);
   logger.info('Performance monitoring enabled');
   
   // Initial memory snapshot

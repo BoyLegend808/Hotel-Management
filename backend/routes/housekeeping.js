@@ -1,6 +1,7 @@
 const express = require("express");
 const { requireAuth, requireRole } = require("../auth");
 const { readDB, writeDB } = require("../db-optimized");
+const appEvents = require("../events");
 const router = express.Router();
 
 // Get all rooms that need cleaning or maintenance (Manager, Housekeeper)
@@ -11,12 +12,36 @@ router.get("/tasks", requireAuth, async (req, res) => {
 
   const db = await readDB();
   const rooms = db.rooms || [];
-  
   const tasks = rooms.filter(r => r.status === "Cleaning" || r.status === "Maintenance");
   
   res.json({
     success: true,
     tasks
+  });
+});
+
+// SSE endpoint for real-time notifications
+router.get("/events", requireAuth, (req, res) => {
+  // We allow housekeeper and manager roles
+  if (req.session.role !== "manager" && req.session.role !== "housekeeper") {
+    return res.status(403).json({ success: false, message: "Access denied" });
+  }
+
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  
+  // Initial ping to establish connection
+  res.write('data: {"type": "ping"}\n\n');
+
+  const onCheckout = (room) => {
+    res.write(`data: ${JSON.stringify({ type: 'checkout', room })}\n\n`);
+  };
+  
+  appEvents.on('roomCheckedOut', onCheckout);
+  
+  req.on('close', () => {
+    appEvents.off('roomCheckedOut', onCheckout);
   });
 });
 

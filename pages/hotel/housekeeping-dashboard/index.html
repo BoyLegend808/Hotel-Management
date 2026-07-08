@@ -140,6 +140,24 @@
             const user = JSON.parse(sessionStorage.getItem('user') || '{}');
             if (user.name) document.getElementById('userNameDisplay').textContent = user.name;
             loadTasks();
+
+            // Connect to Server-Sent Events
+            if (token) {
+                const eventSource = new EventSource(`/api/housekeeping/events?token=${token}`);
+                
+                eventSource.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'checkout') {
+                        _toast(`Room ${data.room.roomNumber} has been checked out and needs cleaning!`, 'warning');
+                        loadTasks(); // Refresh tasks automatically
+                    }
+                };
+
+                eventSource.onerror = (err) => {
+                    console.error("SSE Error:", err);
+                    // EventSource will auto-reconnect, but we can log it here.
+                };
+            }
         });
     </script>
 </body>

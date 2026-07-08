@@ -2,6 +2,7 @@ const express = require("express");
 const { requireAuth, requireRole } = require("../auth");
 const { readDB, writeDB } = require("../db-optimized");
 const { backupBookingToCSV } = require("../backup");
+const appEvents = require("../events");
 const router = express.Router();
 
 // Get all bookings (manager/receptionist) or user's bookings (guest)
@@ -267,6 +268,7 @@ router.put("/:id/status", requireAuth, async (req, res) => {
       db.rooms[roomIndex].status = "Occupied";
     } else if (status === "CheckedOut") {
       db.rooms[roomIndex].status = "Cleaning";
+      appEvents.emit('roomCheckedOut', db.rooms[roomIndex]);
     } else if (status === "Cancelled") {
       db.rooms[roomIndex].status = "Available";
     }

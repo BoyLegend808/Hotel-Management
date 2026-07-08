@@ -38,7 +38,14 @@ function createSession(user) {
 function getBearerToken(req) {
   const header = req.get("authorization") || "";
   const match = header.match(/^Bearer\s+(.+)$/i);
-  return match ? match[1] : "";
+  if (match) return match[1];
+
+  // Allow token in query parameter for EventSource (SSE) support
+  if (req.query && req.query.token) {
+    return req.query.token;
+  }
+
+  return "";
 }
 
 function getSession(req) {
