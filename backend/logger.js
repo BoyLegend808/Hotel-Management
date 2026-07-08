@@ -21,9 +21,17 @@ class Logger {
       debug: 3
     };
     
-    // Ensure log directory exists
-    if (this.logToFile && !fs.existsSync(this.logDirectory)) {
-      fs.mkdirSync(this.logDirectory, { recursive: true });
+    // Ensure log directory exists (skip on read-only filesystems like Vercel)
+    if (this.logToFile && !process.env.VERCEL) {
+      try {
+        if (!fs.existsSync(this.logDirectory)) {
+          fs.mkdirSync(this.logDirectory, { recursive: true });
+        }
+      } catch (err) {
+        this.logToFile = false; // Disable file logging if directory creation fails
+      }
+    } else if (process.env.VERCEL) {
+      this.logToFile = false;
     }
     
     this.stats = {

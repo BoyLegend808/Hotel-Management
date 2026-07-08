@@ -9,6 +9,12 @@ const CSV_FILE = path.join(BACKUP_DIR, 'bookings_backup.csv');
  * @param {Object} booking 
  */
 async function backupBookingToCSV(booking) {
+    // Skip on Vercel (read-only filesystem)
+    if (process.env.VERCEL) {
+        console.log(`[Backup] Skipping CSV backup on Vercel (read-only fs). Booking ID: ${booking.id}`);
+        return;
+    }
+
     try {
         // Ensure backups directory exists
         await fs.mkdir(BACKUP_DIR, { recursive: true });

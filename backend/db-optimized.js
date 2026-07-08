@@ -51,9 +51,21 @@ async function readDB() {
 
 /**
  * Write database asynchronously with atomic file operations
+ * Falls back to in-memory only mode on read-only filesystems (e.g. Vercel)
  */
 async function writeDB(data) {
-  const payload = JSON.stringify({ ...DEFAULT_DB, ...data }, null, 2);
+  const mergedData = { ...DEFAULT_DB, ...data };
+
+  // Always update the in-memory cache regardless of filesystem access
+  dbCache = mergedData;
+  cacheTimestamp = Date.now();
+
+  // On Vercel (read-only fs), skip the file write entirely
+  if (process.env.VERCEL) {
+    return true;
+  }
+
+  const payload = JSON.stringify(mergedData, null, 2);
   const tempPath = `${DB_PATH}.tmp`;
 
   try {
@@ -62,10 +74,6 @@ async function writeDB(data) {
     
     // Atomic rename operation
     await fs.rename(tempPath, DB_PATH);
-    
-    // Invalidate cache
-    dbCache = null;
-    cacheTimestamp = 0;
     
     return true;
   } catch (err) {
